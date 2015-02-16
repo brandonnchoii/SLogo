@@ -8,13 +8,15 @@ Our UI needs to be very flexible in terms of handling string input. The user is 
 
 The back end needs to be designed so it's very open for extension. We need to constantly be able to add new functionality so that we can handle different types of user input. Our back end needs to be able to correctly execute functions based on the original string input that the back end receives. 
 
-The parser is the middle ground between the input and the function execution. It can handle any string input and throw an error if syntax is determined to be incorrect. No string input should break the program. 
+Our "executer" is the middle ground between the input and the drawing being displayed on screen. It can handle any string input and throw an error if syntax is determined to be incorrect. Otherwise the string is passed to the back end of the program. No string input should break the program. 
 
 ##Overview
 
 
 ##User Interface
+At the most basic level there are two components to the user interface. There is a space that allows the user to write Logo code, and there is a window which displays the results of running the code. The user can interact only with the space for writing code. First, there is a text box/field that allows the user to type actual code. The user can select custom settings such as line color, turtle image, line thickness, and background display color, and language. There are also options available that allow users to select recent commands, user-defined commands, and currently-saved variables available. These are features available for user convenience. 
 
+Error reporting is given in the form of a popup dialog box on screen. One way in which an error is generated is by attempting to run invalid code. This is defined as attempting to run code with invalid syntax, such that our parser can't make the data into a command. Invalid code can be achieved by typing out incorrect code or running code that might have been saved for later use by the user. Attempting to run the program when there is no code would be another example of invalid code. An error message is shown relaying this to the user. 
 
 ##Design Details
 
