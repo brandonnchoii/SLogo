@@ -120,6 +120,13 @@ The Turtle is responsible for holding its current position and orientation and b
 
 
 ##API Example code
+The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail.
+
+
+For convenience, set s = ‘fd 50’
+
+
+UI.refresh(s) calls WorldController.update(s) which calls World.listen(s) which calls Parser.parse(s) which returns a one-element Queue of a new ForwardCommand with parameter list equal to {50} which is passed to Turtle.addCommand(s). World.listen(s) also calls Turtle.act(), which processes the command. UI.refresh(s) then references WorldController.getWorld() which returns the information and is updated by the UI.
 
 
 ##Design Considerations 
