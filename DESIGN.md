@@ -14,7 +14,7 @@ Our "executer" is the middle ground between the input and the drawing being disp
 
 Our program utilizes the classic model-view-controller architecture as follows: 
 
-*Model / Back End* </br>
+*Model / Back End* <br>
 Relevant classes: World (and subclasses), Turtle, Parser, CommandFactory, Command (and subclasses), ButtonFactory
 
 The main component of our back end code is our World class. It holds an instance of the Turtle that is being moved and acted upon, a Parser that takes in the user's input and eventually sends out the appropriate Command(s), as well as the determined dimensions of the world. It is an abstract class and can be extended to be bounded or unbounded depending on the desired wrap around functionality. the two pairs of get and set methods allow the dimensions of the world to be changed dynamically. The listen() method is a crucial method that will call Turtle to execute all the commands in its queue of commands. This is essentially where all the movements, changes in direction, drawing, and other significant changes of the back end components in the program will occur. 
@@ -24,18 +24,18 @@ The Turtle class is one of our most important classes as this is the character t
 The Parser takes in the inputted String and utilizes CommandFactory to return all the appropriate commands in a Queue so that the Turtle can act on them in order. Command is an abstract class that will be extended to all specific Command subclasses such as Forward. The HashMap<String, Double> variables will be used to store any and all variables inputted by the user so that the program can reference them whenever needed. The ButtonFactory class is what creates clickable versions of the past commands the user put in. Therefore, once the specific Command(s) is created, the ButtonFactory will initialize a Button to represent those actions and send it the UserInterface to become available for the user. The Buttons would be added to mySideBar.
 
 
-*Controller* </br>
+*Controller* <br>
 Relevant classes: WorldController
 
 WorldController acts as the medium between the UserInterface (front end) and World and its necessary classes (back end). WorldController's clear() method clears the entire screen by erasing all the drawings. The getWorld() method returns the World with all of its new components to demonstrate movement, drawings, or any other visual changes that the back end is meant to represent. The update() method will be a simple method that utilizes the two previously mentioned helper methods.  
 
 
-*View / Front End* </br>
+*View / Front End* <br>
 Relevant classes: UserInterface
 
 The HBox CommandField is the text input where the user can type in commands he or she wants the Turtle to perform. The VBox mySideBar will contain the link to the HTML help page as well as the buttons representing past actions that are now easily clickable in order to repeat the respective previous actions. myWorldController is the instance of WorldController and will act as the middle ground between the UserInterface's front end and the rest of the code's back end. It's initialize() method creates all three of its field variables and components in order to get the program started. The refresh method gets the most up to date World and 'draws' it on the user's view. 
 
-*Basic Overiew of a single command running:* </br>
+*Basic Overiew of a single command running:* <br>
 Say the program is started. Main is called and UserInterface creates the necessary World, Turtle, and WorldController instances as well as its visual components such as commandField. The user inputs forward 50 and clicks run. This is sent to the WorldController, which sends it the its World. The World utilizes Parser and CommandFactory to produce the appropriate Forward command subclass. This is now sent to be created as a Button to be used in the future if the user chooses to do so. At the same time, the World now has one command that it gives the Turtle to add to its queue and perform. The updated Turtle is now available in the updated World which is sent back to the UI through WorldController's getWorld method. The appropriate changes are now visualized on the screen for the user to see.
 
 ##User Interface
