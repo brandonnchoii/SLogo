@@ -28,6 +28,10 @@ Added fixpos(int height, int width)
 
 Adjusts the turtle if it is outside of the boundaries of a toroidal grid (Unbounded Grid). 
 
+Modified move: now move(double px) from move(int px)
+
+Moves the turtles by px in its direction
+
 ##**WORLD**
 
 The major change in world is the change in field name from xSize & ySize to width and height. Methods are changed accordingly.
