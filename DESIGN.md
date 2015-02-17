@@ -12,6 +12,8 @@ Our World class takes on the role of the middle ground between the input and the
 
 ##Overview
 
+Reference our UML design [HERE](https://github.com/duke-compsci308-spring2015/slogo_team07/blob/master/UML%20Overview.jpg)
+
 Our program utilizes the classic model-view-controller architecture as follows: 
 
 *Model / Back End* <br>
@@ -39,7 +41,7 @@ The HBox CommandField is the text input where the user can type in commands he o
 Say the program is started. Main is called and UserInterface creates the necessary World, Turtle, and WorldController instances as well as its visual components such as commandField. The user inputs forward 50 and clicks run. This is sent to the WorldController, which sends it the its World. The World utilizes Parser and CommandFactory to produce the appropriate Forward command subclass. This is now sent to be created as a Button to be used in the future if the user chooses to do so. At the same time, the World now has one command that it gives the Turtle to add to its queue and perform. The updated Turtle is now available in the updated World which is sent back to the UI through WorldController's getWorld method. The appropriate changes are now visualized on the screen for the user to see.
 
 ##User Interface
-At the most basic level there are two components to the user interface. There is a space that allows the user to write Logo code, and there is a window which displays the results of running the code. The user can interact only with the space for writing code. First, there is a text box/field that allows the user to type actual code. The user can select custom settings such as line color, turtle image, line thickness, and background display color, and language. There are also options available that allow users to select recent commands, user-defined commands, and currently-saved variables available. These are features available for user convenience. 
+At the most basic level there are two components to the [user interface](https://github.com/duke-compsci308-spring2015/slogo_team07/blob/master/UIDiagram.jpg). There is a space that allows the user to write Logo code, and there is a window which displays the results of running the code. The user can interact only with the space for writing code. First, there is a text box/field that allows the user to type actual code. The user can select custom settings such as line color, turtle image, line thickness, and background display color, and language. There are also options available that allow users to select recent commands, user-defined commands, and currently-saved variables available. These are features available for user convenience. 
 
 Error reporting is given in the form of a popup dialog box on screen. One way in which an error is generated is by attempting to run invalid code. This is defined as attempting to run code with invalid syntax, such that our parser can't make the data into a command. Invalid code can be achieved by typing out incorrect code or running code that might have been saved for later use by the user. Attempting to run the program when there is no code would be another example of invalid code. An error message is shown relaying this to the user. 
 
