@@ -12,6 +12,7 @@ The main function of the simulation
 static void main(String[] args)
 Runs the program
 
+
 **User Interface**
 
 java.lang.Object
@@ -20,6 +21,7 @@ java.lang.Object
 public class UserInterface
 
 The UI holds a WorldController as well as various boxes to display buttons for settings and other functionalities
+
 
 *Constructors*
 
@@ -33,6 +35,7 @@ Creates the UI
 
 void refresh(String s)
 Refreshes the view based on the World held in WorldController, implementing the commands signified by s.
+
 
 **Turtle**
 
@@ -103,6 +106,7 @@ Draws itself in g.
 void setImage(Image i)
 Sets the turtle’s Image to i
 
+
 **WorldController**
 
 Java.lang.Object
@@ -128,6 +132,7 @@ Resets the screen
 
 World getWorld()
 Returns the world held in the WorldController
+
 
 **World**
 
@@ -171,6 +176,7 @@ Processes the command in s.
 abstract void fixPosition()
 Takes action if the turtle’s position is outside of the grid. This action is determined by the subclass.
 
+
 **CommandFactory**
 java.lang.Object
 CommandFactory.java
@@ -189,6 +195,7 @@ Instantiates a new command factory
 Command createCommand(String s)
 Returns the command specified by s. If there are the wrong number of parameters, the command name is invalid, or a variable name is invalid, it will throw an exception.
 
+
 **Command**
 
 java.lang.Object
@@ -201,6 +208,7 @@ This class provides a framework for a logo command. It holds the parameters of t
 *Methods*
 abstract double run()
 Executes the command.
+
 
 **Other Commands**
 Each command will have its own class which will be an extension of Command.java. Other semi-general Command types (e.g. Math and Turtle) may come to exist as the commands need.
@@ -221,6 +229,7 @@ Creates a new ButtonFactory
 *Methods*
 public Button CreateButton(String s)
 Creates a button that implements the commands with text s.
+
 
 **Parser**
 
