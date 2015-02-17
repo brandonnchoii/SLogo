@@ -8,7 +8,7 @@ Our UI needs to be very flexible in terms of handling string input. The user is 
 
 The back end needs to be designed so it's very open for extension. We need to constantly be able to add new functionality so that we can handle different types of user input. Our back end needs to be able to correctly execute functions based on the original string input that the back end receives. 
 
-Our "executer" is the middle ground between the input and the drawing being displayed on screen. It can handle any string input and throw an error if syntax is determined to be incorrect. Otherwise the string is passed to the back end of the program. No string input should break the program. 
+Our World class takes on the role of the middle ground between the input and the visualization of the input. It can handle any string input and an error is thrown if syntax is determined to be incorrect. The World class also plays a role in the back end of our program. The parser is called by World in order to handle its string input. World isn't explicitly a controller class, because it takes on back end roles, but it performs a similar function by passing things between front end and back end. 
 
 ##Overview
 
