@@ -28,7 +28,7 @@ Added fixpos(int height, int width)
 
 Adjusts the turtle if it is outside of the boundaries of a toroidal grid (Unbounded Grid). 
 
-Modified move: now move(double px) from move(int px)
+Modified move: now move(double pixels) from move(int px)
 
 Moves the turtles by px in its direction
 
