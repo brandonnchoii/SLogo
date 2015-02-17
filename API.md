@@ -1,5 +1,12 @@
 Public API
 
+The Public API describes the methods of each class. For the ones that are most logically extended, a brief description of their extension protocols is included.
+
+The design is such that each class has logical behavior, in that it affects itself and carries out its own actions. There are also clear channels for the flow of necessary information between each class. As discussed in overview, there is a good path of information from front-end to back-end. 
+
+Inter-group API
+Each group is able to access only the necessary information from each other group. Generally, the flow of information would be UI  (Takes in command) > WorldController (Sends it to world) > World (Reads Command) > Parser (Extracts all commands) > CommandFactory (Creates Commands) > Parser (Receives a Queue of all Commands from what was read) > Turtle (Executes Command) > World (updates) > WorldController(Updates) > UI (Redraws). Exceptions will be caught in CommandFactory and passed back through the chain to be reported to the user.
+
 **Main**
 
 java.lang.Object
