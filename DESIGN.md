@@ -12,6 +12,29 @@ Our "executer" is the middle ground between the input and the drawing being disp
 
 ##Overview
 
+Our program utilizes the classic model-view-controller architecture as follows: 
+
+*Model / Back End* </br>
+Relevant classes: World (and subclasses), Turtle, Parser, CommandFactory, Command (and subclasses), ButtonFactory
+
+The main component of our back end code is our World class. It holds an instance of the Turtle that is being moved and acted upon, a Parser that takes in the user's input and eventually sends out the appropriate Command(s), as well as the determined dimensions of the world. 
+
+The Turtle class is one of our most important classes as this is the character that is acted upon by the user's inputs. It contains a boolean pen that indicates whether it is drawing or not, a boolean visible, its coordinates in x and y, its degree of direction, a Queue of Commands that it can interate through and perform, as well as the Image that will represent it on the front end. 
+
+The Parser and CommandFactory 
+
+
+*Controller* </br>
+Relevant classes: WorldController
+
+WorldController acts as the medium between the UserInterface (front end) and World and its necessary classes (back end).
+
+
+*View / Front End* </br>
+Relevant classes: UserInterface
+
+
+
 
 ##User Interface
 At the most basic level there are two components to the user interface. There is a space that allows the user to write Logo code, and there is a window which displays the results of running the code. The user can interact only with the space for writing code. First, there is a text box/field that allows the user to type actual code. The user can select custom settings such as line color, turtle image, line thickness, and background display color, and language. There are also options available that allow users to select recent commands, user-defined commands, and currently-saved variables available. These are features available for user convenience. 
@@ -29,4 +52,7 @@ Error reporting is given in the form of a popup dialog box on screen. One way in
 
 ##Team Responsibilities
 
+Front end artists: James Mosca, Brandon Choi
+Back end artists: Thomas Bagley, Megan Gutter
 
+Because of how complicated the back end is, the front end artists will definitely be contributing to back end as well depending how much help they need and on what they need help on. 
