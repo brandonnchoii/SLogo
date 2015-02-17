@@ -120,6 +120,9 @@ The Turtle is responsible for holding its current position and orientation and b
 
 
 ##API Example code
+
+Reference [this](https://github.com/duke-compsci308-spring2015/slogo_team07/blob/master/API.md)
+
 The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail.
 
 
