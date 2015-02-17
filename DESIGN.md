@@ -120,6 +120,13 @@ The Turtle is responsible for holding its current position and orientation and b
 
 
 ##API Example code
+The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail.
+
+
+For convenience, set s = ‘fd 50’
+
+
+UI.refresh(s) calls WorldController.update(s) which calls World.listen(s) which calls Parser.parse(s) which returns a one-element Queue of a new ForwardCommand with parameter list equal to {50} which is passed to Turtle.addCommand(s). World.listen(s) also calls Turtle.act(), which processes the command. UI.refresh(s) then references WorldController.getWorld() which returns the information and is updated by the UI.
 
 
 ##Design Considerations 
@@ -132,21 +139,21 @@ Back end artists: Thomas Bagley, Megan Gutter
 
 Because of how complicated the back end is, the front end artists will definitely be contributing to back end as well depending how much help they need and on what they need help on. 
 
-James: </br>
-Primary: UserInterface, drawing functionality</br>
-Secondary: ImageView components</br>
+James: <br>
+Primary: UserInterface, drawing functionality<br>
+Secondary: ImageView components<br>
 
 Brandon: </br>
-Primary: UserInterface, WorldController, Main</br>
-Secondary: drawing functionality</br>
+Primary: UserInterface, WorldController, Main<br>
+Secondary: drawing functionality<br>
 
 Thomas: </br>
-Primary: Turtle, Command(s), CommandFactory</br>
-Secondary: ButtonFactory, Parser, World</br>
+Primary: Turtle, Command(s), CommandFactory<br>
+Secondary: ButtonFactory, Parser, World<br>
 
 Megan: </br>
-Primary: Parser, World</br>
-Secondary: Command(s)</br>
+Primary: Parser, World<br>
+Secondary: Command(s)<br>
 
 We plan on meeting as often as possible in order to pair program. Since we now have a bigger team than last project, we will also meet with our respective front or back end partner and code and collaborate with them as well. We have established a messaging system for communication so that we can let each other know of any questions, concerns, or updates. In order to merge and change the master branch, everyone must first verbally or through GitHub comments approve the pull request and its changes. We hope to meet often in order to prevent merge errors in the future and so that everyone is aware of all components of our model-view-controller design.
 
