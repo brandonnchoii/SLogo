@@ -1,5 +1,6 @@
 package userInterface;
 
+import worldController.WorldController;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
