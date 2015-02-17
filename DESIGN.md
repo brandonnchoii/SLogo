@@ -120,6 +120,9 @@ The Turtle is responsible for holding its current position and orientation and b
 
 
 ##API Example code
+
+Reference [this](https://github.com/duke-compsci308-spring2015/slogo_team07/blob/master/API.md)
+
 The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail.
 
 
@@ -130,6 +133,8 @@ UI.refresh(s) calls WorldController.update(s) which calls World.listen(s) which 
 
 
 ##Design Considerations 
+
+We discussed the use of factories for commands and buttons in order to maximize convenience and cleanliness in code. We also weighed the pros and cons on which class should act as our controller in MVC design. We eventually settled on WorldController because it already had access to both the UI as well as the World, which acts as our main component in the back end. We were concerned about how our program would store variables and throw exceptions if needed but settled on putting the hash map of variables in our command factory so that when initializing our commands, any faulty parameter data types would allow us to display a pop-up indiciating an error in our user's input. One significant change from our initial design of the program was our amount of get and set methods. After our readings, we decided on attempting to minimize the number of gets and sets so that there was the least amount of data sharing and a lot of encapsulation in our classes and objects. Finally, we discussed whether to utilize an abstract class or an interface for our Command class. We settled on an abstract class because the functionality of CommandFactory required us to be able to instantiate a general Command. Moreover, while an interface allows multiple behaviors to be implemented on one object, an abstract class demonstrates more of a direct inheritance. A lot of our design considerations and choices changed after class readings on interfaces and reconsiderations on possible code smells. By the end of it, we were really satisified with how our overall design turned out and believe the use of abstractions and our streamlined MVC design will make Sprint 3 much easier.
 
 
 ##Team Responsibilities
