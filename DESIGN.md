@@ -45,17 +45,17 @@ Error reporting is given in the form of a popup dialog box on screen. One way in
 
 ##Design Details
 
-#Main
+###Main
 
 Main runs UserInterface.
 
-#UserInterface
+###UserInterface
 
 The UserInterface will contain the visuals and how the user interacts with them. The command field will allow the users to enter commands to the turtle interactively and virtually displays the results of the turtle executing commands. When a button is pressed, the refresh() method will change the turtle based on the commands. The buttons held in this class allow the user to set a background color, choose a turtle image, and specify a pen color. There will be a field that shows commands previously run in the environment and variables currently available in the environment, as well as user defined commands. Users can also choose which language and access a help page. This class interacts with the WorldController. The resources needed will be the languages and the help page.
 * void initialize()
 * void refresh()
 
-#WorldController
+###WorldController
 
 The WorldController will be the controller of the MVC format. It keeps the model and view separate, getting information from the view to give to the model and vice versa. Holds the World.
 * void update(String s)
@@ -64,7 +64,7 @@ The WorldController will be the controller of the MVC format. It keeps the model
 * void clear()
 * World getWorld()
 
-#World (abstract)
+###World (abstract)
 
 The World connects the Parser, and therefore the Commands, with the Turtle. This is how the commands are passed to the turtle to execute. This class can be extended to create any type of world, like finite or wrap-around.
 * int getXSize()
@@ -78,30 +78,30 @@ The World connects the Parser, and therefore the Commands, with the Turtle. This
   * Passes command to the turtle
   * Calls act on the turtle
 
-#BoundedWorld and UnboundedWorld
+###BoundedWorld and UnboundedWorld
 
 These classes extend the abstract World class for the different possible edge types.
 
-#Parser
+###Parser
 
 This class will parse the input strings into an implementable format. The Parser will pass the parsed string to the CommandFactory to generate the correct command. The Parser will return to World a queue of Commands to implement. 
 *	Queue<Command> parse(String s)
 
-#CommandFactory
+###CommandFactory
 
 We will create the correct type of Command based on the parsed string that was received from the Parser. This is where we will handle errors that may result from the user’s commands, resulting in a pop up box with the error. Holds a map of variables that the user has entered. 
 
-#Command (interface)
+###Command (interface)
 
 The Command interface will be implemented by all the command classes. This is an interface because each command executes different instructions, so there are no methods in common and there will be no use for this to be an abstract class. The purpose of this class is to create a framework from which the same method can be called by the Turtle to perform any command. New commands can be created easily by extending this interface. 
 * abstract double run()
 
-#ButtonFactory
+###ButtonFactory
 
 Dynamically creates new choices for the user and sends them to be displayed, with regards to the features to show previously run commands, variables, and user-defined commands. 
 * Button createButton()
 
-#Turtle
+###Turtle
 The Turtle is responsible for holding its current position and orientation and being able to move based on the instructions from the queue of Commands given to it by the World. The Turtle’s attributes can be changed here as well, like its image or pen color. 
 * void drawSelf(Group g)
 * boolean isDrawin()
