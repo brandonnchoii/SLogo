@@ -71,24 +71,16 @@ Turtle(int x, int y)
 
 Constructs a new Turtle with initial position (x,y), default image, and currently drawing and visible
 
-Turtle(int x, int y, Image i)
+Turtle(int x, int y, boolean draw,boolean vis)
 
-Constructs a new Turtle with initial position (x,y), and Image i
+Constructs a new Turtle with initial position (x,y), default image, drawing and visible set to the parameters
 
-Turtle(int x, int y, boolean draw,boolean visible)
+Turtle(int x, int y, boolean draw,boolean vis, Image i)
 
 Constructs a new Turtle with initial position (x,y), Image I, drawing and visible set to the parameters
 
 
 *Methods* 
-
-int getX()
-
-Returns the current x-position of the turtle
-
-int getY()
-
-Returns the current y-position of the turtle
 
 void move(int px)
 
@@ -129,15 +121,6 @@ Adds each element of q to the c to the turtle’s command queue
 void act()
 
 Executes all of the commands in the queue
-
-void drawSelf(Group g)
-
-Draws itself in g.
-
-void setImage(Image i)
-
-Sets the turtle’s Image to i
-
 
 **WorldController**
 
