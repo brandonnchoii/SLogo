@@ -2,69 +2,91 @@ package turtle;
 
 import java.util.Queue;
 
-import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import command.Command;
 
-public class Turtle {
+public class Turtle extends ImageView {
 
-    private boolean pen;
-    private boolean visible;
-    private int xC;
-    private int yC;
-    private double direction;
-    private Queue<Command> myCommands;
-    private Image myImage;
-    
-    public Turtle() {
-        
-    }
-    
-    public void drawSelf(Group g){
-        
-    }
-    
-    public boolean isDrawing() {
-        return pen;
-    }
-    
-    public boolean isVisible() {
-        return visible;
-    }
-    
-    public void setDrawing(boolean b){
-        pen = b;
-    }
-    
-    public void setVisible(boolean b){
-        visible = b;
-    }
-    
-    public int getX() {
-        return xC;
-    }
-    
-    public int getY() {
-        return yC;
-    }
-    
-    public void act() {
-        
-    }
-    
-    public void move (int pixels) {
-        
-    }
-    
-    public void rotate (double degrees) {
-        
-    }
-    
-    public void setHeading (double degrees) {
-        
-    }
-    
-    public void addCommands(Queue<Command> commands){
-        myCommands = commands;
-    }
+	private boolean pen;
+	private boolean visible;
+	private double direction;
+	private Queue<Command> myCommands;
+
+	private static final int DEFAULT_POS = 0;
+	private static final boolean DEFAULT_DRAW = true;
+	private static final boolean DEFAULT_VISIBLE = true;
+	private static final Image DEFAULT_IMAGE = new Image("resources.images/default.jpg");
+
+	public Turtle() {
+		setTranslateX(DEFAULT_POS);
+		setTranslateY(DEFAULT_POS);
+		direction = DEFAULT_POS;
+		pen = DEFAULT_DRAW;
+		visible = DEFAULT_VISIBLE;
+		setImage(DEFAULT_IMAGE);
+
+	}
+
+	public Turtle(Image i){
+		setTranslateX(DEFAULT_POS);
+		setTranslateY(DEFAULT_POS);
+		direction = DEFAULT_POS;
+		pen = DEFAULT_DRAW;
+		visible = DEFAULT_VISIBLE;
+		setImage(i);
+	}
+	
+	public Turtle(int x, int y, Image i){
+		setTranslateX(x);
+		setTranslateY(x);
+		direction = DEFAULT_POS;
+		pen = DEFAULT_DRAW;
+		visible = DEFAULT_VISIBLE;
+		setImage(i);
+	}
+	
+	public Turtle(int x, int y, double dir, Image i){
+		setTranslateX(x);
+		setTranslateY(y);
+		direction = dir;
+		pen = DEFAULT_DRAW;
+		visible = DEFAULT_VISIBLE;
+		setImage(i);
+	}
+	
+
+	public boolean isDrawing() {
+		return pen;
+	}
+
+	
+	public void setDrawing(boolean b){
+		pen = b;
+	}
+
+
+	public void act() {
+
+	}
+
+	public void move (int pixels) {
+
+	}
+
+	public void fixPos(double height, double width){
+		setTranslateX(getTranslateX() % width);
+		setTranslateY(getTranslateY() % height);
+	}
+	public void rotate (double degrees) {
+		direction += degrees;
+	}
+
+	public void setHeading (double degrees) {
+		direction = degrees;
+	}
+
+	public void addCommands(Queue<Command> commands){
+		myCommands.addAll(commands);
+	}
 }
