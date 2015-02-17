@@ -5,13 +5,33 @@ import turtle.Turtle;
 
 public abstract class World {
 
-    private int height;
-    private int width;
-    private Turtle myTurtle;
+    protected int height;
+    protected int width;
+    protected Turtle myTurtle;
     private Parser myParser;
     
+    private static final int DEFAULT_HEIGHT = 100;
+    private static final int DEFAULT_WIDTH = 100;
+    
     public World() {
-        
+        height = DEFAULT_HEIGHT;
+        width = DEFAULT_WIDTH;
+        myTurtle = new Turtle();
+        myParser = new Parser();
+    }
+    
+    public World(int h, int w){
+    	height = h;
+    	width = w;
+    	myTurtle = new Turtle();
+    	myParser = new Parser();
+    }
+    
+    public World(int h, int w, Turtle t){
+    	height = h;
+    	width = w;
+    	myTurtle = t;
+    	myParser = new Parser();
     }
     
     public abstract void fixPosition();
