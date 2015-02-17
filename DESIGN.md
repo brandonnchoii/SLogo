@@ -33,7 +33,7 @@ WorldController acts as the medium between the UserInterface (front end) and Wor
 *View / Front End* </br>
 Relevant classes: UserInterface
 
-
+The HBox CommandField is the text input where the user can type in commands he or she wants the Turtle to perform. The VBox mySideBar will contain the link to the HTML help page as well as the buttons representing past actions that are now easily clickable in order to repeat previous actions.
 
 
 ##User Interface
