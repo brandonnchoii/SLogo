@@ -52,6 +52,10 @@ public class UserInterface {
     	myScene = new Scene(myRoot);
     }
     
+    private void runCommands(String s) {
+    	String data = s;
+    	myController.update();
+    }
     /**
      * Implement Singleton OO Design architecture
      * do we need to this even if we are making a single case of it from main only anyway?
@@ -64,9 +68,10 @@ public class UserInterface {
     }*/
     
     private VBox makeSideBar() {
-		VBox verticalBar = new VBox();
+		VBox verticalBar = new VBox(10);
 		Button turtle = makeTurtleButton();
-		verticalBar.getChildren().add(turtle);
+		Button run = makeRunButton();
+		verticalBar.getChildren().addAll(run, turtle);
 		verticalBar.setTranslateX(myWidth);
 		return verticalBar;
 	}
@@ -80,12 +85,29 @@ public class UserInterface {
     private Button makeTurtleButton() {
     	return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
     }
+    
+    private Button makeRunButton() {
+    	return makeUIButton("RunCommand", 
+    			e -> runCommands(myCommandWindow.getText()));
+    }
+    
+    private Button saveCommandButton() {
+    	return makeUIButton("SaveCommand",
+    			e -> saveCommand(myCommandWindow.getText()));
+    }
+    
     //open file chooser for turtle image
     //need to make a default (probably xml)
 	private void changeTurtle() {
 		
 	}
 
+	private void saveCommand(String s) {
+		//this is going to take some effort
+		//we need to wait til we can make commands
+		//then add commands of these strings to an ArrayList
+	}
+	
 	private Button makeUIButton(String name, EventHandler<MouseEvent> e) {
 		Button test = new Button(myMenuNames.getString(name));
 		test.setMaxWidth(Double.MAX_VALUE);
