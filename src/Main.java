@@ -6,8 +6,10 @@ import userInterface.UserInterface;
 public class Main extends Application{
     
 	@Override
-	public void start(Stage arg0) throws Exception {
+	public void start(Stage stage) throws Exception {
 		UserInterface display = new UserInterface();
+		stage.setScene(display.getScene());
+		stage.show();
 	}
 
 	 public static void main (String [] args) {	        
