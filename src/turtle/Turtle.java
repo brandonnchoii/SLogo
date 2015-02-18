@@ -9,7 +9,7 @@ import command.Command;
 public class Turtle extends ImageView {
 
 	private boolean pen;
-	double direction;
+	private double direction;
 	private Queue<Command> myCommands;
 
 	private static final int DEFAULT_POS = 0;
@@ -53,7 +53,7 @@ public class Turtle extends ImageView {
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
-
+	
 	public boolean isDrawing() {
 		return pen;
 	}
@@ -87,10 +87,22 @@ public class Turtle extends ImageView {
 	}
 
 	public void setHeading (double degrees) {
-		direction = degrees;
+		direction = degrees % 360;
+		if(direction < 0)
+			direction = 360 + direction;
 	}
 
 	public void addCommands(Queue<Command> commands){
 		myCommands.addAll(commands);
+	}
+
+	
+	public double getDirection() {
+		return direction;
+	}
+	
+	public void moveTo(double x, double y){
+		setTranslateX(x);
+		setTranslateY(y);
 	}
 }
