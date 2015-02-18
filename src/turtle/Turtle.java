@@ -9,8 +9,7 @@ import command.Command;
 public class Turtle extends ImageView {
 
 	private boolean pen;
-	private boolean visible;
-	private double direction;
+	double direction;
 	private Queue<Command> myCommands;
 
 	private static final int DEFAULT_POS = 0;
@@ -23,7 +22,7 @@ public class Turtle extends ImageView {
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
 		pen = DEFAULT_DRAW;
-		visible = DEFAULT_VISIBLE;
+		setVisible(DEFAULT_VISIBLE);
 		setImage(DEFAULT_IMAGE);
 
 	}
@@ -33,51 +32,56 @@ public class Turtle extends ImageView {
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
 		pen = DEFAULT_DRAW;
-		visible = DEFAULT_VISIBLE;
+		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
-	
+
 	public Turtle(int x, int y, Image i){
 		setTranslateX(x);
 		setTranslateY(x);
 		direction = DEFAULT_POS;
 		pen = DEFAULT_DRAW;
-		visible = DEFAULT_VISIBLE;
+		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
-	
+
 	public Turtle(int x, int y, double dir, Image i){
 		setTranslateX(x);
 		setTranslateY(y);
 		direction = dir;
 		pen = DEFAULT_DRAW;
-		visible = DEFAULT_VISIBLE;
+		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
-	
 
 	public boolean isDrawing() {
 		return pen;
 	}
 
-	
 	public void setDrawing(boolean b){
 		pen = b;
 	}
 
-
 	public void act() {
-
+		for (Command c: myCommands)
+			c.run(this);
+		myCommands.clear();
 	}
 
-	public void move (int pixels) {
+	public void move (double pixels) {
+		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
+		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
+	}
 
+	private double radians(){
+		return Math.toRadians(direction);
 	}
 
 	public void fixPos(double height, double width){
 		setTranslateX(getTranslateX() % width);
 		setTranslateY(getTranslateY() % height);
 	}
+
 	public void rotate (double degrees) {
 		direction += degrees;
 	}

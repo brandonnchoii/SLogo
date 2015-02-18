@@ -1,14 +1,17 @@
 package command;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import turtle.Turtle;
 
 public abstract class Command {
     
-    private ArrayList<Double> parameters;
+    protected List<Double> parameters;
     
-    public Command() {
-        
+    public Command(List<Double> params) {
+        parameters = params;
     }
     
-    public abstract double run();
+    public abstract double run(Turtle t);
 }
