@@ -37,7 +37,8 @@ public abstract class World {
     public abstract void fixPosition();
     
     public void listen(String s) {
-        
+        myParser.parse(s);
+        myTurtle.act();
     }
     
     public void setHeight(int h){
