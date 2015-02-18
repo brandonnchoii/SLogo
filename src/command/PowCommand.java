@@ -1,6 +1,5 @@
 package command;
 
-
 import java.util.List;
 import turtle.Turtle;
 
