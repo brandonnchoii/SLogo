@@ -1,11 +1,19 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
 import userInterface.UserInterface;
 
 
-public class Main {
+public class Main extends Application{
     
-    private UserInterface myUI;
-    
-    public static void main (String [] args){
-        
-    }
+	@Override
+	public void start(Stage stage) throws Exception {
+		UserInterface display = new UserInterface();
+		stage.setScene(display.getScene());
+		stage.show();
+	}
+
+	 public static void main (String [] args) {	        
+			launch(args);
+	 }
+
 }
