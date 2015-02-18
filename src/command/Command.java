@@ -1,6 +1,5 @@
 package command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import turtle.Turtle;
@@ -13,5 +12,8 @@ public abstract class Command {
         parameters = params;
     }
     
+    public void addParam(double d){
+    	parameters.add(d);
+    }
     public abstract double run(Turtle t);
 }
