@@ -35,6 +35,7 @@ public class UserInterface {
     //private HBox commandField;
     private VBox mySideBar;
     private Scene myScene;
+    private Color myColor;
     private Group myRoot;
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
@@ -96,6 +97,8 @@ public class UserInterface {
     	return makeUIButton("SaveCommand",
     			e -> saveCommand(myCommandWindow.getText()));
     }
+    
+    
     
     //open file chooser for turtle image
     //need to make a default (probably xml)

@@ -164,4 +164,5 @@ Secondary: Command(s)<br>
 
 We plan on meeting as often as possible in order to pair program. Since we now have a bigger team than last project, we will also meet with our respective front or back end partner and code and collaborate with them as well. We have established a messaging system for communication so that we can let each other know of any questions, concerns, or updates. In order to merge and change the master branch, everyone must first verbally or through GitHub comments approve the pull request and its changes. We hope to meet often in order to prevent merge errors in the future and so that everyone is aware of all components of our model-view-controller design.
 
-
+##Parser Recitation Discussion
+So our current parser implementation design basically consists of recursively making a tree and then running through elements of the tree in a specific order in order to execute commands. Tony from cellsociety is taking a similar but different approach. They solve the problem by having types, each instance of which is a "token". So 50 is constant, x is a variable, etc. Then they use an eval function that knows how to handle each token, and it just evals the next token until the whole expression is evaluated. I do like this design. I could see us potentially implementing this type system.
