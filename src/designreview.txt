@@ -1,0 +1,1 @@
+We could distinguish the different types of commands to avoid giving the turtle math commands or other commands that it doesn't need. 
