@@ -39,6 +39,7 @@ public class UserInterface {
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
     private Timeline myAnimation;
+    
     public UserInterface() {
     	myRoot = new Group();
     	turtleList = new ArrayList<Turtle>();
