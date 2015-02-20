@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class VisibleQueryCommand extends Command{
 	
-	public VisibleQueryCommand(List<Double> params){
-		super(params);
+	public VisibleQueryCommand(){
+		super();
 	}
 
 	@Override

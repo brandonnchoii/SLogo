@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class HeadingCommand extends Command{
 	
-	public HeadingCommand(List<Double> params){
-		super(params);
+	public HeadingCommand(){
+		super();
 	}
 
 	@Override

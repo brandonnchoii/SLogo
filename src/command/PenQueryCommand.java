@@ -1,13 +1,11 @@
 package command;
 
-import java.util.List;
-
 import turtle.Turtle;
 
 public class PenQueryCommand extends Command{
 	
-	public PenQueryCommand(List<Double> params){
-		super(params);
+	public PenQueryCommand(){
+		super();
 	}
 
 	@Override

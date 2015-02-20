@@ -1,13 +1,11 @@
 package command;
 
-import java.util.List;
-
 import turtle.Turtle;
 
 public class XcorCommand extends Command{
 	
-	public XcorCommand(List<Double> params){
-		super(params);
+	public XcorCommand(){
+		super();
 	}
 
 	@Override
