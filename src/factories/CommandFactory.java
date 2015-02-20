@@ -23,7 +23,7 @@ public class CommandFactory {
 	private Properties translationMap;
 	private Properties paramMap;
 
-	private final static String MAKE_VARIABLE = "MAKE";
+
 	private static final double TRUE = 1;
 	private static final double FALSE = 0;
 	private static final double DIMENSIONS = 2;
@@ -33,7 +33,7 @@ public class CommandFactory {
 		language = l;
 		
 		translationMap = new Properties();
-		makeTranslationMap(l);
+		makeTranslationMap();
 		
 		paramMap = new Properties();
 		makeParamMap();
@@ -56,7 +56,7 @@ public class CommandFactory {
 	public Command createCommand(List<String> parts){
 		List<Double> params = new ArrayList<Double>();
 		String command = parts.get(0);
-		if(command.equals(MAKE_VARIABLE)){
+		if(translateCommand(command).equals("MakeVariable")){
 			return addVariable(parts.get(1),parts.get(2));
 		}
 		String cmd = translateCommand(command);
@@ -105,7 +105,7 @@ public class CommandFactory {
 		
 	}
 	
-	private void makeTranslationMap(String language) throws IOException{
+	private void makeTranslationMap() throws IOException{
 		String propFileName = language + ".properties";
 		 
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
