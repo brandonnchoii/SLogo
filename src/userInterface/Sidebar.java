@@ -41,6 +41,7 @@ public class Sidebar {
         }
     }
 
+    //refactor to make this cleaner
     private ComboBox createComboBox (int i) {
         if (i == 0) {
             turtles = new ComboBox<Turtle>();
