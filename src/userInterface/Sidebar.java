@@ -30,7 +30,7 @@ public class Sidebar {
         mySidebar.getChildren().add(n);
     }
     
-    protected void addNewTurtle (Turtle t) {
+    protected void addNewTurtle (Turtle t) { //change to string
         turtles.getItems().add(t);
      }
 

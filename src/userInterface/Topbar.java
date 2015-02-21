@@ -5,14 +5,19 @@ import javafx.application.*;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class Topbar {
 
@@ -43,9 +48,26 @@ public class Topbar {
 
     private Hyperlink createHelpLink () {
         Hyperlink link  = new Hyperlink("HELP?");
-        
-        
+        link.setOnMouseClicked(e -> displayWebpage());
         return link;
+    }
+    
+    private void displayWebpage () {
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        
+        webEngine.load(getClass()
+                    .getResource("/html/helpPage.html")
+                    .toExternalForm());
+        
+        Stage stage = new Stage();
+        Group root = new Group();
+        Scene scene = new Scene(root);
+        root.getChildren().add(browser);
+        
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
     }
 
     private ComboBox<String> createColorOptions () {

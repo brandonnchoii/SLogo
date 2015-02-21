@@ -24,7 +24,7 @@ import javafx.util.Duration;
 
 public class UserInterface {
 
-    private static final int myWidth = 800;
+    private static final int myWidth = 850;
     private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
 
