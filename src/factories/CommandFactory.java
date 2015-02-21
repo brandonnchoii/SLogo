@@ -119,7 +119,7 @@ public class CommandFactory {
 
 	}
 
-	public void setLanguage(String l){
+	public void setLanguage(String l) throws IOException{
 		language = l;
 		makeTranslationMap();
 	}
