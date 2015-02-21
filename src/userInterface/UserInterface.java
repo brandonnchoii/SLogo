@@ -11,14 +11,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,7 +24,6 @@ import javafx.util.Duration;
 
 public class UserInterface {
 
-    // private static UserInterface instance;
     private static final int myWidth = 800;
     private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
@@ -40,19 +37,22 @@ public class UserInterface {
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
     private Timeline myAnimation;
+    private HBox myTopbar;
 
     public UserInterface () {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         turtleList = new ArrayList<Turtle>();
         // addTurtle();
-        myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
+        //myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
         mySidebar = makeSidebar();
+        myTopbar = makeTopbar();
         myCommandWindow = makeCommandWindow();
         makeTimeline();
         //myRoot.getChildren().addAll(myCommandWindow);
         myRoot.setBottom(myCommandWindow);
         myRoot.setRight(mySidebar);
+        myRoot.setTop(myTopbar);
         myScene = new Scene(myRoot, myWidth, myHeight);
     }
 
@@ -70,7 +70,15 @@ public class UserInterface {
         Sidebar sidebar = new Sidebar();
         return sidebar.getSidebar();
     }
+    
+    private HBox makeTopbar () {
+        Topbar topbar = new Topbar();
+        return topbar.getTopbar();
+    }
 
+    private static final String [] buttons = {"ChangeTurtleCommand", "RunCommand", "SaveCommand"};
+    
+    
     private Button makeTurtleButton () {
         return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
     }
@@ -95,9 +103,6 @@ public class UserInterface {
     }
 
     private void saveCommand (String s) {
-        // this is going to take some effort
-        // we need to wait til we can make commands
-        // then add commands of these strings to an ArrayList
     }
 
     private Button makeUIButton (String name, EventHandler<MouseEvent> e) {
