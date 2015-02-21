@@ -33,7 +33,8 @@ public class UserInterface {
     private WorldController myController;
     private List<Turtle> turtleList;
     //private HBox commandField;
-    private VBox mySideBar;
+    private VBox myButtonBar;
+    private Color sceneColor;
     private Scene myScene;
     private Group myRoot;
     private ResourceBundle myMenuNames;
@@ -46,10 +47,10 @@ public class UserInterface {
     	//addTurtle();
     	myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE
 				+ "UIMenu");
-    	mySideBar = makeSideBar();
+    	myButtonBar = makeButtonBar();
     	myCommandWindow = makeCommandWindow();
     	makeTimeline();
-    	myRoot.getChildren().addAll(mySideBar, myCommandWindow);
+    	myRoot.getChildren().addAll(myButtonBar, myCommandWindow);
     	myScene = new Scene(myRoot);
     }
     
@@ -68,7 +69,7 @@ public class UserInterface {
         return instance;
     }*/
     
-    private VBox makeSideBar() {
+    private VBox makeButtonBar() {
 		VBox verticalBar = new VBox(10);
 		Button turtle = makeTurtleButton();
 		Button run = makeRunButton();
@@ -127,7 +128,11 @@ public class UserInterface {
     private void addTurtle() {
     	turtleList.add(new Turtle());
     }
-
+    
+    private void changeColor(Color color) {
+    	sceneColor = color;
+    }
+    
     private void makeTimeline() {
 		myAnimation = new Timeline();
 		myAnimation.setCycleCount(Animation.INDEFINITE);
