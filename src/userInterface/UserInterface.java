@@ -17,6 +17,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -30,7 +32,8 @@ public class UserInterface {
     private static final int myWidth = 800;
     private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
-
+    private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
+    
     private WorldController myController;
     private List<Turtle> turtleList;
     //private HBox commandField;
@@ -47,7 +50,6 @@ public class UserInterface {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         turtleList = new ArrayList<Turtle>();
-        // addTurtle();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
         mySidebar = makeSidebar();
         myCommandWindow = makeCommandWindow();
@@ -68,14 +70,6 @@ public class UserInterface {
         return instance;
     }*/
     
-    private VBox makeButtonBar() {
-		VBox verticalBar = new VBox(10);
-		Button turtle = makeTurtleButton();
-		Button run = makeRunButton();
-		verticalBar.getChildren().addAll(run, turtle);
-		verticalBar.setTranslateX(myWidth);
-		return verticalBar;
-	}
     
     private TextArea makeCommandWindow() {
         TextArea commandWindow = new TextArea("Enter SLogo commands HERE.");
@@ -85,19 +79,8 @@ public class UserInterface {
     
     private VBox makeSidebar () {        
         Sidebar sidebar = new Sidebar();
+        makeRunButton(sidebar);
         return sidebar.getSidebar();
-    }
-
-    private Button makeTurtleButton () {
-        return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
-    }
-
-    private Button makeRunButton () {
-        return makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
-    }
-
-    private Button saveCommandButton () {
-        return makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
     }
 
     // open file chooser for turtle image
@@ -127,11 +110,18 @@ public class UserInterface {
 		myAnimation.play();
 	}
 
-    private Button makeUIButton (String name, EventHandler<MouseEvent> e) {
-        Button test = new Button(myMenuNames.getString(name));
+    private Button makeUIButton (EventHandler<MouseEvent> e) {
+        Button test = new Button();
         test.setMaxWidth(Double.MAX_VALUE);
         test.setOnMousePressed(e);
         return test;
+    }
+    
+    private void makeRunButton(Sidebar sidebar) {
+        Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
+        Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
+        play.setGraphic(new ImageView(playImage));
+        sidebar.getSidebar().getChildren().add(play);
     }
 
     public void refresh (String s) {
