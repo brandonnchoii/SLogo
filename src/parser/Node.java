@@ -1,5 +1,11 @@
 package parser;
-
+/**
+ * This class is responsible for parsing the user inputted 
+ * commands and using the CommandFactory to generate Commands
+ * 
+ * @author Megan
+ *
+ */
 public class Node {
 	private String myValue;
 	private Node myChild1;
@@ -22,6 +28,16 @@ public class Node {
 		else if (myChild2 == null) {
 			myChild2 = newNode;
 		}
+	}
+	
+	public int numChildren() {
+		if (myChild2 != null) {
+			return 2;
+		}
+		else if (myChild1 != null) {
+			return 1;
+		}
+		return 0;
 	}
 	
 	public boolean hasChildren() {

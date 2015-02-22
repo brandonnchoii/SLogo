@@ -22,52 +22,77 @@ public class Parser {
 	private CommandFactory myCommandFactory;
 	private ResourceBundle myResources;
 	private Node myTree;
+	private int numCommands;
 
 	public Parser(String language) throws IOException {
 		myCommandFactory = new CommandFactory(language);
 		myResources = ResourceBundle.getBundle("resources.language/Syntax");
 	}
 
-	public void initializeCommands(String input) {
+	public int initializeCommands(String input) {
+		numCommands = 0;
 		Scanner scanInput = new Scanner(input);
 		myTree = makeTree(scanInput);
+		return numCommands;
 	}
 	
-	public Queue<Command> parse(String input) {
+	public Command parse(String valueFromPrevCommand) {
 		//Queue<Command> commandQueue = new Queue<Command>();
-	
-		Node current = myTree;
-		while(current != null) {
-			ArrayList<String> commandInput = new ArrayList<String>();
-			if(current.hasChildren() && current.getChild1().isLeaf()) {
-				if (current.getChild2() != null && current.getChild2().isLeaf()) {
-					commandInput.add(current.getValue());
-					commandInput.add(current.getChild1().getValue());
-					commandInput.add(current.getChild2().getValue());
-				}
-				else {
-					commandInput.add(current.getValue());
-					commandInput.add(current.getChild1().getValue());
-				}
-				Command command = myCommandFactory.createCommand(commandInput);
-				//commandQueue.add(command);
-				current = new Node(command.getValue(), null, null);
-			}
+		
+		ArrayList<String> commandInput = new ArrayList<String>();
+		Node current = null;
+		if (valueFromPrevCommand == null) {
+			current = getNode();
 		}
-		//traverse
-		//if children are leaves, create command from current and leaves, put into queue
-		//return value that replaces that node
+		else {
+			Node previous = getNode();
+			previous = new Node(valueFromPrevCommand, null, null);
+			current = getNode();
+		}
+		if (current.numChildren() == 2) {
+			commandInput.add(current.getValue());
+			commandInput.add(current.getChild1().getValue());
+			commandInput.add(current.getChild2().getValue());
+		}
+		else if (current.numChildren() == 1) {
+			commandInput.add(current.getValue());
+			commandInput.add(current.getChild1().getValue());
+		}
+		else {
+			commandInput.add(current.getValue());
+		}
 		
 		
-		return null;
+		return myCommandFactory.createCommand(commandInput);
 	}
 
+	private Node getNode() {
+		Node current = myTree;
+		while(current != null) {
+			//ArrayList<String> commandInput = new ArrayList<String>();
+			if(current.hasChildren() && current.getChild1().isLeaf()) {
+				if (current.getChild2() != null) {
+					current = current.getChild2();
+				}
+				else {
+					return current;
+				}
+				//this is where long comment went if I need it *reminder for myself*
+			}
+			else {
+				current = current.getChild1();
+			}
+		}
+		return null;
+	}
+	
 	private Node makeTree(Scanner input) {
 		String current = input.next();
 		if (current.matches(myResources.getString("constant"))
 				|| current.matches(myResources.getString("variable"))) {
 			return new Node(current, null, null);
 		} else if (current.matches(myResources.getString("command"))) {
+			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
