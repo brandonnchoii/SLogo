@@ -1,7 +1,5 @@
 package turtle;
 
-import java.util.Queue;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import command.Command;
@@ -10,7 +8,6 @@ public class Turtle extends ImageView {
 
 	private boolean pen;
 	private double direction;
-	private Queue<Command> myCommands;
 
 	private static final int DEFAULT_POS = 0;
 	private static final boolean DEFAULT_DRAW = true;
@@ -53,7 +50,7 @@ public class Turtle extends ImageView {
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
-	
+
 	public boolean isDrawing() {
 		return pen;
 	}
@@ -62,10 +59,8 @@ public class Turtle extends ImageView {
 		pen = b;
 	}
 
-	public void act() {
-		for (Command c: myCommands)
-			c.run(this);
-		myCommands.clear();
+	public String act(Command c) {
+		return c.run(this) + "";
 	}
 
 	public void move (double pixels) {
@@ -92,15 +87,10 @@ public class Turtle extends ImageView {
 			direction = 360 + direction;
 	}
 
-	public void addCommands(Queue<Command> commands){
-		myCommands.addAll(commands);
-	}
-
-	
 	public double getDirection() {
 		return direction;
 	}
-	
+
 	public void moveTo(double x, double y){
 		setTranslateX(x);
 		setTranslateY(y);

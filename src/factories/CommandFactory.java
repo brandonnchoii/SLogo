@@ -19,7 +19,7 @@ public class CommandFactory {
 	private List<Double> trueParams;
 	private List<Double> homeParams;
 	private String language;
-	
+
 	private Properties translationMap;
 	private Properties paramMap;
 
@@ -31,13 +31,13 @@ public class CommandFactory {
 	public CommandFactory(String l) throws IOException {
 		variables = new HashMap<>();
 		language = l;
-		
+
 		translationMap = new Properties();
 		makeTranslationMap();
-		
+
 		paramMap = new Properties();
 		makeParamMap();
-		
+
 		makeDefaults();
 	}
 
@@ -64,7 +64,7 @@ public class CommandFactory {
 		if (params.contains(null)){
 			throw new IllegalArgumentException("The parameters are invalid"); 
 		}
-		
+
 		Map <String, Command> cmdMap = makeCommandMap(params);
 		Command ret = cmdMap.get(cmd);
 		if(ret == null)
@@ -72,7 +72,7 @@ public class CommandFactory {
 
 		return ret;
 	}
-	
+
 	private String translateCommand(String s){
 		while(translationMap.keys().hasMoreElements()){
 			String key = (String) translationMap.keys().nextElement();
@@ -80,44 +80,49 @@ public class CommandFactory {
 			for (String sub: val.split(","))
 				if(sub.equals(s))
 					return key;
-				
+
 			for(String sub: val.split(","))
 				if(sub.equals(s))
 					return key;
 		}
-		
+
 		throw new IllegalArgumentException("Illegal Command");
 	}
-	
+
 	public int getNumParameters(String s){
 		return Integer.parseInt((String)paramMap.get(translateCommand(s)));
 	}
+
 	private void makeParamMap() throws IOException{
 		String propFileName = "NumParameters.properties";
-		 
+
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
- 
+
 		if (inputStream != null) {
 			paramMap.load(inputStream);
 		} else {
 			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 		}
-		
+
 	}
-	
+
 	private void makeTranslationMap() throws IOException{
 		String propFileName = language + ".properties";
-		 
+
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
- 
+
 		if (inputStream != null) {
 			translationMap.load(inputStream);
 		} else {
 			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 		}
-		
+
 	}
-	
+
+	public void setLanguage(String l) throws IOException{
+		language = l;
+		makeTranslationMap();
+	}
 	private Map<String, Command> makeCommandMap(List<Double> params){
 		Map<String, Command> paramMap = new HashMap<String, Command>();
 		paramMap.putAll(turtleCommands(params));
