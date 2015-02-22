@@ -30,7 +30,7 @@ public class UserInterface {
 
     private WorldController myController;
     private List<Turtle> turtleList;
-    //private HBox commandField;
+    // private HBox commandField;
     private VBox mySidebar;
     private Scene myScene;
     private BorderPane myRoot;
@@ -44,12 +44,12 @@ public class UserInterface {
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         turtleList = new ArrayList<Turtle>();
         // addTurtle();
-        //myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
+        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
         mySidebar = makeSidebar();
         myTopbar = makeTopbar();
         myCommandWindow = makeCommandWindow();
         makeTimeline();
-        //myRoot.getChildren().addAll(myCommandWindow);
+        // myRoot.getChildren().addAll(myCommandWindow);
         myRoot.setBottom(myCommandWindow);
         myRoot.setRight(mySidebar);
         myRoot.setTop(myTopbar);
@@ -60,25 +60,28 @@ public class UserInterface {
         return myScene;
     }
 
-    private TextArea makeCommandWindow() {
+    private TextArea makeCommandWindow () {
         TextArea commandWindow = new TextArea("Enter SLogo commands HERE.");
         commandWindow.setOnMouseClicked(e -> commandWindow.clear());
         return commandWindow;
     }
-    
-    private VBox makeSidebar () {        
+
+    private VBox makeSidebar () {
         Sidebar sidebar = new Sidebar();
         return sidebar.getSidebar();
     }
-    
+
     private HBox makeTopbar () {
         Topbar topbar = new Topbar();
         return topbar.getTopbar();
     }
+    
+    private void makeFunctionButtons() {
+        
+    }
 
-    private static final String [] buttons = {"ChangeTurtleCommand", "RunCommand", "SaveCommand"};
-    
-    
+    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
+
     private Button makeTurtleButton () {
         return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
     }
@@ -96,7 +99,7 @@ public class UserInterface {
     private void changeTurtle () {
 
     }
-    
+
     private void runCommands (String s) {
         String data = s;
         myController.update();

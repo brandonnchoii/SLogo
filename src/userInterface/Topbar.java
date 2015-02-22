@@ -21,13 +21,14 @@ import javafx.stage.Stage;
 
 public class Topbar {
 
-    private static final String [] COLOR_NAMES = {"RED", "BLUE", "GREEN", "PURPLE", "YELLOW", "ORANGE"};
+    private static final String[] COLOR_NAMES = { "RED", "BLUE", "GREEN", "PURPLE", "YELLOW",
+                                                 "ORANGE" };
     private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE,
                                            Color.YELLOW, Color.ORANGE };
     private static final String[] LANGUAGES = { "Chinese", "English", "French", "German",
                                                "Italian", "Japanese", "Korean", "Portuguese",
                                                "Russian", "Spanish" };
-    private static final int SPACING = 50;
+    private static final int SPACING = 80;
 
     private HBox myHBox;
     private Map<String, Color> colorMap;
@@ -47,24 +48,21 @@ public class Topbar {
     }
 
     private Hyperlink createHelpLink () {
-        Hyperlink link  = new Hyperlink("HELP?");
+        Hyperlink link = new Hyperlink("HELP?");
         link.setOnMouseClicked(e -> displayWebpage());
         return link;
     }
-    
+
     private void displayWebpage () {
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        
-        webEngine.load(getClass()
-                    .getResource("/html/helpPage.html")
-                    .toExternalForm());
-        
+
+        webEngine.load(getClass().getResource("/html/helpPage.html").toExternalForm());
+
         Stage stage = new Stage();
         Group root = new Group();
         Scene scene = new Scene(root);
         root.getChildren().add(browser);
-        
         stage.setScene(scene);
         stage.show();
         stage.centerOnScreen();
@@ -73,21 +71,21 @@ public class Topbar {
     private ComboBox<String> createColorOptions () {
         ComboBox<String> colorChoices = new ComboBox<>();
         colorChoices.setPromptText("Set Background Color:");
-        
+
         colorMap = new HashMap<String, Color>();
         for (int i = 0; i < COLOR_NAMES.length; i++)
             colorMap.put(COLOR_NAMES[i], COLORS[i]);
-        
-        for (String s: colorMap.keySet())
+
+        for (String s : colorMap.keySet())
             colorChoices.getItems().add(s);
-        
+
         return colorChoices;
     }
 
     private ComboBox<String> createLanguageOptions () {
         ComboBox<String> langaugeChoices = new ComboBox<String>();
         langaugeChoices.setPromptText("Set Language:");
-        for (String s: LANGUAGES)
+        for (String s : LANGUAGES)
             langaugeChoices.getItems().add(s);
         return langaugeChoices;
     }
