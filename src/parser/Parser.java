@@ -24,9 +24,9 @@ public class Parser {
 	private Node myTree;
 	private int numCommands;
 
-	public Parser(String language) throws IOException {
-		myCommandFactory = new CommandFactory(language);
-		myResources = ResourceBundle.getBundle("resources.language/Syntax");
+	public Parser() throws IOException {
+		//myCommandFactory = new CommandFactory();
+		myResources = ResourceBundle.getBundle("resources.languages/Syntax");
 	}
 
 	public int initializeCommands(String input) {
@@ -49,6 +49,7 @@ public class Parser {
 			previous = new Node(valueFromPrevCommand, null, null);
 			current = getNode();
 		}
+		System.out.println(current.getValue());
 		if (current.numChildren() == 2) {
 			commandInput.add(current.getValue());
 			commandInput.add(current.getChild1().getValue());
@@ -88,10 +89,10 @@ public class Parser {
 	
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		if (current.matches(myResources.getString("constant"))
-				|| current.matches(myResources.getString("variable"))) {
+		if (current.matches(myResources.getString("Constant"))
+				|| current.matches(myResources.getString("Variable"))) {
 			return new Node(current, null, null);
-		} else if (current.matches(myResources.getString("command"))) {
+		} else if (current.matches(myResources.getString("Command"))) {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
 			if (numChildren == 1) {
@@ -106,4 +107,9 @@ public class Parser {
 		return null;
 	}
 
+	 public static void main (String [] args) throws IOException {	        
+			Parser test = new Parser();
+			test.initializeCommands("fd sum 10 sum 5 6");
+			test.parse(null);
+	 }
 }
