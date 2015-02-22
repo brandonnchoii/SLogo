@@ -1,5 +1,7 @@
 package world;
 
+import java.io.IOException;
+
 import parser.Parser;
 import turtle.Turtle;
 
@@ -13,25 +15,25 @@ public abstract class World {
     private static final int DEFAULT_HEIGHT = 100;
     private static final int DEFAULT_WIDTH = 100;
     
-    public World() {
+    public World() throws IOException {
         height = DEFAULT_HEIGHT;
         width = DEFAULT_WIDTH;
         myTurtle = new Turtle();
-        myParser = new Parser();
+        myParser = new Parser("English");
     }
     
-    public World(int h, int w){
+    public World(int h, int w) throws IOException{
     	height = h;
     	width = w;
     	myTurtle = new Turtle();
-    	myParser = new Parser();
+    	myParser = new Parser("English");
     }
     
-    public World(int h, int w, Turtle t){
+    public World(int h, int w, Turtle t, String language) throws IOException{
     	height = h;
     	width = w;
     	myTurtle = t;
-    	myParser = new Parser();
+    	myParser = new Parser(language);
     }
     
     public abstract void fixPosition();
