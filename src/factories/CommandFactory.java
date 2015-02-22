@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import command.*;
 import resources.languages.*;
 
@@ -74,14 +75,13 @@ public class CommandFactory {
 	}
 
 	private String translateCommand(String s){
-		while(translationMap.keys().hasMoreElements()){
-			String key = (String) translationMap.keys().nextElement();
+		for(Object o: translationMap.keySet()){
+			String key = (String) o;
 			String val = (String) translationMap.get(key);
 			for (String sub: val.split(","))
 				if(sub.equals(s))
 					return key;
-
-			for(String sub: val.split(","))
+			for(String sub: val.split("\\|"))
 				if(sub.equals(s))
 					return key;
 		}
@@ -107,10 +107,9 @@ public class CommandFactory {
 	}
 
 	private void makeTranslationMap() throws IOException{
-		String propFileName = "/resources/languages/English.properties";
+		String propFileName = "/resources/languages/" + language + ".properties";
 
 		InputStream inputStream = getClass().getResourceAsStream(propFileName);
-
 		if (inputStream != null) {
 			translationMap.load(inputStream);
 		} else {
@@ -231,5 +230,5 @@ public class CommandFactory {
 	private double readVariable(String s){
 		return variables.get(s);
 	}
-
+	
 }
