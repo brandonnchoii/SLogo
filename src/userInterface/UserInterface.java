@@ -17,11 +17,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -44,20 +46,24 @@ public class UserInterface {
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
     private Timeline myAnimation;
-    private Color sceneColor;
-
+    private Canvas myCanvas;
+    private GraphicsContext myGC;
+    
     public UserInterface () {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         turtleList = new ArrayList<Turtle>();
+        myCanvas = new Canvas(300, 300);
+        myGC = myCanvas.getGraphicsContext2D();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
         mySidebar = makeSidebar();
         myCommandWindow = makeCommandWindow();
+        changeColor(Color.RED);
+        myGC.fillRect(100, 100, 50, 50);
+        
         makeTimeline();
-        //myRoot.getChildren().addAll(myCommandWindow);
-        myRoot.setBottom(myCommandWindow);
-        myRoot.setRight(mySidebar);
-        myScene = new Scene(myRoot, myWidth, myHeight);
+        setupPane();
+        myScene = new Scene(myRoot, myWidth, myHeight, Color.BLACK);
     }
     /**
      * Implement Singleton OO Design architecture
@@ -70,6 +76,14 @@ public class UserInterface {
         return instance;
     }*/
     
+    private void setupPane() {
+    	StackPane p = new StackPane();
+        myRoot.setCenter(p);
+    	p.setStyle("-fx-background-color: blue");
+    	p.getChildren().add(myCanvas);
+        myRoot.setBottom(myCommandWindow);
+        myRoot.setRight(mySidebar);
+    }
     
     private TextArea makeCommandWindow() {
         TextArea commandWindow = new TextArea("Enter SLogo commands HERE.");
@@ -101,7 +115,7 @@ public class UserInterface {
     }
     
     private void changeColor(Color color) {
-    	sceneColor = color;
+    	myGC.setFill(color);
     }
     
     private void makeTimeline() {
@@ -120,7 +134,10 @@ public class UserInterface {
     private void makeRunButton(Sidebar sidebar) {
         Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
         Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
-        play.setGraphic(new ImageView(playImage));
+        ImageView playView = new ImageView(playImage);
+        playView.setScaleX(.9);
+        playView.setScaleY(.9);
+        play.setGraphic(playView);
         sidebar.getSidebar().getChildren().add(play);
     }
 
