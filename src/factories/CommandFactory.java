@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import command.*;
+import resources.languages.*;
 
 
 public class CommandFactory {
@@ -94,9 +94,9 @@ public class CommandFactory {
 	}
 
 	private void makeParamMap() throws IOException{
-		String propFileName = "NumParameters.properties";
-
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+		String propFileName = "/resources/parameters/NumParameters.properties";
+  
+		InputStream inputStream = getClass().getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
 			paramMap.load(inputStream);
@@ -107,14 +107,14 @@ public class CommandFactory {
 	}
 
 	private void makeTranslationMap() throws IOException{
-		String propFileName = language + ".properties";
+		String propFileName = "/resources/languages/English.properties";
 
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+		InputStream inputStream = getClass().getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
 			translationMap.load(inputStream);
 		} else {
-			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+			throw new FileNotFoundException("File not found: " + propFileName);
 		}
 
 	}
