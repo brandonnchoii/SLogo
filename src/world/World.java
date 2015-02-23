@@ -35,10 +35,18 @@ public abstract class World {
     }
     
     public abstract void fixPosition();
-    
+    	
     public void listen(String s) {
-        myParser.parse(s);
-        myTurtle.act();
+    	int numCmds = myParser.initializeCommands(s);
+    	String param = "";
+    	for (int i = 0; i < numCmds; i++)
+    		param = runCommand(param);    	
+       
+    }
+    
+    public String runCommand(String s){
+    	return myTurtle.act(myParser.parse(s));
+    	
     }
     
     public void setHeight(int h){

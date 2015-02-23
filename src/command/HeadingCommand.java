@@ -1,7 +1,5 @@
 package command;
 
-import java.util.List;
-
 import turtle.Turtle;
 
 public class HeadingCommand extends Command{
