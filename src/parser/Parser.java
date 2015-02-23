@@ -50,7 +50,6 @@ public class Parser {
 			current = getNodeForCommand();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			// System.out.println(previous.getValue());
 			previous.insertChild(new Node(valueFromPrevCommand, null, null));
 			current = getNodeForCommand();
 		}
@@ -64,6 +63,8 @@ public class Parser {
 			System.out.println("current child 2: "
 					+ current.getChild2().getValue());
 		} else if (current.numChildren() == 1 && current != null) {
+			System.out.println("current child 1: "
+					+ current.getChild1().getValue());
 			commandInput.add(current.getValue());
 			commandInput.add(current.getChild1().getValue());
 		} else {
@@ -100,6 +101,7 @@ public class Parser {
 							&& !current.getChild1().getChild2().isLeaf()) {
 						current = current.getChild1();
 					} else {
+						System.out.println("1" + current.getValue());
 						return current;
 					}
 				} else if (current.getChild2().hasChildren()
@@ -108,6 +110,7 @@ public class Parser {
 							&& !current.getChild2().getChild2().isLeaf()) {
 						current = current.getChild2();
 					} else {
+						System.out.println("2");
 						return current;
 					}
 				} else {

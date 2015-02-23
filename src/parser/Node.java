@@ -56,7 +56,7 @@ public class Node {
 	}
 
 	public void insertChild(Node newNode) {
-		if (myChild1 == null) {
+		if (myChild2 == null || myChild1 == null) {
 			myChild1 = newNode;
 		} else {
 			myChild2 = newNode;
