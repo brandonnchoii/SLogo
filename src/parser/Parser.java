@@ -50,7 +50,7 @@ public class Parser {
 			current = getNodeForCommand();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			//System.out.println(previous.getValue());
+			// System.out.println(previous.getValue());
 			previous.insertChild(new Node(valueFromPrevCommand, null, null));
 			current = getNodeForCommand();
 		}
@@ -94,15 +94,16 @@ public class Parser {
 		Node current = myTree;
 		while (current != null) {
 			while (current != null) {
-				if (current.getChild1().hasChildren() && current.getChild1().getChild1().isLeaf()) {
+				if (current.getChild1().hasChildren()
+						&& current.getChild1().getChild1().isLeaf()) {
 					if (current.getChild1().getChild2() != null
 							&& !current.getChild1().getChild2().isLeaf()) {
 						current = current.getChild1();
 					} else {
 						return current;
 					}
-				} 
-				else if(current.getChild2().hasChildren() && current.getChild2().getChild1().isLeaf()) {
+				} else if (current.getChild2().hasChildren()
+						&& current.getChild2().getChild1().isLeaf()) {
 					if (current.getChild2().getChild2() != null
 							&& !current.getChild2().getChild2().isLeaf()) {
 						current = current.getChild2();
@@ -141,7 +142,7 @@ public class Parser {
 
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("sum 2 sum 4 5");
-		test.parse("9");
+		test.initializeCommands("fd sum 10 sum 5 6");
+		test.parse("11");
 	}
 }
