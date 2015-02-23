@@ -31,8 +31,6 @@ public class Node {
 	}
 	
 	public int numChildren() {
-		System.out.println(myChild2);
-		System.out.println(myChild1);
 		if (myChild2 != null) {
 			return 2;
 		}
@@ -56,5 +54,9 @@ public class Node {
 	
 	public boolean isLeaf() {
 		return myChild1 ==  null && myChild2 == null;
+	}
+	
+	public void insertChild(Node newNode) {
+		myChild1 = newNode;
 	}
 }

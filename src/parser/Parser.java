@@ -31,76 +31,96 @@ public class Parser {
 
 	public int initializeCommands(String input) {
 		numCommands = 0;
-		Scanner scanInput = new Scanner(input);
-		myTree = makeTree(scanInput);
+		if (input.contains(myResources.getString("ListStart"))) {
+			String loopString = input.substring(
+					input.indexOf(myResources.getString("ListStart")),
+					input.indexOf(myResources.getString("ListEnd")));
+			Node loop = makeTree(new Scanner(loopString));
+			// String loop = input.substring(beginIndex, endIndex)
+		}
+		myTree = makeTree(new Scanner(input));
 		return numCommands;
 	}
-	
+
 	public Command parse(String valueFromPrevCommand) {
-		//Queue<Command> commandQueue = new Queue<Command>();
+		// Queue<Command> commandQueue = new Queue<Command>();
 		ArrayList<String> commandInput = new ArrayList<String>();
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
-			current = getNode();		}
-		else {
-			Node previous = getNode();
+			current = getNodeForCommand();
+		} else {
+			Node previous = getNodeForCommand();
+			System.out.println(previous.getValue());
 			previous = new Node(valueFromPrevCommand, null, null);
-			current = getNode();
+			System.out.println(previous.getValue());
+			current = getNodeForCommand();
 		}
 		System.out.println("current value: " + current.getValue());
 		if (current.numChildren() == 2 && current != null) {
 			commandInput.add(current.getValue());
 			commandInput.add(current.getChild1().getValue());
-			System.out.println("current child 1: " + current.getChild1().getValue());
+			System.out.println("current child 1: "
+					+ current.getChild1().getValue());
 			commandInput.add(current.getChild2().getValue());
-			System.out.println("current child 2: " + current.getChild2().getValue());
-		}
-		else if (current.numChildren() == 1 && current != null) {
+			System.out.println("current child 2: "
+					+ current.getChild2().getValue());
+		} else if (current.numChildren() == 1 && current != null) {
 			commandInput.add(current.getValue());
 			commandInput.add(current.getChild1().getValue());
-		}
-		else {
+		} else {
 			commandInput.add(current.getValue());
 		}
-		
-		
+
 		return myCommandFactory.createCommand(commandInput);
 	}
 
-	private Node getNode() {
+	private Node getNodeForCommand() {
 		Node current = myTree;
-		while(current != null) {
-			//System.out.println(current.getValue());
-			//ArrayList<String> commandInput = new ArrayList<String>();
-			if(current.hasChildren() && current.getChild1().isLeaf()) {
-				if (current.getChild2() != null && !current.getChild2().isLeaf()) {
-					//System.out.println("hi");
+		while (current != null) {
+			if (current.hasChildren() && current.getChild1().isLeaf()) {
+				if (current.getChild2() != null
+						&& !current.getChild2().isLeaf()) {
 					current = current.getChild2();
-				}
-				else {
-					//System.out.println("hi1");
+				} else {
 					return current;
 				}
-				//this is where long comment went if I need it *reminder for myself*
-			}
-			else {
-				//System.out.println("hi2");
+			} else {
 				current = current.getChild1();
 			}
 		}
 		return null;
 	}
-	
+
+	private Node getNodeToReplace() {
+		Node current = myTree;
+		while (current != null) {
+			if (current.getChild1().hasChildren()
+					&& current.getChild1().getChild1().isLeaf()
+					|| current.getChild2().hasChildren()
+					&& current.getChild2().getChild1().isLeaf()) {
+				if (current.getChild2() != null
+						&& !current.getChild2().isLeaf()) {
+					current = current.getChild2();
+				} else {
+					return current;
+				}
+			} else {
+				current = current.getChild1();
+			}
+		}
+		return null;
+	}
+
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		//System.out.println(current);
+		// System.out.println(current);
 		if (current.matches(myResources.getString("Constant"))
 				|| current.matches(myResources.getString("Variable"))) {
 			return new Node(current, null, null);
 		} else if (current.matches(myResources.getString("Command"))) {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
-			//System.out.println(numChildren);
+			// System.out.println(numChildren);
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
 				return new Node(current, newChild, null);
@@ -113,9 +133,9 @@ public class Parser {
 		return null;
 	}
 
-	 public static void main (String [] args) throws IOException {	        
-			Parser test = new Parser("English");
-			test.initializeCommands("fd sum 10 sum 5 6");
-			test.parse("");
-	 }
+	public static void main(String[] args) throws IOException {
+		Parser test = new Parser("English");
+		test.initializeCommands("sum 2 sum 4 5");
+		test.parse("9");
+	}
 }
