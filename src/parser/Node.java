@@ -31,6 +31,8 @@ public class Node {
 	}
 	
 	public int numChildren() {
+		System.out.println(myChild2);
+		System.out.println(myChild1);
 		if (myChild2 != null) {
 			return 2;
 		}
