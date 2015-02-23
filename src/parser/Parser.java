@@ -35,6 +35,7 @@ public class Parser {
 			String loopString = input.substring(
 					input.indexOf(myResources.getString("ListStart")),
 					input.indexOf(myResources.getString("ListEnd")));
+			System.out.println(loopString);
 			Node loop = makeTree(new Scanner(loopString));
 			// String loop = input.substring(beginIndex, endIndex)
 		}
@@ -50,7 +51,9 @@ public class Parser {
 			current = getNodeForCommand();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			previous.insertChild(new Node(valueFromPrevCommand, null, null));
+			System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
+			previous.insertChild(new Node(valueFromPrevCommand, null, null), myResources.getString("Command"));
+			System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
 			current = getNodeForCommand();
 		}
 		System.out.println("current value: " + current.getValue());
@@ -65,6 +68,7 @@ public class Parser {
 		} else if (current.numChildren() == 1 && current != null) {
 			System.out.println("current child 1: "
 					+ current.getChild1().getValue());
+
 			commandInput.add(current.getValue());
 			commandInput.add(current.getChild1().getValue());
 		} else {
@@ -101,16 +105,15 @@ public class Parser {
 							&& !current.getChild1().getChild2().isLeaf()) {
 						current = current.getChild1();
 					} else {
-						System.out.println("1" + current.getValue());
 						return current;
 					}
-				} else if (current.getChild2().hasChildren()
+				} else if (current.getChild2() != null
+						&& current.getChild2().hasChildren()
 						&& current.getChild2().getChild1().isLeaf()) {
 					if (current.getChild2().getChild2() != null
 							&& !current.getChild2().getChild2().isLeaf()) {
 						current = current.getChild2();
 					} else {
-						System.out.println("2");
 						return current;
 					}
 				} else {
