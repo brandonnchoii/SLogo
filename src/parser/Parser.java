@@ -49,10 +49,9 @@ public class Parser {
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else {
-			Node previous = getNodeForCommand();
-			System.out.println(previous.getValue());
-			previous = new Node(valueFromPrevCommand, null, null);
-			System.out.println(previous.getValue());
+			Node previous = getNodeBeforeToReplace();
+			//System.out.println(previous.getValue());
+			previous.insertChild(new Node(valueFromPrevCommand, null, null));
 			current = getNodeForCommand();
 		}
 		System.out.println("current value: " + current.getValue());
@@ -91,21 +90,28 @@ public class Parser {
 		return null;
 	}
 
-	private Node getNodeToReplace() {
+	private Node getNodeBeforeToReplace() {
 		Node current = myTree;
 		while (current != null) {
-			if (current.getChild1().hasChildren()
-					&& current.getChild1().getChild1().isLeaf()
-					|| current.getChild2().hasChildren()
-					&& current.getChild2().getChild1().isLeaf()) {
-				if (current.getChild2() != null
-						&& !current.getChild2().isLeaf()) {
-					current = current.getChild2();
+			while (current != null) {
+				if (current.getChild1().hasChildren() && current.getChild1().getChild1().isLeaf()) {
+					if (current.getChild1().getChild2() != null
+							&& !current.getChild1().getChild2().isLeaf()) {
+						current = current.getChild1();
+					} else {
+						return current;
+					}
+				} 
+				else if(current.getChild2().hasChildren() && current.getChild2().getChild1().isLeaf()) {
+					if (current.getChild2().getChild2() != null
+							&& !current.getChild2().getChild2().isLeaf()) {
+						current = current.getChild2();
+					} else {
+						return current;
+					}
 				} else {
-					return current;
+					current = current.getChild1();
 				}
-			} else {
-				current = current.getChild1();
 			}
 		}
 		return null;
