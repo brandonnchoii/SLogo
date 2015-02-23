@@ -1,6 +1,7 @@
 package userInterface;
 
 import javafx.application.*;
+import javafx.geometry.Insets;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -35,6 +36,7 @@ public class Topbar {
 
     public Topbar () {
         myHBox = new HBox(SPACING);
+        myHBox.setPadding(new Insets(15,15,15,15));
         initialize();
     }
 

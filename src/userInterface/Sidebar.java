@@ -1,6 +1,7 @@
 package userInterface;
 
 import turtle.Turtle;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,6 +21,7 @@ public class Sidebar {
 
     public Sidebar () {
         mySidebar = new VBox(SPACING);
+        mySidebar.setPadding(new Insets(15,15,15,15));
         initialize();
     }
 
