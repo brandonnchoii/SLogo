@@ -94,9 +94,9 @@ public class CommandFactory {
 	}
 
 	private void makeParamMap() throws IOException{
-		String propFileName = "/resources/parameters/NumParameters.properties";
-  
-		InputStream inputStream = getClass().getResourceAsStream(propFileName);
+		String propFileName = "NumParameters.properties";
+
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
 			paramMap.load(inputStream);
@@ -107,9 +107,9 @@ public class CommandFactory {
 	}
 
 	private void makeTranslationMap() throws IOException{
-		String propFileName = "/resources/languages/" + language + ".properties";
+		String propFileName = language + ".properties";
 
-		InputStream inputStream = getClass().getResourceAsStream(propFileName);
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 		if (inputStream != null) {
 			translationMap.load(inputStream);
 		} else {

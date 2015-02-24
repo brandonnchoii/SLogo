@@ -11,7 +11,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -30,15 +30,15 @@ import javafx.util.Duration;
 
 public class UserInterface {
 
-    // private static UserInterface instance;
-    private static final int myWidth = 800;
+    private static final int myWidth = 850;
     private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
     
     private WorldController myController;
     private List<Turtle> turtleList;
-    //private HBox commandField;
+
+    // private HBox commandField;
 
     private VBox mySidebar;
     private Scene myScene;
@@ -46,6 +46,8 @@ public class UserInterface {
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
     private Timeline myAnimation;
+    private HBox myTopbar;
+
     private Canvas myCanvas;
     private GraphicsContext myGC;
     
@@ -53,33 +55,38 @@ public class UserInterface {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         turtleList = new ArrayList<Turtle>();
+
+        // addTurtle();
+        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
+
         myCanvas = new Canvas(300, 300);
         myGC = myCanvas.getGraphicsContext2D();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
+
         mySidebar = makeSidebar();
+        myTopbar = makeTopbar();
         myCommandWindow = makeCommandWindow();
         changeColor(Color.RED);
         myGC.fillRect(100, 100, 50, 50);
         
         makeTimeline();
+
+        // myRoot.getChildren().addAll(myCommandWindow);
+        myRoot.setBottom(myCommandWindow);
+        myRoot.setRight(mySidebar);
+        myRoot.setTop(myTopbar);
         setupPane();
-        myScene = new Scene(myRoot, myWidth, myHeight, Color.BLACK);
+        myScene = new Scene(myRoot, myWidth, myHeight);
     }
-    /**
-     * Implement Singleton OO Design architecture
-     * do we need to this even if we are making a single case of it from main only anyway?
-     */
-    /*public static synchronized UserInterface getInstance() {
-        if (instance == null)
-            instance = new UserInterface(myWidth, myHeight);
-        
-        return instance;
-    }*/
+
+    public Scene getScene () {
+        return myScene;
+    }
     
     private void setupPane() {
     	StackPane p = new StackPane();
         myRoot.setCenter(p);
-    	p.setStyle("-fx-background-color: blue");
+    	p.setStyle("-fx-background-color: white");
     	p.getChildren().add(myCanvas);
         myRoot.setBottom(myCommandWindow);
         myRoot.setRight(mySidebar);
@@ -90,28 +97,48 @@ public class UserInterface {
         commandWindow.setOnMouseClicked(e -> commandWindow.clear());
         return commandWindow;
     }
-    
-    private VBox makeSidebar () {        
+
+    private VBox makeSidebar () {
         Sidebar sidebar = new Sidebar();
         makeRunButton(sidebar);
         return sidebar.getSidebar();
     }
+
+    private HBox makeTopbar () {
+        Topbar topbar = new Topbar();
+        return topbar.getTopbar();
+    }
+    
+    private void makeFunctionButtons() {
+        
+    }
+
+    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
+
+//    private Button makeTurtleButton () {
+//        return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
+//    }
+//
+//    private Button makeRunButton () {
+//        return makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
+//    }
+//
+//    private Button saveCommandButton () {
+//        return makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
+//    }
 
     // open file chooser for turtle image
     // need to make a default (probably xml)
     private void changeTurtle () {
 
     }
-    
+
     private void runCommands (String s) {
         String data = s;
         myController.update();
     }
 
     private void saveCommand (String s) {
-        // this is going to take some effort
-        // we need to wait til we can make commands
-        // then add commands of these strings to an ArrayList
     }
     
     private void changeColor(Color color) {
@@ -149,8 +176,4 @@ public class UserInterface {
         turtleList.add(new Turtle());
     }
     
-    public Scene getScene() {
-    	return myScene;
-    }
-
 }

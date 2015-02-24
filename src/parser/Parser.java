@@ -32,15 +32,32 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		if (input.contains(myResources.getString("ListStart"))) {
-			String loopString = input.substring(
-					input.indexOf(myResources.getString("ListStart")),
-					input.indexOf(myResources.getString("ListEnd")));
-			System.out.println(loopString);
-			Node loop = makeTree(new Scanner(loopString));
-			// String loop = input.substring(beginIndex, endIndex)
+            String loopString = input.substring(
+                    input.indexOf(myResources.getString("ListStart")),
+                    input.indexOf(myResources.getString("ListEnd")));
+            Node loop = makeTree(new Scanner(loopString));
+            // String loop = input.substring(beginIndex, endIndex)
+        }
+        myTree = makeTree(new Scanner(input));
+        return numCommands;
+	}
+	
+
+	private Node getNode() {
+		Node current = myTree;
+		while(current != null) {
+			//ArrayList<String> commandInput = new ArrayList<String>();
+			if(current.hasChildren() && current.getChild1().isLeaf()) {
+				if (current.getChild2() != null) {
+					current = current.getChild2();
+				}
+				else {
+					return current;
+				}
+				//this is where long comment went if I need it *reminder for myself*
+			}
 		}
-		myTree = makeTree(new Scanner(input));
-		return numCommands;
+		return null;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
@@ -134,6 +151,7 @@ public class Parser {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
 			// System.out.println(numChildren);
+			
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
 				return new Node(current, newChild, null);
