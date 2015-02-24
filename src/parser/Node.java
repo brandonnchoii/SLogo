@@ -1,7 +1,9 @@
 package parser;
+
 /**
- * This class is responsible for parsing the user inputted 
- * commands and using the CommandFactory to generate Commands
+ * This class is responsible for parsing the user inputted commands and using
+ * the CommandFactory to generate Commands
+>>>>>>> 727601d81786c0f2d9eae273f0affe0853b8e92b
  * 
  * @author Megan
  *
@@ -10,12 +12,13 @@ public class Node {
 	private String myValue;
 	private Node myChild1;
 	private Node myChild2;
-	
+
 	public Node(String value, Node child1, Node child2) {
 		myValue = value;
 		myChild1 = child1;
 		myChild2 = child2;
 	}
+
 	
 	public String getValue() {
 		return myValue;
@@ -30,16 +33,16 @@ public class Node {
 		}
 	}
 	
+
 	public int numChildren() {
 		if (myChild2 != null) {
 			return 2;
-		}
-		else if (myChild1 != null) {
+		} else if (myChild1 != null) {
 			return 1;
 		}
 		return 0;
 	}
-	
+
 	public boolean hasChildren() {
 		return myChild1 != null || myChild2 != null;
 	}
@@ -54,5 +57,13 @@ public class Node {
 	
 	public boolean isLeaf() {
 		return myChild1 ==  null && myChild2 == null;
+	}
+
+	public void insertChild(Node newNode) {
+		if (myChild2 == null || myChild1 == null) {
+			myChild1 = newNode;
+		} else {
+			myChild2 = newNode;
+		}
 	}
 }

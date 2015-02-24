@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import command.*;
+import resources.languages.*;
 
 
 public class CommandFactory {
@@ -74,14 +75,13 @@ public class CommandFactory {
 	}
 
 	private String translateCommand(String s){
-		while(translationMap.keys().hasMoreElements()){
-			String key = (String) translationMap.keys().nextElement();
+		for(Object o: translationMap.keySet()){
+			String key = (String) o;
 			String val = (String) translationMap.get(key);
 			for (String sub: val.split(","))
 				if(sub.equals(s))
 					return key;
-
-			for(String sub: val.split(","))
+			for(String sub: val.split("\\|"))
 				if(sub.equals(s))
 					return key;
 		}
@@ -110,11 +110,10 @@ public class CommandFactory {
 		String propFileName = language + ".properties";
 
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-
 		if (inputStream != null) {
 			translationMap.load(inputStream);
 		} else {
-			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+			throw new FileNotFoundException("File not found: " + propFileName);
 		}
 
 	}
@@ -231,5 +230,5 @@ public class CommandFactory {
 	private double readVariable(String s){
 		return variables.get(s);
 	}
-
+	
 }
