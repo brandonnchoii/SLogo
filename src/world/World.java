@@ -43,10 +43,9 @@ public abstract class World {
     	String param = "";
     	for (int i = 0; i < numCmds; i++)
     		param = runCommand(param);    	
-       
     }
     
-    public String runCommand(String s){
+    private String runCommand(String s){
     	return myTurtle.act(myParser.parse(s));
     	
     }

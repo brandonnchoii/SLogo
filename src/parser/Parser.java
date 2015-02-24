@@ -31,33 +31,18 @@ public class Parser {
 
 	public int initializeCommands(String input) {
 		numCommands = 0;
+		System.out.println(input);
 		if (input.contains(myResources.getString("ListStart"))) {
             String loopString = input.substring(
                     input.indexOf(myResources.getString("ListStart")),
                     input.indexOf(myResources.getString("ListEnd")));
+            System.out.println(loopString);
             Node loop = makeTree(new Scanner(loopString));
             // String loop = input.substring(beginIndex, endIndex)
         }
-        myTree = makeTree(new Scanner(input));
+		myTree = makeTree(new Scanner(input));
+        System.out.println(numCommands);
         return numCommands;
-	}
-	
-
-	private Node getNode() {
-		Node current = myTree;
-		while(current != null) {
-			//ArrayList<String> commandInput = new ArrayList<String>();
-			if(current.hasChildren() && current.getChild1().isLeaf()) {
-				if (current.getChild2() != null) {
-					current = current.getChild2();
-				}
-				else {
-					return current;
-				}
-				//this is where long comment went if I need it *reminder for myself*
-			}
-		}
-		return null;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
@@ -68,9 +53,9 @@ public class Parser {
 			current = getNodeForCommand();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
+			//System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
 			previous.insertChild(new Node(valueFromPrevCommand, null, null), myResources.getString("Command"));
-			System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
+			//System.out.println(previous.getChild1().getValue() + previous.getChild2().getValue());
 			current = getNodeForCommand();
 		}
 		System.out.println("current value: " + current.getValue());
@@ -143,8 +128,18 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		// System.out.println(current);
-		if (current.matches(myResources.getString("Constant"))
+		System.out.println(current);
+		if (current.matches(myResources.getString("ListStart"))) {
+			current = input.next();
+			String loopString = "";
+            while (!current.matches(myResources.getString("ListEnd"))) {
+            	loopString += current + " ";
+            	current = input.next();
+            }
+            System.out.println(loopString);
+            return makeTree(new Scanner(loopString));
+		}
+		else if (current.matches(myResources.getString("Constant"))
 				|| current.matches(myResources.getString("Variable"))) {
 			return new Node(current, null, null);
 		} else if (current.matches(myResources.getString("Command"))) {
@@ -166,7 +161,9 @@ public class Parser {
 
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("fd sum 10 sum 5 6");
-		test.parse("11");
+		test.initializeCommands("sum [ sum 3 4 ] 8");
+		//test.parse("");
+		//test.parse("11");
+		//test.parse("21");
 	}
 }
