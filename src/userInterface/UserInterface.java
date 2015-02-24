@@ -16,7 +16,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,12 +33,9 @@ public class UserInterface {
     private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
+    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
     
     private WorldController myController;
-    private List<Turtle> turtleList;
-
-    // private HBox commandField;
-
     private VBox mySidebar;
     private Scene myScene;
     private BorderPane myRoot;
@@ -47,34 +43,20 @@ public class UserInterface {
     private TextArea myCommandWindow;
     private Timeline myAnimation;
     private HBox myTopbar;
-
+    
     private Canvas myCanvas;
     private GraphicsContext myGC;
     
     public UserInterface () {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
-        turtleList = new ArrayList<Turtle>();
-
-        // addTurtle();
-        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
-
         myCanvas = new Canvas(300, 300);
         myGC = myCanvas.getGraphicsContext2D();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
-
         mySidebar = makeSidebar();
         myTopbar = makeTopbar();
-        myCommandWindow = makeCommandWindow();
-        changeColor(Color.RED);
-        myGC.fillRect(100, 100, 50, 50);
-        
+        myCommandWindow = makeCommandWindow();        
         makeTimeline();
-
-        // myRoot.getChildren().addAll(myCommandWindow);
-        myRoot.setBottom(myCommandWindow);
-        myRoot.setRight(mySidebar);
-        myRoot.setTop(myTopbar);
         setupPane();
         myScene = new Scene(myRoot, myWidth, myHeight);
     }
@@ -100,7 +82,7 @@ public class UserInterface {
 
     private VBox makeSidebar () {
         Sidebar sidebar = new Sidebar();
-        makeRunButton(sidebar);
+        makeFunctionButtons(sidebar);
         return sidebar.getSidebar();
     }
 
@@ -109,25 +91,35 @@ public class UserInterface {
         return topbar.getTopbar();
     }
     
-    private void makeFunctionButtons() {
-        
+    private void makeFunctionButtons(Sidebar sidebar) {
+        makeAddButton(sidebar);
+    	makeSwitchTurtle(sidebar);
+        makeSaveButton(sidebar);
+    	makeRunButton(sidebar);
     }
 
-    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
 
-//    private Button makeTurtleButton () {
-//        return makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
-//    }
-//
-//    private Button makeRunButton () {
-//        return makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
-//    }
-//
-//    private Button saveCommandButton () {
-//        return makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
-//    }
+    private void makeSwitchTurtle (Sidebar sidebar) {
+        Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
+    	sidebar.getSidebar().getChildren().add(save);
+    }
 
-    // open file chooser for turtle image
+
+    private void makeSaveButton(Sidebar sidebar) {
+        Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
+        sidebar.getSidebar().getChildren().add(save);
+    }
+
+    private void makeAddButton(Sidebar sidebar) {
+    	Button save = makeUIButton("AddTurtle", e -> addTurtle());
+        sidebar.getSidebar().getChildren().add(save);
+    }
+     
+    private void addTurtle() {
+		// TODO Auto-generated method stub
+	}
+
+	// open file chooser for turtle image
     // need to make a default (probably xml)
     private void changeTurtle () {
 
@@ -141,25 +133,22 @@ public class UserInterface {
     private void saveCommand (String s) {
     }
     
-    private void changeColor(Color color) {
-    	myGC.setFill(color);
-    }
-    
     private void makeTimeline() {
 		myAnimation = new Timeline();
 		myAnimation.setCycleCount(Animation.INDEFINITE);
 		myAnimation.play();
 	}
 
-    private Button makeUIButton (EventHandler<MouseEvent> e) {
-        Button test = new Button();
+    private Button makeUIButton (String s, EventHandler<MouseEvent> e) {
+        Button test = new Button(myMenuNames.getString(s));
         test.setMaxWidth(Double.MAX_VALUE);
         test.setOnMousePressed(e);
         return test;
     }
     
     private void makeRunButton(Sidebar sidebar) {
-        Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
+        Button play = new Button();
+    	play.setOnMousePressed(e -> runCommands(myCommandWindow.getText()));
         Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
         ImageView playView = new ImageView(playImage);
         playView.setScaleX(.9);
@@ -170,10 +159,6 @@ public class UserInterface {
 
     public void refresh (String s) {
 
-    }
-
-    private void addTurtle () {
-        turtleList.add(new Turtle());
     }
     
 }

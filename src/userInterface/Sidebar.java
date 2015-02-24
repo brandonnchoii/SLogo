@@ -14,7 +14,7 @@ public class Sidebar {
     private static final int SPACING = 30;
 
     private VBox mySidebar;
-    private ComboBox<Turtle> turtles;
+    private ComboBox<String> turtles;
     private ComboBox<String> previous;
     private ComboBox<Button> saved;
     private ComboBox<String> edits;
@@ -33,7 +33,7 @@ public class Sidebar {
         mySidebar.getChildren().add(n);
     }
 
-    protected void addNewTurtle (Turtle t) { // change to string
+    protected void addNewTurtle (String t) { // change to string
         turtles.getItems().add(t);
     }
 
