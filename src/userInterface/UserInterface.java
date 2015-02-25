@@ -37,8 +37,10 @@ public class UserInterface {
     private static final double SCALER = .7;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
+    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
     
     private WorldController myController;
+
     private Scene myScene;
     private BorderPane myRoot;
     private Sidebar mySidebar;
@@ -46,7 +48,6 @@ public class UserInterface {
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
     private Timeline myAnimation;
-
     private Canvas myCanvas;
     private GraphicsContext myGC;
     
@@ -56,7 +57,7 @@ public class UserInterface {
         mySidebar = new Sidebar();
         makeCreateTurtle();
         makeSaveCommand();
-        makeRunButton();
+        //makeRunButton();
         myTopbar = new Topbar();
 
         // addTurtle();
@@ -67,7 +68,7 @@ public class UserInterface {
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        changeColor(Color.RED);
+        //changeColor(Color.RED);
         myGC.fillRect(100, 100, 50, 50);
         
         makeTimeline();
@@ -98,6 +99,51 @@ public class UserInterface {
         return commandWindow;
     }
 
+//    private VBox makeSidebar () {
+//        Sidebar sidebar = new Sidebar();
+//        makeFunctionButtons(sidebar);
+//        return sidebar.getSidebar();
+//    }
+//
+//    private HBox makeTopbar () {
+//        Topbar topbar = new Topbar();
+//        return topbar.getTopbar();
+//    }
+    
+//    private void makeFunctionButtons(Sidebar sidebar) {
+//        makeAddButton(sidebar);
+//    	makeSwitchTurtle(sidebar);
+//        makeSaveButton(sidebar);
+//    	makeRunButton(sidebar);
+//    }
+//
+
+//    private void makeSwitchTurtle (Sidebar sidebar) {
+//        Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
+//    	sidebar.getSidebar().getChildren().add(save);
+//    }
+//
+//
+//    private void makeSaveButton(Sidebar sidebar) {
+//        Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
+//        sidebar.getSidebar().getChildren().add(save);
+//    }
+//
+//    private void makeAddButton(Sidebar sidebar) {
+//    	Button save = makeUIButton("AddTurtle", e -> addTurtle());
+//        sidebar.getSidebar().getChildren().add(save);
+//    }
+     
+    private void addTurtle() {
+		// TODO Auto-generated method stub
+	}
+
+	// open file chooser for turtle image
+    // need to make a default (probably xml)
+    private void changeTurtle () {
+
+    }
+
     private void runCommands (String s) {
         String data = s;
         myController.update();
@@ -117,32 +163,28 @@ public class UserInterface {
         mySidebar.add(saveCommand);
     }
     
-    private void changeColor(Color color) {
-    	myGC.setFill(color);
-    }
-    
     private void makeTimeline() {
 		myAnimation = new Timeline();
 		myAnimation.setCycleCount(Animation.INDEFINITE);
 		myAnimation.play();
 	}
 
-    private Button makeUIButton (EventHandler<MouseEvent> e) {
-        Button test = new Button();
+    private Button makeUIButton (String s, EventHandler<MouseEvent> e) {
+        Button test = new Button(myMenuNames.getString(s));
         test.setMaxWidth(Double.MAX_VALUE);
         test.setOnMousePressed(e);
         return test;
     }
     
-    private void makeRunButton() {
-        Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
-        Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
-        ImageView playView = new ImageView(playImage);
-        playView.setFitWidth(60);
-        playView.setFitHeight(40);
-        play.setGraphic(playView);
-        mySidebar.add(play);
-    }
+//    private void makeRunButton() {
+//        Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
+//        Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
+//        ImageView playView = new ImageView(playImage);
+//        playView.setFitWidth(60);
+//        playView.setFitHeight(40);
+//        play.setGraphic(playView);
+//        mySidebar.add(play);
+//    }
 
     public void refresh (String s) {
 

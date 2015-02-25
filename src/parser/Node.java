@@ -1,9 +1,7 @@
 package parser;
 
 /**
- * This class is responsible for parsing the user inputted commands and using
- * the CommandFactory to generate Commands
->>>>>>> 727601d81786c0f2d9eae273f0affe0853b8e92b
+ * The Node class is for creating trees
  * 
  * @author Megan
  *
@@ -59,11 +57,12 @@ public class Node {
 		return myChild1 ==  null && myChild2 == null;
 	}
 
-	public void insertChild(Node newNode) {
-		if (myChild2 == null || myChild1 == null) {
-			myChild1 = newNode;
-		} else {
+	public void insertChild(Node newNode, String command) {
+		if (myChild2 != null && myChild2.getValue().matches(command)
+				&& myChild1 != null && !myChild1.getValue().matches(command)) {
 			myChild2 = newNode;
+		} else {
+			myChild1 = newNode;
 		}
 	}
 }

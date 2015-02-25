@@ -70,7 +70,7 @@ public class Sidebar {
     }
 
     // private vs protected vs public?
-    private void addResult (String s) {
+    protected void addResult (String s) {
         myResults.setText(myResults.getText() + s + "\n");
     }
 
