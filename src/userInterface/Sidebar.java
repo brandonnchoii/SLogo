@@ -1,27 +1,34 @@
+/**
+ *
+ * @author Brandon Choi
+ *
+ */
+
 package userInterface;
 
-import turtle.Turtle;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class Sidebar {
 
-    private static final String[] boxes = { "Turtles", "Edit Turtle", "Previous Commands", "Saved Commands" };
-    private static final int BOX_WIDTH = 180;
-    private static final int SPACING = 30;
+    private static final String[] BOX_LABELS = { "Turtles", "Edit Turtle", "Previous Commands",
+                                                "Saved Commands" };
+    private static final int SPACING = 5;
 
     private VBox mySidebar;
-    private ComboBox<String> turtles;
-    private ComboBox<String> previous;
-    private ComboBox<Button> saved;
-    private ComboBox<String> edits;
+    private ComboBox<String> turtles, previous, saved, edits;
+    private ArrayList<ComboBox<String>> boxes;
+    private ScrollPane myResultBox;
+    private Text myResults;
 
     public Sidebar () {
-        mySidebar = new VBox(SPACING);
-        mySidebar.setPadding(new Insets(15,15,15,15));
         initialize();
     }
 
@@ -33,55 +40,46 @@ public class Sidebar {
         mySidebar.getChildren().add(n);
     }
 
-    protected void addNewTurtle (String t) { // change to string
-        turtles.getItems().add(t);
-    }
+    protected void addItem (String s) {
 
-    protected void addNewPrevious (String s) {
-        previous.getItems().add(s);
-    }
-
-    protected void addNewSaved (Button b) {
-        saved.getItems().add(b);
     }
 
     private void initialize () {
-        for (int i = 0; i < boxes.length; i++) {
-            try {
-                ComboBox cb = createComboBox(i, boxes[i]);
-                cb.setMinWidth(BOX_WIDTH);
-                mySidebar.getChildren().add(cb);
-            }
-            catch (NullPointerException e) {
-                System.out.println("Null pointer exception!"); // maybe make into a popup later
-            }
+        mySidebar = new VBox(SPACING);
+        mySidebar.setPadding(new Insets(15, 15, 15, 15));
+        boxes = new ArrayList<>();
+        boxes.addAll(Arrays.asList(turtles, previous, saved, edits));
+        for (int i = 0; i < boxes.size(); i++) {
+            setUpComboBox(boxes.get(i), BOX_LABELS[i]);
         }
+        setUpResults();
+        setUpVariableEditor();
     }
 
-    // refactor to make this cleaner
-    private ComboBox createComboBox (int i, String s) {
-        if (i == 0) {
-            turtles = new ComboBox<>();
-            turtles.setPromptText(s);
-            return turtles;
-        }
-        else if (i == 1) {
-            edits = new ComboBox<>();
-            edits.setPromptText(s);
-            return edits;
-        }
-        else if (i == 2) {
-            previous = new ComboBox<>();
-            previous.setPromptText(s);
-            return previous;
-        }
-        else if (i == 3) {
-            saved = new ComboBox<>();
-            saved.setPromptText(s);
-            return saved;
-        }
-        return null;
+    private void setUpResults () {
+        myResultBox = new ScrollPane();
+        myResults = new Text("Results: \n\n");
+        myResultBox.setStyle("-fx-background: white;");
+        myResultBox.setMinSize(UserInterface.BOX_WIDTH, UserInterface.BOX_WIDTH);
+        myResultBox.setContent(myResults);
+        mySidebar.getChildren().add(myResultBox);
     }
-    
-    
+
+    private void setUpVariableEditor () {
+
+    }
+
+    // private vs protected vs public?
+    protected void addResult (String s) {
+        myResults.setText(myResults.getText() + s + "\n");
+    }
+
+    private void setUpComboBox (ComboBox<String> cb, String s) {
+        cb = new ComboBox<>();
+        cb.setMinWidth(UserInterface.BOX_WIDTH);
+        cb.setPromptText(s);
+        mySidebar.getChildren().add(cb);
+        // previous.setOnAction(e ->
+        // System.out.println(previous.getSelectionModel().getSelectedItem()));
+    }
 }
