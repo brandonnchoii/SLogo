@@ -19,16 +19,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
-* 
-* @author Brandon Choi, James Mosca
-*
-*/
+ * 
+ * @author Brandon Choi, James Mosca
+ *
+ */
 public class UserInterface {
 
     public static final int BOX_WIDTH = 180;
@@ -38,7 +36,7 @@ public class UserInterface {
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
     private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
-    
+
     private WorldController myController;
 
     private Scene myScene;
@@ -50,14 +48,15 @@ public class UserInterface {
     private Timeline myAnimation;
     private Canvas myCanvas;
     private GraphicsContext myGC;
-    
+    private StackPane canvasPane;
+
     public UserInterface () {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         mySidebar = new Sidebar();
         makeCreateTurtle();
         makeSaveCommand();
-        //makeRunButton();
+        // makeRunButton();
         myTopbar = new Topbar();
 
         // addTurtle();
@@ -68,9 +67,9 @@ public class UserInterface {
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        //changeColor(Color.RED);
+        // changeColor(Color.RED);
         myGC.fillRect(100, 100, 50, 50);
-        
+
         makeTimeline();
 
         myRoot.setBottom(myCommandWindow);
@@ -79,86 +78,93 @@ public class UserInterface {
         setupPane();
         myScene = new Scene(myRoot, myWidth, myHeight);
         makeFunctionButtons();
+        setUpResponses();
     }
 
     public Scene getScene () {
         return myScene;
     }
-    
-    private void setupPane() {
-    	StackPane p = new StackPane();
-        myRoot.setCenter(p);
-    	p.setStyle("-fx-background-color: white");
-    	p.getChildren().add(myCanvas);
+
+    private void setUpResponses () {
+        myTopbar.myColorChoices.setOnAction(e -> {
+            canvasPane.setStyle("-fx-background-color: " + "#" +
+                                myTopbar.myColorChoices.getValue().toString().substring(2));
+        });
+    }
+
+    private void setupPane () {
+        canvasPane = new StackPane();
+        myRoot.setCenter(canvasPane);
+        canvasPane.setStyle("-fx-background-color: #ffcc99ff");
+        canvasPane.getChildren().add(myCanvas);
         myRoot.setBottom(myCommandWindow);
         myRoot.setRight(mySidebar.getSidebar());
     }
-    
-    private TextArea makeCommandWindow() {
+
+    private TextArea makeCommandWindow () {
         TextArea commandWindow = new TextArea("Enter SLogo command(s) HERE.");
         commandWindow.setOnMouseClicked(e -> commandWindow.clear());
         return commandWindow;
     }
-    
-    private void makeFunctionButtons() {
-    	makeSwitchTurtle();
-    	makeRunButton();
-    }
 
+    private void makeFunctionButtons () {
+        makeSwitchTurtle();
+        makeRunButton();
+    }
 
     private void makeSwitchTurtle () {
         Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
-    	mySidebar.add(save);
+        mySidebar.add(save);
     }
-    
-    private void makeSaveButton() {
+
+    private void makeSaveButton () {
         Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
         mySidebar.add(save);
     }
 
-    private void makeAddButton() {
-    	Button save = makeUIButton("AddTurtle", e -> addTurtle());
-    	mySidebar.add(save);
+    private void makeAddButton () {
+        Button save = makeUIButton("AddTurtle", e -> addTurtle());
+        mySidebar.add(save);
     }
-     
-    private void addTurtle() {
-		// TODO Auto-generated method stub
-	}
 
-	// open file chooser for turtle image
+    private void addTurtle () {
+        // TODO Auto-generated method stub
+    }
+
+    // open file chooser for turtle image
     // need to make a default (probably xml)
     private void changeTurtle () {
 
     }
-    
-    private void saveCommand(String s){
-        
+
+    private void saveCommand (String s) {
+
     }
 
     private void runCommands (String s) {
         String data = s;
         myController.update();
     }
-    
-    private void makeCreateTurtle() {
+
+    private void makeCreateTurtle () {
         Button turtleCreate = new Button("Create New Turtle");
         turtleCreate.setMinWidth(BOX_WIDTH);
         turtleCreate.setOnMouseClicked(e -> new TurtleMaker());
         mySidebar.add(turtleCreate);
     }
 
-    private void makeSaveCommand() {
+    private void makeSaveCommand () {
         Button saveCommand = new Button("Save New Command");
         saveCommand.setMinWidth(BOX_WIDTH);
         saveCommand.setOnMouseClicked(e -> new CommandSaver());
         mySidebar.add(saveCommand);
     }
-    
-    private void makeTimeline() {
-		myAnimation = new Timeline();
-		myAnimation.setCycleCount(Animation.INDEFINITE);
-		myAnimation.play();
-	}
+
+    private void makeTimeline () {
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Animation.INDEFINITE);
+        myAnimation.play();
+    }
 
     private Button makeUIButton (String s, EventHandler<MouseEvent> e) {
         Button test = new Button(myMenuNames.getString(s));
@@ -166,8 +172,8 @@ public class UserInterface {
         test.setOnMousePressed(e);
         return test;
     }
-    
-    private void makeRunButton() {
+
+    private void makeRunButton () {
         Button play = makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
         Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
         ImageView playView = new ImageView(playImage);

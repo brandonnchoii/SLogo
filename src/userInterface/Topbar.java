@@ -29,9 +29,9 @@ public class Topbar {
     private static final int SPACING = 40;
 
     private HBox myHBox;
-    private ComboBox<String> languageChoices;
-    private Hyperlink myLink;
-    private ColorPicker myColorChoices;
+    protected ComboBox<String> languageChoices;
+    protected Hyperlink myLink;
+    protected ColorPicker myColorChoices;
 
     public Topbar () {
         initialize();
