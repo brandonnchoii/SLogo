@@ -78,6 +78,7 @@ public class UserInterface {
         myRoot.setTop(myTopbar.getTopbar());
         setupPane();
         myScene = new Scene(myRoot, myWidth, myHeight);
+        makeFunctionButtons();
     }
 
     public Scene getScene () {
@@ -98,41 +99,27 @@ public class UserInterface {
         commandWindow.setOnMouseClicked(e -> commandWindow.clear());
         return commandWindow;
     }
-
-//    private VBox makeSidebar () {
-//        Sidebar sidebar = new Sidebar();
-//        makeFunctionButtons(sidebar);
-//        return sidebar.getSidebar();
-//    }
-//
-//    private HBox makeTopbar () {
-//        Topbar topbar = new Topbar();
-//        return topbar.getTopbar();
-//    }
     
-//    private void makeFunctionButtons(Sidebar sidebar) {
-//        makeAddButton(sidebar);
-//    	makeSwitchTurtle(sidebar);
-//        makeSaveButton(sidebar);
-//    	makeRunButton(sidebar);
-//    }
-//
+    private void makeFunctionButtons() {
+    	makeSwitchTurtle();
+    	makeRunButton();
+    }
 
-//    private void makeSwitchTurtle (Sidebar sidebar) {
-//        Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
-//    	sidebar.getSidebar().getChildren().add(save);
-//    }
-//
-//
-//    private void makeSaveButton(Sidebar sidebar) {
-//        Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
-//        sidebar.getSidebar().getChildren().add(save);
-//    }
-//
-//    private void makeAddButton(Sidebar sidebar) {
-//    	Button save = makeUIButton("AddTurtle", e -> addTurtle());
-//        sidebar.getSidebar().getChildren().add(save);
-//    }
+
+    private void makeSwitchTurtle () {
+        Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
+    	mySidebar.add(save);
+    }
+    
+    private void makeSaveButton() {
+        Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
+        mySidebar.add(save);
+    }
+
+    private void makeAddButton() {
+    	Button save = makeUIButton("AddTurtle", e -> addTurtle());
+    	mySidebar.add(save);
+    }
      
     private void addTurtle() {
 		// TODO Auto-generated method stub
@@ -142,6 +129,10 @@ public class UserInterface {
     // need to make a default (probably xml)
     private void changeTurtle () {
 
+    }
+    
+    private void saveCommand(String s){
+        
     }
 
     private void runCommands (String s) {
@@ -176,15 +167,15 @@ public class UserInterface {
         return test;
     }
     
-//    private void makeRunButton() {
-//        Button play = makeUIButton(e -> runCommands(myCommandWindow.getText()));
-//        Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
-//        ImageView playView = new ImageView(playImage);
-//        playView.setFitWidth(60);
-//        playView.setFitHeight(40);
-//        play.setGraphic(playView);
-//        mySidebar.add(play);
-//    }
+    private void makeRunButton() {
+        Button play = makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
+        Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
+        ImageView playView = new ImageView(playImage);
+        playView.setFitWidth(60);
+        playView.setFitHeight(40);
+        play.setGraphic(playView);
+        mySidebar.add(play);
+    }
 
     public void refresh (String s) {
 
