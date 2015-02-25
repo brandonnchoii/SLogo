@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 public class Sidebar {
 
     private static final String[] BOX_LABELS = { "Turtles", "Edit Turtle", "Previous Commands",
-                                           "Saved Commands" };
+                                                "Saved Commands" };
     private static final int SPACING = 5;
 
     private VBox mySidebar;
@@ -41,12 +41,12 @@ public class Sidebar {
     }
 
     protected void addItem (String s) {
-        
+
     }
 
     private void initialize () {
         mySidebar = new VBox(SPACING);
-        mySidebar.setPadding(new Insets(15,15,15,15));
+        mySidebar.setPadding(new Insets(15, 15, 15, 15));
         boxes = new ArrayList<>();
         boxes.addAll(Arrays.asList(turtles, previous, saved, edits));
         for (int i = 0; i < boxes.size(); i++) {
@@ -58,20 +58,19 @@ public class Sidebar {
 
     private void setUpResults () {
         myResultBox = new ScrollPane();
-        myResults = new Text("Results: \n");
+        myResults = new Text("Results: \n\n");
         myResultBox.setStyle("-fx-background: white;");
         myResultBox.setMinSize(UserInterface.BOX_WIDTH, UserInterface.BOX_WIDTH);
-        myResultBox.setContent(myResults);        
+        myResultBox.setContent(myResults);
         mySidebar.getChildren().add(myResultBox);
     }
-    
-private void setUpVariableEditor () {
-        
-        
+
+    private void setUpVariableEditor () {
+
     }
-    
-    //private vs protected vs public?
-    private void addResult(String s){
+
+    // private vs protected vs public?
+    private void addResult (String s) {
         myResults.setText(myResults.getText() + s + "\n");
     }
 
@@ -80,7 +79,7 @@ private void setUpVariableEditor () {
         cb.setMinWidth(UserInterface.BOX_WIDTH);
         cb.setPromptText(s);
         mySidebar.getChildren().add(cb);
-            // previous.setOnAction(e ->
-            // System.out.println(previous.getSelectionModel().getSelectedItem()));
+        // previous.setOnAction(e ->
+        // System.out.println(previous.getSelectionModel().getSelectedItem()));
     }
 }
