@@ -8,7 +8,6 @@ package userInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -18,12 +17,17 @@ import javafx.scene.text.Text;
 
 public class Sidebar {
 
+    public static final int TURTLE_INDEX = 0;
+    public static final int EDITS_INDEX = 1;
+    public static final int PREVIOUS_INDEX = 2;
+    public static final int SAVED_INDEX = 3;
+
     private static final String[] BOX_LABELS = { "Turtles", "Edit Turtle", "Previous Commands",
                                                 "Saved Commands" };
     private static final int SPACING = 5;
 
     private VBox mySidebar;
-    private ComboBox<String> turtles, previous, saved, edits;
+    protected ComboBox<String> turtles, edits, previous, saved;
     private ArrayList<ComboBox<String>> boxes;
     private ScrollPane myResultBox;
     private Text myResults;
@@ -40,18 +44,19 @@ public class Sidebar {
         mySidebar.getChildren().add(n);
     }
 
-    protected void addItem (String s) {
-
+    protected void addItem (String s, int index) {
+        boxes.get(index).getItems().add(s);
     }
 
     private void initialize () {
         mySidebar = new VBox(SPACING);
         mySidebar.setPadding(new Insets(15, 15, 15, 15));
-        boxes = new ArrayList<>();
-        boxes.addAll(Arrays.asList(turtles, previous, saved, edits));
-        for (int i = 0; i < boxes.size(); i++) {
-            setUpComboBox(boxes.get(i), BOX_LABELS[i]);
-        }
+        boxes = new ArrayList<ComboBox<String>>();
+        Arrays.asList(turtles, edits, previous, saved).stream().forEach(e -> {
+            e = new ComboBox<>();
+            boxes.add(e);
+        });
+        boxes.stream().forEach(e -> setUpComboBox(e, BOX_LABELS[boxes.indexOf(e)]));
         setUpResults();
         setUpVariableEditor();
     }
@@ -75,7 +80,6 @@ public class Sidebar {
     }
 
     private void setUpComboBox (ComboBox<String> cb, String s) {
-        cb = new ComboBox<>();
         cb.setMinWidth(UserInterface.BOX_WIDTH);
         cb.setPromptText(s);
         mySidebar.getChildren().add(cb);

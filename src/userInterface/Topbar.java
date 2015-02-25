@@ -30,7 +30,7 @@ public class Topbar {
 
     private HBox myHBox;
     protected ComboBox<String> languageChoices;
-    protected Hyperlink myLink;
+    private Hyperlink myLink;
     protected ColorPicker myColorChoices;
 
     public Topbar () {

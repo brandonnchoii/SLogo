@@ -32,13 +32,11 @@ public class UserInterface {
     public static final int BOX_WIDTH = 180;
     private static final int myWidth = 900;
     private static final int myHeight = 750;
-    private static final double SCALER = .7;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
     private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
 
     private WorldController myController;
-
     private Scene myScene;
     private BorderPane myRoot;
     private Sidebar mySidebar;
@@ -49,6 +47,7 @@ public class UserInterface {
     private Canvas myCanvas;
     private GraphicsContext myGC;
     private StackPane canvasPane;
+    private Button commandSaverButton;
 
     public UserInterface () {
         myRoot = new BorderPane();
@@ -56,18 +55,13 @@ public class UserInterface {
         mySidebar = new Sidebar();
         makeCreateTurtle();
         makeSaveCommand();
-        // makeRunButton();
         myTopbar = new Topbar();
-
-        // addTurtle();
-        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
 
         myCanvas = new Canvas(200, 200);
         myGC = myCanvas.getGraphicsContext2D();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        // changeColor(Color.RED);
         myGC.fillRect(100, 100, 50, 50);
 
         makeTimeline();
@@ -86,16 +80,45 @@ public class UserInterface {
     }
 
     private void setUpResponses () {
+        // change background color
         myTopbar.myColorChoices.setOnAction(e -> {
             canvasPane.setStyle("-fx-background-color: " + "#" +
                                 myTopbar.myColorChoices.getValue().toString().substring(2));
         });
+
+        // change language choice
+        myTopbar.languageChoices.setOnAction(e -> {
+
+        });
+
+        // save command
+        CommandSaver cs = new CommandSaver();
+        commandSaverButton.setOnMouseClicked(e -> {
+            cs.saveCommand();
+            cs.saveButton.setOnMouseClicked(c -> {
+                mySidebar.addItem(cs.commandWindow.getText(), Sidebar.SAVED_INDEX);
+                cs.close();
+            });
+        });
+
+        // create new turtle
+        TurtleMaker tm = new TurtleMaker();
+        
+        //access specific saved command
+        
+        //access specific previous command
+        
+        //access specific turtle 
+        
+        //edit specific turtle
+
     }
 
     private void setupPane () {
         canvasPane = new StackPane();
+        canvasPane.setPadding(new Insets(10, 10, 10, 10));
         myRoot.setCenter(canvasPane);
-        canvasPane.setStyle("-fx-background-color: #ffcc99ff");
+        canvasPane.setStyle("-fx-background-color: white");
         canvasPane.getChildren().add(myCanvas);
         myRoot.setBottom(myCommandWindow);
         myRoot.setRight(mySidebar.getSidebar());
@@ -114,16 +137,6 @@ public class UserInterface {
 
     private void makeSwitchTurtle () {
         Button save = makeUIButton("ChangeTurtleCommand", e -> changeTurtle());
-        mySidebar.add(save);
-    }
-
-    private void makeSaveButton () {
-        Button save = makeUIButton("SaveCommand", e -> saveCommand(myCommandWindow.getText()));
-        mySidebar.add(save);
-    }
-
-    private void makeAddButton () {
-        Button save = makeUIButton("AddTurtle", e -> addTurtle());
         mySidebar.add(save);
     }
 
@@ -154,10 +167,9 @@ public class UserInterface {
     }
 
     private void makeSaveCommand () {
-        Button saveCommand = new Button("Save New Command");
-        saveCommand.setMinWidth(BOX_WIDTH);
-        saveCommand.setOnMouseClicked(e -> new CommandSaver());
-        mySidebar.add(saveCommand);
+        commandSaverButton = new Button("Save New Command");
+        commandSaverButton.setMinWidth(BOX_WIDTH);
+        mySidebar.add(commandSaverButton);
     }
 
     private void makeTimeline () {

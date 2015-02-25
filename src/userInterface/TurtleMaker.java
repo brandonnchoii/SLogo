@@ -21,7 +21,6 @@ public class TurtleMaker {
     
     public TurtleMaker() {
         initialize();
-        makeTurtle();
     }
     
     public void makeTurtle() {
