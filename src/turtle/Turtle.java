@@ -2,19 +2,22 @@ package turtle;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import command.Command;
 
 public class Turtle extends ImageView {
 
 	private boolean pen;
 	private double direction;
-
+	private Pen myPen;
 	private static final int DEFAULT_POS = 0;
 	private static final boolean DEFAULT_DRAW = true;
 	private static final boolean DEFAULT_VISIBLE = true;
 	private static final Image DEFAULT_IMAGE = new Image("resources.images/default.jpg");
 
-	public Turtle() {
+	public Turtle(Paint color) {
+		myPen = new Pen(color);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
@@ -95,4 +98,13 @@ public class Turtle extends ImageView {
 		setTranslateX(x);
 		setTranslateY(y);
 	}
+
+	public Paint drawWithColor(Paint color) {
+		return myPen.getColor();
+	}
+	
+	public double drawWithSize(double size) {
+		return myPen.getSize();
+	}
+	
 }
