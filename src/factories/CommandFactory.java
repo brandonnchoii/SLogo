@@ -40,10 +40,7 @@ public class CommandFactory {
 		syntax = ResourceBundle.getBundle("resources.languages/Syntax");
 
 		makeDefaults();
-		
-		resetRepcount();
-
-
+				
 	}
 
 	private void makeDefaults(){
@@ -56,6 +53,8 @@ public class CommandFactory {
 		homeParams = new ArrayList<>();
 		while(homeParams.size() <= DIMENSIONS)
 			homeParams.add(0.);
+		
+		resetRepcount();
 	}
 
 	private void setTranslationMap(){
@@ -228,7 +227,11 @@ public class CommandFactory {
 	}
 
 	private double readVariable(String s){
-		return variables.get(":x");
+		Double d = variables.get(s);
+		if(d != null)
+			return variables.get(s);
+		else
+			throw new IllegalArgumentException("Illegal variable name");
 	}
 
 	public void clearRepCount(){
