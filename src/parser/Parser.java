@@ -48,7 +48,9 @@ public class Parser {
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
+			System.out.println("REGISTER LOOP");
 			myTree = makeTree(new Scanner(myInput));
+			System.out.println(myTree.getValue());
 			myTree = myListTree;
 			return parse("");
 		} else {
@@ -182,11 +184,11 @@ public class Parser {
 		test.parse("");
 		test.parse("11");
 		test.parse("21");
-		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
-		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
+//		test.parse("loop");
+//		test.parse("11");
+//		test.parse("21");
+//		test.parse("loop");
+//		test.parse("11");
+//		test.parse("21");
 	}
 }
