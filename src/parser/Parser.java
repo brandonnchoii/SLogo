@@ -22,9 +22,10 @@ public class Parser {
 	private CommandFactory myCommandFactory;
 	private ResourceBundle myResources;
 	private Node myTree;
-	private static Node myTreeCopy;
+	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
+	private static final String LOOP_DONE = "loopDone";
 
 	public Parser(String language) throws IOException {
 		myCommandFactory = new CommandFactory(language);
@@ -34,13 +35,12 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
-		myTreeCopy = makeTree(new Scanner(input));
+		myInput = input;
 		//System.out.println(numCommands);
 		return numCommands;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
-		// Queue<Command> commandQueue = new Queue<Command>();
 		ArrayList<String> commandInput = new ArrayList<String>();
 		System.out.println(valueFromPrevCommand);
 		//Node current = getMostNestedCommand(valueFromPrevCommand);
@@ -49,16 +49,15 @@ public class Parser {
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
-			myTree = myTreeCopy;
+			myTree = makeTree(new Scanner(myInput));
+			//myCommandFactory.incrementLoopCounter();
 			return parse("");
+		} else if (valueFromPrevCommand.equals(LOOP_DONE)) {
+			//myCommandFactory.clearRepCount();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			// System.out.println(previous.getChild1().getValue() +
-			// previous.getChild2().getValue());
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
 					myResources.getString("Command"));
-			// System.out.println(previous.getChild1().getValue() +
-			// previous.getChild2().getValue());
 			current = getNodeForCommand();
 		}
 		
