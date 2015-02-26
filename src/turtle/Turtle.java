@@ -8,58 +8,60 @@ import command.Command;
 
 public class Turtle extends ImageView {
 
-	private boolean pen;
 	private double direction;
 	private Pen myPen;
 	private static final int DEFAULT_POS = 0;
 	private static final boolean DEFAULT_DRAW = true;
 	private static final boolean DEFAULT_VISIBLE = true;
-	private static final Image DEFAULT_IMAGE = new Image("resources.images/default.jpg");
-
+	private static final Image DEFAULT_IMAGE = new Image("resources/images/default.jpg");
+	
 	public Turtle(Paint color) {
 		myPen = new Pen(color);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
-		pen = DEFAULT_DRAW;
+		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(DEFAULT_IMAGE);
 
 	}
 
-	public Turtle(Image i){
+	public Turtle(Image i, Paint color){
+		myPen = new Pen(color);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
-		pen = DEFAULT_DRAW;
+		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
 
-	public Turtle(int x, int y, Image i){
+	public Turtle(int x, int y, Image i, Paint color){
+		myPen = new Pen(color);
 		setTranslateX(x);
 		setTranslateY(x);
 		direction = DEFAULT_POS;
-		pen = DEFAULT_DRAW;
+		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
 
-	public Turtle(int x, int y, double dir, Image i){
+	public Turtle(int x, int y, double dir, Image i, Paint color){
+		myPen = new Pen(color);
 		setTranslateX(x);
 		setTranslateY(y);
 		direction = dir;
-		pen = DEFAULT_DRAW;
+		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
 	}
 
 	public boolean isDrawing() {
-		return pen;
+		return myPen.penReady();
 	}
 
 	public void setDrawing(boolean b){
-		pen = b;
+		myPen.changePenState(b);
 	}
 
 	public String act(Command c) {

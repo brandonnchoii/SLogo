@@ -2,6 +2,7 @@ package world;
 
 import java.io.IOException;
 
+import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
 
@@ -18,14 +19,14 @@ public abstract class World {
     public World() throws IOException {
         height = DEFAULT_HEIGHT;
         width = DEFAULT_WIDTH;
-        myTurtle = new Turtle();
+        myTurtle = new Turtle(Color.GREEN);
         myParser = new Parser("English");
     }
     
     public World(int h, int w) throws IOException{
     	height = h;
     	width = w;
-    	myTurtle = new Turtle();
+    	myTurtle = new Turtle(Color.GREEN);
     	myParser = new Parser("English");
     }
     
@@ -46,6 +47,7 @@ public abstract class World {
     }
     
     private String runCommand(String s){
+    	System.out.println(s);
     	return myTurtle.act(myParser.parse(s));
     	
     }
