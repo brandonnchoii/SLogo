@@ -24,6 +24,11 @@ public class CommandFactory {
 	private static final double FALSE = 0;
 	private static final double DIMENSIONS = 2;
 
+	private static final int REPEAT = 1;
+	private static final int DOTIMES = 2;
+	private static final int FOR = 4; //I promise this isn't a typo
+	private static final double DEFAULT_START = 1;
+
 	public CommandFactory(String l)  {
 		variables = new HashMap<>();
 		language = l;
@@ -63,7 +68,7 @@ public class CommandFactory {
 		}
 		String cmd = translateCommand(command);
 		params = makeParams(parts);
-		
+
 		Map <String, Command> cmdMap = makeCommandMap(params, parts);
 		Command ret = cmdMap.get(cmd);
 		if(ret == null)
@@ -226,5 +231,32 @@ public class CommandFactory {
 		variables.remove(":repCount");
 	}
 
+	public void updateVariable(String varName, double val){
+		variables.put(varName,val);
+	}
 
+	public void initializeLoopVariables(String info){
+		String[] parts = info.split(" ");
+		
+		if(parts.length == REPEAT)
+			variables.put(":repcount", DEFAULT_START);
+
+		else if(parts.length == DOTIMES){
+			if(!parts[0].matches(syntax.getString("Variable")))
+				variables.put(parts[0], DEFAULT_START);
+			else
+				throw new IllegalArgumentException("Illegal Variable Name");
+		}
+
+
+		else if(parts.length == FOR){
+			try{
+				variables.put(parts[0], Double.parseDouble(parts[1]));
+			}
+			catch(NumberFormatException e){
+				throw new IllegalArgumentException("Invalid start value");
+			}
+		}
+
+	}
 }
