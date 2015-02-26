@@ -28,9 +28,10 @@ public class WorldController {
         UI = ui;
         myGC = UI.getGraphics();
         myTurtle = myWorld.getTurtle();
+        myTurtle.setPreserveRatio(true);
         myTurtle.setFitHeight(40);
         myTurtle.setFitWidth(40);
-        myGC.drawImage(myTurtle.getImage(), 100, 100);
+        myGC.drawImage(myTurtle.getImage(), 75, 75, 100, 100);
     }
 
     public WorldController (UserInterface ui, World w) {
@@ -53,7 +54,7 @@ public class WorldController {
         myTurtle.setFitWidth(40);
     }
     public void update(String command) {
-        //System.out.println(command);
+        System.out.println(command + "wc");
     	myWorld.listen(command);
     }
 

@@ -32,10 +32,11 @@ public class Parser {
 	}
 
 	public int initializeCommands(String input) {
+		System.out.println(input);
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
 		myTreeCopy = makeTree(new Scanner(input));
-		//System.out.println(numCommands);
+		System.out.println(numCommands);
 		return numCommands;
 	}
 
@@ -156,7 +157,7 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		//System.out.println(current);
+		System.out.println(current);
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
