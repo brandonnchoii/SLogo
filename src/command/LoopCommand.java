@@ -25,11 +25,9 @@ public abstract class LoopCommand extends Command {
 	}
 
 	@Override
-	public double run(Turtle t) {
-		if(parameters.get(parameters.size()-1) < parameters.get(0)) 
-			return 0;
-		return 1;
-	}
+	public abstract double run(Turtle t);
+	
+	public abstract void readValues();
 
 	public double getStart(){
 		return start;
