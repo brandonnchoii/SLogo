@@ -1,5 +1,7 @@
 package worldController;
 
+import java.io.IOException;
+
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
@@ -8,7 +10,7 @@ public class WorldController {
 
     World myWorld;
 
-    public WorldController () {
+    public WorldController () throws IOException {
         myWorld = new BoundedWorld();
     }
 
@@ -16,7 +18,7 @@ public class WorldController {
         myWorld = w;
     }
 
-    public WorldController (boolean bounded) {
+    public WorldController (boolean bounded) throws IOException {
         if (bounded)
             myWorld = new BoundedWorld();
         else
