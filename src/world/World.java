@@ -71,6 +71,7 @@ public abstract class World {
 					myParser.updateVariable(loopCommand.getVariable(), j);
 					myTurtle.act(myParser.parse(param));
 				}
+				myParser.resetRepcount();
 			} else {
 				param = myTurtle.act(myParser.parse(param));
 			}
