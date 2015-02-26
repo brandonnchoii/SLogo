@@ -29,9 +29,9 @@ public class Topbar {
     private static final int SPACING = 40;
 
     private HBox myHBox;
-    private ComboBox<String> languageChoices;
+    protected ComboBox<String> languageChoices;
     private Hyperlink myLink;
-    private ColorPicker myColorChoices;
+    protected ColorPicker myColorChoices;
 
     public Topbar () {
         initialize();
@@ -49,7 +49,7 @@ public class Topbar {
     }
 
     private Hyperlink createHelpLink () {
-        myLink = new Hyperlink("HELP?");
+        myLink = new Hyperlink("HELP PAGE");
         myLink.setOnMouseClicked(e -> displayWebpage());
         return myLink;
     }

@@ -191,6 +191,18 @@ public class CommandFactory {
 
         return commands;
     }
+    
+    private Map<String, Command> loopCommands(List<Double> params){
+    	Map<String, Command> commands = new HashMap<>();
+    	params.add(this.readVariable(":repcount"));
+    	commands.put("Repeat", new LoopCommand(params));
+    	commands.put("DoTimes", new LoopCommand(params));
+    	commands.put("For", new LoopCommand(params));
+    	commands.put("If", new IfCommand(params));
+    	commands.put("IfElse", new IfCommand(params));
+    	//commands.put("MakeUserInstruction", new MakeUserInstructionCommand(params));
+    	return commands;
+    }
 
     private Command addVariable(String s, String d){
         try{

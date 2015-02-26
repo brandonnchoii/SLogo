@@ -1,3 +1,9 @@
+/**
+* 
+* @author Brandon Choi, James Mosca
+*
+*/
+
 package worldController;
 
 import java.io.IOException;
@@ -18,15 +24,15 @@ public class WorldController {
         myWorld = w;
     }
 
-    public WorldController (boolean bounded) throws IOException {
+    public WorldController (boolean bounded) throws IOException  {
         if (bounded)
             myWorld = new BoundedWorld();
         else
             myWorld = new UnboundedWorld();
     }
 
-    public void update () {
-
+    public void update(String command) {
+    	myWorld.listen(command);
     }
 
     public void clear () {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import command.Command;
 import command.DoTimesCommand;
 import command.ForCommand;
@@ -33,6 +34,7 @@ public abstract class World {
     public World() throws IOException {
         height = DEFAULT_HEIGHT;
         width = DEFAULT_WIDTH;
+
         myTurtle = new Turtle(TURTLE_DEFAULT);
         myParser = new Parser("English");
         makeLoops();
