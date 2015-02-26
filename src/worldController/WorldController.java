@@ -46,8 +46,9 @@ public class WorldController {
         myCanvas.setHeight(myPane.getHeight());
         shiftX = myPane.getWidth() / 2.0;
         shiftY = myPane.getHeight() /2.0;
-        myGC.drawImage(myTurtle.getImage(), shiftX, shiftY, RECT_SIZE, RECT_SIZE);
-       // myAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
+        myPane.getChildren().add(myTurtle);
+        //myGC.drawImage(myTurtle.getImage(), shiftX, shiftY, RECT_SIZE, RECT_SIZE);
+        //myAnimation.getKeyFrames().add();
     	//		e -> drawTurtle()));
     }
 
@@ -67,8 +68,6 @@ public class WorldController {
         UI = ui;
         myGC = UI.getGraphics();
         myTurtle = myWorld.getTurtle();
-        myTurtle.setFitHeight(40);
-        myTurtle.setFitWidth(40);
     }
     public void update(String command) {
         System.out.println(command + "wc");
@@ -77,12 +76,10 @@ public class WorldController {
     }
 
     private void drawTurtle() {
-//    	System.out.println(myTurtle.getTranslateX());
-//    	System.out.println(myTurtle.getX());
-//    	System.out.println(myTurtle.getTranslateY());
-//    	System.out.println(myTurtle.getY());
-		myGC.clearRect(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + shiftY, RECT_SIZE, RECT_SIZE);
-		myGC.drawImage(myTurtle.getImage(), myTurtle.getTranslateX() + shiftX, myTurtle.getTranslateY() + shiftY, RECT_SIZE, RECT_SIZE);
+//		myGC.clearRect(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + shiftY, RECT_SIZE, RECT_SIZE);
+//		myGC.drawImage(myTurtle.getImage(), myTurtle.getTranslateX() + shiftX, myTurtle.getTranslateY() + shiftY, RECT_SIZE, RECT_SIZE);
+    	myTurtle.setTranslateX(myTurtle.getTranslateX());
+    	myTurtle.setTranslateY(myTurtle.getTranslateY());
     }
 
 	public void clear () {
