@@ -1,6 +1,5 @@
 package factories;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import command.*;
-
 
 public class CommandFactory {
 
@@ -30,15 +28,15 @@ public class CommandFactory {
 		variables = new HashMap<>();
 		language = l;
 
-		
+
 		setTranslationMap();
 
 		paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
 		syntax = ResourceBundle.getBundle("resources.languages/Syntax");
 
 		makeDefaults();
-		
-		
+
+
 	}
 
 	private void makeDefaults(){
@@ -56,7 +54,7 @@ public class CommandFactory {
 	private void setTranslationMap(){
 		translationMap = ResourceBundle.getBundle("resources.languages/" + language);
 	}
-	
+
 	public Command createCommand(List<String> parts){
 		List<Double> params = new ArrayList<Double>();
 		String command = parts.get(0);
@@ -102,11 +100,14 @@ public class CommandFactory {
 
 	private Map<String, Command> makeCommandMap(List<Double> params){
 		Map<String, Command> paramMap = new HashMap<String, Command>();
+
 		paramMap.putAll(turtleCommands(params));
 		paramMap.putAll(queryCommands(params));
 		paramMap.putAll(mathCommands(params));
 		paramMap.putAll(booleanCommands(params));
+		paramMap.putAll(ifCommands(params));
 		paramMap.putAll(loopCommands(params));
+
 		return paramMap;
 	}
 
@@ -142,7 +143,6 @@ public class CommandFactory {
 
 	private Map<String, Command> queryCommands(List<Double> params) {
 		Map<String, Command> commands = new HashMap<>();
-		// TODO Auto-generated method stub
 		commands .put("XCoordinate", new XcorCommand());
 		commands.put("YCoordinate", new YcorCommand());
 		commands.put("Heading", new HeadingCommand());
@@ -173,13 +173,16 @@ public class CommandFactory {
 
 	private Map<String, Command> loopCommands(List<Double> params){
 		Map<String, Command> commands = new HashMap<>();
-		params.add(this.readVariable(":repcount"));
-		commands.put("Repeat", new LoopCommand(params));
-		commands.put("DoTimes", new LoopCommand(params));
-		commands.put("For", new LoopCommand(params));
+		commands.put("Repeat", new RepeatCommand(params));
+		commands.put("DoTimes", new DoTimesCommand(params));
+		commands.put("For", new ForCommand(params));
+		return commands;
+	}
+
+	private Map<String, Command> ifCommands(List<Double> params){
+		Map<String, Command> commands = new HashMap<>();
 		commands.put("If", new IfCommand(params));
 		commands.put("IfElse", new IfCommand(params));
-		//commands.put("MakeUserInstruction", new MakeUserInstructionCommand(params));
 		return commands;
 	}
 
@@ -221,13 +224,10 @@ public class CommandFactory {
 	private double readVariable(String s){
 		return variables.get(s);
 	}
-	
-	public void increment(String s, String i){
-		variables.put(s, variables.get(s) + Double.parseDouble(i));
-	}
-	
+
 	public void clearRepCount(){
 		variables.remove(":repCount");
 	}
+
 
 }

@@ -4,21 +4,23 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class ForCommand extends Command {
-
-	public ForCommand(List<Double> params){
+public class ForCommand extends LoopCommand {
+	
+	public ForCommand(List<Double> params) {
 		super(params);
+		start = 1;
+		end = params.get();
+		incr = params.get();
 	}
 
-	public ForCommand() {
-		// TODO Auto-generated constructor stub
+	public ForCommand(){
+		super();
 	}
-		
+
 	@Override
 	public double run(Turtle t) {
-		if(parameters.get(1) < parameters.get(0)) 
-			return 0;
-		return 1;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
