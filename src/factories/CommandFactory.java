@@ -22,7 +22,7 @@ public class CommandFactory {
     private String language;
 
     private Properties translationMap;
-    private Properties paramMap;
+    private Properties commandMap;
 
 
     private static final double TRUE = 1;
@@ -36,7 +36,7 @@ public class CommandFactory {
         translationMap = new Properties();
         makeTranslationMap();
 
-        paramMap = new Properties();
+        commandMap = new Properties();
         makeParamMap();
 
         makeDefaults();
@@ -90,7 +90,7 @@ public class CommandFactory {
     }
 
     public int getNumParameters(String s){
-        return Integer.parseInt((String)paramMap.get(translateCommand(s)));
+        return Integer.parseInt((String)commandMap.get(translateCommand(s)));
     }
 
     private void makeParamMap() throws IOException{
@@ -99,7 +99,7 @@ public class CommandFactory {
         InputStream inputStream = getClass().getResourceAsStream(propFileName);
 
         if (inputStream != null) {
-            paramMap.load(inputStream);
+            commandMap.load(inputStream);
         } else {
             throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
         }
@@ -123,12 +123,13 @@ public class CommandFactory {
         makeTranslationMap();
     }
     private Map<String, Command> makeCommandMap(List<Double> params){
-        Map<String, Command> paramMap = new HashMap<String, Command>();
-        paramMap.putAll(turtleCommands(params));
-        paramMap.putAll(queryCommands(params));
-        paramMap.putAll(mathCommands(params));
-        paramMap.putAll(booleanCommands(params));
-        return paramMap;
+        Map<String, Command> commandMap = new HashMap<String, Command>();
+        commandMap.putAll(turtleCommands(params));
+        commandMap.putAll(queryCommands(params));
+        commandMap.putAll(mathCommands(params));
+        commandMap.putAll(booleanCommands(params));
+        commandMap.putAll(loopCommands(params));
+        return commandMap;
     }
 
     private Map<String, Command> booleanCommands(List<Double> params){
@@ -190,6 +191,18 @@ public class CommandFactory {
         commands.put("ClearScreen", null);
 
         return commands;
+    }
+    
+    private Map<String, Command> loopCommands(List<Double> params){
+    	Map<String, Command> commands = new HashMap<>();
+    	params.add(this.readVariable(":repcount"));
+    	commands.put("Repeat", new LoopCommand(params));
+    	commands.put("DoTimes", new LoopCommand(params));
+    	commands.put("For", new LoopCommand(params));
+    	commands.put("If", new IfCommand(params));
+    	commands.put("IfElse", new IfCommand(params));
+    	//commands.put("MakeUserInstruction", new MakeUserInstructionCommand(params));
+    	return commands;
     }
 
     private Command addVariable(String s, String d){
