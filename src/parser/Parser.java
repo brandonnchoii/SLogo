@@ -35,6 +35,7 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
+		System.out.println(myTree.getValue());
 		myInput = input;
 		return numCommands;
 	}
@@ -98,6 +99,8 @@ public class Parser {
 				} else {
 					return current;
 				}
+			} else if (!current.hasChildren()) {
+				return current;
 			} else {
 				current = current.getChild1();
 			}
@@ -164,6 +167,8 @@ public class Parser {
 				Node newChild1 = makeTree(input);
 				Node newChild2 = makeTree(input);
 				return new Node(current, newChild1, newChild2);
+			} else {
+				return new Node(current, null, null);
 			}
 		}
 		return null;
