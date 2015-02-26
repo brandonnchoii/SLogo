@@ -63,11 +63,8 @@ public class CommandFactory {
 		}
 		String cmd = translateCommand(command);
 		params = makeParams(parts);
-		if (params.contains(null)){
-			throw new IllegalArgumentException("The parameters are invalid"); 
-		}
-
-		Map <String, Command> cmdMap = makeCommandMap(params);
+		
+		Map <String, Command> cmdMap = makeCommandMap(params, parts);
 		Command ret = cmdMap.get(cmd);
 		if(ret == null)
 			throw new IllegalArgumentException("The command is invalid");
@@ -98,7 +95,7 @@ public class CommandFactory {
 		setTranslationMap();
 	}
 
-	private Map<String, Command> makeCommandMap(List<Double> params){
+	private Map<String, Command> makeCommandMap(List<Double> params, List<String> parts){
 		Map<String, Command> paramMap = new HashMap<String, Command>();
 
 		paramMap.putAll(turtleCommands(params));
@@ -107,7 +104,7 @@ public class CommandFactory {
 		paramMap.putAll(booleanCommands(params));
 		//paramMap.putAll(loopCommands(params));
 		paramMap.putAll(ifCommands(params));
-		paramMap.putAll(loopCommands(params));
+		paramMap.putAll(loopCommands(parts));
 
 		return paramMap;
 	}
@@ -172,7 +169,7 @@ public class CommandFactory {
 		return commands;
 	}
 
-	private Map<String, Command> loopCommands(List<Double> params){
+	private Map<String, Command> loopCommands(List<String> params){
 		Map<String, Command> commands = new HashMap<>();
 		params.add(this.readVariable(":repcount"));
 		commands.put("Repeat", new LoopCommand(params));
