@@ -40,6 +40,8 @@ public class CommandFactory {
 		syntax = ResourceBundle.getBundle("resources.languages/Syntax");
 
 		makeDefaults();
+		
+		resetRepcount();
 
 
 	}
@@ -66,7 +68,7 @@ public class CommandFactory {
 		if(translateCommand(command).equals("MakeVariable")){
 			return addVariable(parts.get(1),parts.get(2));
 		}
-		String cmd = translateCommand(command);
+		String cmd = translateCommand(command.toLowerCase());
 		params = makeParams(parts);
 
 		Map <String, Command> cmdMap = makeCommandMap(params, parts);
@@ -226,7 +228,7 @@ public class CommandFactory {
 	}
 
 	private double readVariable(String s){
-		return variables.get(s);
+		return variables.get(":x");
 	}
 
 	public void clearRepCount(){
@@ -239,12 +241,16 @@ public class CommandFactory {
 
 	public void initializeLoopVariables(String info){
 		String[] parts = info.split(" ");
+		System.out.print(parts.length);
 		
-		if(parts.length == REPEAT)
+		if(parts.length == REPEAT){
+			System.out.println("INITIALIZE");
 			variables.put(":repcount", DEFAULT_START);
+		}
 
 		else if(parts.length == DOTIMES){
-			if(!parts[0].matches(syntax.getString("Variable")))
+			System.out.print(parts[0].length());
+			if(parts[0].matches(syntax.getString("Variable")))
 				variables.put(parts[0], DEFAULT_START);
 			else
 				throw new IllegalArgumentException("Illegal Variable Name");
@@ -260,5 +266,9 @@ public class CommandFactory {
 			}
 		}
 
+	}
+	
+	public void resetRepcount(){
+		variables.put(":repcount", 1.0);
 	}
 }

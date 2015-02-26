@@ -59,16 +59,19 @@ public abstract class World {
 		int numCmds = myParser.initializeCommands(s);
 		String param = "";
 		for (int i = 0; i < numCmds; i++) {
-			Command c = myParser.parse(s);
+			Command c = myParser.parse(param);
 			if (c.isLoop()) {
 				param = "loop";
 				LoopCommand loopCommand = (LoopCommand) c;
 				loopCommand.readValues();
 				for (double j = loopCommand.getStart() + loopCommand.getIncr(); j < loopCommand
 						.getEnd(); j += loopCommand.getIncr()) {
+					System.out.println("loop # " + j);
+					param = "loop";
 					myParser.updateVariable(loopCommand.getVariable(), j);
-					param = myTurtle.act(myParser.parse(param));
+					myTurtle.act(myParser.parse(param));
 				}
+				myParser.resetRepcount();
 			} else {
 				param = myTurtle.act(myParser.parse(param));
 			}
