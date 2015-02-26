@@ -26,7 +26,7 @@ public class Parser {
 	private static final String LOOP = "loop";
 	private static final String LOOP_DONE = "loopDone";
 
-	public Parser(String language) throws IOException {
+	public Parser(String language) {
 		myCommandFactory = new CommandFactory(language);
 		myResources = ResourceBundle.getBundle("resources.languages/Syntax");
 	}
@@ -168,7 +168,11 @@ public class Parser {
 		}
 		return null;
 	}
-
+	
+	public void setLanguage(String language) {
+		myCommandFactory.setLanguage(language);
+	}
+	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
 		test.initializeCommands("fd sum 10 sum 5 6");
