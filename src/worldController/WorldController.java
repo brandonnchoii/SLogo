@@ -70,7 +70,8 @@ public class WorldController {
     }
     public void update(String command) {
         System.out.println(command + "wc");
-    	myWorld.listen(command);
+    	String s = myWorld.listen(command);
+    	UI.getSidebar().addResult(s);
     	drawTurtle();
     }
 
