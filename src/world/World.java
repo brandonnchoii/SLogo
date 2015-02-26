@@ -55,9 +55,10 @@ public abstract class World {
 	//
 	// }
 
-	public void listen(String s) {
+	public String listen(String s) {
 		int numCmds = myParser.initializeCommands(s);
 		String param = "";
+
 		for (int i = 0; i < numCmds; i++) {
 			Command c = myParser.parse(param);
 			System.out.println("num " + i);
@@ -77,6 +78,8 @@ public abstract class World {
 				//param = myTurtle.act(myParser.parse(param));
 			}
 		}
+		
+		return param;
 	}
 
 	// private String runCommand(String s) {
