@@ -107,6 +107,7 @@ public class CommandFactory {
 		paramMap.putAll(queryCommands(params));
 		paramMap.putAll(mathCommands(params));
 		paramMap.putAll(booleanCommands(params));
+
 		paramMap.putAll(ifCommands(params));
 		paramMap.putAll(loopCommands(parts));
 
@@ -183,6 +184,7 @@ public class CommandFactory {
 
 	private Map<String, Command> ifCommands(List<Double> params){
 		Map<String, Command> commands = new HashMap<>();
+
 		commands.put("If", new IfCommand(params));
 		commands.put("IfElse", new IfCommand(params));
 		return commands;

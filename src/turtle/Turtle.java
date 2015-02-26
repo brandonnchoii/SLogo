@@ -1,5 +1,6 @@
 package turtle;
 
+import worldController.WorldController;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,15 +10,20 @@ import command.Command;
 //Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
 
-	private double direction;
-	private Pen myPen;
 	private static final int DEFAULT_POS = 0;
 	private static final boolean DEFAULT_DRAW = true;
 	private static final boolean DEFAULT_VISIBLE = true;
 	private static final Image DEFAULT_IMAGE = new Image("resources/images/default.jpg");
 	
+	private double direction;
+	private Pen myPen;
+	private Point2D current;
+	private Point2D next;
+	
 	public Turtle(Paint color) {
 		myPen = new Pen(color);
+		current = new Point2D(DEFAULT_POS, DEFAULT_POS);
+		next = new Point2D(DEFAULT_POS, DEFAULT_POS);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
 		direction = DEFAULT_POS;
@@ -69,14 +75,16 @@ public class Turtle extends ImageView {
 	}
 
 	public void move (double pixels) {
-		myPen.setCurrent(new Point2D(getTranslateX(), getTranslateY()));
+		System.out.println(getTranslateX() + " " + getTranslateY());
+		current = new Point2D(getTranslateX(), getTranslateY());
 		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
 		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
-		myPen.setNext(new Point2D(getTranslateX(), getTranslateY()));
+		next = new Point2D(getTranslateX(), getTranslateY());
+		System.out.println(getTranslateX() + " " + getTranslateY());
 	}
 
 	private double radians(){
-		return Math.toRadians(direction);
+		return Math.toRadians(direction) - Math.PI/2;
 	}
 
 	public void fixPos(double height, double width){
@@ -86,6 +94,7 @@ public class Turtle extends ImageView {
 
 	public void rotate (double degrees) {
 		direction += degrees;
+		setRotate(direction);
 	}
 
 	public void setHeading (double degrees) {
@@ -111,5 +120,11 @@ public class Turtle extends ImageView {
 		return myPen.getSize();
 	}
 	
+	public Point2D getcurr() {
+		return current;
+	}
 	
+	public Point2D getnext() {
+		return next;
+	}
 }

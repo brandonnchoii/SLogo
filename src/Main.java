@@ -9,6 +9,7 @@ public class Main extends Application {
         UserInterface display = new UserInterface();
         stage.setScene(display.getScene());
         stage.show();
+        display.setUpController();
     }
 
     public static void main (String[] args) {

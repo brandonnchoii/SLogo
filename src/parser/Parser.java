@@ -36,21 +36,17 @@ public class Parser {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
 		myInput = input;
-		// System.out.println(numCommands);
 		return numCommands;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
-		System.out.println(valueFromPrevCommand);
-		// Node current = getMostNestedCommand(valueFromPrevCommand);
-
+		//System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
-			System.out.println("REGISTER LOOP");
+			//System.out.println("REGISTER LOOP");
 			myTree = makeTree(new Scanner(myInput));
-			System.out.println(myTree.getValue());
 			myTree = myListTree;
 			return parse("");
 		} else {
@@ -140,7 +136,7 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		//System.out.println(current);
+
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
@@ -162,7 +158,6 @@ public class Parser {
 		} else if (current.matches(myResources.getString("Command"))) {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
-			// System.out.println(numChildren);
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
 				return new Node(current, newChild, null);
