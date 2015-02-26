@@ -1,5 +1,6 @@
 package userInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -48,14 +49,17 @@ public class UserInterface {
     private GraphicsContext myGC;
     private StackPane canvasPane;
     private Button commandSaverButton;
-
-    public UserInterface () {
+    
+    public UserInterface () throws IOException {
         myRoot = new BorderPane();
         myRoot.setPadding(new Insets(15, 20, 15, 20));
         mySidebar = new Sidebar();
         makeCreateTurtle();
         makeSaveCommand();
         myTopbar = new Topbar();
+        myController = new WorldController();
+        // addTurtle();
+        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
 
         myCanvas = new Canvas(200, 200);
         myGC = myCanvas.getGraphicsContext2D();
@@ -63,7 +67,6 @@ public class UserInterface {
 
         myCommandWindow = makeCommandWindow();
         myGC.fillRect(100, 100, 50, 50);
-
         makeTimeline();
 
         myRoot.setBottom(myCommandWindow);
@@ -157,10 +160,8 @@ public class UserInterface {
 
     }
 
-    private void runCommand (String s) {
-        System.out.println(s);
-//        String data = s;
-//        myController.update();
+    private void runCommand (String data) {
+    	myController.update(data);
     }
 
     private void makeCreateTurtle () {

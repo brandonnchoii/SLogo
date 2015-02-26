@@ -6,7 +6,7 @@ import turtle.Turtle;
 
 public class BoundedWorld extends World{
 	
-	public BoundedWorld() throws IOException{
+	public BoundedWorld() throws IOException {
 		super();
 	}
 	
