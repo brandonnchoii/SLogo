@@ -45,7 +45,6 @@ public abstract class World {
 		myParser = new Parser(language);
 	}
 
-
 	public abstract void fixPosition();
 
 	// public void listen(String s) {
@@ -63,8 +62,11 @@ public abstract class World {
 			Command c = myParser.parse(s);
 			if (c.isLoop()) {
 				param = "loop";
-				for (double j = ((LoopCommand) c).getStart(); j < ((LoopCommand) c)
-						.getEnd(); j += ((LoopCommand) c).getIncr()) {
+				LoopCommand loopCommand = (LoopCommand) c;
+				loopCommand.readValues();
+				for (double j = loopCommand.getStart() + loopCommand.getIncr(); j < loopCommand
+						.getEnd(); j += loopCommand.getIncr()) {
+					myParser.updateVariable(loopCommand.getVariable(), j);
 					param = myTurtle.act(myParser.parse(param));
 				}
 			} else {
@@ -73,18 +75,18 @@ public abstract class World {
 		}
 	}
 
-	//	private String runCommand(String s) {
-	//		Command c = myParser.parse(s);
-	//		if (c.isLoop()) {
-	//			s = "loop";
-	//			for (double i = ((LoopCommand) c).getStart(); i < ((LoopCommand) c)
-	//					.getEnd(); i += ((LoopCommand) c).getIncr()) {
-	//				
-	//			}
-	//		}
-	//		return myTurtle.act(c);
+	// private String runCommand(String s) {
+	// Command c = myParser.parse(s);
+	// if (c.isLoop()) {
+	// s = "loop";
+	// for (double i = ((LoopCommand) c).getStart(); i < ((LoopCommand) c)
+	// .getEnd(); i += ((LoopCommand) c).getIncr()) {
 	//
-	//	}
+	// }
+	// }
+	// return myTurtle.act(c);
+	//
+	// }
 
 	public void setHeight(int h) {
 		height = h;

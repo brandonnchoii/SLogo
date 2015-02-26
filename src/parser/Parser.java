@@ -153,6 +153,7 @@ public class Parser {
 				myListTree = makeTree(new Scanner(loopString));
 				return makeTree(new Scanner(loopString));
 			} else {
+				myCommandFactory.initializeLoopVariables(loopString);
 				return new Node(loopString, null, null);
 			}
 		} else if (current.matches(myResources.getString("Constant"))
@@ -180,15 +181,19 @@ public class Parser {
 	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("fd sum 10 sum 5 6");
+		test.initializeCommands("repeat 2 [ sum 1 2 ]");
 		test.parse("");
-		test.parse("11");
-		test.parse("21");
-//		test.parse("loop");
+		test.parse("3");
+//		test.parse("21");
+		test.parse("loop");
 //		test.parse("11");
 //		test.parse("21");
 //		test.parse("loop");
 //		test.parse("11");
 //		test.parse("21");
+	}
+
+	public void updateVariable(String variable, double variableValue) {
+		myCommandFactory.updateVariable(variable, variableValue);
 	}
 }
