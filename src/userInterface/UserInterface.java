@@ -57,16 +57,18 @@ public class UserInterface {
         makeCreateTurtle();
         makeSaveCommand();
         myTopbar = new Topbar();
-        myController = new WorldController();
+        //myController = new WorldController(this);
         // addTurtle();
         // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
 
         myCanvas = new Canvas(200, 200);
         myGC = myCanvas.getGraphicsContext2D();
+        myController = new WorldController(this);
+
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        myGC.fillRect(100, 100, 50, 50);
+        //myGC.fillRect(100, 100, 50, 50);
         makeTimeline();
 
         myRoot.setBottom(myCommandWindow);
@@ -203,4 +205,9 @@ public class UserInterface {
     public void refresh (String s) {
 
     }
+
+    public GraphicsContext getGraphics() {
+    	return myGC;
+    }
+
 }

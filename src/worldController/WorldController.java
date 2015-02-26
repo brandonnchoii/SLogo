@@ -8,6 +8,10 @@ package worldController;
 
 import java.io.IOException;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import turtle.Turtle;
+import userInterface.UserInterface;
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
@@ -15,22 +19,39 @@ import world.World;
 public class WorldController {
 
     World myWorld;
-
-    public WorldController () throws IOException {
+    private UserInterface UI;
+    private GraphicsContext myGC;
+    private Turtle myTurtle;
+    
+    public WorldController (UserInterface ui) throws IOException {
         myWorld = new BoundedWorld();
+        UI = ui;
+        myGC = UI.getGraphics();
+        myTurtle = myWorld.getTurtle();
+        myTurtle.setFitHeight(40);
+        myTurtle.setFitWidth(40);
+        myGC.drawImage(myTurtle.getImage(), 100, 100);
     }
 
-    public WorldController (World w) {
+    public WorldController (UserInterface ui, World w) {
         myWorld = w;
+        UI = ui;
+        myGC = UI.getGraphics();
+        myTurtle = myWorld.getTurtle();
+
     }
 
-    public WorldController (boolean bounded) throws IOException  {
+    public WorldController (UserInterface ui, boolean bounded) throws IOException  {
         if (bounded)
             myWorld = new BoundedWorld();
-        else
+        else 
             myWorld = new UnboundedWorld();
+        UI = ui;
+        myGC = UI.getGraphics();
+        myTurtle = myWorld.getTurtle();
+        myTurtle.setFitHeight(40);
+        myTurtle.setFitWidth(40);
     }
-
     public void update(String command) {
     	myWorld.listen(command);
     }
@@ -42,4 +63,6 @@ public class WorldController {
     public World getWorld () {
         return myWorld;
     }
+
+
 }
