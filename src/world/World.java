@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
+
 import command.Command;
 import command.DoTimesCommand;
 import command.ForCommand;
 import command.IfCommand;
-import command.LoopCommand;
 import command.RepeatCommand;
 import javafx.scene.paint.Color;
 import parser.Parser;
@@ -70,9 +72,12 @@ public abstract class World {
 
 	private void makeLoopList(){
 		loopList = new ArrayList<>();
-		loopList.add(new LoopCommand().getClass());
+		loopList.add(new DoTimesCommand().getClass());
+		loopList.add(new RepeatCommand().getClass());
+		loopList.add(new ForCommand().getClass());
 		loopList.add(new IfCommand().getClass());
 	}
+	
 	public abstract void fixPosition();
 
 	public void listen(String s) {
@@ -122,4 +127,5 @@ public abstract class World {
 		return myTurtle;
 
 	}
+	
 }
