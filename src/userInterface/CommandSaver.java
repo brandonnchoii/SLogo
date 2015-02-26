@@ -38,7 +38,6 @@ public class CommandSaver {
         saveCommandWindow = new VBox();
         saveButton = new Button("Save");
         saveButton.setMinWidth(BUTTON_WIDTH);
-        // saveButton.setOnMouseClicked(e -> ...);
         commandWindow = new TextArea("Enter SLogo command(s) you want to save HERE.");
         commandWindow.setOnMouseClicked(e -> commandWindow.clear());
         saveCommandWindow.getChildren().addAll(commandWindow, saveButton);
