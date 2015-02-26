@@ -244,7 +244,8 @@ public class CommandFactory {
 			variables.put(":repcount", DEFAULT_START);
 
 		else if(parts.length == DOTIMES){
-			if(!parts[0].matches(syntax.getString("Variable")))
+			System.out.print(parts[0].length());
+			if(parts[0].matches(syntax.getString("Variable")))
 				variables.put(parts[0], DEFAULT_START);
 			else
 				throw new IllegalArgumentException("Illegal Variable Name");
