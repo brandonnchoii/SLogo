@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import command.Command;
-
+//Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
 
 	private double direction;
@@ -24,7 +24,6 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(DEFAULT_IMAGE);
-
 	}
 
 	public Turtle(Image i, Paint color){

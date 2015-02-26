@@ -53,6 +53,7 @@ public class WorldController {
         myTurtle.setFitWidth(40);
     }
     public void update(String command) {
+        //System.out.println(command);
     	myWorld.listen(command);
     }
 

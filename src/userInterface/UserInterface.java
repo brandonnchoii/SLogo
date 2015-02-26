@@ -59,7 +59,6 @@ public class UserInterface {
         myTopbar = new Topbar();
         //myController = new WorldController(this);
         // addTurtle();
-        // myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "UIMenu");
 
         myCanvas = new Canvas(200, 200);
         myGC = myCanvas.getGraphicsContext2D();
@@ -68,7 +67,7 @@ public class UserInterface {
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        //myGC.fillRect(100, 100, 50, 50);
+
         makeTimeline();
 
         myRoot.setBottom(myCommandWindow);
