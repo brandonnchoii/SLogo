@@ -66,7 +66,7 @@ public class CommandFactory {
 		if(translateCommand(command).equals("MakeVariable")){
 			return addVariable(parts.get(1),parts.get(2));
 		}
-		String cmd = translateCommand(command);
+		String cmd = translateCommand(command.toLowerCase());
 		params = makeParams(parts);
 
 		Map <String, Command> cmdMap = makeCommandMap(params, parts);
