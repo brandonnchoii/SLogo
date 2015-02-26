@@ -44,6 +44,7 @@ public class Parser {
 		//System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
+			System.out.println("HI");
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
 			//System.out.println("REGISTER LOOP");

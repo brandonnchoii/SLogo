@@ -16,7 +16,7 @@ public class Pen {
 	private Point2D next;
 	
 	public Pen(Paint color) {
-		isDrawing = false;
+		isDrawing = true;
 		myPenColor = color;
 		mySize = DEFAULT_PEN_SIZE;
 		current = new Point2D(DEFAULT_START, DEFAULT_START);
