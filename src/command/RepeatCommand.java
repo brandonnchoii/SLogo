@@ -5,12 +5,18 @@ import java.util.List;
 import turtle.Turtle;
 
 public class RepeatCommand extends LoopCommand {
-	
-	public RepeatCommand(List<Double> params) {
+
+	public RepeatCommand(List<String> params) {
 		super(params);
-		start = 1;
-		end = 1;
-		incr = 1;
+		try{
+			start = 1;
+			end = Double.parseDouble(params.get(1));
+			incr = 1;
+			variable = ":repcount";
+		}
+		catch(NumberFormatException e){
+			throw new IllegalArgumentException("Illegal parameters");
+		}
 	}
 
 	public RepeatCommand(){
@@ -19,7 +25,6 @@ public class RepeatCommand extends LoopCommand {
 
 	@Override
 	public double run(Turtle t) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
