@@ -10,9 +10,12 @@ public abstract class LoopCommand extends Command {
 	protected double start;
 	protected double end;
 	protected double incr;
+	protected String variable;
+	protected List<String> strParameters;
 
-	public LoopCommand(List<Double> params){
-		super(params);
+	public LoopCommand(List<String> params){
+		super();
+		strParameters = params;
 		loop = true;
 	}
 
@@ -38,6 +41,10 @@ public abstract class LoopCommand extends Command {
 
 	public double getIncr(){
 		return incr;
+	}
+	
+	public String getVariable(){
+		return variable;
 	}
 
 }
