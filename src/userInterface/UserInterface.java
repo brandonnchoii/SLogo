@@ -56,23 +56,22 @@ public class UserInterface {
         makeCreateTurtle();
         makeSaveCommand();
         myTopbar = new Topbar();
-        myController = new WorldController();
+        //myController = new WorldController(this);
         // addTurtle();
-
-        myCanvas = new Canvas(200, 200);
-        myGC = myCanvas.getGraphicsContext2D();
+        setupPane();
+        makeTimeline();
+        //myController = new WorldController(this);
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-        makeTimeline();
 
-        myRoot.setBottom(myCommandWindow);
-        myRoot.setRight(mySidebar.getSidebar());
-        myRoot.setTop(myTopbar.getTopbar());
-        setupPane();
+        //setupPane();
         myScene = new Scene(myRoot, myWidth, myHeight);
         makeFunctionButtons();
         setUpResponses();
+        myRoot.setBottom(myCommandWindow);
+        myRoot.setRight(mySidebar.getSidebar());
+        myRoot.setTop(myTopbar.getTopbar());
     }
 
     public Scene getScene () {
@@ -121,10 +120,14 @@ public class UserInterface {
         canvasPane = new StackPane();
         canvasPane.setPadding(new Insets(10, 10, 10, 10));
         myRoot.setCenter(canvasPane);
-        canvasPane.setStyle("-fx-background-color: white");
+        myCanvas = new Canvas();
+    	myGC = myCanvas.getGraphicsContext2D();
         canvasPane.getChildren().add(myCanvas);
-        myRoot.setBottom(myCommandWindow);
-        myRoot.setRight(mySidebar.getSidebar());
+        canvasPane.setStyle("-fx-background-color: white");
+    }
+    
+    public void setUpController() throws IOException {
+    	myController = new WorldController(this);
     }
 
     private TextArea makeCommandWindow () {
@@ -200,4 +203,21 @@ public class UserInterface {
     public void refresh (String s) {
 
     }
+
+    public GraphicsContext getGraphics() {
+    	return myGC;
+    }
+
+    public Timeline getTimeline() {
+    	return myAnimation;
+    }
+    
+    public Canvas getCanvas() {
+    	return myCanvas;
+    }
+    
+    public StackPane getPane() {
+    	return canvasPane;
+    }
+    
 }
