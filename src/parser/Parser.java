@@ -136,7 +136,6 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
@@ -190,5 +189,9 @@ public class Parser {
 
 	public void updateVariable(String variable, double variableValue) {
 		myCommandFactory.updateVariable(variable, variableValue);
+	}
+	
+	public void resetRepcount() {
+		myCommandFactory.resetRepcount();
 	}
 }
