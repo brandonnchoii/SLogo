@@ -49,9 +49,10 @@ public class Parser {
 		} else if (valueFromPrevCommand.equals(LOOP)) {
 			myTree = makeTree(new Scanner(myInput));
 			// myCommandFactory.incrementLoopCounter();
+			//myCommandFactory.setLoopTrue();
 			return parse("");
 		} else if (valueFromPrevCommand.equals(LOOP_DONE)) {
-			// myCommandFactory.clearRepCount();
+			// myCommandFactory.setLoopFalse();
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
@@ -139,7 +140,7 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		// System.out.println(current);
+		//System.out.println(current);
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
@@ -147,8 +148,12 @@ public class Parser {
 				loopString += current + " ";
 				current = input.next();
 			}
-			System.out.println(loopString);
-			return makeTree(new Scanner(loopString));
+			Scanner loopScanner = new Scanner(loopString);
+			if (loopScanner.next().matches(myResources.getString("Command"))) {
+				return makeTree(new Scanner(loopString));
+			} else {
+				return new Node(loopString, null, null);
+			}
 		} else if (current.matches(myResources.getString("Constant"))
 				|| current.matches(myResources.getString("Variable"))) {
 			return new Node(current, null, null);
@@ -156,7 +161,6 @@ public class Parser {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
 			// System.out.println(numChildren);
-
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
 				return new Node(current, newChild, null);
@@ -175,15 +179,15 @@ public class Parser {
 	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("fd sum 10 sum 5 6");
+		test.initializeCommands("sum 5 [ 3 ]");
 		test.parse("");
-		test.parse("11");
-		test.parse("21");
-		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
-		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
+//		test.parse("11");
+//		test.parse("21");
+//		test.parse("loop");
+//		test.parse("11");
+//		test.parse("21");
+//		test.parse("loop");
+//		test.parse("11");
+//		test.parse("21");
 	}
 }

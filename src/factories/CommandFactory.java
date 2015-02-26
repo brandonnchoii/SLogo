@@ -106,7 +106,7 @@ public class CommandFactory {
 		paramMap.putAll(queryCommands(params));
 		paramMap.putAll(mathCommands(params));
 		paramMap.putAll(booleanCommands(params));
-		paramMap.putAll(loopCommands(params));
+		//paramMap.putAll(loopCommands(params));
 		return paramMap;
 	}
 
@@ -173,7 +173,7 @@ public class CommandFactory {
 
 	private Map<String, Command> loopCommands(List<Double> params){
 		Map<String, Command> commands = new HashMap<>();
-		params.add(this.readVariable(":repcount"));
+		//params.add(this.readVariable(":repcount"));
 		commands.put("Repeat", new LoopCommand(params));
 		commands.put("DoTimes", new LoopCommand(params));
 		commands.put("For", new LoopCommand(params));
