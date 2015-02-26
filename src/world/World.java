@@ -1,18 +1,11 @@
 package world;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
-
-import command.Command;
-import command.DoTimesCommand;
-import command.ForCommand;
-import command.IfCommand;
 import command.LoopCommand;
-import command.RepeatCommand;
+import command.Command;
 import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
@@ -21,16 +14,14 @@ public abstract class World {
 
 	protected int height;
 	protected int width;
-	//Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
+	// Turtle extends IV but eventaully, we want to not give WC or UI the entire
+	// Turtle
 	protected Turtle myTurtle;
-	private Map<Double, String> loopMap;
-	private List<Class> loopList;
 	private Parser myParser;
 
 	private static final int DEFAULT_HEIGHT = 100;
 	private static final int DEFAULT_WIDTH = 100;
 	private static final Color TURTLE_DEFAULT = Color.BLACK;
-
 
 	public World() throws IOException {
 		height = DEFAULT_HEIGHT;
@@ -38,67 +29,66 @@ public abstract class World {
 
 		myTurtle = new Turtle(TURTLE_DEFAULT);
 		myParser = new Parser("English");
-		makeLoops();
 	}
 
-	public World(int h, int w) throws IOException{
+	public World(int h, int w) throws IOException {
 		height = h;
 		width = w;
 		myTurtle = new Turtle(TURTLE_DEFAULT);
 		myParser = new Parser("English");
-		makeLoops();
 	}
 
-	public World(int h, int w, Turtle t, String language) throws IOException{
+	public World(int h, int w, Turtle t, String language) throws IOException {
 		height = h;
 		width = w;
 		myTurtle = t;
 		myParser = new Parser(language);
-		makeLoops();
 	}
 
-	private void makeLoops(){
-		makeLoopMap();
-		makeLoopList();
-	}
-
-	private void makeLoopMap(){
-		loopMap = new HashMap<>();
-		loopMap.put(0., "Loop");
-		loopMap.put(1., "loopDone");
-	}
-
-	private void makeLoopList(){
-		loopList = new ArrayList<>();
-		loopList.add(new LoopCommand().getClass());
-		loopList.add(new IfCommand().getClass());
-	}
 	public abstract void fixPosition();
+
+	// public void listen(String s) {
+	// int numCmds = myParser.initializeCommands(s);
+	// String param = "";
+	// for (int i = 0; i < numCmds; i++)
+	// param = runCommand(param);
+	//
+	// }
 
 	public void listen(String s) {
 		int numCmds = myParser.initializeCommands(s);
 		String param = "";
-		for (int i = 0; i < numCmds; i++)
-			param = runCommand(param);    
-
-	}
-
-	private String runCommand(String s){
-		Command c = myParser.parse(s);
-		if(isLoop(c)){
-			return loopMap.get(myTurtle.act(c));
+		for (int i = 0; i < numCmds; i++) {
+			Command c = myParser.parse(s);
+			if (c.isLoop()) {
+				param = "loop";
+				LoopCommand loopCommand = (LoopCommand) c;
+				loopCommand.readValues();
+				for (double j = loopCommand.getStart() + loopCommand.getIncr(); j < loopCommand
+						.getEnd(); j += loopCommand.getIncr()) {
+					myParser.updateVariable(loopCommand.getVariable(), j);
+					param = myTurtle.act(myParser.parse(param));
+				}
+			} else {
+				param = myTurtle.act(myParser.parse(param));
+			}
 		}
-		return myTurtle.act(c);
-
 	}
 
-	private boolean isLoop(Command c){
-		if(loopList.contains(c.getClass()))
-			return true;
-		return false;
-	}
+	// private String runCommand(String s) {
+	// Command c = myParser.parse(s);
+	// if (c.isLoop()) {
+	// s = "loop";
+	// for (double i = ((LoopCommand) c).getStart(); i < ((LoopCommand) c)
+	// .getEnd(); i += ((LoopCommand) c).getIncr()) {
+	//
+	// }
+	// }
+	// return myTurtle.act(c);
+	//
+	// }
 
-	public void setHeight(int h){
+	public void setHeight(int h) {
 		height = h;
 	}
 
@@ -106,7 +96,7 @@ public abstract class World {
 		return height;
 	}
 
-	public void setWidth(int w){
+	public void setWidth(int w) {
 		width = w;
 	}
 
@@ -114,7 +104,7 @@ public abstract class World {
 		return width;
 	}
 
-	public void setLanguage(String language){
+	public void setLanguage(String language) {
 		myParser.setLanguage(language);
 	}
 
@@ -122,4 +112,5 @@ public abstract class World {
 		return myTurtle;
 
 	}
+
 }

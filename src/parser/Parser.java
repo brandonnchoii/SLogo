@@ -21,6 +21,7 @@ public class Parser {
 	private CommandFactory myCommandFactory;
 	private ResourceBundle myResources;
 	private Node myTree;
+	private Node myListTree;
 	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
@@ -49,11 +50,11 @@ public class Parser {
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
+			System.out.println("REGISTER LOOP");
 			myTree = makeTree(new Scanner(myInput));
-			// myCommandFactory.incrementLoopCounter();
+			System.out.println(myTree.getValue());
+			myTree = myListTree;
 			return parse("");
-		} else if (valueFromPrevCommand.equals(LOOP_DONE)) {
-			// myCommandFactory.clearRepCount();
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
@@ -141,7 +142,6 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		System.out.println(current);
 
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
@@ -150,8 +150,14 @@ public class Parser {
 				loopString += current + " ";
 				current = input.next();
 			}
-			System.out.println(loopString);
-			return makeTree(new Scanner(loopString));
+			Scanner loopScanner = new Scanner(loopString);
+			if (loopScanner.next().matches(myResources.getString("Command"))) {
+				myListTree = makeTree(new Scanner(loopString));
+				return makeTree(new Scanner(loopString));
+			} else {
+				myCommandFactory.initializeLoopVariables(loopString);
+				return new Node(loopString, null, null);
+			}
 		} else if (current.matches(myResources.getString("Constant"))
 				|| current.matches(myResources.getString("Variable"))) {
 			return new Node(current, null, null);
@@ -159,7 +165,6 @@ public class Parser {
 			numCommands += 1;
 			int numChildren = myCommandFactory.getNumParameters(current);
 			// System.out.println(numChildren);
-
 			if (numChildren == 1) {
 				Node newChild = makeTree(input);
 				return new Node(current, newChild, null);
@@ -178,15 +183,19 @@ public class Parser {
 	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("fd sum 10 sum 5 6");
+		test.initializeCommands("repeat 2 [ sum 1 2 ]");
 		test.parse("");
-		test.parse("11");
-		test.parse("21");
+		test.parse("3");
+//		test.parse("21");
 		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
-		test.parse("loop");
-		test.parse("11");
-		test.parse("21");
+//		test.parse("11");
+//		test.parse("21");
+//		test.parse("loop");
+//		test.parse("11");
+//		test.parse("21");
+	}
+
+	public void updateVariable(String variable, double variableValue) {
+		myCommandFactory.updateVariable(variable, variableValue);
 	}
 }

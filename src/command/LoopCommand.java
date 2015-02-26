@@ -4,21 +4,45 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class LoopCommand extends Command {
+public abstract class LoopCommand extends Command {
 
-	public LoopCommand(List<Double> params){
-		super(params);
+
+	protected double start;
+	protected double end;
+	protected double incr;
+	protected String variable;
+	protected List<String> strParameters;
+
+	public LoopCommand(List<String> params){
+		super();
+		strParameters = params;
+		loop = true;
 	}
 
 	public LoopCommand() {
-		// TODO Auto-generated constructor stub
+		super();
+		loop = true;
 	}
-		
+
 	@Override
-	public double run(Turtle t) {
-		if(parameters.get(1) < parameters.get(0)) 
-			return 0;
-		return 1;
+	public abstract double run(Turtle t);
+	
+	public abstract void readValues();
+
+	public double getStart(){
+		return start;
+	}
+
+	public double getEnd(){
+		return end;
+	}
+
+	public double getIncr(){
+		return incr;
+	}
+	
+	public String getVariable(){
+		return variable;
 	}
 
 }

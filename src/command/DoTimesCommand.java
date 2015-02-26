@@ -4,21 +4,36 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class DoTimesCommand extends Command {
+public class DoTimesCommand extends LoopCommand {
 
-	public DoTimesCommand(List<Double> params){
+	public DoTimesCommand(List<String> params) {
 		super(params);
+
 	}
 
-	public DoTimesCommand() {
-		// TODO Auto-generated constructor stub
+	public DoTimesCommand(){
+		super();
 	}
-		
+
+	public void readValues(){
+		try{
+			start = 1;
+			incr = 1;
+			String[] loopInfo = strParameters.get(1).split(" ");
+			variable = loopInfo[0];
+			end = Double.parseDouble(loopInfo[1]);
+
+
+		}
+		catch(NumberFormatException e){
+			throw new IllegalArgumentException("Illegal Params");
+		}
+	}
 	@Override
-	public double run(Turtle t) {
-		if(parameters.get(1) < parameters.get(0)) 
-			return 0;
-		return 1;
+	public double run(Turtle t) {	
+
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
