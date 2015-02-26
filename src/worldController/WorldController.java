@@ -82,7 +82,7 @@ public class WorldController {
     	myTurtle.setTranslateY(yCoor);
         Pen pen = myTurtle.getPen();
     	myGC.setStroke(pen.getColor());
-        myGC.setLineWidth(5);
+        myGC.setLineWidth(3);
         if (pen.penReady())
         	myGC.strokeLine(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + 
         			shiftY, myTurtle.getnext().getX() + shiftX, myTurtle.getnext().getY() + shiftY);
