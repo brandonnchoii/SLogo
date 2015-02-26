@@ -21,6 +21,7 @@ public class Parser {
 	private CommandFactory myCommandFactory;
 	private ResourceBundle myResources;
 	private Node myTree;
+	private Node myListTree;
 	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
@@ -48,11 +49,8 @@ public class Parser {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
 			myTree = makeTree(new Scanner(myInput));
-			// myCommandFactory.incrementLoopCounter();
-			//myCommandFactory.setLoopTrue();
+			myTree = myListTree;
 			return parse("");
-		} else if (valueFromPrevCommand.equals(LOOP_DONE)) {
-			// myCommandFactory.setLoopFalse();
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
@@ -150,6 +148,7 @@ public class Parser {
 			}
 			Scanner loopScanner = new Scanner(loopString);
 			if (loopScanner.next().matches(myResources.getString("Command"))) {
+				myListTree = makeTree(new Scanner(loopString));
 				return makeTree(new Scanner(loopString));
 			} else {
 				return new Node(loopString, null, null);
@@ -179,15 +178,15 @@ public class Parser {
 	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
-		test.initializeCommands("sum 5 [ 3 ]");
+		test.initializeCommands("fd sum 10 sum 5 6");
 		test.parse("");
-//		test.parse("11");
-//		test.parse("21");
-//		test.parse("loop");
-//		test.parse("11");
-//		test.parse("21");
-//		test.parse("loop");
-//		test.parse("11");
-//		test.parse("21");
+		test.parse("11");
+		test.parse("21");
+		test.parse("loop");
+		test.parse("11");
+		test.parse("21");
+		test.parse("loop");
+		test.parse("11");
+		test.parse("21");
 	}
 }

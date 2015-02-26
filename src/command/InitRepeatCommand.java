@@ -4,17 +4,14 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class DoTimesCommand extends LoopCommand {
-	
-	public DoTimesCommand(List<Double> params) {
+public class InitRepeatCommand extends Command {
+
+	public InitRepeatCommand(List<Double> params) {
 		super(params);
-		start = 1;
-		end = 1;
-		incr = 1;
 	}
 
-	public DoTimesCommand(){
-		super();
+	public InitRepeatCommand(){
+	
 	}
 
 	@Override
@@ -22,5 +19,8 @@ public class DoTimesCommand extends LoopCommand {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
+
 
 }
