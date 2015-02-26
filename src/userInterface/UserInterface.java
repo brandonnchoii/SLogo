@@ -35,7 +35,6 @@ public class UserInterface {
     private static final int myHeight = 750;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
-    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
 
     private WorldController myController;
     private Scene myScene;
