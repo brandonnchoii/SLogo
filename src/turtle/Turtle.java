@@ -26,6 +26,8 @@ public class Turtle extends ImageView {
 		next = new Point2D(DEFAULT_POS, DEFAULT_POS);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
+		setFitWidth(70);
+		setFitHeight(70);
 		direction = DEFAULT_POS;
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
@@ -101,6 +103,7 @@ public class Turtle extends ImageView {
 		direction = degrees % 360;
 		if(direction < 0)
 			direction = 360 + direction;
+		setRotate(direction);
 	}
 
 	public double getDirection() {
