@@ -11,7 +11,6 @@ package parser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -22,11 +21,12 @@ public class Parser {
 	private CommandFactory myCommandFactory;
 	private ResourceBundle myResources;
 	private Node myTree;
-	private static Node myTreeCopy;
+	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
+	private static final String LOOP_DONE = "loopDone";
 
-	public Parser(String language) throws IOException {
+	public Parser(String language) {
 		myCommandFactory = new CommandFactory(language);
 		myResources = ResourceBundle.getBundle("resources.languages/Syntax");
 	}
@@ -34,34 +34,38 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
-		myTreeCopy = makeTree(new Scanner(input));
-		//System.out.println(numCommands);
+		myInput = input;
+		// System.out.println(numCommands);
 		return numCommands;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
-		// Queue<Command> commandQueue = new Queue<Command>();
-		ArrayList<String> commandInput = new ArrayList<String>();
 		System.out.println(valueFromPrevCommand);
-		//Node current = getMostNestedCommand(valueFromPrevCommand);
-		
+		// Node current = getMostNestedCommand(valueFromPrevCommand);
+
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
-			myTree = myTreeCopy;
+			myTree = makeTree(new Scanner(myInput));
+			// myCommandFactory.incrementLoopCounter();
 			return parse("");
+		} else if (valueFromPrevCommand.equals(LOOP_DONE)) {
+			// myCommandFactory.clearRepCount();
 		} else {
 			Node previous = getNodeBeforeToReplace();
-			// System.out.println(previous.getChild1().getValue() +
-			// previous.getChild2().getValue());
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
 					myResources.getString("Command"));
-			// System.out.println(previous.getChild1().getValue() +
-			// previous.getChild2().getValue());
 			current = getNodeForCommand();
 		}
-		
+		List<String> commandInput = generateCommandInput(valueFromPrevCommand,
+				current);
+		return myCommandFactory.createCommand(commandInput);
+	}
+
+	private List<String> generateCommandInput(String valueFromPrevCommand,
+			Node current) {
+		ArrayList<String> commandInput = new ArrayList<String>();
 		if (current == null) {
 			System.out.println(valueFromPrevCommand);
 			System.out.println("test");
@@ -84,29 +88,8 @@ public class Parser {
 		} else {
 			commandInput.add(current.getValue());
 		}
-
-		return myCommandFactory.createCommand(commandInput);
+		return commandInput;
 	}
-
-//	private Node getMostNestedCommand(String valueFromPrevCommand) {
-//		Node current = null;
-//		if (valueFromPrevCommand.equals("")) {
-//			current = getNodeForCommand();
-//		} else if (valueFromPrevCommand.equals(LOOP)) {
-//			myTree = myTreeCopy;
-//			parse("");
-//		} else {
-//			Node previous = getNodeBeforeToReplace();
-//			// System.out.println(previous.getChild1().getValue() +
-//			// previous.getChild2().getValue());
-//			previous.insertChild(new Node(valueFromPrevCommand, null, null),
-//					myResources.getString("Command"));
-//			// System.out.println(previous.getChild1().getValue() +
-//			// previous.getChild2().getValue());
-//			current = getNodeForCommand();
-//		}
-//		return current;
-//	}
 
 	private Node getNodeForCommand() {
 		Node current = myTree;
@@ -156,7 +139,7 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-		//System.out.println(current);
+		// System.out.println(current);
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
@@ -185,7 +168,11 @@ public class Parser {
 		}
 		return null;
 	}
-
+	
+	public void setLanguage(String language) {
+		myCommandFactory.setLanguage(language);
+	}
+	
 	public static void main(String[] args) throws IOException {
 		Parser test = new Parser("English");
 		test.initializeCommands("fd sum 10 sum 5 6");

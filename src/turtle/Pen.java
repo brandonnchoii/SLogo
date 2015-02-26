@@ -47,4 +47,12 @@ public class Pen {
 		isDrawing = b;
 	}
 	
+	public void setCurrent(Point2D pt) {
+		current = pt;
+	}
+	
+	public void setNext(Point2D pt) {
+		next = pt;
+	}
+	
 }

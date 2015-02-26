@@ -1,11 +1,12 @@
 package turtle;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import command.Command;
-
+//Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
 
 	private double direction;
@@ -23,7 +24,6 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(DEFAULT_IMAGE);
-
 	}
 
 	public Turtle(Image i, Paint color){
@@ -69,8 +69,10 @@ public class Turtle extends ImageView {
 	}
 
 	public void move (double pixels) {
+		myPen.setCurrent(new Point2D(getTranslateX(), getTranslateY()));
 		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
 		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
+		myPen.setNext(new Point2D(getTranslateX(), getTranslateY()));
 	}
 
 	private double radians(){
@@ -108,5 +110,6 @@ public class Turtle extends ImageView {
 	public double drawWithSize(double size) {
 		return myPen.getSize();
 	}
+	
 	
 }
