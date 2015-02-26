@@ -14,7 +14,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import turtle.Pen;
 import turtle.Turtle;
 import userInterface.UserInterface;
 import world.BoundedWorld;
@@ -47,9 +49,6 @@ public class WorldController {
         shiftX = myPane.getWidth() / 2.0;
         shiftY = myPane.getHeight() /2.0;
         myPane.getChildren().add(myTurtle);
-        //myGC.drawImage(myTurtle.getImage(), shiftX, shiftY, RECT_SIZE, RECT_SIZE);
-        //myAnimation.getKeyFrames().add();
-    	//		e -> drawTurtle()));
     }
 
     public WorldController (UserInterface ui, World w) {
@@ -76,10 +75,16 @@ public class WorldController {
     }
 
     private void drawTurtle() {
-//		myGC.clearRect(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + shiftY, RECT_SIZE, RECT_SIZE);
-//		myGC.drawImage(myTurtle.getImage(), myTurtle.getTranslateX() + shiftX, myTurtle.getTranslateY() + shiftY, RECT_SIZE, RECT_SIZE);
-    	myTurtle.setTranslateX(myTurtle.getTranslateX());
-    	myTurtle.setTranslateY(myTurtle.getTranslateY());
+    	double xCoor = myTurtle.getTranslateX();
+    	double yCoor = myTurtle.getTranslateY();
+    	myTurtle.setTranslateX(xCoor);
+    	myTurtle.setTranslateY(yCoor);
+        Pen pen = myTurtle.getPen();
+    	myGC.setStroke(pen.getColor());
+        myGC.setLineWidth(5);
+        if (pen.penReady())
+        	myGC.strokeLine(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + 
+        			shiftY, myTurtle.getnext().getX() + shiftX, myTurtle.getnext().getY() + shiftY);
     }
 
 	public void clear () {

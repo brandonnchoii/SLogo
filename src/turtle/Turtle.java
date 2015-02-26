@@ -130,4 +130,9 @@ public class Turtle extends ImageView {
 	public Point2D getnext() {
 		return next;
 	}
+
+	public Pen getPen() {
+		return myPen;
+	}
+
 }
