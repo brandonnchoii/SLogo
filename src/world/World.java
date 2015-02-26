@@ -113,4 +113,8 @@ public abstract class World {
     public int getWidth() {
         return width;
     }
+    
+    public Turtle getTurtle() {
+    	return myTurtle;
+    }
 }
