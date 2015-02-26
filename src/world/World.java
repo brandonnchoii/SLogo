@@ -1,17 +1,11 @@
 package world;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 import command.LoopCommand;
 import command.Command;
-import command.DoTimesCommand;
-import command.ForCommand;
-import command.IfCommand;
-import command.RepeatCommand;
 import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
@@ -23,8 +17,6 @@ public abstract class World {
 	// Turtle extends IV but eventaully, we want to not give WC or UI the entire
 	// Turtle
 	protected Turtle myTurtle;
-	private Map<Double, String> loopMap;
-	private List<Class> loopList;
 	private Parser myParser;
 
 	private static final int DEFAULT_HEIGHT = 100;
@@ -37,7 +29,6 @@ public abstract class World {
 
 		myTurtle = new Turtle(TURTLE_DEFAULT);
 		myParser = new Parser("English");
-		makeLoops();
 	}
 
 	public World(int h, int w) throws IOException {
@@ -45,7 +36,6 @@ public abstract class World {
 		width = w;
 		myTurtle = new Turtle(TURTLE_DEFAULT);
 		myParser = new Parser("English");
-		makeLoops();
 	}
 
 	public World(int h, int w, Turtle t, String language) throws IOException {
@@ -53,27 +43,8 @@ public abstract class World {
 		width = w;
 		myTurtle = t;
 		myParser = new Parser(language);
-		makeLoops();
 	}
 
-	private void makeLoops() {
-		makeLoopMap();
-		makeLoopList();
-	}
-
-	private void makeLoopMap() {
-		loopMap = new HashMap<>();
-		loopMap.put(0., "Loop");
-		loopMap.put(1., "loopDone");
-	}
-
-	private void makeLoopList() {
-		loopList = new ArrayList<>();
-		loopList.add(new DoTimesCommand().getClass());
-		loopList.add(new RepeatCommand().getClass());
-		loopList.add(new ForCommand().getClass());
-		loopList.add(new IfCommand().getClass());
-	}
 
 	public abstract void fixPosition();
 
@@ -102,24 +73,18 @@ public abstract class World {
 		}
 	}
 
-//	private String runCommand(String s) {
-//		Command c = myParser.parse(s);
-//		if (c.isLoop()) {
-//			s = "loop";
-//			for (double i = ((LoopCommand) c).getStart(); i < ((LoopCommand) c)
-//					.getEnd(); i += ((LoopCommand) c).getIncr()) {
-//				
-//			}
-//		}
-//		return myTurtle.act(c);
-//
-//	}
-
-	private boolean isLoop(Command c) {
-		if (loopList.contains(c.getClass()))
-			return true;
-		return false;
-	}
+	//	private String runCommand(String s) {
+	//		Command c = myParser.parse(s);
+	//		if (c.isLoop()) {
+	//			s = "loop";
+	//			for (double i = ((LoopCommand) c).getStart(); i < ((LoopCommand) c)
+	//					.getEnd(); i += ((LoopCommand) c).getIncr()) {
+	//				
+	//			}
+	//		}
+	//		return myTurtle.act(c);
+	//
+	//	}
 
 	public void setHeight(int h) {
 		height = h;
