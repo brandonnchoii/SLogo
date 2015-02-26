@@ -92,11 +92,11 @@ public class UserInterface {
         });
 
         // save command
-        CommandSaver cs = new CommandSaver();
         commandSaverButton.setOnMouseClicked(e -> {
+            CommandSaver cs = new CommandSaver();
             cs.saveCommand();
             cs.saveButton.setOnMouseClicked(c -> {
-                mySidebar.addItem(cs.commandWindow.getText(), Sidebar.SAVED_INDEX);
+                mySidebar.addItem(cs.commandWindow.getText().replaceAll("\n", " , "), Sidebar.SAVED_INDEX);
                 cs.close();
             });
         });
@@ -105,6 +105,9 @@ public class UserInterface {
         TurtleMaker tm = new TurtleMaker();
         
         //access specific saved command
+        mySidebar.boxes.get(Sidebar.SAVED_INDEX).setOnAction(e -> {
+            runCommand(mySidebar.boxes.get(Sidebar.SAVED_INDEX).getSelectionModel().getSelectedItem());
+        });
         
         //access specific previous command
         
@@ -154,9 +157,10 @@ public class UserInterface {
 
     }
 
-    private void runCommands (String s) {
-        String data = s;
-        myController.update();
+    private void runCommand (String s) {
+        System.out.println(s);
+//        String data = s;
+//        myController.update();
     }
 
     private void makeCreateTurtle () {
@@ -186,7 +190,7 @@ public class UserInterface {
     }
 
     private void makeRunButton () {
-        Button play = makeUIButton("RunCommand", e -> runCommands(myCommandWindow.getText()));
+        Button play = makeUIButton("RunCommand", e -> runCommand(myCommandWindow.getText()));
         Image playImage = new Image(DEFAULT_IMAGE_PACKAGE + "PlayButton.jpg");
         ImageView playView = new ImageView(playImage);
         playView.setFitWidth(60);

@@ -27,8 +27,8 @@ public class Sidebar {
     private static final int SPACING = 5;
 
     private VBox mySidebar;
-    protected ComboBox<String> turtles, edits, previous, saved;
-    private ArrayList<ComboBox<String>> boxes;
+    private ComboBox<String> turtles, edits, previous, saved;
+    protected ArrayList<ComboBox<String>> boxes;
     private ScrollPane myResultBox;
     private Text myResults;
 

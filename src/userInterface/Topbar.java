@@ -49,7 +49,7 @@ public class Topbar {
     }
 
     private Hyperlink createHelpLink () {
-        myLink = new Hyperlink("HELP?");
+        myLink = new Hyperlink("HELP PAGE");
         myLink.setOnMouseClicked(e -> displayWebpage());
         return myLink;
     }
