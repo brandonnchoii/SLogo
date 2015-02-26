@@ -32,6 +32,7 @@ public class WorldController {
     }
 
     public void update(String command) {
+        //System.out.println(command);
     	myWorld.listen(command);
     }
 

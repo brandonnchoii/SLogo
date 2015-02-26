@@ -21,6 +21,7 @@ public abstract class World {
 
     protected int height;
     protected int width;
+  //Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
     protected Turtle myTurtle;
     private Map<Double, String> loopMap;
     private List<Class> loopList;
