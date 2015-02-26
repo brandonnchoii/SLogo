@@ -33,14 +33,6 @@ public class Parser {
 
 	public int initializeCommands(String input) {
 		numCommands = 0;
-		if (input.contains(myResources.getString("ListStart"))) {
-			String loopString = input.substring(
-					input.indexOf(myResources.getString("ListStart")),
-					input.indexOf(myResources.getString("ListEnd")));
-			System.out.println(loopString);
-			Node loop = makeTree(new Scanner(loopString));
-			// String loop = input.substring(beginIndex, endIndex)
-		}
 		myTree = makeTree(new Scanner(input));
 		myTreeCopy = makeTree(new Scanner(input));
 		//System.out.println(numCommands);
