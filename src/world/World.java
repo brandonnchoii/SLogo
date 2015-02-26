@@ -64,7 +64,7 @@ public abstract class World {
     private void makeLoopMap(){
     	loopMap = new HashMap<>();
     	loopMap.put(0., "Loop");
-    	loopMap.put(1., "Done");
+    	loopMap.put(1., "loopDone");
     }
     
     private void makeLoopList(){
@@ -111,5 +111,9 @@ public abstract class World {
     
     public int getWidth() {
         return width;
+    }
+    
+    public void setLanguage(String language){
+    	myParser.setLanguage(language);
     }
 }
