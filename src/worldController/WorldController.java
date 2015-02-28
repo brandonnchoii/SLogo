@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -68,6 +69,7 @@ public class WorldController {
         myGC = UI.getGraphics();
         myTurtle = myWorld.getTurtle();
     }
+    
     public void update(String command) {
         System.out.println(command + "wc");
     	String s = myWorld.listen(command);
@@ -82,10 +84,12 @@ public class WorldController {
     	myTurtle.setTranslateY(yCoor);
         Pen pen = myTurtle.getPen();
     	myGC.setStroke(pen.getColor());
-        myGC.setLineWidth(3);
+        myGC.setLineWidth(pen.getSize());
         if (pen.penReady())
         	myGC.strokeLine(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + 
         			shiftY, myTurtle.getnext().getX() + shiftX, myTurtle.getnext().getY() + shiftY);
+        myTurtle.setcurr(new Point2D(xCoor, yCoor));
+
     }
 
 	public void clear () {
