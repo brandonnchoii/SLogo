@@ -31,8 +31,8 @@ import javafx.scene.paint.Color;
 public class UserInterface {
 
     public static final int BOX_WIDTH = 180;
-    private static final int myWidth = 900;
-    private static final int myHeight = 750;
+    private static final int myWidth = 1200;
+    private static final int myHeight = 700;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
 
