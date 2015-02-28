@@ -78,7 +78,7 @@ public class Turtle extends ImageView {
 
 	public void move (double pixels) {
 		System.out.println(getTranslateX() + " " + getTranslateY());
-		current = new Point2D(getTranslateX(), getTranslateY());
+		//current = new Point2D(getTranslateX(), getTranslateY());
 		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
 		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
 		next = new Point2D(getTranslateX(), getTranslateY());
@@ -115,16 +115,20 @@ public class Turtle extends ImageView {
 		setTranslateY(y);
 	}
 
-	public Paint drawWithColor(Paint color) {
-		return myPen.getColor();
-	}
-	
-	public double drawWithSize(double size) {
-		return myPen.getSize();
-	}
+//	public Paint drawWithColor() {
+//		return myPen.getColor();
+//	}
+//	
+//	public double drawWithSize() {
+//		return myPen.getSize();
+//	}
 	
 	public Point2D getcurr() {
 		return current;
+	}
+	
+	public void setcurr(Point2D pt) {
+		current = pt;
 	}
 	
 	public Point2D getnext() {
@@ -134,5 +138,5 @@ public class Turtle extends ImageView {
 	public Pen getPen() {
 		return myPen;
 	}
-
+	
 }
