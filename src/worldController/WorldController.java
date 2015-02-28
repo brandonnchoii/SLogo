@@ -72,8 +72,8 @@ public class WorldController {
     
     public void update(String command) {
         System.out.println(command + "wc");
-    	String addition = myWorld.listen(command);
-    	UI.getSidebar().addResult(addition);
+    	String s = myWorld.listen(command);
+    	UI.getSidebar().addResult(s);
     	drawTurtle();
     }
 
