@@ -17,11 +17,14 @@ public class Turtle extends ImageView {
 	private static final Image DEFAULT_IMAGE = new Image("resources/images/default.jpg");
 	
 	private double direction;
+	private boolean active;
+	private int id;
+	
 	private Pen myPen;
 	private Point2D current;
 	private Point2D next;
 	
-	public Turtle(Paint color) {
+	public Turtle(Paint color, int ID) {
 		myPen = new Pen(color);
 		current = new Point2D(DEFAULT_POS, DEFAULT_POS);
 		next = new Point2D(DEFAULT_POS, DEFAULT_POS);
@@ -33,9 +36,12 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(DEFAULT_IMAGE);
+		active = true;
+		id = ID;
+		
 	}
 
-	public Turtle(Image i, Paint color){
+	public Turtle(Image i, Paint color, int ID){
 		myPen = new Pen(color);
 		setTranslateX(DEFAULT_POS);
 		setTranslateY(DEFAULT_POS);
@@ -43,9 +49,11 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
+		active = true;
+		id = ID;
 	}
 
-	public Turtle(int x, int y, Image i, Paint color){
+	public Turtle(int x, int y, Image i, Paint color, int ID){
 		myPen = new Pen(color);
 		setTranslateX(x);
 		setTranslateY(x);
@@ -53,9 +61,11 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
+		active = true;
+		id = ID;
 	}
 
-	public Turtle(int x, int y, double dir, Image i, Paint color){
+	public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
 		myPen = new Pen(color);
 		setTranslateX(x);
 		setTranslateY(y);
@@ -63,6 +73,8 @@ public class Turtle extends ImageView {
 		myPen.changePenState(DEFAULT_DRAW);
 		setVisible(DEFAULT_VISIBLE);
 		setImage(i);
+		active = true;
+		id = ID;
 	}
 
 	public boolean isDrawing() {
@@ -133,6 +145,14 @@ public class Turtle extends ImageView {
 	
 	public Pen getPen() {
 		return myPen;
+	}
+	
+	public boolean isActive(){
+		return active;
+	}
+	
+	public int getID(){
+		return id;
 	}
 	
 }

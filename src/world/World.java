@@ -1,7 +1,8 @@
 package world;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import command.LoopCommand;
@@ -16,7 +17,8 @@ public abstract class World {
 	protected int width;
 	// Turtle extends IV but eventaully, we want to not give WC or UI the entire
 	// Turtle
-	protected Turtle myTurtle;
+	protected List<Turtle> myTurtles;
+	protected Turtle activeTurtle;
 	private Parser myParser;
 
 	private static final int DEFAULT_HEIGHT = 100;
@@ -27,21 +29,24 @@ public abstract class World {
 		height = DEFAULT_HEIGHT;
 		width = DEFAULT_WIDTH;
 
-		myTurtle = new Turtle(TURTLE_DEFAULT);
+		myTurtles = new ArrayList<>();
+		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
 		myParser = new Parser("English");
 	}
 
 	public World(int h, int w) throws IOException {
 		height = h;
 		width = w;
-		myTurtle = new Turtle(TURTLE_DEFAULT);
+		myTurtles = new ArrayList<>();
+		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
 		myParser = new Parser("English");
 	}
 
 	public World(int h, int w, Turtle t, String language) throws IOException {
 		height = h;
 		width = w;
-		myTurtle = t;
+		myTurtles = new ArrayList<>();
+		myTurtles.add(t);
 		myParser = new Parser(language);
 	}
 
@@ -58,7 +63,7 @@ public abstract class World {
 	public String listen(String s) {
 		int numCmds = myParser.initializeCommands(s);
 		String param = "";
-
+		
 		for (int i = 0; i < numCmds; i++) {
 			Command c = myParser.parse(param);
 			System.out.println("num " + i);
