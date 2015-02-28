@@ -221,4 +221,7 @@ public class UserInterface {
     	return canvasPane;
     }
     
+    public Sidebar getSidebar() {
+    	return mySidebar;
+    }
 }
