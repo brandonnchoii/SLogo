@@ -25,7 +25,6 @@ public class Parser {
 	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
-	private static final String LOOP_DONE = "loopDone";
 
 	public Parser(String language) {
 		myCommandFactory = new CommandFactory(language);
@@ -44,7 +43,6 @@ public class Parser {
 		//System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
-			System.out.println("HI");
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
 			//System.out.println("REGISTER LOOP");
@@ -179,7 +177,7 @@ public class Parser {
 		myCommandFactory.setLanguage(language);
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Parser test = new Parser("English");
 		test.initializeCommands("repeat 2 [ sum 1 2 ]");
 		test.parse("");
