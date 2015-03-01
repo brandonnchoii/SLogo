@@ -12,6 +12,13 @@ public class SumCommand extends Command{
 
 	@Override
 	public double run(Turtle t) {
-		return parameters.get(0) + parameters.get(1);
+
+		if(parameters.size() < 2)
+			throw new IllegalArgumentException("Not enough parameters");
+		
+		double ret = 0;
+		for(double d: parameters)
+			ret += d;
+		return ret;
 	}
 }

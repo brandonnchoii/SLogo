@@ -12,6 +12,14 @@ public class DifferenceCommand extends Command{
 
 	@Override
 	public double run(Turtle t) {
-		return parameters.get(0) - parameters.get(1);
+		
+		if(parameters.size() < 2)
+			throw new IllegalArgumentException("Not enough parameters");
+		
+		double ret = parameters.get(0);
+		for (int i = 1; i < parameters.size(); i++){
+			ret -= parameters.get(i);
+		}
+		return ret;
 	}
 }
