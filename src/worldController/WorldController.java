@@ -26,7 +26,6 @@ import world.World;
 
 public class WorldController {
 
-    private static final int RECT_SIZE = 60;
 	World myWorld;
     private UserInterface UI;
     private GraphicsContext myGC;
@@ -78,18 +77,7 @@ public class WorldController {
     }
 
     private void drawTurtle() {
-    	double xCoor = myTurtle.getTranslateX();
-    	double yCoor = myTurtle.getTranslateY();
-    	myTurtle.setTranslateX(xCoor);
-    	myTurtle.setTranslateY(yCoor);
-        Pen pen = myTurtle.getPen();
-    	myGC.setStroke(pen.getColor());
-        myGC.setLineWidth(pen.getSize());
-        if (pen.penReady())
-        	myGC.strokeLine(myTurtle.getcurr().getX() + shiftX, myTurtle.getcurr().getY() + 
-        			shiftY, myTurtle.getnext().getX() + shiftX, myTurtle.getnext().getY() + shiftY);
-        myTurtle.setcurr(new Point2D(xCoor, yCoor));
-
+        myTurtle.drawLine(myGC, shiftX, shiftY);
     }
 
 	public void clear () {
