@@ -2,12 +2,13 @@ package turtle;
 
 import worldController.WorldController;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import command.Command;
-//Turtle extends IV but eventaully, we want to not give WC or UI the entire Turtle
+//Turtle extends IV but eventually, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
 
 	private static final int DEFAULT_POS = 0;
@@ -90,7 +91,6 @@ public class Turtle extends ImageView {
 
 	public void move (double pixels) {
 		System.out.println(getTranslateX() + " " + getTranslateY());
-		//current = new Point2D(getTranslateX(), getTranslateY());
 		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
 		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
 		next = new Point2D(getTranslateX(), getTranslateY());
@@ -127,26 +127,22 @@ public class Turtle extends ImageView {
 		setTranslateY(y);
 	}
 
-//	public Paint drawWithColor() {
-//		return myPen.getColor();
-//	}
-//	
-//	public double drawWithSize() {
-//		return myPen.getSize();
-//	}
-	
-	public Point2D getcurr() {
-		return current;
+	public void drawLine(GraphicsContext gc, double shiftX, double shiftY) {
+		double currX = current.getX();
+		double currY = current.getY();
+    	double nextX = getTranslateX();
+    	double nextY = getTranslateY();
+		gc.setStroke(myPen.getColor());
+        gc.setLineWidth(myPen.getSize());
+		setTranslateX(nextX);
+    	setTranslateY(nextY);
+		if (myPen.penReady()) {
+    		gc.strokeLine(currX + shiftX, currY + shiftY, 
+    				next.getX() + shiftX, next.getY() + shiftY);
+		}
+		current = new Point2D(nextX, nextY);
 	}
 	
-	public void setcurr(Point2D pt) {
-		current = pt;
-	}
-	
-	public Point2D getnext() {
-		return next;
-	}
-
 	public Pen getPen() {
 		return myPen;
 	}

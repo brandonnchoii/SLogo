@@ -100,21 +100,6 @@ public abstract class World {
 	//
 	// }
 
-	public void setHeight(int h) {
-		height = h;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setWidth(int w) {
-		width = w;
-	}
-
-	public int getWidth() {
-		return width;
-	}
 
 	public void setLanguage(String language) {
 		myParser.setLanguage(language);
@@ -122,7 +107,6 @@ public abstract class World {
 
 	public Turtle getTurtle() {
 		return myTurtle;
-
 	}
 
 }
