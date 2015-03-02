@@ -8,6 +8,7 @@ package worldController;
 
 import java.io.IOException;
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -23,6 +24,7 @@ import userInterface.UserInterface;
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
+import userInterface.UI;
 
 public class WorldController {
 
@@ -36,6 +38,22 @@ public class WorldController {
     private StackPane myPane;
     private double shiftX;
     private double shiftY;
+    
+    
+    public WorldController (UI ui) throws IOException {
+        myWorld = new BoundedWorld();
+        //UI = ui;
+        myCanvas = UI.getCanvas();
+        myPane = UI.getPane();
+        myGC = UI.getGraphics();
+        myAnimation = UI.getTimeline();
+        myTurtle = myWorld.getTurtle();
+        myCanvas.setWidth(myPane.getWidth());
+        myCanvas.setHeight(myPane.getHeight());
+        shiftX = myPane.getWidth() / 2.0;
+        shiftY = myPane.getHeight() /2.0;
+        myPane.getChildren().add(myTurtle);
+    }
     
     public WorldController (UserInterface ui) throws IOException {
         myWorld = new BoundedWorld();
