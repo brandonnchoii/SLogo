@@ -1,0 +1,6 @@
+<map id="parser.Parser.getNodeBeforeToReplace" name="parser.Parser.getNodeBeforeToReplace">
+<area shape="rect" id="node2" href="$d3/dcc/classparser_1_1_node.html#aa67bc0d39227232943abec9b95b23235" title="parser.Node.getChild1" alt="" coords="269,5,433,32"/>
+<area shape="rect" id="node3" href="$d3/dcc/classparser_1_1_node.html#a0f13775acc62af77cdde90dbeaf26bbc" title="parser.Node.getChild2" alt="" coords="269,56,433,83"/>
+<area shape="rect" id="node4" href="$d3/dcc/classparser_1_1_node.html#ab14db24c0724dec4387e29d513008e2e" title="parser.Node.hasChildren" alt="" coords="261,107,440,133"/>
+<area shape="rect" id="node5" href="$d3/dcc/classparser_1_1_node.html#aa92667a825777b3d757bc3b1a247ac20" title="parser.Node.isLeaf" alt="" coords="280,157,421,184"/>
+</map>

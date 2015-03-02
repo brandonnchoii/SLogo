@@ -1,0 +1,12 @@
+<map id="turtle.Pen.penReady" name="turtle.Pen.penReady">
+<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#ac5df386a63f84a7108ee50e2d663a23c" title="turtle.Turtle.drawLine" alt="" coords="208,51,363,77"/>
+<area shape="rect" id="node10" href="$df/dcb/classturtle_1_1_turtle.html#a705ea4fb106755bef5f4af563515b537" title="turtle.Turtle.isDrawing" alt="" coords="206,103,365,129"/>
+<area shape="rect" id="node3" href="$d8/d08/classworld_controller_1_1_world_controller.html#a9380abb3ed5334498510f1d6a88a826d" title="worldController.WorldController.draw\lTurtle" alt="" coords="414,41,663,82"/>
+<area shape="rect" id="node4" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="712,48,976,75"/>
+<area shape="rect" id="node5" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a95e324c85888faea808be269e44ed5b8" title="userInterface.UserInterface.run\lCommand" alt="" coords="1024,41,1245,82"/>
+<area shape="rect" id="node6" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a560c36977fddeee87002333870c54ed6" title="userInterface.UserInterface.set\lUpResponses" alt="" coords="1587,6,1807,47"/>
+<area shape="rect" id="node8" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a4316649a1f81fcc1dcaf93c812bf6f3a" title="userInterface.UserInterface.make\lRunButton" alt="" coords="1294,70,1530,111"/>
+<area shape="rect" id="node7" href="$dd/d8e/classuser_interface_1_1_user_interface.html#af296b064499e62c4fbfbf73da6456532" title="userInterface.UserInterface.\lUserInterface" alt="" coords="1864,39,2064,81"/>
+<area shape="rect" id="node9" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a6d39ee7d7ae35fc0539bb714bce6221a" title="userInterface.UserInterface.make\lFunctionButtons" alt="" coords="1579,71,1815,113"/>
+<area shape="rect" id="node11" href="$df/de8/classcommand_1_1_pen_query_command.html#a2e6af9e8d31937ab22a6f9bdaaaa7892" title="command.PenQueryCommand.run" alt="" coords="416,107,661,133"/>
+</map>

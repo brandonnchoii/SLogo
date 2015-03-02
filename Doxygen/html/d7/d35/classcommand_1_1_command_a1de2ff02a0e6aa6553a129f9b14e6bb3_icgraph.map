@@ -1,0 +1,10 @@
+<map id="command.Command.run" name="command.Command.run">
+<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#aa53d992fb81cd039a22a301af9b32aba" title="turtle.Turtle.act" alt="" coords="238,45,357,72"/>
+<area shape="rect" id="node3" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="405,45,536,72"/>
+<area shape="rect" id="node4" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="584,45,848,72"/>
+<area shape="rect" id="node5" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a95e324c85888faea808be269e44ed5b8" title="userInterface.UserInterface.run\lCommand" alt="" coords="896,38,1117,79"/>
+<area shape="rect" id="node6" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a560c36977fddeee87002333870c54ed6" title="userInterface.UserInterface.set\lUpResponses" alt="" coords="1459,5,1679,46"/>
+<area shape="rect" id="node8" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a4316649a1f81fcc1dcaf93c812bf6f3a" title="userInterface.UserInterface.make\lRunButton" alt="" coords="1166,67,1402,109"/>
+<area shape="rect" id="node7" href="$dd/d8e/classuser_interface_1_1_user_interface.html#af296b064499e62c4fbfbf73da6456532" title="userInterface.UserInterface.\lUserInterface" alt="" coords="1736,38,1936,79"/>
+<area shape="rect" id="node9" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a6d39ee7d7ae35fc0539bb714bce6221a" title="userInterface.UserInterface.make\lFunctionButtons" alt="" coords="1451,70,1687,111"/>
+</map>
