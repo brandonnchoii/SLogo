@@ -14,11 +14,8 @@ import javafx.scene.text.Text;
 public class RightPanel {
 
 private static final String DEFAULT_WHITE_BG = "-fx-background: white;";
-
 private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
-
 private static final int RIGHT_PANEL_SPACING = 40;
-
 private static final String DEFAULT_RESULT = "Results: \n\n";
     
     private VBox myRightPanel;
