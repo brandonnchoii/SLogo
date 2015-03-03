@@ -5,9 +5,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class EqualsCommand extends Command{
+public class EqualCommand extends Command{
 	
-	public EqualsCommand(List<Double> params){
+	public EqualCommand(List<Double> params){
 		super(params);
 	}
 

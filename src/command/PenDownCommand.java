@@ -4,9 +4,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class PenCommand extends Command {
+public class PenDownCommand extends Command {
 	
-	public PenCommand(List<Double> params){
+	public PenDownCommand(List<Double> params){
 		super(params);
 	}
 	@Override

@@ -4,9 +4,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class VisibleCommand extends Command {
+public class ShowTurtleCommand extends Command {
 	
-	public VisibleCommand(List<Double> params){
+	public ShowTurtleCommand(List<Double> params){
 		super(params);
 	}
 	@Override

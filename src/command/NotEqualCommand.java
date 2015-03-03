@@ -5,9 +5,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class NotEqualsCommand extends Command{
+public class NotEqualCommand extends Command{
 	
-	public NotEqualsCommand(List<Double> params){
+	public NotEqualCommand(List<Double> params){
 		super(params);
 	}
 

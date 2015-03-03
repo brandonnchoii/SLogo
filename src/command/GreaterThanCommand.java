@@ -5,9 +5,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class GreaterCommand extends Command{
+public class GreaterThanCommand extends Command{
 	
-	public GreaterCommand(List<Double> params){
+	public GreaterThanCommand(List<Double> params){
 		super(params);
 	}
 
