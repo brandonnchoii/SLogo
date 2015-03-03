@@ -2,9 +2,9 @@ package command;
 
 import turtle.Turtle;
 
-public class VisibleQueryCommand extends Command{
+public class IsShowingCommand extends Command{
 	
-	public VisibleQueryCommand(){
+	public IsShowingCommand(){
 		super();
 	}
 

@@ -2,10 +2,10 @@ package command;
 
 import turtle.Turtle;
 
-public class MakeCommand extends Command {
+public class MakeVariableCommand extends Command {
 	private double expr;
 	
-	public MakeCommand(double d){
+	public MakeVariableCommand(double d){
 		super(null);
 		expr = d;
 	}

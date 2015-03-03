@@ -159,4 +159,8 @@ public class Turtle extends ImageView {
 		return id;
 	}
 	
+	public void setActive(boolean b){
+		active = b;
+	}
+	
 }

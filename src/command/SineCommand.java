@@ -4,9 +4,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class SinCommand extends Command{
+public class SineCommand extends Command{
 	
-	public SinCommand(List<Double> params){
+	public SineCommand(List<Double> params){
 		super(params);
 	}
 
