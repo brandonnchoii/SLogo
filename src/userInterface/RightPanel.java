@@ -13,6 +13,10 @@ import javafx.scene.text.Text;
 
 public class RightPanel {
 
+private static final String DEFAULT_WHITE_BG = "-fx-background: white;";
+
+private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
+
 private static final int RIGHT_PANEL_SPACING = 40;
 
 private static final String DEFAULT_RESULT = "Results: \n\n";
@@ -20,9 +24,11 @@ private static final String DEFAULT_RESULT = "Results: \n\n";
     private VBox myRightPanel;
     private ScrollPane myResultView;
     private Text myResults;
+    private EventHandler<ActionEvent> runCommand;
     
     public RightPanel (EventHandler<ActionEvent> run) {
-        initialize(run);
+        runCommand = run;
+        initialize();
     }
     
     public VBox getPanel() {
@@ -33,22 +39,22 @@ private static final String DEFAULT_RESULT = "Results: \n\n";
         myResults.setText(myResults.getText() + s + "\n");
     }
     
-    private void initialize (EventHandler<ActionEvent> event) {
+    private void initialize () {
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
         myResultView = new ScrollPane();
-        myResultView.setStyle("-fx-background: white;");
+        myResultView.setStyle(DEFAULT_WHITE_BG);
         myResultView.setMinSize(UI.PANEL_WIDTH, UI.PANEL_HEIGHT);
         myResults = new Text(DEFAULT_RESULT);
         myResultView.setContent(myResults);
-        myRightPanel.getChildren().addAll(myResultView, makeRunButton(event));
+        myRightPanel.getChildren().addAll(myResultView, makeRunButton());
     }
         
-    private Button makeRunButton (EventHandler<ActionEvent> event) {
+    private Button makeRunButton () {
         Button play = new Button();
-        Image playImage = new Image("resources/images/PlayButton.jpg");
+        Image playImage = new Image(PLAY_BUTTON);
         ImageView playView = new ImageView(playImage);
         play.setGraphic(playView);   
-        play.setOnAction(event);
+        play.setOnAction(runCommand);
         return play;
     }
 }

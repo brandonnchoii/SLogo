@@ -23,20 +23,18 @@ import javafx.stage.Stage;
 
 public class UI {
 
-    public static final int UI_WIDTH = 1000;
-    public static final int UI_HEIGHT = 750;
+    
     public static final int PANEL_WIDTH = 200;
     public static final int PANEL_HEIGHT = 500;
     
-    private static final String TAB_NAME = "SLogo #";
-    private static final String AUTOMATED_TEXT = "Click here to type commands!";
+    private static final String AUTOMATED_TEXT = "CLICK HERE TO TYPE COMMAND";
     private static final int INPUT_WIDTH = 450;
     private static final int INPUT_HEIGHT = 300;
     
     private WorldController myController;
-    private TabPane myUI; //singleton for TabPane
     private BorderPane myView, myCenterView;
     private TextArea myInput;
+    private boolean textClicked;
     private Scene myScene;
     private RightPanel myRightPanel;
     private LeftPanel myLeftPanel;
@@ -44,51 +42,44 @@ public class UI {
     private Canvas myCanvas;
     private GraphicsContext myGC;
     private StackPane canvasPane;
+    private EventHandler<ActionEvent> run;
     
-    private EventHandler<ActionEvent> run, changeColor;
-    
-    public UI () {
+    public UI (){
         initialize();
+        //setUpController();
     }
     
-    public Scene getScene() {
-        return myScene;
-    }
-    
-    public void setUpController() throws IOException {
-        myController = new WorldController(this);
-    }
-    
-    public Pane getView() {
+    public Pane getUI () {
         return myView;
     }
     
     private void initialize() {
-        myUI = new TabPane();
+        myView = new BorderPane();
         myView = new BorderPane();
         myView.setPadding(new Insets(10,10,10,10));
-        
         myCenterView = new BorderPane();
-        myCenterView.setPadding(new Insets(5,5,5,5));
-        
-        myScene = new Scene(myUI, UI_WIDTH, UI_HEIGHT);
+        myCenterView.setPadding(new Insets(5,5,5,5));  
         
         setUpEventHandlers();
+        setUpCommandField();
         
         myRightPanel = new RightPanel(run);
         myLeftPanel = new LeftPanel(new HashMap<String, String>(), new HashMap<String, Double>());
-        myMenu = new TopMenu();
-        
-        addNewTab(myView);  
-        setUpCommandField();
-        
-        myView.setCenter(myCenterView); 
-        myCenterView.setTop(myMenu.getMenuBar());
-        myCenterView.setBottom(myInput);
-        myCenterView.setAlignment(myInput, Pos.CENTER);
-        
+
+        myView.setCenter(myCenterView);
         myView.setRight(myRightPanel.getPanel());
         myView.setLeft(myLeftPanel.getPanel());
+        myCenterView.setBottom(myInput);
+        myCenterView.setAlignment(myInput, Pos.CENTER);
+    }
+    
+    private void setUpController(){
+        try {
+            myController = new WorldController(this);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     private void setUpEventHandlers () {
@@ -102,24 +93,12 @@ public class UI {
 
     private void setUpCommandField () {
         myInput = new TextArea(AUTOMATED_TEXT);
+        textClicked = false;
         myInput.setMaxSize(INPUT_WIDTH, INPUT_HEIGHT); 
         myInput.setOnMouseClicked(e -> {
-            if (myInput.getText().equals(AUTOMATED_TEXT))
+            if (!textClicked) 
                 myInput.clear();
+                textClicked = true;
         });
-    }
-    
-    private void addTab(Node content) {
-        Tab tab = new Tab();
-        tab.setText(TAB_NAME + (myUI.getTabs().size() + 1));
-        
-        
-    }
-    
-    private void addNewTab(Node content) {
-        Tab tab = new Tab();
-        tab.setText(TAB_NAME + (myUI.getTabs().size() + 1));
-        tab.setContent(content);
-        myUI.getTabs().add(tab);
     }
 }

@@ -1,6 +1,7 @@
 package userInterface;
 
-import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,8 +21,10 @@ public class TopMenu {
     private MenuBar myMenu;
     private Menu File, Edit, View, Preferences, Help;
     protected ColorPicker myColorChoices;
+    private EventHandler<ActionEvent> createNewTab;
 
-    public TopMenu () {
+    public TopMenu (EventHandler<ActionEvent> tabHandler) {
+        createNewTab = tabHandler;
         initialize();
     }
 
@@ -46,9 +49,7 @@ public class TopMenu {
     private Menu createFileMenu () {
         File = new Menu("File");
         MenuItem m1 = new MenuItem("New SLogo Tab");
-        m1.setOnAction(e -> {
-            
-        });
+        m1.setOnAction(createNewTab);
         MenuItem m2 = new MenuItem("Exit");
         m2.setOnAction(e -> System.exit(1));
 
@@ -71,6 +72,7 @@ public class TopMenu {
         MenuItem m1 = new MenuItem("Set Background Color");
         m1.setOnAction(e -> displayColorPicker());
         MenuItem m2 = new MenuItem("Set Pen Settings");
+        m2.setOnAction(e -> displayPenEditor());
         MenuItem m3 = new MenuItem("Set Current Turtle's Image");
 
         View.getItems().addAll(m1, m2, m3);
@@ -84,11 +86,11 @@ public class TopMenu {
         Help.getItems().add(m1);
         return Help;
     }
-    
+
     private Menu createPreferencesMenu () {
         Preferences = new Menu("Preferences");
         MenuItem m1 = new MenuItem("Change Language");
-        //m1.setOnAction(e -> );
+        // m1.setOnAction(e -> );
         Preferences.getItems().add(m1);
         return Preferences;
     }
@@ -103,16 +105,19 @@ public class TopMenu {
     private void displayColorPicker () {
         StackPane colorPick = new StackPane();
         VBox content = new VBox(10);
-        colorPick.setMinSize(200, 100);
         Label text = new Label("Background Color:");
         content.getChildren().addAll(text, myColorChoices);
         colorPick.getChildren().add(content);
-        
+
         myColorChoices.setOnAction(e -> {
-            
+
         });
-        
+
         display(colorPick);
+    }
+
+    private void displayPenEditor () {
+
     }
 
     private void display (Node n) {

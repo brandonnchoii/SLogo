@@ -30,7 +30,7 @@ public class WorldController {
 
     private static final int RECT_SIZE = 60;
 	World myWorld;
-    private UserInterface UI;
+    private UI UI;
     private GraphicsContext myGC;
     private Timeline myAnimation;
     private Turtle myTurtle;
@@ -42,7 +42,7 @@ public class WorldController {
     
     public WorldController (UI ui) throws IOException {
         myWorld = new BoundedWorld();
-        //UI = ui;
+        UI = ui;
         myCanvas = UI.getCanvas();
         myPane = UI.getPane();
         myGC = UI.getGraphics();
