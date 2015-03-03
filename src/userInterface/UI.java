@@ -2,6 +2,7 @@ package userInterface;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import worldController.WorldController;
 import javafx.event.ActionEvent;
@@ -27,7 +28,6 @@ public class UI {
     public static final int PANEL_WIDTH = 200;
     public static final int PANEL_HEIGHT = 500;
     
-    private static final String AUTOMATED_TEXT = "CLICK HERE TO TYPE COMMAND";
     private static final int INPUT_WIDTH = 450;
     private static final int INPUT_HEIGHT = 300;
     
@@ -92,7 +92,8 @@ public class UI {
     }
 
     private void setUpCommandField () {
-        myInput = new TextArea(AUTOMATED_TEXT);
+        myInput = new TextArea("HELLO");
+       // myInput = new TextArea(language.getString("InputText"));
         textClicked = false;
         myInput.setMaxSize(INPUT_WIDTH, INPUT_HEIGHT); 
         myInput.setOnMouseClicked(e -> {

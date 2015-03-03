@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -31,15 +33,20 @@ public class TopMenu {
     private static final int PANE_SPACING = 5;
     private static final int POPUP_WIDTH = 250;
     private static final int POPUP_HEIGHT = 150;
-    
+    private static final String[] LANGUAGES = { "Chinese", "English", "French", "German",
+                                                "Italian", "Japanese", "Korean", "Portuguese",
+                                                "Russian", "Spanish" };
+
     private MenuBar myMenu;
     private Menu File, Edit, View, Preferences, Help;
     private ColorPicker myBackgroundColorChoices;
     private ColorPicker myPenColorChoices;
     private EventHandler<ActionEvent> createNewTab;
     private Stage myStage;
+    private ResourceBundle language;
 
-    public TopMenu (EventHandler<ActionEvent> tabHandler) {
+    public TopMenu (EventHandler<ActionEvent> tabHandler, ResourceBundle resource) {
+        language = resource;
         createNewTab = tabHandler;
         initialize();
     }
@@ -52,19 +59,20 @@ public class TopMenu {
         myMenu = new MenuBar();
         myBackgroundColorChoices = new ColorPicker();
         myPenColorChoices = new ColorPicker();
+        myStage = new Stage();
         myMenu.getMenus().addAll(createFileMenu(), createEditMenu(), createViewMenu(),
                                  createPreferencesMenu(), createHelpMenu());
     }
 
     // use reflection to create all of them, save code
-    private Menu createMenu (String s) {
-        Menu m = new Menu();
-        MenuItem m1, m2, m3;
-        return m;
-    }
+//    private Menu createMenu (String s) {
+//        Menu m = new Menu();
+//        MenuItem m1, m2, m3;
+//        return m;
+//    }
 
     private Menu createFileMenu () {
-        File = new Menu("File");
+        File = new Menu(language.getString("File"));
         MenuItem m1 = new MenuItem("New SLogo Tab");
         m1.setOnAction(createNewTab);
         MenuItem m2 = new MenuItem("Exit");
@@ -85,7 +93,7 @@ public class TopMenu {
     }
 
     private Menu createViewMenu () {
-        View = new Menu("View");
+        View = new Menu(language.getString("View"));
         MenuItem m1 = new MenuItem("Set Background Color");
         m1.setOnAction(e -> displayColorPicker());
         MenuItem m2 = new MenuItem("Set Pen Settings");
@@ -98,7 +106,7 @@ public class TopMenu {
     }
 
     private Menu createHelpMenu () {
-        Help = new Menu("Help");
+        Help = new Menu(language.getString("Help"));
         MenuItem m1 = new MenuItem("What is SLogo?");
         m1.setOnAction(e -> displayWebpage());
         Help.getItems().add(m1);
@@ -106,15 +114,16 @@ public class TopMenu {
     }
 
     private Menu createPreferencesMenu () {
-        Preferences = new Menu("Preferences");
+        Preferences = new Menu(language.getString("Preferences"));
         MenuItem m1 = new MenuItem("Change Language");
-        // m1.setOnAction(e -> );
+        m1.setOnAction(e -> displayLanguageSelector());
         Preferences.getItems().add(m1);
         return Preferences;
     }
 
     /**
-     * displays the HTML web page with instructions on SLogo and additional information about the software
+     * displays the HTML web page with instructions on SLogo and additional information about the
+     * software
      */
     private void displayWebpage () {
         WebView browser = new WebView();
@@ -130,7 +139,8 @@ public class TopMenu {
         myBackgroundColorChoices.setOnAction(e -> {
             System.out.println(myBackgroundColorChoices.getValue().toString());
         });
-        display(createDisplayBox(Arrays.asList(new Label("Set Background Color: "), myBackgroundColorChoices)));
+        display(createDisplayBox(Arrays.asList(new Label("Set Background Color: "),
+                                               myBackgroundColorChoices)));
     }
 
     /**
@@ -146,16 +156,30 @@ public class TopMenu {
         colorBox.getChildren().addAll(new Label("Set Pen Color: "), myPenColorChoices);
         display(createDisplayBox(Arrays.asList(sliderBox, colorBox)));
     }
-    
+
+    /**
+     * displays a file chooser that allows user to select desired image for turtle
+     */
     private void displayImagePicker () {
-        myStage = new Stage();
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Select image");
-        chooser.getExtensionFilters().addAll(new ExtensionFilter("Images Files", "*.png", "*.jpg", ".gif"));
+        chooser.getExtensionFilters().addAll(new ExtensionFilter("Images Files", "*.png", "*.jpg",
+                                                                 ".gif"));
         File selectedFile = chooser.showOpenDialog(myStage);
-            //System.out.println(selectedFile.toString());
+        // System.out.println(selectedFile.toString());
     }
-    
+
+    /**
+     * displays the language selector for the user to pick which language will be read in by the program
+     */
+    private void displayLanguageSelector () {
+        ComboBox<String> languageChoices = new ComboBox<>();
+        languageChoices.setPromptText("Language:");
+        Arrays.stream(LANGUAGES).forEach(e -> languageChoices.getItems().add(e));
+        //languageChoices.getSelectionModel().getSelectedItem();
+        display(createDisplayBox(Arrays.asList(languageChoices)));
+    }
+
     /**
      * returns the appropriate display box with all desired nodes added on
      */
@@ -171,7 +195,6 @@ public class TopMenu {
      * displays any node passed in on a new, centered stage
      */
     private void display (Node n) {
-        myStage = new Stage();
         Group root = new Group();
         Scene scene = new Scene(root);
         root.getChildren().add(n);
