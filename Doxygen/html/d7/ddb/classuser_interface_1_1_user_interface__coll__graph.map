@@ -1,0 +1,10 @@
+<map id="userInterface.UserInterface" name="userInterface.UserInterface">
+<area shape="rect" id="node16" href="$d8/d08/classworld_controller_1_1_world_controller.html" title="worldController.WorldController" alt="" coords="1229,583,1445,609"/>
+<area shape="rect" id="node26" href="$d6/d95/classparser_1_1_parser.html" title="parser.Parser" alt="" coords="565,804,672,831"/>
+<area shape="rect" id="node5" href="$d9/d3d/classuser_interface_1_1_topbar.html" title="userInterface.Topbar" alt="" coords="543,157,695,184"/>
+<area shape="rect" id="node10" href="$d1/d68/classuser_interface_1_1_sidebar.html" title="userInterface.Sidebar" alt="" coords="539,301,698,328"/>
+<area shape="rect" id="node17" href="$df/dcb/classturtle_1_1_turtle.html" title="turtle.Turtle" alt="" coords="571,725,666,752"/>
+<area shape="rect" id="node25" href="$d9/dd0/classworld_1_1_world.html" title="world.World" alt="" coords="948,829,1041,856"/>
+<area shape="rect" id="node19" href="$de/d57/classturtle_1_1_pen.html" title="turtle.Pen" alt="" coords="229,688,313,715"/>
+<area shape="rect" id="node28" href="$d3/dcc/classparser_1_1_node.html" title="parser.Node" alt="" coords="221,905,321,932"/>
+</map>

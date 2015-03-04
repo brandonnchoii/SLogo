@@ -1,0 +1,13 @@
+<map id="factories.CommandFactory.queryCommands" name="factories.CommandFactory.queryCommands">
+<area shape="rect" id="node2" href="$d5/d9c/classfactories_1_1_command_factory.html#a4c6d0dd68adc65612918d5629f87e046" title="factories.CommandFactory.make\lCommandMap" alt="" coords="285,23,517,65"/>
+<area shape="rect" id="node3" href="$d5/d9c/classfactories_1_1_command_factory.html#aadbfb6cc65ea4fa4257bdae2c6b8e097" title="factories.CommandFactory.create\lCommand" alt="" coords="565,23,803,65"/>
+<area shape="rect" id="node4" href="$d6/d95/classparser_1_1_parser.html#a4ecbffc246c3add017c4720eed4c6da9" title="parser.Parser.parse" alt="" coords="851,31,997,57"/>
+<area shape="rect" id="node5" href="$d6/d95/classparser_1_1_parser.html#a6b2d7b2b182d99537ce332ed0dfd3e03" title="parser.Parser.main" alt="" coords="1045,5,1187,32"/>
+<area shape="rect" id="node6" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="1051,56,1181,83"/>
+<area shape="rect" id="node7" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="1235,56,1499,83"/>
+<area shape="rect" id="node8" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a95e324c85888faea808be269e44ed5b8" title="userInterface.UserInterface.run\lCommand" alt="" coords="1547,49,1768,90"/>
+<area shape="rect" id="node9" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a560c36977fddeee87002333870c54ed6" title="userInterface.UserInterface.set\lUpResponses" alt="" coords="2110,15,2330,57"/>
+<area shape="rect" id="node11" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a4316649a1f81fcc1dcaf93c812bf6f3a" title="userInterface.UserInterface.make\lRunButton" alt="" coords="1817,78,2053,119"/>
+<area shape="rect" id="node10" href="$dd/d8e/classuser_interface_1_1_user_interface.html#af296b064499e62c4fbfbf73da6456532" title="userInterface.UserInterface.\lUserInterface" alt="" coords="2387,49,2587,90"/>
+<area shape="rect" id="node12" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a6d39ee7d7ae35fc0539bb714bce6221a" title="userInterface.UserInterface.make\lFunctionButtons" alt="" coords="2102,81,2338,122"/>
+</map>
