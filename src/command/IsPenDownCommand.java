@@ -2,9 +2,9 @@ package command;
 
 import turtle.Turtle;
 
-public class PenQueryCommand extends Command{
+public class IsPenDownCommand extends Command{
 	
-	public PenQueryCommand(){
+	public IsPenDownCommand(){
 		super();
 	}
 
