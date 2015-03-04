@@ -3,9 +3,9 @@ package command;
 import java.util.List;
 import turtle.Turtle;
 
-public class LogCommand extends Command{
+public class NaturalLogCommand extends Command{
 
-	public LogCommand(List<Double> params){
+	public NaturalLogCommand(List<Double> params){
 		super(params);
 	}
 
