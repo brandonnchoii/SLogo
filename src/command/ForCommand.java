@@ -6,30 +6,27 @@ import turtle.Turtle;
 
 public class ForCommand extends LoopCommand {
 
-	public ForCommand(List<String> params) {
-		super(params);
-	}
+    public ForCommand(List<String> params) {
+        super(params);
+        updateMap();
+    }
 
-	public ForCommand(){
-		super();
-	}
-	
-	public void readValues(){
-		try{
-			String[] loopInfo = strParameters.get(1).split(" ");
-			variable = loopInfo[0];
-			start = Double.parseDouble(loopInfo[1]);
-			end = Double.parseDouble(loopInfo[2]);
-			incr = Double.parseDouble(loopInfo[3]);
-		}
-		catch(NumberFormatException e){
-			throw new IllegalArgumentException("Invalid Parameters");
-		}
-	}
-	@Override
-	public double run(Turtle t) {
-		
-		return 0;
-	}
+    public ForCommand(){
+        super();
+    }
+
+    protected void updateMap(){
+        String[] loopInfo = strParameters.get(1).split(" ");
+        commandValues.put("loopVariable", loopInfo[0]);
+        commandValues.put("loopStart", loopInfo[1]);
+        commandValues.put("loopEnd",loopInfo[2]);
+        commandValues.put("loopIncrement",loopInfo[3]);
+    }
+    
+    @Override
+    public double run(Turtle t) {
+
+        return 0;
+    }
 
 }

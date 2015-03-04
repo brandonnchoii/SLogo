@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Map;
 import turtle.Turtle;
 
-public class TellCommand extends LoopCommand{
+public class AskCommand extends LoopCommand{
 
-    public TellCommand(){
+    public AskCommand(){
 
     }
 
-    public TellCommand(List<String> params){
+    public AskCommand(List<String> params){
         super(params);
     }
+
     @Override
     public double run(Turtle t) {
         if(parameters.contains(t.getID()))
@@ -31,14 +32,9 @@ public class TellCommand extends LoopCommand{
     protected String makeString(Map<Integer, Turtle> turtles){
         String s = "";
         List<Integer> activeIDs = makeIDs();
-        for (Turtle t: turtles.values()){
-            if(activeIDs.contains(t.getID())){
-                t.setActive(true);
+        for (Turtle t: turtles.values())
+            if(activeIDs.contains(t.getID()))
                 s += t.getID() + " ";
-            }
-            else
-                t.setActive(false);
-        }
 
         return s.trim();
     }
@@ -52,4 +48,3 @@ public class TellCommand extends LoopCommand{
 
     }
 }
-
