@@ -1,6 +1,0 @@
-<map id="worldController.WorldController.drawTurtle" name="worldController.WorldController.drawTurtle">
-<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#ac5df386a63f84a7108ee50e2d663a23c" title="turtle.Turtle.drawLine" alt="" coords="304,56,459,83"/>
-<area shape="rect" id="node3" href="$de/d57/classturtle_1_1_pen.html#ac9a08745a9f3615b9e47c1c8e5af8f1b" title="turtle.Pen.getColor" alt="" coords="511,5,654,32"/>
-<area shape="rect" id="node4" href="$de/d57/classturtle_1_1_pen.html#a76c8dc4e66927e7d3774ea00b2266640" title="turtle.Pen.getSize" alt="" coords="515,56,651,83"/>
-<area shape="rect" id="node5" href="$de/d57/classturtle_1_1_pen.html#a361f4e030646d953185a8afe94427ce2" title="turtle.Pen.penReady" alt="" coords="507,107,658,133"/>
-</map>
