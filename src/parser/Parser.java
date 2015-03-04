@@ -8,14 +8,13 @@ package parser;
  *
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import command.Command;
-import factories.CommandFactory;
+import command.CommandFactory;
 
 public class Parser {
 	private CommandFactory myCommandFactory;
@@ -148,7 +147,7 @@ public class Parser {
 			Scanner loopScanner = new Scanner(loopString);
 			if (loopScanner.next().matches(myResources.getString("Command"))) {
 				myListTree = makeTree(new Scanner(loopString));
-				return makeTree(new Scanner(loopString));
+				return null;
 			} else {
 				myCommandFactory.initializeLoopVariables(loopString);
 				return new Node(loopString, null, null);
