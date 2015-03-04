@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class RepeatCommand extends LoopCommand {
 
-    public RepeatCommand(List<String> params) {
-        super(params);
+    public RepeatCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
         updateMap();
 
     }

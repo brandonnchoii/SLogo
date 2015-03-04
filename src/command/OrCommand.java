@@ -2,14 +2,14 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class OrCommand extends Command{
 
 
-    public OrCommand(List<Double> params){
-        super(params);
+    public OrCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

@@ -6,7 +6,7 @@ public class MakeVariableCommand extends Command {
     private double expr;
 
     public MakeVariableCommand(double d){
-        super(null);
+        super();
         expr = d;
     }
 

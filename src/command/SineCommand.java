@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class SineCommand extends Command{
 
-    public SineCommand(List<Double> params){
-        super(params);
+    public SineCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

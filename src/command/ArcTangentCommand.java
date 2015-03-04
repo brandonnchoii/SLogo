@@ -2,13 +2,13 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class ArcTangentCommand extends Command{
 
-    public ArcTangentCommand(List<Double> params){
-        super(params);
+    public ArcTangentCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

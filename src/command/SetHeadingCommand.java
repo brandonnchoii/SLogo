@@ -1,13 +1,14 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class SetHeadingCommand extends Command {
 
-    public SetHeadingCommand(List<Double> params){
-        super(params);
+    public SetHeadingCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
+
     }
     @Override
     public double run(Turtle t) {

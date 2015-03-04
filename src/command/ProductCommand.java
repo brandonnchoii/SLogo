@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class ProductCommand extends Command{
 
-    public ProductCommand(List<Double> params){
-        super(params);
+    public ProductCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

@@ -1,14 +1,14 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class DoTimesCommand extends LoopCommand {
 
-    public DoTimesCommand(List<String> params) {
-        super(params);
-        updateMap();
+    public DoTimesCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
+      
 
     }
 
@@ -22,6 +22,8 @@ public class DoTimesCommand extends LoopCommand {
         commandValues.put("loopVariable", loopInfo[0]);
         commandValues.put("loopEnd",loopInfo[1]);
     }
+
+
 
     @Override
     public double run(Turtle t) {	

@@ -1,14 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class ForCommand extends LoopCommand {
 
-    public ForCommand(List<String> params) {
-        super(params);
-        updateMap();
+    public ForCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     public ForCommand(){

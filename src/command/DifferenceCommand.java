@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class DifferenceCommand extends Command{
 
-    public DifferenceCommand(List<Double> params){
-        super(params);
+    public DifferenceCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

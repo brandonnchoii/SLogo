@@ -2,13 +2,13 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class NotEqualCommand extends Command{
 
-    public NotEqualCommand(List<Double> params){
-        super(params);
+    public NotEqualCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

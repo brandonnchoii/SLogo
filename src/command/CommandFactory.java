@@ -2,7 +2,6 @@ package command;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,15 +51,8 @@ public class CommandFactory {
     private Command reflectCMD(String cmd, List<String> parts){
         try {
             Class<?> commandClass = Class.forName("command." + cmd + "Command");
-            Constructor<?> commandConstructor = commandClass.getConstructor(List.class);
-            Command ret;
-            if(commandClass.getSuperclass().equals(new ForCommand().getClass().getSuperclass())){
-                ret = (Command) commandConstructor.newInstance(parts);
-            }
-            else {
-                ret = (Command) commandConstructor.newInstance(makeParams(parts));
-            }
-
+            Constructor<?> commandConstructor = commandClass.getConstructor(List.class, Map.class);
+            Command ret = (Command) commandConstructor.newInstance(parts, variables);
             return ret;
 
         } 
@@ -104,43 +96,6 @@ public class CommandFactory {
         catch(NumberFormatException e){
             throw e;
         }
-    }
-
-    private List<Double> makeParams(List<String> parts){
-        List<Double> params = new ArrayList<Double>();
-        for (int i = 1; i < parts.size(); i ++){
-            params.add(addParam(parts.get(i)));
-        }
-
-        return params;
-    }
-
-    private Double addParam(String s){
-        if(isVariable(s))
-            return readVariable(s);
-        else
-            try{
-                return Double.parseDouble(s);
-            }
-        catch(NumberFormatException e){
-            return null;
-        }
-    }
-
-    private boolean isVariable(String s){ 
-        return s.matches(syntax.getString("Variable"));
-    }
-
-    private double readVariable(String s){
-        Double d = variables.get(s);
-        if(d != null)
-            return variables.get(s);
-        else
-            throw new IllegalArgumentException("Illegal variable name");
-    }
-
-    public void updateVariable(String varName, double val){
-        variables.put(varName,val);
     }
 
     public void initializeLoopVariables(String info){
@@ -187,4 +142,5 @@ public class CommandFactory {
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
     }
+
 }

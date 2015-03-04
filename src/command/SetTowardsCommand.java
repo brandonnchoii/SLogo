@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class SetTowardsCommand extends Command {
 
-    public SetTowardsCommand(List<Double> params){
-        super(params);
+    public SetTowardsCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
     @Override
     public double run(Turtle t) {

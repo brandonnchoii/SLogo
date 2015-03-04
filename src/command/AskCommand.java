@@ -11,8 +11,8 @@ public class AskCommand extends LoopCommand{
 
     }
 
-    public AskCommand(List<String> params){
-        super(params);
+    public AskCommand(List<String> params, Map<String, Double> variables){
+        super(params, variables);
     }
 
     @Override
@@ -27,7 +27,10 @@ public class AskCommand extends LoopCommand{
     @Override
     protected void updateMap () {
     }
-
+    
+    protected ArrayList<Double> createParameters(){
+        return new ArrayList<Double>();
+    }
     @Override
     protected String makeString(Map<Integer, Turtle> turtles){
         String s = "";

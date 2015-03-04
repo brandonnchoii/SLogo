@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class QuotientCommand extends Command{
 
-    public QuotientCommand(List<Double> params){
-        super(params);
+    public QuotientCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

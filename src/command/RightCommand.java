@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class RightCommand extends Command {
 
-    public RightCommand(List<Double> params){
-        super(params);
+    public RightCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
     @Override
     public double run(Turtle t) {

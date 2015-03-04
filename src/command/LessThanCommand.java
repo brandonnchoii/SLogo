@@ -2,13 +2,13 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class LessThanCommand extends Command{
 
-    public LessThanCommand(List<Double> params){
-        super(params);
+    public LessThanCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

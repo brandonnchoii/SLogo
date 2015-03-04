@@ -1,12 +1,13 @@
 package command;
 
 import java.util.List;
+import java.util.Map;
 import turtle.Turtle;
 
 public class NaturalLogCommand extends Command{
 
-    public NaturalLogCommand(List<Double> params){
-        super(params);
+    public NaturalLogCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

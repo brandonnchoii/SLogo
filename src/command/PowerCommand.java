@@ -1,12 +1,13 @@
 package command;
 
 import java.util.List;
+import java.util.Map;
 import turtle.Turtle;
 
 public class PowerCommand extends Command{
 
-    public PowerCommand(List<Double> params){
-        super(params);
+    public PowerCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class PenDownCommand extends Command {
 
-    public PenDownCommand(List<Double> params){
-        super(params);
+    public PenDownCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
     @Override
     public double run(Turtle t) {

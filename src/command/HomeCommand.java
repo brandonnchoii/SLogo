@@ -1,13 +1,13 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class HomeCommand extends Command {
 
-    public HomeCommand(List<Double> params){
-        super(params);
+    public HomeCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
     @Override
     public double run(Turtle t) {

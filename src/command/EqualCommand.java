@@ -2,13 +2,13 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
 import turtle.Turtle;
 
 public class EqualCommand extends Command{
 
-    public EqualCommand(List<Double> params){
-        super(params);
+    public EqualCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
 
     @Override

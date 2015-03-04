@@ -1,18 +1,14 @@
 package command;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 import turtle.Turtle;
 
-public class TellCommand extends LoopCommand{
+public class TellCommand extends MultiTurtleCommand{
 
-    public TellCommand(){
-
-    }
-
-    public TellCommand(List<String> params){
-        super(params);
+    public TellCommand(List<String> params, Map<String, Double> variableMap){
+        super(params, variableMap);
     }
     @Override
     public double run(Turtle t) {
@@ -24,32 +20,21 @@ public class TellCommand extends LoopCommand{
     }
 
     @Override
-    protected void updateMap () {
-    }
-
-    @Override
     protected String makeString(Map<Integer, Turtle> turtles){
-        String s = "";
-        List<Integer> activeIDs = makeIDs();
+        updateActive(makeIDs(), turtles);
+        return super.makeString(turtles);
+
+    }
+    private void updateActive (List<Integer> makeIDs, Map<Integer, Turtle> turtles) {
         for (Turtle t: turtles.values()){
-            if(activeIDs.contains(t.getID())){
+            if(makeIDs.contains(t.getID()))
                 t.setActive(true);
-                s += t.getID() + " ";
-            }
             else
                 t.setActive(false);
         }
 
-        return s.trim();
     }
 
-    private List<Integer> makeIDs(){
-        List<Integer> ret = new ArrayList<>();
-        String[] s = strParameters.get(1).split("\\p{Space}");
-        for(String id: s)
-            ret.add(Integer.parseInt(id));
-        return ret;
 
-    }
 }
 
