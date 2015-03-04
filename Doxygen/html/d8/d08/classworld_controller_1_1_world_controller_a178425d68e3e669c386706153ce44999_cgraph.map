@@ -1,0 +1,34 @@
+<map id="worldController.WorldController.update" name="worldController.WorldController.update">
+<area shape="rect" id="node2" href="$d1/d68/classuser_interface_1_1_sidebar.html#a7a3c7a302a3b54e74a26d97c4749444d" title="userInterface.Sidebar.add\lResult" alt="" coords="349,57,536,98"/>
+<area shape="rect" id="node3" href="$d8/d08/classworld_controller_1_1_world_controller.html#a9380abb3ed5334498510f1d6a88a826d" title="worldController.WorldController.draw\lTurtle" alt="" coords="318,122,567,163"/>
+<area shape="rect" id="node8" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a06489ec50d4d8ff415e0b1ec2b02d39a" title="userInterface.UserInterface.get\lSidebar" alt="" coords="332,187,553,229"/>
+<area shape="rect" id="node9" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="377,351,508,377"/>
+<area shape="rect" id="node4" href="$df/dcb/classturtle_1_1_turtle.html#ac5df386a63f84a7108ee50e2d663a23c" title="turtle.Turtle.drawLine" alt="" coords="672,56,827,83"/>
+<area shape="rect" id="node5" href="$de/d57/classturtle_1_1_pen.html#ac9a08745a9f3615b9e47c1c8e5af8f1b" title="turtle.Pen.getColor" alt="" coords="977,5,1119,32"/>
+<area shape="rect" id="node6" href="$de/d57/classturtle_1_1_pen.html#a76c8dc4e66927e7d3774ea00b2266640" title="turtle.Pen.getSize" alt="" coords="980,56,1116,83"/>
+<area shape="rect" id="node7" href="$de/d57/classturtle_1_1_pen.html#a361f4e030646d953185a8afe94427ce2" title="turtle.Pen.penReady" alt="" coords="973,107,1123,133"/>
+<area shape="rect" id="node10" href="$df/dcb/classturtle_1_1_turtle.html#aa53d992fb81cd039a22a301af9b32aba" title="turtle.Turtle.act" alt="" coords="690,275,809,301"/>
+<area shape="rect" id="node13" href="$d3/d0c/classcommand_1_1_loop_command.html#a00fbe9457b4fbcf10374d777d567e50b" title="command.LoopCommand.getEnd" alt="" coords="630,325,869,352"/>
+<area shape="rect" id="node14" href="$d3/d0c/classcommand_1_1_loop_command.html#a38d345572574f40b34185027fed74590" title="command.LoopCommand.getIncr" alt="" coords="631,376,868,403"/>
+<area shape="rect" id="node15" href="$d3/d0c/classcommand_1_1_loop_command.html#acafb991a0b502838282d37c6d34d93ea" title="command.LoopCommand.getStart" alt="" coords="626,427,873,453"/>
+<area shape="rect" id="node16" href="$d3/d0c/classcommand_1_1_loop_command.html#a5b6c248f45758e6515fcc46e2eae4562" title="command.LoopCommand.getVariable" alt="" coords="617,477,882,504"/>
+<area shape="rect" id="node17" href="$d6/d95/classparser_1_1_parser.html#a240c75608624a9c67402a296855c4d1d" title="parser.Parser.initialize\lCommands" alt="" coords="669,529,829,570"/>
+<area shape="rect" id="node20" href="$d7/d35/classcommand_1_1_command.html#abab1a56440721aacda6f82ca3e3f761d" title="command.Command.isLoop" alt="" coords="648,645,851,672"/>
+<area shape="rect" id="node21" href="$d6/d95/classparser_1_1_parser.html#a4ecbffc246c3add017c4720eed4c6da9" title="parser.Parser.parse" alt="" coords="677,595,822,621"/>
+<area shape="rect" id="node31" href="$d3/d0c/classcommand_1_1_loop_command.html#ada1d22f47d490bc6dab4de647cc1f48c" title="command.LoopCommand.read\lValues" alt="" coords="638,107,861,149"/>
+<area shape="rect" id="node32" href="$d6/d95/classparser_1_1_parser.html#acebafe1593fc1f09ac31c7104438e4b1" title="parser.Parser.resetRepcount" alt="" coords="649,173,850,200"/>
+<area shape="rect" id="node33" href="$d6/d95/classparser_1_1_parser.html#a8679d61f4ae6c55910ef113bcdda2c75" title="parser.Parser.updateVariable" alt="" coords="647,224,852,251"/>
+<area shape="rect" id="node11" href="$d7/d35/classcommand_1_1_command.html#a1de2ff02a0e6aa6553a129f9b14e6bb3" title="command.Command.run" alt="" coords="957,300,1139,327"/>
+<area shape="rect" id="node12" href="$df/dcb/classturtle_1_1_turtle.html#ae954e0c7f03c3bb4558761d04c34c1d3" title="turtle.Turtle.truncate" alt="" coords="972,249,1124,276"/>
+<area shape="rect" id="node18" href="$d3/dcc/classparser_1_1_node.html#a9c12e8d4375a7517eae0a35724b253c4" title="parser.Node.getValue" alt="" coords="1227,565,1387,592"/>
+<area shape="rect" id="node19" href="$d6/d95/classparser_1_1_parser.html#a4f582c65390bddc57219c0b5c31ef5e7" title="parser.Parser.makeTree" alt="" coords="963,536,1133,563"/>
+<area shape="rect" id="node22" href="$d6/d95/classparser_1_1_parser.html#aac1cff62f68138c7e977a67d39671701" title="parser.Parser.generateCommand\lInput" alt="" coords="931,638,1165,679"/>
+<area shape="rect" id="node26" href="$d6/d95/classparser_1_1_parser.html#a3efcd1192e76101919526b4a5e0046f4" title="parser.Parser.getNodeBefore\lToReplace" alt="" coords="945,769,1151,810"/>
+<area shape="rect" id="node29" href="$d6/d95/classparser_1_1_parser.html#a447c473b62ba23b7c144df9bb38a9a41" title="parser.Parser.getNodeFor\lCommand" alt="" coords="956,703,1140,745"/>
+<area shape="rect" id="node30" href="$d3/dcc/classparser_1_1_node.html#a066da2b478008f39a02440d7afceb9ee" title="parser.Node.insertChild" alt="" coords="963,587,1133,613"/>
+<area shape="rect" id="node23" href="$d3/dcc/classparser_1_1_node.html#aa67bc0d39227232943abec9b95b23235" title="parser.Node.getChild1" alt="" coords="1225,667,1389,693"/>
+<area shape="rect" id="node24" href="$d3/dcc/classparser_1_1_node.html#a0f13775acc62af77cdde90dbeaf26bbc" title="parser.Node.getChild2" alt="" coords="1225,717,1389,744"/>
+<area shape="rect" id="node25" href="$d3/dcc/classparser_1_1_node.html#a6bbc0c61aaa261077eb87cfc4e2b45dc" title="parser.Node.numChildren" alt="" coords="1214,616,1399,643"/>
+<area shape="rect" id="node27" href="$d3/dcc/classparser_1_1_node.html#ab14db24c0724dec4387e29d513008e2e" title="parser.Node.hasChildren" alt="" coords="1217,768,1396,795"/>
+<area shape="rect" id="node28" href="$d3/dcc/classparser_1_1_node.html#aa92667a825777b3d757bc3b1a247ac20" title="parser.Node.isLeaf" alt="" coords="1236,819,1377,845"/>
+</map>
