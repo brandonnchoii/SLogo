@@ -1,7 +1,0 @@
-<map id="worldController.WorldController.WorldController" name="worldController.WorldController.WorldController">
-<area shape="rect" id="node2" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a0b26b9f8f16bc8b9c947d67a27c47d2a" title="userInterface.UserInterface.get\lCanvas" alt="" coords="288,5,509,46"/>
-<area shape="rect" id="node3" href="$dd/d8e/classuser_interface_1_1_user_interface.html#aed8e34a6b3b2149844157c9274af3d1b" title="userInterface.UserInterface.get\lGraphics" alt="" coords="288,70,509,111"/>
-<area shape="rect" id="node4" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a9fbeedabe8a36a24d9e4f67c5ae1bc7c" title="userInterface.UserInterface.getPane" alt="" coords="273,136,525,163"/>
-<area shape="rect" id="node5" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a3feaf153f47ec086b29e6a4f20229ee2" title="userInterface.UserInterface.get\lTimeline" alt="" coords="288,187,509,229"/>
-<area shape="rect" id="node6" href="$d9/dd0/classworld_1_1_world.html#a62bc519b46f0fd04af93a8a12d38f2f9" title="world.World.getTurtle" alt="" coords="323,253,475,280"/>
-</map>

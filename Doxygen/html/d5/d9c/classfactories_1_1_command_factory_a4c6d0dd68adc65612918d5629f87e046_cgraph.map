@@ -1,8 +1,0 @@
-<map id="factories.CommandFactory.makeCommandMap" name="factories.CommandFactory.makeCommandMap">
-<area shape="rect" id="node2" href="$d5/d9c/classfactories_1_1_command_factory.html#a5292b29f4ad537c83565665f3d0d925e" title="factories.CommandFactory.boolean\lCommands" alt="" coords="286,5,533,46"/>
-<area shape="rect" id="node3" href="$d5/d9c/classfactories_1_1_command_factory.html#a46dbbfd0b30737af25939e97752d5136" title="factories.CommandFactory.if\lCommands" alt="" coords="308,70,511,111"/>
-<area shape="rect" id="node4" href="$d5/d9c/classfactories_1_1_command_factory.html#ac1cc33f40758c92aff1b989f99454795" title="factories.CommandFactory.loop\lCommands" alt="" coords="298,135,521,177"/>
-<area shape="rect" id="node5" href="$d5/d9c/classfactories_1_1_command_factory.html#a883fd5deb5ebfdbc8ac9d4e920bbfb10" title="factories.CommandFactory.math\lCommands" alt="" coords="294,201,525,242"/>
-<area shape="rect" id="node6" href="$d5/d9c/classfactories_1_1_command_factory.html#a1c1a978ea4c51cbfadb12ca3140b6b3a" title="factories.CommandFactory.query\lCommands" alt="" coords="293,266,525,307"/>
-<area shape="rect" id="node7" href="$d5/d9c/classfactories_1_1_command_factory.html#aa6426cc26d8396d9f75538d61f189e84" title="factories.CommandFactory.turtle\lCommands" alt="" coords="294,331,525,373"/>
-</map>
