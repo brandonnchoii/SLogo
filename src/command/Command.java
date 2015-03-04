@@ -9,8 +9,8 @@ import turtle.Turtle;
 
 public abstract class Command {
 
-    private static final String DEFAULT_START = "0";
-    private static final String DEFAULT_END = "1";
+    private static final String DEFAULT_START = "1";
+    private static final String DEFAULT_END = "2";
     private static final String DEFAULT_INCR = "1";
     private static final String DEFAULT_VAR = ":repcount";
     protected List<Double> parameters;
@@ -55,15 +55,16 @@ public abstract class Command {
         }
     }
 
-    public Map<String, String> getCommandValues(List<Turtle> turtles){
+    public Map<String, String> getCommandValues(Map<Integer,Turtle> turtles){
         commandValues.put("turtlesToAct", makeString(turtles));
         return commandValues;
     }
 
-    protected String makeString(List<Turtle> turtles){
+    protected String makeString(Map<Integer, Turtle> turtles){
         String s = "";
-        for (Turtle t: turtles)
-            s += t.getID() + " ";
+        for (Turtle t: turtles.values())
+            if(t.isActive())
+                s += t.getID() + " ";
         return s.trim();
     }
 
