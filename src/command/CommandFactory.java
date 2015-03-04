@@ -11,180 +11,180 @@ import java.util.ResourceBundle;
 
 public class CommandFactory {
 
-	private Map<String, Double> variables;
-	private String language;
+    private Map<String, Double> variables;
+    private String language;
 
-	private ResourceBundle translationMap;
-	private ResourceBundle paramMap;
-	private ResourceBundle syntax;
+    private ResourceBundle translationMap;
+    private ResourceBundle paramMap;
+    private ResourceBundle syntax;
 
-	private static final int REPEAT = 1;
-	private static final int DOTIMES = 2;
-	private static final int FOR = 4; //I promise this isn't a typo
-	private static final double DEFAULT_START = 1;
+    private static final int REPEAT = 1;
+    private static final int DOTIMES = 2;
+    private static final int FOR = 4; //I promise this isn't a typo
+    private static final double DEFAULT_START = 1;
 
-	public CommandFactory(String l)  {
-		variables = new HashMap<>();
-		language = l;
-		setTranslationMap();
-		paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
-		syntax = ResourceBundle.getBundle("resources.languages/Syntax");
-	}
+    public CommandFactory(String l)  {
+        variables = new HashMap<>();
+        language = l;
+        setTranslationMap();
+        paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
+        syntax = ResourceBundle.getBundle("resources.languages/Syntax");
+    }
 
-	private void setTranslationMap(){
-		translationMap = ResourceBundle.getBundle("resources.languages/" + language);
-	}
+    private void setTranslationMap(){
+        translationMap = ResourceBundle.getBundle("resources.languages/" + language);
+    }
 
-	public Command createCommand(List<String> parts){
-		String command = parts.get(0);
-		String cmd = translateCommand(command.toLowerCase());
-		checkMake(cmd, parts);
-		Command ret = reflectCMD(cmd, parts);
-		return ret;
-	}
+    public Command createCommand(List<String> parts){
+        String command = parts.get(0);
+        String cmd = translateCommand(command.toLowerCase());
+        checkMake(cmd, parts);
+        Command ret = reflectCMD(cmd, parts);
+        return ret;
+    }
 
-	private void checkMake(String cmd, List<String> parts){
-		if(cmd.equals("MakeVariable")){
-			addVariable(parts.get(1),parts.get(2));
-		}
-	}
-	
-	private Command reflectCMD(String cmd, List<String> parts){
-		try {
-			Class<?> commandClass = Class.forName("command." + cmd + "Command");
-			Constructor<?> commandConstructor = commandClass.getConstructor(List.class);
-			Command ret;
-			if(commandClass.getSuperclass().equals(new ForCommand().getClass().getSuperclass())){
-				ret = (Command) commandConstructor.newInstance(parts);
-			}
-			else {
-				ret = (Command) commandConstructor.newInstance(makeParams(parts));
-			}
-			
-			return ret;
+    private void checkMake(String cmd, List<String> parts){
+        if(cmd.equals("MakeVariable")){
+            addVariable(parts.get(1),parts.get(2));
+        }
+    }
 
-		} 
-		catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-			return new ForCommand();
-			//throw new IllegalArgumentException("The command is invalid");
-		}
-		
+    private Command reflectCMD(String cmd, List<String> parts){
+        try {
+            Class<?> commandClass = Class.forName("command." + cmd + "Command");
+            Constructor<?> commandConstructor = commandClass.getConstructor(List.class);
+            Command ret;
+            if(commandClass.getSuperclass().equals(new ForCommand().getClass().getSuperclass())){
+                ret = (Command) commandConstructor.newInstance(parts);
+            }
+            else {
+                ret = (Command) commandConstructor.newInstance(makeParams(parts));
+            }
 
-	}
-	
-	private String translateCommand(String s){
-		for(String key: translationMap.keySet()){
-			String val = translationMap.getString(key);
-			for (String sub: val.split(","))
-				if(sub.equals(s))
-					return key;
-			for(String sub: val.split("\\|"))
-				if(sub.equals(s))
-					return key;
-		}
+            return ret;
 
-		throw new IllegalArgumentException("Illegal Command");
-	}
+        } 
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+            return new ForCommand();
+            //throw new IllegalArgumentException("The command is invalid");
+        }
 
-	public int getNumParameters(String s){
-		return Integer.parseInt(paramMap.getString(translateCommand(s)));
-	}
 
-	public void setLanguage(String l) {
-		language = l;
-		setTranslationMap();
-	}
+    }
 
-	private Command addVariable(String s, String d){
-		try{
-			variables.put(s,Double.parseDouble(d));
-			return new MakeVariableCommand(Double.parseDouble(d));
-		}
-		catch(NumberFormatException e){
-			throw e;
-		}
-	}
+    private String translateCommand(String s){
+        for(String key: translationMap.keySet()){
+            String val = translationMap.getString(key);
+            for (String sub: val.split(","))
+                if(sub.equals(s))
+                    return key;
+            for(String sub: val.split("\\|"))
+                if(sub.equals(s))
+                    return key;
+        }
 
-	private List<Double> makeParams(List<String> parts){
-		List<Double> params = new ArrayList<Double>();
-		for (int i = 1; i < parts.size(); i ++){
-			params.add(addParam(parts.get(i)));
-		}
+        throw new IllegalArgumentException("Illegal Command");
+    }
 
-		return params;
-	}
+    public int getNumParameters(String s){
+        return Integer.parseInt(paramMap.getString(translateCommand(s)));
+    }
 
-	private Double addParam(String s){
-		if(isVariable(s))
-			return readVariable(s);
-		else
-			try{
-				return Double.parseDouble(s);
-			}
-		catch(NumberFormatException e){
-			return null;
-		}
-	}
+    public void setLanguage(String l) {
+        language = l;
+        setTranslationMap();
+    }
 
-	private boolean isVariable(String s){ 
-		return s.matches(syntax.getString("Variable"));
-	}
+    private Command addVariable(String s, String d){
+        try{
+            variables.put(s,Double.parseDouble(d));
+            return new MakeVariableCommand(Double.parseDouble(d));
+        }
+        catch(NumberFormatException e){
+            throw e;
+        }
+    }
 
-	private double readVariable(String s){
-		Double d = variables.get(s);
-		if(d != null)
-			return variables.get(s);
-		else
-			throw new IllegalArgumentException("Illegal variable name");
-	}
+    private List<Double> makeParams(List<String> parts){
+        List<Double> params = new ArrayList<Double>();
+        for (int i = 1; i < parts.size(); i ++){
+            params.add(addParam(parts.get(i)));
+        }
 
-	public void updateVariable(String varName, double val){
-		variables.put(varName,val);
-	}
+        return params;
+    }
 
-	public void initializeLoopVariables(String info){
-		String[] parts = info.split(" ");
-		System.out.print(parts.length);
-		
-		checkRepeat(parts);
-		checkDotimes(parts);
-		checkFor(parts);
-	}
-	
-	private void checkRepeat(String[] parts){
-		if(parts.length == REPEAT){
-			System.out.println("INITIALIZE");
-			variables.put(":repcount", DEFAULT_START);
-		}
-	}
-	
-	private void checkDotimes(String[] parts){
-		if(parts.length == DOTIMES){
-			if(parts[0].matches(syntax.getString("Variable")))
-				variables.put(parts[0], DEFAULT_START);
-			else
-				throw new IllegalArgumentException("Illegal Variable Name");
-		}
-	}
-	
-	private void checkFor(String[] parts){
-		if(parts.length == FOR){
-			try{
-				variables.put(parts[0], Double.parseDouble(parts[1]));
-			}
-			catch(NumberFormatException e){
-				throw new IllegalArgumentException("Invalid start value");
-			}
-		}
+    private Double addParam(String s){
+        if(isVariable(s))
+            return readVariable(s);
+        else
+            try{
+                return Double.parseDouble(s);
+            }
+        catch(NumberFormatException e){
+            return null;
+        }
+    }
 
-	}
+    private boolean isVariable(String s){ 
+        return s.matches(syntax.getString("Variable"));
+    }
 
-	public void clearRepCount(){
-		variables.remove(":repCount");
-	}
+    private double readVariable(String s){
+        Double d = variables.get(s);
+        if(d != null)
+            return variables.get(s);
+        else
+            throw new IllegalArgumentException("Illegal variable name");
+    }
 
-	public void resetRepcount(){
-		variables.put(":repcount", DEFAULT_START);
-	}
+    public void updateVariable(String varName, double val){
+        variables.put(varName,val);
+    }
+
+    public void initializeLoopVariables(String info){
+        String[] parts = info.split(" ");
+        System.out.print(parts.length);
+
+        checkRepeat(parts);
+        checkDotimes(parts);
+        checkFor(parts);
+    }
+
+    private void checkRepeat(String[] parts){
+        if(parts.length == REPEAT){
+            System.out.println("INITIALIZE");
+            variables.put(":repcount", DEFAULT_START);
+        }
+    }
+
+    private void checkDotimes(String[] parts){
+        if(parts.length == DOTIMES){
+            if(parts[0].matches(syntax.getString("Variable")))
+                variables.put(parts[0], DEFAULT_START);
+            else
+                throw new IllegalArgumentException("Illegal Variable Name");
+        }
+    }
+
+    private void checkFor(String[] parts){
+        if(parts.length == FOR){
+            try{
+                variables.put(parts[0], Double.parseDouble(parts[1]));
+            }
+            catch(NumberFormatException e){
+                throw new IllegalArgumentException("Invalid start value");
+            }
+        }
+
+    }
+
+    public void clearRepCount(){
+        variables.remove(":repCount");
+    }
+
+    public void resetRepcount(){
+        variables.put(":repcount", DEFAULT_START);
+    }
 }
