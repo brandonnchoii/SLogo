@@ -1,5 +1,8 @@
 package turtle;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import worldController.WorldController;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -85,7 +88,12 @@ public class Turtle extends ImageView {
 	}
 
 	public String act(Command c) {
-		return c.run(this) + "";
+		return truncate(c.run(this));
+	}
+	
+	public String truncate (double d){
+		NumberFormat nf = new DecimalFormat("#.##");
+		return nf.format(d);
 	}
 
 	public void move (double pixels) {
