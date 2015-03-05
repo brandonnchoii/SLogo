@@ -9,7 +9,6 @@ package worldController;
 import java.io.IOException;
 
 import javafx.animation.Animation;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -18,25 +17,21 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import turtle.Pen;
 import turtle.Turtle;
-import userInterface.UserInterface;
+import userInterface.UI;
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
 
 public class WorldController {
 
-	private static final int PAUSE = 10;
-	
-	World myWorld;
-    private UserInterface UI;
+    private static final int PAUSE = 10;
+    
+    World myWorld;
+    private UI UI;
     private GraphicsContext myGC;
     private Timeline myAnimation;
     private Turtle myTurtle;
@@ -46,7 +41,7 @@ public class WorldController {
     private double shiftY;
 
     
-    public WorldController (UserInterface ui) throws IOException {
+    public WorldController (UI ui) throws IOException {
         myWorld = new BoundedWorld();
         UI = ui;
         myCanvas = UI.getCanvas();
@@ -61,7 +56,7 @@ public class WorldController {
         makeTimeline(PAUSE);
     }
 
-    public WorldController (UserInterface ui, World w) {
+    public WorldController (UI ui, World w) {
         myWorld = w;
         UI = ui;
         myGC = UI.getGraphics();
@@ -69,7 +64,7 @@ public class WorldController {
 
     }
 
-    public WorldController (UserInterface ui, boolean bounded) throws IOException  {
+    public WorldController (UI ui, boolean bounded) throws IOException  {
         if (bounded)
             myWorld = new BoundedWorld();
         else 
@@ -88,19 +83,19 @@ public class WorldController {
 
      
      private KeyFrame makeKeyFrame(int framerate, double xTarget, double yTarget) {
-    	 Point2D current = myTurtle.getCurrent();
-    	 Point2D goal = myTurtle.getGoal();
-    	 Duration t1 = new Duration(framerate);
-    	 DoubleProperty xProp = new SimpleDoubleProperty(xTarget);
-    	 DoubleProperty yProp = new SimpleDoubleProperty(yTarget);
-    	 KeyValue kv0 = new KeyValue(xProp, xTarget);
+         Point2D current = myTurtle.getCurrent();
+         Point2D goal = myTurtle.getGoal();
+         Duration t1 = new Duration(framerate);
+         DoubleProperty xProp = new SimpleDoubleProperty(xTarget);
+         DoubleProperty yProp = new SimpleDoubleProperty(yTarget);
+         KeyValue kv0 = new KeyValue(xProp, xTarget);
          KeyValue kv1 = new KeyValue(yProp, yTarget);
          KeyFrame kf = new KeyFrame(t1,
           a -> {                          
-        	  myTurtle.animatedMove(myGC, shiftX, shiftY);
+              myTurtle.animatedMove(myGC, shiftX, shiftY);
               Point2D next = myTurtle.findNextPoint(current.getX(), current.getY()
                    , goal.getX(), goal.getY());  
-        	  double nextXGoal = next.getX();
+              double nextXGoal = next.getX();
               double nextYGoal = next.getY();
               myAnimation.stop();
               myAnimation.getKeyFrames().remove(0);
@@ -109,29 +104,28 @@ public class WorldController {
               myAnimation.play();
           }, 
           kv0, kv1);
-	return kf;
+    return kf;
   }
      
     public void update(String command) {
-    	myTurtle.updatePenAttributes(myGC);
-    	myAnimation.play();
+        myTurtle.updatePenAttributes(myGC);
+        myAnimation.play();
         String s = myWorld.listen(command);
-    	UI.getSidebar().addResult(s);
-    	//drawTurtle();
+        //UI.getSidebar().addResult(s);
+        //drawTurtle();
     }
+    
     //resort to this method if the animator isn't working well
     //just uncomment drawTurtle() in the update method
     private void drawTurtle() {
         myTurtle.previousDrawLine(myGC, shiftX, shiftY);
     }    
     
-	public void clear () {
+    public void clear () {
 
     }
 
     public World getWorld () {
         return myWorld;
     }
-
-
 }
