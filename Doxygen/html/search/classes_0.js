@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['andcommand',['AndCommand',['../d9/dd9/classcommand_1_1_and_command.html',1,'command']]],
-  ['arctangentcommand',['ArcTangentCommand',['../d7/d31/classcommand_1_1_arc_tangent_command.html',1,'command']]]
-];

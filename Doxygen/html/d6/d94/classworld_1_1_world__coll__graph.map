@@ -1,6 +1,0 @@
-<map id="world.World" name="world.World">
-<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html" title="turtle.Turtle" alt="" coords="218,203,312,229"/>
-<area shape="rect" id="node4" href="$de/d57/classturtle_1_1_pen.html" title="turtle.Pen" alt="" coords="121,97,204,124"/>
-<area shape="rect" id="node8" href="$d6/d95/classparser_1_1_parser.html" title="parser.Parser" alt="" coords="499,203,605,229"/>
-<area shape="rect" id="node11" href="$d3/dcc/classparser_1_1_node.html" title="parser.Node" alt="" coords="730,97,829,124"/>
-</map>
