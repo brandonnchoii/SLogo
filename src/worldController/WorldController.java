@@ -8,14 +8,21 @@ package worldController;
 
 import java.io.IOException;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import turtle.Pen;
 import turtle.Turtle;
@@ -26,6 +33,8 @@ import world.World;
 
 public class WorldController {
 
+	private static final int PAUSE = 10;
+	
 	World myWorld;
     private UserInterface UI;
     private GraphicsContext myGC;
@@ -35,6 +44,7 @@ public class WorldController {
     private StackPane myPane;
     private double shiftX;
     private double shiftY;
+
     
     public WorldController (UserInterface ui) throws IOException {
         myWorld = new BoundedWorld();
@@ -42,13 +52,13 @@ public class WorldController {
         myCanvas = UI.getCanvas();
         myPane = UI.getPane();
         myGC = UI.getGraphics();
-        myAnimation = UI.getTimeline();
         myTurtle = myWorld.getTurtle();
         myCanvas.setWidth(myPane.getWidth());
         myCanvas.setHeight(myPane.getHeight());
         shiftX = myPane.getWidth() / 2.0;
         shiftY = myPane.getHeight() /2.0;
         myPane.getChildren().add(myTurtle);
+        makeTimeline(PAUSE);
     }
 
     public WorldController (UserInterface ui, World w) {
@@ -69,17 +79,52 @@ public class WorldController {
         myTurtle = myWorld.getTurtle();
     }
     
+    private void makeTimeline (int framerate) {
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Animation.INDEFINITE);
+        KeyFrame frame = makeKeyFrame(framerate, 0, 0);
+        myAnimation.getKeyFrames().add(frame);
+    }
+
+     
+     private KeyFrame makeKeyFrame(int framerate, double xTarget, double yTarget) {
+    	 Point2D current = myTurtle.getCurrent();
+    	 Point2D goal = myTurtle.getGoal();
+    	 Duration t1 = new Duration(framerate);
+    	 DoubleProperty xProp = new SimpleDoubleProperty(xTarget);
+    	 DoubleProperty yProp = new SimpleDoubleProperty(yTarget);
+    	 KeyValue kv0 = new KeyValue(xProp, xTarget);
+         KeyValue kv1 = new KeyValue(yProp, yTarget);
+         KeyFrame kf = new KeyFrame(t1,
+          a -> {                          
+        	  myTurtle.animatedMove(myGC, shiftX, shiftY);
+              Point2D next = myTurtle.findNextPoint(current.getX(), current.getY()
+                   , goal.getX(), goal.getY());  
+        	  double nextXGoal = next.getX();
+              double nextYGoal = next.getY();
+              myAnimation.stop();
+              myAnimation.getKeyFrames().remove(0);
+              myAnimation.getKeyFrames().add(makeKeyFrame(
+                   framerate, nextXGoal, nextYGoal));
+              myAnimation.play();
+          }, 
+          kv0, kv1);
+	return kf;
+  }
+     
     public void update(String command) {
-        System.out.println(command + "wc");
-    	String s = myWorld.listen(command);
+    	myTurtle.updatePenAttributes(myGC);
+    	myAnimation.play();
+        String s = myWorld.listen(command);
     	UI.getSidebar().addResult(s);
-    	drawTurtle();
+    	//drawTurtle();
     }
-
+    //resort to this method if the animator isn't working well
+    //just uncomment drawTurtle() in the update method
     private void drawTurtle() {
-        myTurtle.drawLine(myGC, shiftX, shiftY);
-    }
-
+        myTurtle.previousDrawLine(myGC, shiftX, shiftY);
+    }    
+    
 	public void clear () {
 
     }
