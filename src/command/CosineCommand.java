@@ -4,9 +4,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class CosCommand extends Command{
+public class CosineCommand extends Command{
 	
-	public CosCommand(List<Double> params){
+	public CosineCommand(List<Double> params){
 		super(params);
 	}
 

@@ -12,6 +12,13 @@ public class ProductCommand extends Command{
 
 	@Override
 	public double run(Turtle t) {
-		return parameters.get(0) * parameters.get(1);
+		
+		if(parameters.size() < 2)
+			throw new IllegalArgumentException("Not enough parameters");
+		
+		double ret = 1;
+		for(int i = 0; i < parameters.size(); i ++)
+			ret *= parameters.get(i);
+		return ret;
 	}
 }

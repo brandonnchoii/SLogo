@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import command.Command;
-import factories.CommandFactory;
+import command.CommandFactory;
 
 public class Parser {
 	private CommandFactory myCommandFactory;
@@ -25,7 +25,6 @@ public class Parser {
 	private String myInput;
 	private int numCommands;
 	private static final String LOOP = "loop";
-	private static final String LOOP_DONE = "loopDone";
 
 	public Parser(String language) {
 		myCommandFactory = new CommandFactory(language);
@@ -35,6 +34,7 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
+		System.out.println(myTree.getValue());
 		myInput = input;
 		return numCommands;
 	}
@@ -43,7 +43,6 @@ public class Parser {
 		//System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
-			System.out.println("HI");
 			current = getNodeForCommand();
 		} else if (valueFromPrevCommand.equals(LOOP)) {
 			//System.out.println("REGISTER LOOP");
@@ -99,6 +98,8 @@ public class Parser {
 				} else {
 					return current;
 				}
+			} else if (!current.hasChildren()) {
+				return current;
 			} else {
 				current = current.getChild1();
 			}
@@ -137,7 +138,6 @@ public class Parser {
 
 	private Node makeTree(Scanner input) {
 		String current = input.next();
-
 		if (current.matches(myResources.getString("ListStart"))) {
 			current = input.next();
 			String loopString = "";
@@ -166,6 +166,8 @@ public class Parser {
 				Node newChild1 = makeTree(input);
 				Node newChild2 = makeTree(input);
 				return new Node(current, newChild1, newChild2);
+			} else {
+				return new Node(current, null, null);
 			}
 		}
 		return null;
@@ -175,7 +177,7 @@ public class Parser {
 		myCommandFactory.setLanguage(language);
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Parser test = new Parser("English");
 		test.initializeCommands("repeat 2 [ sum 1 2 ]");
 		test.parse("");
@@ -191,5 +193,9 @@ public class Parser {
 
 	public void updateVariable(String variable, double variableValue) {
 		myCommandFactory.updateVariable(variable, variableValue);
+	}
+	
+	public void resetRepcount() {
+		myCommandFactory.resetRepcount();
 	}
 }

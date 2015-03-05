@@ -5,9 +5,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class AtanCommand extends Command{
+public class ArcTangentCommand extends Command{
 	
-	public AtanCommand(List<Double> params){
+	public ArcTangentCommand(List<Double> params){
 		super(params);
 	}
 

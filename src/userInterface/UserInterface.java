@@ -33,9 +33,9 @@ public class UserInterface {
     public static final int BOX_WIDTH = 180;
     private static final int myWidth = 900;
     private static final int myHeight = 750;
+	private static final int FRAME_RATE = 2000;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
-    private static final String[] buttons = { "ChangeTurtleCommand", "RunCommand", "SaveCommand" };
 
     private WorldController myController;
     private Scene myScene;
@@ -57,16 +57,11 @@ public class UserInterface {
         makeCreateTurtle();
         makeSaveCommand();
         myTopbar = new Topbar();
-        //myController = new WorldController(this);
         // addTurtle();
         setupPane();
-        makeTimeline();
-        //myController = new WorldController(this);
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
         myCommandWindow = makeCommandWindow();
-
-        //setupPane();
         myScene = new Scene(myRoot, myWidth, myHeight);
         makeFunctionButtons();
         setUpResponses();
@@ -178,11 +173,6 @@ public class UserInterface {
         mySidebar.add(commandSaverButton);
     }
 
-    private void makeTimeline () {
-        myAnimation = new Timeline();
-        myAnimation.setCycleCount(Animation.INDEFINITE);
-        myAnimation.play();
-    }
 
     private Button makeUIButton (String s, EventHandler<MouseEvent> e) {
         Button test = new Button(myMenuNames.getString(s));
@@ -208,10 +198,6 @@ public class UserInterface {
     public GraphicsContext getGraphics() {
     	return myGC;
     }
-
-    public Timeline getTimeline() {
-    	return myAnimation;
-    }
     
     public Canvas getCanvas() {
     	return myCanvas;
@@ -219,6 +205,10 @@ public class UserInterface {
     
     public StackPane getPane() {
     	return canvasPane;
+    }
+    
+    public Sidebar getSidebar() {
+        return mySidebar;
     }
     
 }
