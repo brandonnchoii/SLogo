@@ -25,6 +25,12 @@ public abstract class World {
 	private static final int DEFAULT_WIDTH = 100;
 	private static final Color TURTLE_DEFAULT = Color.BLACK;
 	private static final String TRUE = "1";
+	private static final String TURTLES_TO_ACT = "turtlesToAct";
+	private static final String LOOP_VARIABLE = "loopVariable";
+	private static final String LOOP_INCREMENT = "loopIncrement";
+	private static final String LOOP_END = "loopEnd";
+	private static final String LOOP_START = "loopStart";
+	private static final String IF_STATEMENT = "ifStatement";
 
 	public World() throws IOException {
 		height = DEFAULT_HEIGHT;
@@ -88,33 +94,45 @@ public abstract class World {
 			Command c = myParser.parse(param);
 			Map<String, String> commandValues = c.getCommandValues(myTurtles);
 			for (int i = 0; i < numCommands; i++) {
-				for (String id : commandValues.get("turtlesToAct").split("/n")) {
-					if (commandValues.get("ifStatement").equals(TRUE)) {
-						for (double j = Double.parseDouble(commandValues
-								.get("loopStart")); j < Double
-								.parseDouble(commandValues.get("loopEnd")); j += Double
-								.parseDouble(commandValues.get("loopIncrement"))) {
+				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
+					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
+						double loopStart = Double.parseDouble(commandValues
+								.get(LOOP_START));
+						double loopEnd = Double.parseDouble(commandValues
+								.get(LOOP_END));
+						double loopIncrement = Double.parseDouble(commandValues
+								.get(LOOP_INCREMENT));
+						for (double j = loopStart; j < loopEnd; j += loopIncrement) {
 							myParser.updateVariable(
-									commandValues.get("loopVariable"), j);
+									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
-							try {
-								param = myTurtles.get(turtleID).act(c);
-							} catch (Exception e) {
-								myTurtles.put(turtleID, new Turtle(
-										TURTLE_DEFAULT, turtleID));
-								param = myTurtles.get(turtleID).act(c);
+							if (loopStart + loopIncrement == loopEnd) {
+								param = runCommand(c, turtleID);
+							} else {
+								param = runCommand(myParser.parse(param),
+										turtleID);
 							}
-							myParser.resetRepcount();
-							c = myParser.parse(param);
 						}
+						myParser.resetRepcount();
 					} else {
-						return commandValues.get("0");
+						// return commandValues.get("0");
 					}
 				}
 			}
 		}
 		return param;
 
+	}
+
+	private String runCommand(Command command, int turtleID) {
+		String param;
+		try {
+			param = myTurtles.get(turtleID).act(command);
+		} catch (Exception e) {
+			myTurtles.put(turtleID, new Turtle(TURTLE_DEFAULT, turtleID));
+			param = myTurtles.get(turtleID).act(command);
+		}
+		return param;
 	}
 
 	public void setLanguage(String language) {

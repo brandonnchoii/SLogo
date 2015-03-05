@@ -33,8 +33,10 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
-		System.out.println(myTree.getValue());
 		myInput = input;
+		if (myListTree.getValue() == null) {
+			myListTree = makeTree(new Scanner(input));
+		}
 		return numCommands;
 	}
 
@@ -43,11 +45,13 @@ public class Parser {
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
-		} else if (valueFromPrevCommand.equals(LOOP)) {
-			//System.out.println("REGISTER LOOP");
-			myTree = makeTree(new Scanner(myInput));
+		} else if (myTree.isLeaf()) {
 			myTree = myListTree;
-			return parse("");
+//		} else if (valueFromPrevCommand.equals(LOOP)) {
+//			//System.out.println("REGISTER LOOP");
+//			myTree = makeTree(new Scanner(myInput));
+//			myTree = myListTree;
+//			return parse("");
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
