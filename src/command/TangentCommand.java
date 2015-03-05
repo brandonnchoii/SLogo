@@ -5,9 +5,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class TanCommand extends Command{
+public class TangentCommand extends Command{
 	
-	public TanCommand(List<Double> params){
+	public TangentCommand(List<Double> params){
 		super(params);
 	}
 

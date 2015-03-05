@@ -4,13 +4,15 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import worldController.WorldController;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Path;
 import command.Command;
 //Turtle extends IV but eventually, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
@@ -39,30 +41,7 @@ public class Turtle extends ImageView {
 //		xProp = new SimpleDoubleProperty(0);
 //		yProp = new SimpleDoubleProperty(0);
 	}
-	
-	public Turtle(Image i, Paint color, int ID){
-		myPen = new Pen(color);
-		setTranslateX(DEFAULT_POS);
-		setTranslateY(DEFAULT_POS);
-		direction = DEFAULT_POS;
-		myPen.changePenState(DEFAULT_DRAW);
-		setVisible(DEFAULT_VISIBLE);
-		setImage(i);
-		active = true;
-		id = ID;
-	}
 
-	public Turtle(int x, int y, Image i, Paint color, int ID){
-		myPen = new Pen(color);
-		setTranslateX(x);
-		setTranslateY(x);
-		direction = DEFAULT_POS;
-		myPen.changePenState(DEFAULT_DRAW);
-		setVisible(DEFAULT_VISIBLE);
-		setImage(i);
-		active = true;
-		id = ID;
-	}
 
 	public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
 		myPen = new Pen(color);
@@ -228,5 +207,59 @@ public class Turtle extends ImageView {
 		return goal;
 	}
 	
+
+
+    public Turtle(Image i, Paint color, int ID){
+        myPen = new Pen(color);
+        setTranslateX(DEFAULT_POS);
+        setTranslateY(DEFAULT_POS);
+        direction = DEFAULT_POS;
+        myPen.changePenState(DEFAULT_DRAW);
+        setVisible(DEFAULT_VISIBLE);
+        setImage(i);
+        active = true;
+        id = ID;
+    }
+
+    public Turtle(int x, int y, Image i, Paint color, int ID){
+        myPen = new Pen(color);
+        setTranslateX(x);
+        setTranslateY(x);
+        direction = DEFAULT_POS;
+        myPen.changePenState(DEFAULT_DRAW);
+        setVisible(DEFAULT_VISIBLE);
+        setImage(i);
+        active = true;
+        id = ID;
+    }
+
+
+    public String truncate (double d){
+        NumberFormat nf = new DecimalFormat("#.##");
+        return nf.format(d);
+    }
+
+
+    public void drawLine(GraphicsContext gc, double shiftX, double shiftY) {
+        double currX = current.getX();
+        double currY = current.getY();
+        double nextX = getTranslateX();
+        double nextY = getTranslateY();
+        gc.setStroke(myPen.getColor());
+        gc.setLineWidth(myPen.getSize());
+        setTranslateX(nextX);
+        setTranslateY(nextY);
+        if (myPen.penReady()) {
+            gc.strokeLine(currX + shiftX, currY + shiftY, 
+                          next.getX() + shiftX, next.getY() + shiftY);
+        }
+        current = new Point2D(nextX, nextY);
+    }
+
+    public void setActive(boolean b) {
+        active = b;
+
+    }
+
 }
 
