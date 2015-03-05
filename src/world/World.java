@@ -27,14 +27,14 @@ public abstract class World {
 		height = DEFAULT_HEIGHT;
 		width = DEFAULT_WIDTH;
 
-		myTurtle = new Turtle(TURTLE_DEFAULT);
+		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
 		myParser = new Parser("English");
 	}
 
 	public World(int h, int w) throws IOException {
 		height = h;
 		width = w;
-		myTurtle = new Turtle(TURTLE_DEFAULT);
+		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
 		myParser = new Parser("English");
 	}
 

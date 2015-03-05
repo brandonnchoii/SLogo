@@ -62,6 +62,8 @@ public class UI {
         
         setUpEventHandlers();
         setUpCommandField();
+        setUpPane();
+        setUpController();
         
         myRightPanel = new RightPanel(run);
         myLeftPanel = new LeftPanel(new HashMap<String, String>(), new HashMap<String, Double>());
@@ -69,6 +71,7 @@ public class UI {
         myView.setCenter(myCenterView);
         myView.setRight(myRightPanel.getPanel());
         myView.setLeft(myLeftPanel.getPanel());
+        myCenterView.setCenter(canvasPane);
         myCenterView.setBottom(myInput);
         myCenterView.setAlignment(myInput, Pos.CENTER);
     }
@@ -101,5 +104,26 @@ public class UI {
                 myInput.clear();
                 textClicked = true;
         });
+    }
+    
+    private void setUpPane () {
+        canvasPane = new StackPane();
+        canvasPane.setPadding(new Insets(10, 10, 10, 10));
+        myCanvas = new Canvas();
+        myGC = myCanvas.getGraphicsContext2D();
+        canvasPane.getChildren().add(myCanvas);
+        canvasPane.setStyle("-fx-background-color: white");
+    }
+    
+    public GraphicsContext getGraphics() {
+        return myGC;
+    }
+    
+    public Canvas getCanvas() {
+        return myCanvas;
+    }
+    
+    public StackPane getPane() {
+        return canvasPane;
     }
 }

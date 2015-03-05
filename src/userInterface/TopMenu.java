@@ -84,11 +84,9 @@ public class TopMenu {
 
     private Menu createEditMenu () {
         Edit = new Menu("Edit");
-        MenuItem m1 = new MenuItem("");
-        MenuItem m2 = new MenuItem("");
-        MenuItem m3 = new MenuItem("");
+        MenuItem m1 = new MenuItem("Add Turtle");
 
-        Edit.getItems().addAll(m1, m2, m3);
+        Edit.getItems().addAll(m1);
         return Edit;
     }
 
