@@ -37,8 +37,6 @@ public class Turtle extends ImageView {
 		initializeTurtleDefaults();
 		active = true;
 		id = ID;
-//		xProp = new SimpleDoubleProperty(0);
-//		yProp = new SimpleDoubleProperty(0);
 	}
 
 

@@ -36,7 +36,6 @@ public class WorldController {
 	private static final int PAUSE = 10;
 	
 	World myWorld;
-    private UserInterface UI;
     private GraphicsContext myGC;
     private Timeline myAnimation;
     private Turtle myTurtle;
@@ -44,37 +43,35 @@ public class WorldController {
     private StackPane myPane;
     private Point2D shift;
     
-    public WorldController (UserInterface ui) throws IOException {
+    public WorldController (StackPane pane) throws IOException {
         myWorld = new BoundedWorld();
-        UI = ui;
-        myCanvas = UI.getCanvas();
-        myPane = UI.getPane();
-        myGC = UI.getGraphics();
+        initializeWorld(pane);
+    }
+
+    public WorldController (StackPane pane, World w) {
+        myWorld = w;
+        initializeWorld(pane);
+    }
+
+    public WorldController (StackPane pane, boolean bounded) throws IOException  {
+        if (bounded)
+            myWorld = new BoundedWorld();
+        else 
+            myWorld = new UnboundedWorld();
+        initializeWorld(pane);
+    }
+
+	private void initializeWorld(StackPane pane) {
+		myPane = pane;
+        myCanvas = (Canvas) pane.getChildren().get(0);
+        myGC = myCanvas.getGraphicsContext2D();
         myTurtle = myWorld.getTurtle();
         myCanvas.setWidth(myPane.getWidth());
         myCanvas.setHeight(myPane.getHeight());
         shift = new Point2D(myPane.getWidth() / 2.0, myPane.getHeight() / 2.0);
         myPane.getChildren().add(myTurtle);
         makeTimeline(PAUSE);
-    }
-
-    public WorldController (UserInterface ui, World w) {
-        myWorld = w;
-        UI = ui;
-        myGC = UI.getGraphics();
-        myTurtle = myWorld.getTurtle();
-
-    }
-
-    public WorldController (UserInterface ui, boolean bounded) throws IOException  {
-        if (bounded)
-            myWorld = new BoundedWorld();
-        else 
-            myWorld = new UnboundedWorld();
-        UI = ui;
-        myGC = UI.getGraphics();
-        myTurtle = myWorld.getTurtle();
-    }
+	}
     
     private void makeTimeline (int framerate) {
         myAnimation = new Timeline();
@@ -108,7 +105,7 @@ public class WorldController {
     	myTurtle.updatePenAttributes(myGC);
     	myAnimation.play();
         String s = myWorld.listen(command);
-    	UI.getSidebar().addResult(s);
+    	//UI.getSidebar().addResult(s);
     	//drawTurtle();
     }
     

@@ -33,7 +33,6 @@ public class UserInterface {
     public static final int BOX_WIDTH = 180;
     private static final int myWidth = 900;
     private static final int myHeight = 750;
-	private static final int FRAME_RATE = 2000;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private static final String DEFAULT_IMAGE_PACKAGE = "resources/images/";
 
@@ -44,7 +43,6 @@ public class UserInterface {
     private Topbar myTopbar;
     private ResourceBundle myMenuNames;
     private TextArea myCommandWindow;
-    private Timeline myAnimation;
     private Canvas myCanvas;
     private GraphicsContext myGC;
     private StackPane canvasPane;
@@ -57,7 +55,6 @@ public class UserInterface {
         makeCreateTurtle();
         makeSaveCommand();
         myTopbar = new Topbar();
-        // addTurtle();
         setupPane();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 
@@ -123,7 +120,7 @@ public class UserInterface {
     }
     
     public void setUpController() throws IOException {
-    	myController = new WorldController(this);
+    	myController = new WorldController(canvasPane);
     }
 
     private TextArea makeCommandWindow () {
@@ -193,18 +190,6 @@ public class UserInterface {
 
     public void refresh (String s) {
 
-    }
-
-    public GraphicsContext getGraphics() {
-    	return myGC;
-    }
-    
-    public Canvas getCanvas() {
-    	return myCanvas;
-    }
-    
-    public StackPane getPane() {
-    	return canvasPane;
     }
     
     public Sidebar getSidebar() {
