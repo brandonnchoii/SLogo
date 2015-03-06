@@ -12,9 +12,6 @@ public class RepeatCommand extends LoopCommand {
 
     }
 
-    public RepeatCommand(){
-        super();
-    }
 
     @Override
     public double run(Turtle t) {

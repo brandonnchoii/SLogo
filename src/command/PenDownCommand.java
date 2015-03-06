@@ -11,8 +11,8 @@ public class PenDownCommand extends Command {
     }
     @Override
     public double run(Turtle t) {
-        t.setDrawing(parameters.get(0) != 0);
-        return parameters.get(0);
+        t.setDrawing(true);
+        return 1;
     }
 
 }

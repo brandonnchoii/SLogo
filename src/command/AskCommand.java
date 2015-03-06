@@ -7,10 +7,6 @@ import turtle.Turtle;
 
 public class AskCommand extends LoopCommand{
 
-    public AskCommand(){
-
-    }
-
     public AskCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
         super(params, variableMap, func);
     }
