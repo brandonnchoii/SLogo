@@ -107,16 +107,15 @@ public abstract class World {
 								.get(LOOP_END));
 						double loopIncrement = Double.parseDouble(commandValues
 								.get(LOOP_INCREMENT));
-						for (double j = loopStart; j < loopEnd; j += loopIncrement) {
+						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
 //							myParser.updateVariable(
 //									commandValues.get(LOOP_VARIABLE), j);
+							System.out.println("loop# = " + j);
 							int turtleID = Integer.parseInt(id);
-							System.out.println("loopEnd = " + loopEnd);
 							if (loopStart + loopIncrement == loopEnd) {
-								System.out.println("hi");
 								param = runCommand(c, turtleID);
 							} else {
-								param = runCommand(myParser.parse(param),
+								param = runCommand(myParser.parse("loop"),
 										turtleID);
 							}
 						}
