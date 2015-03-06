@@ -1,21 +1,23 @@
 package world;
 
 import java.io.IOException;
+import java.util.List;
 
+import javafx.beans.property.ObjectProperty;
 import turtle.Turtle;
 
 public class UnboundedWorld extends World{
 
-	public UnboundedWorld() throws IOException{
-		super();
+	public UnboundedWorld(List<ObjectProperty> bindings) throws IOException{
+		super(bindings);
 	}
 	
-	public UnboundedWorld(int h, int w) throws IOException{
-    	super(h,w);
+	public UnboundedWorld(List<ObjectProperty> bindings, int h, int w) throws IOException{
+    	super(bindings, h,w);
     }
     
-    public UnboundedWorld(int h, int w, Turtle t, String l) throws IOException{
-    	super(h,w,t,l);
+    public UnboundedWorld(List<ObjectProperty> bindings, int h, int w, Turtle t, String l) throws IOException{
+    	super(bindings, h,w,t,l);
     }
     
 

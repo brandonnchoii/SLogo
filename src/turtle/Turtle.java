@@ -1,13 +1,11 @@
 package turtle;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 
-import worldController.WorldController;
+import userInterface.UIManager;
+import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -32,11 +30,12 @@ public class Turtle extends ImageView {
     private Point2D current;
     private Point2D next;
     private Point2D goal;
+    private ObjectProperty<Image> myImage;
 
-
-    public Turtle(Paint color, int ID) {
+    public Turtle(List<ObjectProperty> bindings, Paint color, int ID) {
         myPen = new Pen(color);
         initializeTurtleDefaults();
+        setUpBindings(bindings);
         active = true;
         id = ID;
 //      xProp = new SimpleDoubleProperty(0);
@@ -69,6 +68,14 @@ public class Turtle extends ImageView {
         myPen.changePenState(DEFAULT_DRAW);
         setVisible(DEFAULT_VISIBLE);
         setImage(DEFAULT_IMAGE);
+    }
+    
+    private void setUpBindings (List<ObjectProperty> bindings) {
+        myImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
+        this.imageProperty().bind(myImage);
+        
+        //add pen bindings depending on how you want to set up pen
+        
     }
 
     

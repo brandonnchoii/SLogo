@@ -8,12 +8,15 @@ package worldController;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -24,6 +27,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import turtle.Pen;
@@ -31,6 +35,7 @@ import turtle.Turtle;
 import userInterface.LeftPanel;
 import userInterface.RightPanel;
 import userInterface.UI;
+import userInterface.UIManager;
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
@@ -58,23 +63,15 @@ public class WorldController {
     private ObservableMap<String, Double> variableMap;
     private StringProperty inputText;
 
-    public WorldController (UI ui, RightPanel r, LeftPanel l, StringProperty s) throws IOException {
+    public WorldController (UI ui, RightPanel r, LeftPanel l, StringProperty s, List<ObjectProperty> bindings) throws IOException {      
+        myWorld = new BoundedWorld(bindings);
         
-        results = FXCollections.observableArrayList();
-        previousCommands = FXCollections.observableArrayList();
-        savedCommands = FXCollections.observableArrayList();
-        turtleMap = FXCollections.observableMap(new HashMap<String, String>());
-        variableMap = FXCollections.observableMap(new HashMap<String, Double>());
-        inputText = s;
-              
+        setUpBindings(s);
         myRightPanel = r.getInstance();
         myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
-        
         myLeftPanel = l.getInstance();
         myLeftPanel.initialize(turtleMap, variableMap);
         
-         
-        myWorld = new BoundedWorld();
         UI = ui;
         myCanvas = UI.getCanvas();
         myPane = UI.getPane();
@@ -96,14 +93,23 @@ public class WorldController {
 
     }
 
-    public WorldController (UI ui, boolean bounded) throws IOException {
+    public WorldController (UI ui, boolean bounded, List<ObjectProperty> bindings) throws IOException {
         if (bounded)
-            myWorld = new BoundedWorld();
+            myWorld = new BoundedWorld(bindings);
         else
-            myWorld = new UnboundedWorld();
+            myWorld = new UnboundedWorld(bindings);
         UI = ui;
         myGC = UI.getGraphics();
         myTurtle = myWorld.getTurtle();
+    }
+    
+    private void setUpBindings (StringProperty s) {
+        results = FXCollections.observableArrayList();
+        previousCommands = FXCollections.observableArrayList();
+        savedCommands = FXCollections.observableArrayList();
+        turtleMap = FXCollections.observableMap(new HashMap<String, String>());
+        variableMap = FXCollections.observableMap(new HashMap<String, Double>());
+        inputText = s;
     }
 
     private void makeTimeline (int framerate) {

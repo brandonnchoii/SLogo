@@ -2,10 +2,12 @@ package userInterface;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import worldController.WorldController;
 import javafx.beans.binding.StringBinding;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableStringValue;
@@ -28,7 +30,6 @@ public class UI {
 
     public static final int PANEL_WIDTH = 200;
     public static final int PANEL_HEIGHT = 500;
-    private static final String DEFAULT_BACKGROUND_COLOR = "-fx-background-color: white";
     private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
     private static final int INPUT_WIDTH = 450;
     private static final int INPUT_HEIGHT = 300;
@@ -43,19 +44,24 @@ public class UI {
     private Canvas myCanvas;
     private GraphicsContext myGC;
     private StackPane canvasPane;
-    private ResourceBundle myLanguage;
     private StringProperty inputText;
+    private List<ObjectProperty> myBindings;
+    private ObjectProperty<ResourceBundle> myLanguage;
+    private ObjectProperty<String> myCanvasColor;
 
-    public UI (ResourceBundle language) {
-        initialize(language);
+    public UI (List<ObjectProperty> bindings) {
+        initialize(bindings);
     }
 
     public Pane getUI () {
         return myView;
     }
 
-    private void initialize (ResourceBundle language) {
-        myLanguage = language;
+    private void initialize (List<ObjectProperty> bindings) {
+        myBindings = bindings;
+        myLanguage = myBindings.get(UIManager.LANGUAGE_INDEX);
+        myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
+        
         myView = new BorderPane();
         myView = new BorderPane();
         myView.setPadding(new Insets(10, 10, 10, 10));
@@ -76,7 +82,7 @@ public class UI {
 
     private void setUpController () {
         try {
-            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText);
+            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText, myBindings);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +91,7 @@ public class UI {
 
     private void setUpCommandField () {
         myCommandField = new HBox(15);
-        myInput = new TextArea(myLanguage.getString("InputText"));
+        myInput = new TextArea(myLanguage.getValue().getString("InputText"));
         
         inputText = new SimpleStringProperty();
         inputText = myInput.textProperty();
@@ -118,7 +124,7 @@ public class UI {
         myCanvas = new Canvas();
         myGC = myCanvas.getGraphicsContext2D();
         canvasPane.getChildren().add(myCanvas);
-        canvasPane.setStyle(DEFAULT_BACKGROUND_COLOR);
+        canvasPane.styleProperty().bind(myCanvasColor);
     }
 
     private void runCommand () {
