@@ -34,14 +34,15 @@ public class RightPanel {
     private VBox myRightPanel;
     private ScrollPane myResultView;
     private Text myResults;
-    private List<String> results;
-    private List<String> previousCommands;
-    private List<String> savedCommands;
+    private ObservableList<String> results;
+    private ObservableList<String> previousCommands;
+    private ObservableList<String> savedCommands;
     private ListView<String> resultsView;
     private ListView<String> previousCommandView;
     private ListView<String> savedCommandView;
 
-    public RightPanel () {
+    public RightPanel (ObservableList<String> resultsList) {
+        results = resultsList;
         initialize();
     }
 
@@ -49,16 +50,10 @@ public class RightPanel {
         return myRightPanel;
     }
 
-    // pass in a string that is bound to something from UI instead of updating
-    protected void addResult (String s) {
-
-    }
-
     private void initialize () {
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
         myRightPanel.setPrefSize(UI.PANEL_WIDTH, UI.PANEL_HEIGHT);
         
-        results = new ArrayList<>();
         resultsView = new ListView<>();
         
         previousCommandView = new ListView<>();
@@ -66,26 +61,27 @@ public class RightPanel {
             //if (e.getClickCount() == DOUBLE_CLICK)
                 
         });
-        previousCommands = new ArrayList<>();  
+        //previousCommands = new ObservableList<>();  
         
         savedCommandView = new ListView<>();
         savedCommandView.setOnMouseClicked(e -> {
             //if (e.getClickCount() == DOUBLE_CLICK)
                 
         });
-        savedCommands = new ArrayList<>();
+        //savedCommands = new ObservableList<>();
         
-        myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
-                                          makeListView(previousCommandView, previousCommands, PREVIOUS_COMMANDS_LABEL),
-                                          makeListView(savedCommandView, savedCommands, SAVED_COMMANDS_LABEL));
+//        myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
+//                                          makeListView(previousCommandView, previousCommands, PREVIOUS_COMMANDS_LABEL),
+//                                          makeListView(savedCommandView, savedCommands, SAVED_COMMANDS_LABEL));
+        myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL));
+                                          
     }
 
-    private VBox makeListView (ListView view, List list, String name) {
+    private VBox makeListView (ListView view, ObservableList list, String name) {
         VBox listViewBox = new VBox();
         listViewBox.setAlignment(Pos.CENTER);
         Label label = new Label(name);
-        ObservableList<String> observable = FXCollections.observableArrayList(list);
-        view.setItems(observable);
+        view.setItems(list);
         listViewBox.getChildren().addAll(label, view);
         return listViewBox;
     }

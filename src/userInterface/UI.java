@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import worldController.WorldController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -41,6 +41,7 @@ public class UI {
     private GraphicsContext myGC;
     private StackPane canvasPane;
     private ResourceBundle myLanguage;
+    private ObservableList<String> results;
 
     public UI (ResourceBundle language) {
         initialize(language);
@@ -57,12 +58,14 @@ public class UI {
         myView.setPadding(new Insets(10, 10, 10, 10));
         myCenterView = new BorderPane();
         myCenterView.setPadding(new Insets(5, 5, 5, 5));
+        
+        results = FXCollections.observableArrayList();
 
         setUpCommandField();
         setUpPane();
         setUpController();
 
-        myRightPanel = new RightPanel();
+        myRightPanel = new RightPanel(results);
         myLeftPanel = new LeftPanel(new HashMap<String, String>(), new HashMap<String, Double>());
 
         myView.setCenter(myCenterView);
@@ -118,6 +121,7 @@ public class UI {
 
     private void runCommand () {
         myController.update(myInput.getText());
+        results.add(myInput.getText());
         myInput.clear();
     }
 
