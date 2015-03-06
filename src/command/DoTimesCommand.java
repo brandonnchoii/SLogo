@@ -10,10 +10,6 @@ public class DoTimesCommand extends LoopCommand {
         super(params, variableMap, func);
     }
 
-    public DoTimesCommand(){
-        super();
-    }
-
     @Override
     protected void updateMap(){
         super.updateMap();

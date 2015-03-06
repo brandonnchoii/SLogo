@@ -18,12 +18,7 @@ public abstract class LoopCommand extends Command {
         updateMap();
         loop = true;
     }
-
-    public LoopCommand() {
-        super();
-        loop = true;
-    }
-    
+  
     protected List<Double> createParameters(){
         return new ArrayList<Double>();
     }

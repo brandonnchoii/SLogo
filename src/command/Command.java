@@ -21,13 +21,6 @@ public abstract class Command {
     protected Map<String, String> commandValues; 
     protected ResourceBundle syntax;
 
-    public Command(){
-        strParameters = new ArrayList<String>();
-        checkParams();
-        loop = false;
-        createCommandValues();
-    }
-
     public Command(List<String> params, Map<String, Double> variableMap, Map<String, String> func) {
         strParameters = params;
         loop = false;
@@ -35,23 +28,21 @@ public abstract class Command {
         createCommandValues();
         parameters = makeParameters();
         functions = func;
-        
-       
-
     }
-    
+
     protected List<Double> makeParameters(){
         List<Double> params = new ArrayList<Double>();
         for (int i = 1; i < strParameters.size(); i ++){
             params.add(addParam(strParameters.get(i)));
         }
-
+        checkParams(params);
         return params;
     }
-    
+
     protected Double addParam(String s){
-        if(isVariable(s))
+        if(isVariable(s)){
             return readVariable(s);
+        }
         else
             try{
                 return Double.parseDouble(s);
@@ -92,9 +83,10 @@ public abstract class Command {
         return loop;
     }
 
-    private void checkParams(){
-        if (parameters.contains(null)){
-            throw new IllegalArgumentException("The parameters are invalid"); 
+    private void checkParams(List<Double> params){
+     
+        if (params.contains(null)){
+            throw new IllegalArgumentException("Parameters are invalid"); 
         }
     }
 
@@ -110,11 +102,11 @@ public abstract class Command {
                 s += t.getID() + " ";
         return s.trim();
     }
-    
+
     public Map<String, Double> updateVariables(){
         return variables;
     }
-    
+
     public Map<String, String> updateFunctions(){
         return functions;
     }

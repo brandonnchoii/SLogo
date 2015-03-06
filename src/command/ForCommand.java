@@ -10,10 +10,6 @@ public class ForCommand extends LoopCommand {
         super(params, variableMap, func);
     }
 
-    public ForCommand(){
-        super();
-    }
-
     protected void updateMap(){
         super.updateMap();
         commandValues.put("loopVariable", loopInfo[0]);
