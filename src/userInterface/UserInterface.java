@@ -57,7 +57,6 @@ public class UserInterface {
         myTopbar = new Topbar();
         setupPane();
         myMenuNames = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
-
         myCommandWindow = makeCommandWindow();
         myScene = new Scene(myRoot, myWidth, myHeight);
         makeFunctionButtons();
