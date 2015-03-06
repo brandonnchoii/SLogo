@@ -6,13 +6,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 
 
 public class CommandFactory {
 
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
+    private List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
     private String language;
 
     private ResourceBundle translationMap;
@@ -22,10 +27,12 @@ public class CommandFactory {
 
     private static final double DEFAULT_START = 1;
 
-    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> fun)  {
+    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color)  {
         variables = var;
         functions = fun;
+        bindings = bind;
         language = l;
+        colors = color;
         setTranslationMap();
         paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
@@ -45,8 +52,8 @@ public class CommandFactory {
     private Command reflectCMD(String cmd, List<String> parts){
         try {
             Class<?> commandClass = Class.forName("command." + cmd + "Command");
-            Constructor<?> commandConstructor = commandClass.getConstructor(List.class, Map.class, Map.class);
-            Command ret = (Command) commandConstructor.newInstance(parts, variables, functions);
+            Constructor<?> commandConstructor = commandClass.getConstructor(List.class, Map.class, Map.class, List.class, List.class);
+            Command ret = (Command) commandConstructor.newInstance(parts, variables, functions, bindings, colors);
             return ret;
 
         } 

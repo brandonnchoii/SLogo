@@ -1,11 +1,15 @@
+/**
+ * @author Brandon Choi
+ */
+
 package userInterface;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -19,9 +23,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
@@ -30,12 +36,23 @@ import javafx.stage.Stage;
 
 public class TopMenu {
 
+    /**
+     * TopMenu is the menu bar at the top of the UIManager. Holds options to change components of
+     * the view or to even create another tab of SLogo
+     */
+
+    private static final String HEX_PREFIX = "x";
+    private static final int COLOR_SUBSTRING_INDEX = 1;
+    private static final String COLOR_PATH = "-fx-background-color: #";
+    private static final String IMAGE_PATH = "resources/images/";
+    private static final String RESOURCE_PATH = "resources/languages/";
+    private static final String HTML_HELP_PAGE = "/html/helpPage.html";
     private static final int PANE_SPACING = 5;
     private static final int POPUP_WIDTH = 250;
     private static final int POPUP_HEIGHT = 150;
     private static final String[] LANGUAGES = { "Chinese", "English", "French", "German",
-                                                "Italian", "Japanese", "Korean", "Portuguese",
-                                                "Russian", "Spanish" };
+                                               "Italian", "Japanese", "Korean", "Portuguese",
+                                               "Russian", "Spanish" };
 
     private MenuBar myMenu;
     private Menu File, Edit, View, Preferences, Help;
@@ -43,19 +60,39 @@ public class TopMenu {
     private ColorPicker myPenColorChoices;
     private EventHandler<ActionEvent> createNewTab;
     private Stage myStage;
-    private ResourceBundle language;
+    private ObjectProperty<String> canvasColor, penColor;
+    private ObjectProperty<Double> penSize;
+    private ObjectProperty<Image> turtleImage;
+    private ObjectProperty<ResourceBundle> language;
 
-    public TopMenu (EventHandler<ActionEvent> tabHandler, ResourceBundle resource) {
-        language = resource;
-        createNewTab = tabHandler;
-        initialize();
+    public TopMenu (EventHandler<ActionEvent> tabHandler, List<ObjectProperty> bindings) {
+        initialize(tabHandler, bindings);
     }
 
+    /**
+     * used by UIManager to get the MenuBar
+     * 
+     * @return MenuBar myMenu
+     */
     public MenuBar getMenuBar () {
         return myMenu;
     }
 
-    private void initialize () {
+    /**
+     * Initializes the components of the TopMenu. Utilizes binding to ensure dynamic changes to the
+     * view aspects or language choice.
+     * 
+     * @param EventHandler<ActionEvent> tabHandler
+     * @param List<ObjectProperty> bindings
+     */
+    private void initialize (EventHandler<ActionEvent> tabHandler, List<ObjectProperty> bindings) {
+        createNewTab = tabHandler;
+        canvasColor = bindings.get(UIManager.CANVAS_INDEX);
+        penColor = bindings.get(UIManager.PEN_COLOR_INDEX);
+        penSize = bindings.get(UIManager.PEN_SIZE_INDEX);
+        turtleImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
+        language = bindings.get(UIManager.LANGUAGE_INDEX);
+
         myMenu = new MenuBar();
         myBackgroundColorChoices = new ColorPicker();
         myPenColorChoices = new ColorPicker();
@@ -65,33 +102,43 @@ public class TopMenu {
     }
 
     // use reflection to create all of them, save code
-//    private Menu createMenu (String s) {
-//        Menu m = new Menu();
-//        MenuItem m1, m2, m3;
-//        return m;
-//    }
+    // private Menu createMenu (String s) {
+    // Menu m = new Menu();
+    // MenuItem m1, m2, m3;
+    // return m;
+    // }
 
+    /**
+     * creates File part of the MenuBar
+     * @return Menu File
+     */
     private Menu createFileMenu () {
-        File = new Menu(language.getString("File"));
+        File = new Menu(language.getValue().getString("File"));
         MenuItem m1 = new MenuItem("New SLogo Tab");
         m1.setOnAction(createNewTab);
         MenuItem m2 = new MenuItem("Exit");
         m2.setOnAction(e -> System.exit(1));
-
         File.getItems().addAll(m1, m2);
         return File;
     }
 
+    /**
+     * creates Edit part of the MenuBar
+     * @return Menu Edit
+     */
     private Menu createEditMenu () {
         Edit = new Menu("Edit");
         MenuItem m1 = new MenuItem("Add Turtle");
-
         Edit.getItems().addAll(m1);
         return Edit;
     }
 
+    /**
+     * creates View part of the MenuBar
+     * @return Menu View
+     */
     private Menu createViewMenu () {
-        View = new Menu(language.getString("View"));
+        View = new Menu(language.getValue().getString("View"));
         MenuItem m1 = new MenuItem("Set Background Color");
         m1.setOnAction(e -> displayColorPicker());
         MenuItem m2 = new MenuItem("Set Pen Settings");
@@ -103,16 +150,24 @@ public class TopMenu {
         return View;
     }
 
+    /**
+     * creates Help part of the MenuBar
+     * @return Menu Help
+     */
     private Menu createHelpMenu () {
-        Help = new Menu(language.getString("Help"));
+        Help = new Menu(language.getValue().getString("Help"));
         MenuItem m1 = new MenuItem("What is SLogo?");
         m1.setOnAction(e -> displayWebpage());
         Help.getItems().add(m1);
         return Help;
     }
 
+    /**
+     * creates Preferences part of the MenuBar
+     * @return Menu Preferences
+     */
     private Menu createPreferencesMenu () {
-        Preferences = new Menu(language.getString("Preferences"));
+        Preferences = new Menu(language.getValue().getString("Preferences"));
         MenuItem m1 = new MenuItem("Change Language");
         m1.setOnAction(e -> displayLanguageSelector());
         Preferences.getItems().add(m1);
@@ -126,7 +181,7 @@ public class TopMenu {
     private void displayWebpage () {
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        webEngine.load(getClass().getResource("/html/helpPage.html").toExternalForm());
+        webEngine.load(getClass().getResource(HTML_HELP_PAGE).toExternalForm());
         display(browser);
     }
 
@@ -135,10 +190,20 @@ public class TopMenu {
      */
     private void displayColorPicker () {
         myBackgroundColorChoices.setOnAction(e -> {
-            System.out.println(myBackgroundColorChoices.getValue().toString());
+            canvasColor.setValue(COLOR_PATH + extractColor(myBackgroundColorChoices.getValue()));
         });
         display(createDisplayBox(Arrays.asList(new Label("Set Background Color: "),
                                                myBackgroundColorChoices)));
+    }
+
+    /**
+     * extract the hex values of the Color's string by substringing everything after the 0x;
+     * 
+     * @param c
+     * @return
+     */
+    private String extractColor (Color c) {
+        return c.toString().substring(c.toString().indexOf(HEX_PREFIX) + COLOR_SUBSTRING_INDEX);
     }
 
     /**
@@ -152,6 +217,13 @@ public class TopMenu {
         sliderBox.getChildren().addAll(new Label("Set Pen Size: "), sizeSlider);
         HBox colorBox = new HBox(PANE_SPACING);
         colorBox.getChildren().addAll(new Label("Set Pen Color: "), myPenColorChoices);
+        sizeSlider.setOnMouseClicked(e -> {
+            penSize.setValue(sizeSlider.getValue());
+        });
+
+        myPenColorChoices.setOnAction(e -> {
+            penColor.setValue(extractColor(myPenColorChoices.getValue()));
+        });
         display(createDisplayBox(Arrays.asList(sliderBox, colorBox)));
     }
 
@@ -164,17 +236,22 @@ public class TopMenu {
         chooser.getExtensionFilters().addAll(new ExtensionFilter("Images Files", "*.png", "*.jpg",
                                                                  ".gif"));
         File selectedFile = chooser.showOpenDialog(myStage);
-        // System.out.println(selectedFile.toString());
+        turtleImage.setValue(new Image(IMAGE_PATH + selectedFile.getName()));
     }
 
     /**
-     * displays the language selector for the user to pick which language will be read in by the program
+     * displays the language selector for the user to pick which language will be read in by the
+     * program
      */
     private void displayLanguageSelector () {
         ComboBox<String> languageChoices = new ComboBox<>();
         languageChoices.setPromptText("Language:");
         Arrays.stream(LANGUAGES).forEach(e -> languageChoices.getItems().add(e));
-        //languageChoices.getSelectionModel().getSelectedItem();
+        languageChoices.setOnAction(e -> {
+            language.setValue(ResourceBundle.getBundle(RESOURCE_PATH +
+                                                       languageChoices.getSelectionModel()
+                                                               .getSelectedItem()));
+        });
         display(createDisplayBox(Arrays.asList(languageChoices)));
     }
 

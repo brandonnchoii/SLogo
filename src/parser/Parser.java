@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import command.Command;
 import command.CommandFactory;
 
@@ -27,11 +30,15 @@ public class Parser {
     private static final String LOOP = "loop";
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
+    private List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
 
-    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun) {
+    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color) {
         variables = var;
         functions = fun;
-        myCommandFactory = new CommandFactory(language, variables, functions);
+        bindings = bind;
+        colors = color;
+        myCommandFactory = new CommandFactory(language, variables, functions, bindings, colors);
         myResources = ResourceBundle.getBundle("resources.languages/Syntax");
     }
 
@@ -193,7 +200,8 @@ public class Parser {
     public static void main(String[] args) {
         ObservableMap<String, Double> variables = null;
         ObservableMap<String, String> functions = null;
-        Parser test = new Parser("English", variables, functions);
+        List<ObjectProperty> bindings = null;
+        Parser test = new Parser("English", variables, functions, bindings);
         test.initializeCommands("repeat 2 [ sum 1 2 ]");
         test.parse("");
         test.parse("3");
