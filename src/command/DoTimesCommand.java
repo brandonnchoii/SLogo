@@ -6,10 +6,8 @@ import turtle.Turtle;
 
 public class DoTimesCommand extends LoopCommand {
 
-    public DoTimesCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
-      
-
+    public DoTimesCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     public DoTimesCommand(){
@@ -18,9 +16,9 @@ public class DoTimesCommand extends LoopCommand {
 
     @Override
     protected void updateMap(){
-        String[] loopInfo = strParameters.get(1).split(" ");
-        commandValues.put("loopVariable", loopInfo[0]);
-        commandValues.put("loopEnd",loopInfo[1]);
+        super.updateMap();
+        commandValues.put("loopVariable", loopInfo[0]);  
+        addInfo("loopEnd", 1);
     }
 
 

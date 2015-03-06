@@ -11,8 +11,8 @@ public class AskCommand extends LoopCommand{
 
     }
 
-    public AskCommand(List<String> params, Map<String, Double> variables){
-        super(params, variables);
+    public AskCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

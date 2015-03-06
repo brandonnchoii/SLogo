@@ -7,8 +7,8 @@ import turtle.Turtle;
 
 public class ArcTangentCommand extends Command{
 
-    public ArcTangentCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public ArcTangentCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

@@ -8,8 +8,8 @@ import turtle.Turtle;
 public class NotCommand extends Command{
 
 
-    public NotCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public NotCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

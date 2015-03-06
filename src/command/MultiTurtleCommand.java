@@ -6,8 +6,8 @@ import java.util.Map;
 
 public abstract class MultiTurtleCommand extends Command {
 
-    public MultiTurtleCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public MultiTurtleCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
     
     protected List<Integer> makeIDs(){

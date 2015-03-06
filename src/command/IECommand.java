@@ -10,8 +10,8 @@ public abstract class IECommand extends Command {
     private final static String TRUE = "1";
     private final static String FALSE = "0";
     
-    public IECommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public IECommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
         updateMap();
 
     }

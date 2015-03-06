@@ -8,8 +8,8 @@ import turtle.Turtle;
 public class AndCommand extends Command{
 
 
-    public AndCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public AndCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

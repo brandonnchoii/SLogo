@@ -7,8 +7,8 @@ import turtle.Turtle;
 
 public class TangentCommand extends Command{
 
-    public TangentCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public TangentCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

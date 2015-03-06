@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class ForCommand extends LoopCommand {
 
-    public ForCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public ForCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     public ForCommand(){
@@ -15,13 +15,14 @@ public class ForCommand extends LoopCommand {
     }
 
     protected void updateMap(){
-        String[] loopInfo = strParameters.get(1).split(" ");
+        super.updateMap();
         commandValues.put("loopVariable", loopInfo[0]);
-        commandValues.put("loopStart", loopInfo[1]);
-        commandValues.put("loopEnd",loopInfo[2]);
-        commandValues.put("loopIncrement",loopInfo[3]);
+        addInfo("loopStart", 1);
+        addInfo("loopEnd", 2);
+        addInfo("loopIncrement", 3);
+
     }
-    
+
     @Override
     public double run(Turtle t) {
 

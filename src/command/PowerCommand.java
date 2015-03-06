@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class PowerCommand extends Command{
 
-    public PowerCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public PowerCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

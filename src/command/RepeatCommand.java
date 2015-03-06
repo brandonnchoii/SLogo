@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class RepeatCommand extends LoopCommand {
 
-    public RepeatCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public RepeatCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
         updateMap();
 
     }
@@ -23,7 +23,8 @@ public class RepeatCommand extends LoopCommand {
     
     @Override
     protected void updateMap() {
-       commandValues.put("loopEnd", strParameters.get(1));
+       super.updateMap();
+       addInfo("loopEnd", 0);
     }
 
 }

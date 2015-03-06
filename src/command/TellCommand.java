@@ -7,8 +7,8 @@ import turtle.Turtle;
 
 public class TellCommand extends MultiTurtleCommand{
 
-    public TellCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public TellCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
     @Override
     public double run(Turtle t) {

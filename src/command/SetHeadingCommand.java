@@ -6,10 +6,10 @@ import turtle.Turtle;
 
 public class SetHeadingCommand extends Command {
 
-    public SetHeadingCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
-
+    public SetHeadingCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
+    
     @Override
     public double run(Turtle t) {
         double pastDir = t.getDirection();

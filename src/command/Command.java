@@ -16,9 +16,10 @@ public abstract class Command {
     protected List<String> strParameters;
     protected List<Double> parameters;
     protected Map<String, Double> variables;
+    protected Map<String, String> functions;
     protected boolean loop;
     protected Map<String, String> commandValues; 
-    private ResourceBundle syntax;
+    protected ResourceBundle syntax;
 
     public Command(){
         strParameters = new ArrayList<String>();
@@ -27,12 +28,13 @@ public abstract class Command {
         createCommandValues();
     }
 
-    public Command(List<String> params, Map<String, Double> variableMap) {
+    public Command(List<String> params, Map<String, Double> variableMap, Map<String, String> func) {
         strParameters = params;
         loop = false;
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
         createCommandValues();
         parameters = makeParameters();
+        functions = func;
         
        
 
@@ -47,7 +49,7 @@ public abstract class Command {
         return params;
     }
     
-    private Double addParam(String s){
+    protected Double addParam(String s){
         if(isVariable(s))
             return readVariable(s);
         else
@@ -63,7 +65,7 @@ public abstract class Command {
         return s.matches(syntax.getString("Variable"));
     }
 
-    private double readVariable(String s){
+    protected double readVariable(String s){
         Double d = variables.get(s);
         if(d != null)
             return variables.get(s);
@@ -107,6 +109,14 @@ public abstract class Command {
             if(t.isActive())
                 s += t.getID() + " ";
         return s.trim();
+    }
+    
+    public Map<String, Double> updateVariables(){
+        return variables;
+    }
+    
+    public Map<String, String> updateFunctions(){
+        return functions;
     }
 
 }       

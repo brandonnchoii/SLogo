@@ -6,9 +6,8 @@ import turtle.Turtle;
 
 public class DifferenceCommand extends Command{
 
-    public DifferenceCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
-    }
+    public DifferenceCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);    }
 
     @Override
     public double run(Turtle t) {

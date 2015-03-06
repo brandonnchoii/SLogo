@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class ProductCommand extends Command{
 
-    public ProductCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public ProductCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

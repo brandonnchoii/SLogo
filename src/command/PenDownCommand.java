@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class PenDownCommand extends Command {
 
-    public PenDownCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public PenDownCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
     @Override
     public double run(Turtle t) {

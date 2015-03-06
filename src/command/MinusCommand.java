@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class MinusCommand extends Command{
 
-    public MinusCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public MinusCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
 
     @Override

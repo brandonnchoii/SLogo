@@ -11,9 +11,10 @@ public abstract class LoopCommand extends Command {
     protected double incr;
     protected String variable;
     protected List<String> strParameters;
+    protected String[] loopInfo;
 
-    public LoopCommand(List<String> params, Map<String, Double> variables){
-        super(params, variables);
+    public LoopCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
         updateMap();
         loop = true;
     }
@@ -23,9 +24,18 @@ public abstract class LoopCommand extends Command {
         loop = true;
     }
     
-    protected ArrayList<Double> createParameters(){
+    protected List<Double> createParameters(){
         return new ArrayList<Double>();
     }
     
-    protected abstract void updateMap();
+    protected void updateMap(){
+        loopInfo = strParameters.get(1).split(" ");
+    }
+    
+    protected void addInfo(String s, int i){
+        if(loopInfo[i].matches(syntax.getString("Variable")))
+            commandValues.put("loopEnd", readVariable(loopInfo[i]) + "");
+        else
+            commandValues.put("loopEnd", loopInfo[i]);
+    }
 }

@@ -6,8 +6,8 @@ import turtle.Turtle;
 
 public class SetTowardsCommand extends Command {
 
-    public SetTowardsCommand(List<String> params, Map<String, Double> variableMap){
-        super(params, variableMap);
+    public SetTowardsCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
     }
     @Override
     public double run(Turtle t) {
