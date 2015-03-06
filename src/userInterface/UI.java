@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import worldController.WorldController;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -40,6 +44,7 @@ public class UI {
     private GraphicsContext myGC;
     private StackPane canvasPane;
     private ResourceBundle myLanguage;
+    private StringProperty inputText;
 
     public UI (ResourceBundle language) {
         initialize(language);
@@ -71,7 +76,7 @@ public class UI {
 
     private void setUpController () {
         try {
-            myController = new WorldController(this, myRightPanel, myLeftPanel);
+            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -81,6 +86,9 @@ public class UI {
     private void setUpCommandField () {
         myCommandField = new HBox(15);
         myInput = new TextArea(myLanguage.getString("InputText"));
+        
+        inputText = new SimpleStringProperty();
+        inputText = myInput.textProperty();
 
         firstClick = true;
         myInput.setMaxSize(INPUT_WIDTH, INPUT_HEIGHT);
@@ -114,7 +122,7 @@ public class UI {
     }
 
     private void runCommand () {
-        myController.update(myInput.getText());
+        myController.update(inputText.getValue());
         myInput.clear();
     }
 

@@ -15,6 +15,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -55,17 +56,19 @@ public class WorldController {
     private ObservableList<String> savedCommands;
     private ObservableMap<String, String> turtleMap;
     private ObservableMap<String, Double> variableMap;
+    private StringProperty inputText;
 
-    public WorldController (UI ui, RightPanel r, LeftPanel l) throws IOException {
+    public WorldController (UI ui, RightPanel r, LeftPanel l, StringProperty s) throws IOException {
         
         results = FXCollections.observableArrayList();
         previousCommands = FXCollections.observableArrayList();
         savedCommands = FXCollections.observableArrayList();
         turtleMap = FXCollections.observableMap(new HashMap<String, String>());
         variableMap = FXCollections.observableMap(new HashMap<String, Double>());
+        inputText = s;
               
         myRightPanel = r.getInstance();
-        myRightPanel.initialize(results, previousCommands, savedCommands);
+        myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
         
         myLeftPanel = l.getInstance();
         myLeftPanel.initialize(turtleMap, variableMap);
