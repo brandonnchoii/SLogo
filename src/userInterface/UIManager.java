@@ -59,7 +59,7 @@ public class UIManager {
      * method called when user creates new tab on the GUI
      */
     private void addTab() {
-        UI ui = new UI();
+        UI ui = new UI(language);
         Tab tab = new Tab(TAB_NAME + (myTabs.getTabs().size() + 1));
         tab.setContent(ui.getUI());
         myTabs.getTabs().add(tab);
