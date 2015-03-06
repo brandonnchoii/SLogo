@@ -1,7 +1,0 @@
-<map id="turtle.Turtle.atGoal" name="turtle.Turtle.atGoal">
-<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#a49bc6263dff19b97b012d9c2052e701d" title="turtle.Turtle.findNextPoint" alt="" coords="195,31,378,57"/>
-<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#a7c0f37993844a70cdd57951ae4a916dd" title="turtle.Turtle.animatedMove" alt="" coords="427,5,621,32"/>
-<area shape="rect" id="node4" href="$d8/d08/classworld_controller_1_1_world_controller.html#a6158b4b98f36224f3e871c8a164a0137" title="worldController.WorldController.make\lKeyFrame" alt="" coords="670,23,925,65"/>
-<area shape="rect" id="node5" href="$d8/d08/classworld_controller_1_1_world_controller.html#a338b2d907598a400b7cbcfbb86550a71" title="worldController.WorldController.make\lTimeline" alt="" coords="974,23,1229,65"/>
-<area shape="rect" id="node6" href="$d8/d08/classworld_controller_1_1_world_controller.html#a222090289a76ebd152bc9fe1b5db20ac" title="worldController.WorldController.\lWorldController" alt="" coords="1277,23,1496,65"/>
-</map>
