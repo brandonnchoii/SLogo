@@ -8,7 +8,6 @@ package parser;
  *
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,27 +33,33 @@ public class Parser {
 	public int initializeCommands(String input) {
 		numCommands = 0;
 		myTree = makeTree(new Scanner(input));
-		System.out.println(myTree.getValue());
 		myInput = input;
+		// if (myListTree == null) {
+		// myListTree = makeTree(new Scanner(input));
+		// numCommands = numCommands / 2;
+		// }
 		return numCommands;
 	}
 
 	public Command parse(String valueFromPrevCommand) {
-		//System.out.println("prevValue = " + valueFromPrevCommand);
+		System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
-		} else if (valueFromPrevCommand.equals(LOOP)) {
-			//System.out.println("REGISTER LOOP");
-			myTree = makeTree(new Scanner(myInput));
+		} else if (myTree.isLeaf()) {
 			myTree = myListTree;
-			return parse("");
+			// } else if (valueFromPrevCommand.equals(LOOP)) {
+			// //System.out.println("REGISTER LOOP");
+			// myTree = makeTree(new Scanner(myInput));
+			// myTree = myListTree;
+			// return parse("");
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
 					myResources.getString("Command"));
 			current = getNodeForCommand();
 		}
+		System.out.println("current value: " + current.getValue());
 		List<String> commandInput = generateCommandInput(valueFromPrevCommand,
 				current);
 		return myCommandFactory.createCommand(commandInput);
@@ -110,26 +115,32 @@ public class Parser {
 	private Node getNodeBeforeToReplace() {
 		Node current = myTree;
 		while (current != null) {
-			while (current != null) {
-				if (current.getChild1().hasChildren()
-						&& current.getChild1().getChild1().isLeaf()) {
-					if (current.getChild1().getChild2() != null
-							&& !current.getChild1().getChild2().isLeaf()) {
-						current = current.getChild1();
-					} else {
-						return current;
-					}
-				} else if (current.getChild2() != null
-						&& current.getChild2().hasChildren()
-						&& current.getChild2().getChild1().isLeaf()) {
-					if (current.getChild2().getChild2() != null
-							&& !current.getChild2().getChild2().isLeaf()) {
-						current = current.getChild2();
-					} else {
-						return current;
-					}
-				} else {
+			if (current.getChild1().hasChildren()
+					&& current.getChild1().getChild1().isLeaf()) {
+				if (current.getChild1().getChild2() != null
+						&& !current.getChild1().getChild2().isLeaf()) {
 					current = current.getChild1();
+				} else {
+					return current;
+				}
+			} else if (current.getChild2() != null
+					&& current.getChild2().hasChildren()
+					&& current.getChild2().getChild1().isLeaf()) {
+				if (current.getChild2().getChild2() != null
+						&& !current.getChild2().getChild2().isLeaf()) {
+					current = current.getChild2();
+				} else {
+					return current;
+				}
+			} else {
+				if (current.getChild1().getValue()
+						.matches(myResources.getString("Command"))
+						|| (current.getChild2() != null && !current.getChild2()
+								.getValue()
+								.matches(myResources.getString("Command")))) {
+					current = current.getChild1();
+				} else {
+					current = current.getChild2();
 				}
 			}
 		}
@@ -148,9 +159,8 @@ public class Parser {
 			Scanner loopScanner = new Scanner(loopString);
 			if (loopScanner.next().matches(myResources.getString("Command"))) {
 				myListTree = makeTree(new Scanner(loopString));
-				return makeTree(new Scanner(loopString));
+				return null;
 			} else {
-				myCommandFactory.initializeLoopVariables(loopString);
 				return new Node(loopString, null, null);
 			}
 		} else if (current.matches(myResources.getString("Constant"))
@@ -172,29 +182,29 @@ public class Parser {
 		}
 		return null;
 	}
-	
+
 	public void setLanguage(String language) {
 		myCommandFactory.setLanguage(language);
 	}
-	
+
 	public static void main(String[] args) {
 		Parser test = new Parser("English");
 		test.initializeCommands("repeat 2 [ sum 1 2 ]");
 		test.parse("");
 		test.parse("3");
-//		test.parse("21");
+		// test.parse("21");
 		test.parse("loop");
-//		test.parse("11");
-//		test.parse("21");
-//		test.parse("loop");
-//		test.parse("11");
-//		test.parse("21");
+		// test.parse("11");
+		// test.parse("21");
+		// test.parse("loop");
+		// test.parse("11");
+		// test.parse("21");
 	}
 
-	public void updateVariable(String variable, double variableValue) {
-		myCommandFactory.updateVariable(variable, variableValue);
-	}
-	
+//	public void updateVariable(String variable, double variableValue) {
+//		myCommandFactory.updateVariable(variable, variableValue);
+//	}
+
 	public void resetRepcount() {
 		myCommandFactory.resetRepcount();
 	}
