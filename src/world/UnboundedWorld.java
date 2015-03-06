@@ -21,7 +21,7 @@ public class UnboundedWorld extends World{
 
     @Override
     public void fixPosition () {
-        for(Turtle t: myTurtles)
+        for(Turtle t: myTurtles.values())
             t.fixPos(height, width);
     }
 
