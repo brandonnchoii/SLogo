@@ -1,25 +1,40 @@
 package command;
 
-import java.util.List;
 
+import java.util.List;
+import java.util.Map;
 import turtle.Turtle;
 
-public class TellCommand extends Command{
-	
-	public TellCommand(){
-		
-	}
-	
-	public TellCommand(List<Double> params){
-		super(params);
-	}
-	@Override
-	public double run(Turtle t) {
-		if(parameters.contains(t.getID()))
-			t.setActive(true);
-		else
-			t.setActive(false);
-		return parameters.get(parameters.size()-1);
-	}
+public class TellCommand extends MultiTurtleCommand{
+
+    public TellCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
+        super(params, variableMap, func);
+    }
+    @Override
+    public double run(Turtle t) {
+        if(parameters.contains(t.getID()))
+            t.setActive(true);
+        else
+            t.setActive(false);
+        return parameters.get(parameters.size()-1);
+    }
+
+    @Override
+    protected String makeString(Map<Integer, Turtle> turtles){
+        updateActive(makeIDs(), turtles);
+        return super.makeString(turtles);
+
+    }
+    private void updateActive (List<Integer> makeIDs, Map<Integer, Turtle> turtles) {
+        for (Turtle t: turtles.values()){
+            if(makeIDs.contains(t.getID()))
+                t.setActive(true);
+            else
+                t.setActive(false);
+        }
+
+    }
+
 
 }
+

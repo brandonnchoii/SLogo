@@ -161,7 +161,6 @@ public class Parser {
 				myListTree = makeTree(new Scanner(loopString));
 				return null;
 			} else {
-				myCommandFactory.initializeLoopVariables(loopString);
 				return new Node(loopString, null, null);
 			}
 		} else if (current.matches(myResources.getString("Constant"))
@@ -202,9 +201,9 @@ public class Parser {
 		// test.parse("21");
 	}
 
-	public void updateVariable(String variable, double variableValue) {
-		myCommandFactory.updateVariable(variable, variableValue);
-	}
+//	public void updateVariable(String variable, double variableValue) {
+//		myCommandFactory.updateVariable(variable, variableValue);
+//	}
 
 	public void resetRepcount() {
 		myCommandFactory.resetRepcount();

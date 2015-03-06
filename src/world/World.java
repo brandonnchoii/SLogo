@@ -61,34 +61,34 @@ public abstract class World {
 
 	public abstract void fixPosition();
 
-	public String oldListen(String input) {
-		String param = "";
-		for (String s : input.split("/n")) {
-			int numCmds = myParser.initializeCommands(s);
-			for (int i = 0; i < numCmds; i++) {
-				Command c = myParser.parse(param);
-				System.out.println("num " + i);
-				if (c.isLoop()) {
-					// param = "loop";
-					LoopCommand loopCommand = (LoopCommand) c;
-					loopCommand.readValues();
-					for (double j = loopCommand.getStart()
-							+ loopCommand.getIncr(); j < loopCommand.getEnd(); j += loopCommand
-							.getIncr()) {
-						param = "loop";
-						myParser.updateVariable(loopCommand.getVariable(), j);
-						myTurtle.act(myParser.parse(param));
-					}
-					myParser.resetRepcount();
-				} else {
-					param = myTurtle.act(c);
-					// param = myTurtle.act(myParser.parse(param));
-				}
-			}
-			param = "";
-		}
-		return param;
-	}
+//	public String oldListen(String input) {
+//		String param = "";
+//		for (String s : input.split("/n")) {
+//			int numCmds = myParser.initializeCommands(s);
+//			for (int i = 0; i < numCmds; i++) {
+//				Command c = myParser.parse(param);
+//				System.out.println("num " + i);
+//				if (c.isLoop()) {
+//					// param = "loop";
+//					LoopCommand loopCommand = (LoopCommand) c;
+//					loopCommand.readValues();
+//					for (double j = loopCommand.getStart()
+//							+ loopCommand.getIncr(); j < loopCommand.getEnd(); j += loopCommand
+//							.getIncr()) {
+//						param = "loop";
+//						myParser.updateVariable(loopCommand.getVariable(), j);
+//						myTurtle.act(myParser.parse(param));
+//					}
+//					myParser.resetRepcount();
+//				} else {
+//					param = myTurtle.act(c);
+//					// param = myTurtle.act(myParser.parse(param));
+//				}
+//			}
+//			param = "";
+//		}
+//		return param;
+//	}
 
 	public String listen(String input) {
 		String param = "";
