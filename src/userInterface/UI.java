@@ -22,10 +22,10 @@ import javafx.scene.layout.StackPane;
 
 public class UI {
 
-    private static final String DEFAULT_BACKGROUND_COLOR = "-fx-background-color: white";
     public static final int PANEL_WIDTH = 200;
     public static final int PANEL_HEIGHT = 500;
-
+    private static final String DEFAULT_BACKGROUND_COLOR = "-fx-background-color: white";
+    private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
     private static final int INPUT_WIDTH = 450;
     private static final int INPUT_HEIGHT = 300;
 
@@ -33,15 +33,13 @@ public class UI {
     private BorderPane myView, myCenterView;
     private HBox myCommandField;
     private TextArea myInput;
-    private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
-    private boolean textClicked;
+    private boolean firstClick;
     private RightPanel myRightPanel;
     private LeftPanel myLeftPanel;
     private Canvas myCanvas;
     private GraphicsContext myGC;
     private StackPane canvasPane;
     private ResourceBundle myLanguage;
-    private ObservableList<String> results;
 
     public UI (ResourceBundle language) {
         initialize(language);
@@ -58,19 +56,14 @@ public class UI {
         myView.setPadding(new Insets(10, 10, 10, 10));
         myCenterView = new BorderPane();
         myCenterView.setPadding(new Insets(5, 5, 5, 5));
-        
-        results = FXCollections.observableArrayList();
 
         setUpCommandField();
         setUpPane();
         setUpController();
 
-        myRightPanel = new RightPanel(results);
-        myLeftPanel = new LeftPanel(new HashMap<String, String>(), new HashMap<String, Double>());
-
         myView.setCenter(myCenterView);
-        myView.setRight(myRightPanel.getPanel());
-        myView.setLeft(myLeftPanel.getPanel());
+        myView.setRight(myRightPanel.getInstance().getPanel());
+        myView.setLeft(myLeftPanel.getInstance().getPanel());
         myCenterView.setCenter(canvasPane);
         myCenterView.setBottom(myCommandField);
         myCenterView.setAlignment(myInput, Pos.CENTER);
@@ -78,7 +71,7 @@ public class UI {
 
     private void setUpController () {
         try {
-            myController = new WorldController(this);
+            myController = new WorldController(this, myRightPanel, myLeftPanel);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -89,12 +82,13 @@ public class UI {
         myCommandField = new HBox(15);
         myInput = new TextArea(myLanguage.getString("InputText"));
 
-        textClicked = false;
+        firstClick = true;
         myInput.setMaxSize(INPUT_WIDTH, INPUT_HEIGHT);
         myInput.setOnMouseClicked(e -> {
-            if (!textClicked)
+            if (firstClick){
                 myInput.clear();
-            textClicked = true;
+                firstClick = false;
+            }   
         });
         
         myCommandField.setAlignment(Pos.CENTER);
@@ -121,7 +115,6 @@ public class UI {
 
     private void runCommand () {
         myController.update(myInput.getText());
-        results.add(myInput.getText());
         myInput.clear();
     }
 

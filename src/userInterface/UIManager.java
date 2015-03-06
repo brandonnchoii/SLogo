@@ -24,8 +24,6 @@ public class UIManager {
     private BorderPane myView;
     private Scene myScene;
     private TopMenu myMenu;
-    //use object property to bind to TopMenu
-
     private EventHandler<ActionEvent> createNewTab;
     
     public UIManager () {

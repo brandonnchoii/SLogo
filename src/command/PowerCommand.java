@@ -3,9 +3,9 @@ package command;
 import java.util.List;
 import turtle.Turtle;
 
-public class PowCommand extends Command{
+public class PowerCommand extends Command{
 	
-	public PowCommand(List<Double> params){
+	public PowerCommand(List<Double> params){
 		super(params);
 	}
 

@@ -240,7 +240,6 @@ public class Turtle extends ImageView {
         return nf.format(d);
     }
 
-
     public void drawLine(GraphicsContext gc, double shiftX, double shiftY) {
         double currX = current.getX();
         double currY = current.getY();

@@ -2,9 +2,9 @@ package command;
 
 import turtle.Turtle;
 
-public class YcorCommand extends Command{
+public class YCoordinateCommand extends Command{
 	
-	public YcorCommand(){
+	public YCoordinateCommand(){
 		super();
 	}
 

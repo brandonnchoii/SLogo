@@ -4,9 +4,9 @@ import java.util.List;
 
 import turtle.Turtle;
 
-public class TowardsCommand extends Command {
+public class SetTowardsCommand extends Command {
 	
-	public TowardsCommand(List<Double> params){
+	public SetTowardsCommand(List<Double> params){
 		super(params);
 	}
 	@Override

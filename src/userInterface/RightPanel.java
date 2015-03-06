@@ -31,6 +31,7 @@ public class RightPanel {
     private static final String DEFAULT_WHITE_BG = "-fx-background: white;";
     private static final int RIGHT_PANEL_SPACING = 10;
 
+    private static RightPanel instance;
     private VBox myRightPanel;
     private ScrollPane myResultView;
     private Text myResults;
@@ -41,40 +42,44 @@ public class RightPanel {
     private ListView<String> previousCommandView;
     private ListView<String> savedCommandView;
 
-    public RightPanel (ObservableList<String> resultsList) {
-        results = resultsList;
-        initialize();
+    public RightPanel () {}
+
+    public static synchronized RightPanel getInstance () {
+        if (instance == null) {
+            instance = new RightPanel();
+            return instance;
+        }
+        else
+            return instance;
     }
 
     public VBox getPanel () {
         return myRightPanel;
     }
 
-    private void initialize () {
+    public void initialize (ObservableList<String> r, ObservableList<String> p, ObservableList<String> s) {
+        results = r;
+        previousCommands = p;
+        savedCommands = s;
+        
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
         myRightPanel.setPrefSize(UI.PANEL_WIDTH, UI.PANEL_HEIGHT);
-        
+
         resultsView = new ListView<>();
-        
+
         previousCommandView = new ListView<>();
         previousCommandView.setOnMouseClicked(e -> {
-            //if (e.getClickCount() == DOUBLE_CLICK)
-                
-        });
-        //previousCommands = new ObservableList<>();  
-        
+            // if (e.getClickCount() == DOUBLE_CLICK)
+            });
+
         savedCommandView = new ListView<>();
         savedCommandView.setOnMouseClicked(e -> {
-            //if (e.getClickCount() == DOUBLE_CLICK)
-                
-        });
-        //savedCommands = new ObservableList<>();
-        
-//        myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
-//                                          makeListView(previousCommandView, previousCommands, PREVIOUS_COMMANDS_LABEL),
-//                                          makeListView(savedCommandView, savedCommands, SAVED_COMMANDS_LABEL));
-        myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL));
-                                          
+            // if (e.getClickCount() == DOUBLE_CLICK)
+            });
+
+         myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
+         makeListView(previousCommandView, previousCommands, PREVIOUS_COMMANDS_LABEL),
+         makeListView(savedCommandView, savedCommands, SAVED_COMMANDS_LABEL));
     }
 
     private VBox makeListView (ListView view, ObservableList list, String name) {
