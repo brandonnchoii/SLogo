@@ -14,7 +14,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import command.Command;
 import command.CommandFactory;
 
@@ -29,12 +31,14 @@ public class Parser {
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
     private List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
 
-    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind) {
+    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color) {
         variables = var;
         functions = fun;
         bindings = bind;
-        myCommandFactory = new CommandFactory(language, variables, functions, bindings);
+        colors = color;
+        myCommandFactory = new CommandFactory(language, variables, functions, bindings, colors);
         myResources = ResourceBundle.getBundle("resources.languages/Syntax");
     }
 

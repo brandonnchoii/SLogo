@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import command.LoopCommand;
 import command.Command;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
@@ -38,41 +39,45 @@ public abstract class World {
     private static final String LOOP_START = "loopStart";
     private static final String IF_STATEMENT = "ifStatement";
     private  List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
 
-    public World(ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
+    public World(ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings, ObservableList<Color> color) throws IOException {
         variables = var;
         functions = fun;
         bindings = Bindings;
+        colors = color;
         height = DEFAULT_HEIGHT;
         width = DEFAULT_WIDTH;
         myTurtles = new HashMap<>();
         myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-        myParser = new Parser("English", variables, functions, bindings);
+        myParser = new Parser("English", variables, functions, bindings, colors);
         myTurtle = myTurtles.get(0);
     }
 
-    public World(int h, int w, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
+    public World(int h, int w, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings, ObservableList<Color> color) throws IOException {
         variables = var;
         functions = fun;
         bindings = Bindings;
+        colors = color;
         height = h;
         width = w;
         myTurtles = new HashMap<>();
         myTurtles.put(0, (new Turtle(bindings,TURTLE_DEFAULT, 0)));
-        myParser = new Parser("English", variables, functions, bindings);
+        myParser = new Parser("English", variables, functions, bindings, colors);
         myTurtle = myTurtles.get(0);
         
     }
 
-    public World(int h, int w, Turtle t, String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
+    public World(int h, int w, Turtle t, String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings, ObservableList<Color> color) throws IOException {
         variables = var;
         functions = fun;
         bindings = Bindings;
+        colors = color;
         height = h;
         width = w;
         myTurtles = new HashMap<>();
         myTurtles.put(t.getID(), t);
-        myParser = new Parser(language, variables, functions, Bindings);
+        myParser = new Parser(language, variables, functions, bindings, colors);
         myTurtle = myTurtles.get(0);
 
     }

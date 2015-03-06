@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public abstract class Command {
@@ -17,17 +20,21 @@ public abstract class Command {
     protected List<Double> parameters;
     protected Map<String, Double> variables;
     protected Map<String, String> functions;
+    protected List<ObjectProperty> bindings;
+    protected ObservableList<Color> colors;
     protected boolean loop;
     protected Map<String, String> commandValues; 
     protected ResourceBundle syntax;
 
-    public Command(List<String> params, Map<String, Double> variableMap, Map<String, String> func) {
+    public Command(List<String> params, Map<String, Double> variableMap, Map<String, String> func, List<ObjectProperty> bind, ObservableList<Color> color) {
         strParameters = params;
         loop = false;
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
         createCommandValues();
         parameters = makeParameters();
         functions = func;
+        bindings = bind;
+        colors = color;
     }
 
     protected List<Double> makeParameters(){
