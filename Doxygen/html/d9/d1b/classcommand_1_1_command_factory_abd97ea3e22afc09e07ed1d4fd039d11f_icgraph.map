@@ -1,0 +1,12 @@
+<map id="command.CommandFactory.reflectCMD" name="command.CommandFactory.reflectCMD">
+<area shape="rect" id="node2" href="$d9/d1b/classcommand_1_1_command_factory.html#ab25bb047b051661d31adf73b2dae5649" title="command.CommandFactory.create\lCommand" alt="" coords="331,23,578,65"/>
+<area shape="rect" id="node3" href="$d6/d95/classparser_1_1_parser.html#a4ecbffc246c3add017c4720eed4c6da9" title="parser.Parser.parse" alt="" coords="627,31,773,57"/>
+<area shape="rect" id="node4" href="$d6/d95/classparser_1_1_parser.html#a6b2d7b2b182d99537ce332ed0dfd3e03" title="parser.Parser.main" alt="" coords="821,5,963,32"/>
+<area shape="rect" id="node5" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="827,56,957,83"/>
+<area shape="rect" id="node6" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="1011,56,1275,83"/>
+<area shape="rect" id="node7" href="$d0/d7c/classuser_interface_1_1_u_i.html#ab17592b00ba0b808f524b4fc223303ec" title="userInterface.UI.runCommand" alt="" coords="1323,56,1538,83"/>
+<area shape="rect" id="node8" href="$d0/d7c/classuser_interface_1_1_u_i.html#a02bd34909b5d6037ea8ebe812879b90a" title="userInterface.UI.makeRun\lButton" alt="" coords="1587,49,1773,90"/>
+<area shape="rect" id="node9" href="$d0/d7c/classuser_interface_1_1_u_i.html#a9f7eaa121e1405b45e262f03859f9ff0" title="userInterface.UI.setUpCommand\lField" alt="" coords="1821,49,2053,90"/>
+<area shape="rect" id="node10" href="$d0/d7c/classuser_interface_1_1_u_i.html#a8b1a665c129df3827e48e2739afe870d" title="userInterface.UI.initialize" alt="" coords="2101,56,2280,83"/>
+<area shape="rect" id="node11" href="$d0/d7c/classuser_interface_1_1_u_i.html#a378fe4fa2136ee8c5196e86189c0d484" title="userInterface.UI.UI" alt="" coords="2329,56,2469,83"/>
+</map>
