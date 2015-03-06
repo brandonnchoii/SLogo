@@ -196,7 +196,8 @@ public class Parser {
     public static void main(String[] args) {
         ObservableMap<String, Double> variables = null;
         ObservableMap<String, String> functions = null;
-        Parser test = new Parser("English", variables, functions);
+        List<ObjectProperty> bindings = null;
+        Parser test = new Parser("English", variables, functions, bindings);
         test.initializeCommands("repeat 2 [ sum 1 2 ]");
         test.parse("");
         test.parse("3");
