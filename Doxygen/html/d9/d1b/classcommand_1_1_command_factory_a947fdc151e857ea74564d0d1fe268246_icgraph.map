@@ -1,0 +1,15 @@
+<map id="command.CommandFactory.translateCommand" name="command.CommandFactory.translateCommand">
+<area shape="rect" id="node2" href="$d9/d1b/classcommand_1_1_command_factory.html#ab25bb047b051661d31adf73b2dae5649" title="command.CommandFactory.create\lCommand" alt="" coords="318,5,565,46"/>
+<area shape="rect" id="node12" href="$d9/d1b/classcommand_1_1_command_factory.html#a87bf7e648425bb22124367cabedb3327" title="command.CommandFactory.get\lNumParameters" alt="" coords="328,70,555,111"/>
+<area shape="rect" id="node3" href="$d6/d95/classparser_1_1_parser.html#a4ecbffc246c3add017c4720eed4c6da9" title="parser.Parser.parse" alt="" coords="839,15,985,41"/>
+<area shape="rect" id="node4" href="$d6/d95/classparser_1_1_parser.html#a6b2d7b2b182d99537ce332ed0dfd3e03" title="parser.Parser.main" alt="" coords="1040,17,1181,44"/>
+<area shape="rect" id="node5" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="1045,69,1176,96"/>
+<area shape="rect" id="node6" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="1229,69,1493,96"/>
+<area shape="rect" id="node7" href="$d0/d7c/classuser_interface_1_1_u_i.html#ab17592b00ba0b808f524b4fc223303ec" title="userInterface.UI.runCommand" alt="" coords="1542,69,1757,96"/>
+<area shape="rect" id="node8" href="$d0/d7c/classuser_interface_1_1_u_i.html#a02bd34909b5d6037ea8ebe812879b90a" title="userInterface.UI.makeRun\lButton" alt="" coords="1805,62,1992,103"/>
+<area shape="rect" id="node9" href="$d0/d7c/classuser_interface_1_1_u_i.html#a9f7eaa121e1405b45e262f03859f9ff0" title="userInterface.UI.setUpCommand\lField" alt="" coords="2040,62,2272,103"/>
+<area shape="rect" id="node10" href="$d0/d7c/classuser_interface_1_1_u_i.html#a8b1a665c129df3827e48e2739afe870d" title="userInterface.UI.initialize" alt="" coords="2320,69,2499,96"/>
+<area shape="rect" id="node11" href="$d0/d7c/classuser_interface_1_1_u_i.html#a378fe4fa2136ee8c5196e86189c0d484" title="userInterface.UI.UI" alt="" coords="2547,69,2687,96"/>
+<area shape="rect" id="node13" href="$d6/d95/classparser_1_1_parser.html#a4f582c65390bddc57219c0b5c31ef5e7" title="parser.Parser.makeTree" alt="" coords="613,75,784,101"/>
+<area shape="rect" id="node14" href="$d6/d95/classparser_1_1_parser.html#a240c75608624a9c67402a296855c4d1d" title="parser.Parser.initialize\lCommands" alt="" coords="832,66,992,107"/>
+</map>
