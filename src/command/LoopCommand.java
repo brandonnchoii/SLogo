@@ -10,7 +10,6 @@ public abstract class LoopCommand extends Command {
     protected double end;
     protected double incr;
     protected String variable;
-    protected List<String> strParameters;
     protected String[] loopInfo;
 
     public LoopCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
@@ -25,6 +24,7 @@ public abstract class LoopCommand extends Command {
     
     protected void updateMap(){
         loopInfo = strParameters.get(1).split(" ");
+        System.out.println("INFO" + loopInfo);
     }
     
     protected void addInfo(String s, int i){
