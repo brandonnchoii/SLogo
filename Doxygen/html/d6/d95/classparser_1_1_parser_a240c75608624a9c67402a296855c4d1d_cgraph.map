@@ -1,6 +1,0 @@
-<map id="parser.Parser.initializeCommands" name="parser.Parser.initializeCommands">
-<area shape="rect" id="node2" href="$d3/dcc/classparser_1_1_node.html#a9c12e8d4375a7517eae0a35724b253c4" title="parser.Node.getValue" alt="" coords="219,5,379,32"/>
-<area shape="rect" id="node3" href="$d6/d95/classparser_1_1_parser.html#a4f582c65390bddc57219c0b5c31ef5e7" title="parser.Parser.makeTree" alt="" coords="213,56,384,83"/>
-<area shape="rect" id="node4" href="$d9/d1b/classcommand_1_1_command_factory.html#a87bf7e648425bb22124367cabedb3327" title="command.CommandFactory.get\lNumParameters" alt="" coords="432,49,659,90"/>
-<area shape="rect" id="node5" href="$d9/d1b/classcommand_1_1_command_factory.html#a947fdc151e857ea74564d0d1fe268246" title="command.CommandFactory.translate\lCommand" alt="" coords="707,49,970,90"/>
-</map>
