@@ -10,7 +10,7 @@ import turtle.Turtle;
 public abstract class Command {
 
     private static final String DEFAULT_START = "1";
-    private static final String DEFAULT_END = "2";
+    private static final String DEFAULT_END = "1";
     private static final String DEFAULT_INCR = "1";
     private static final String DEFAULT_VAR = ":repcount";
     protected List<String> strParameters;
