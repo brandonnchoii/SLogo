@@ -1,18 +1,16 @@
+/**
+ * @author Brandon Choi, James Mosca
+ */
+
 package userInterface;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import worldController.WorldController;
-import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableStringValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -27,6 +25,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class UI {
+
+    /**
+     * UI represents the user interface of a single instance of SLogo. Multiple instances can be
+     * added by creating a new tab in UIManager
+     */
 
     public static final int PANEL_WIDTH = 200;
     public static final int PANEL_HEIGHT = 500;
@@ -53,15 +56,24 @@ public class UI {
         initialize(bindings);
     }
 
+    /**
+     * @return BorderPane myView
+     */
     public Pane getUI () {
         return myView;
     }
 
+    /**
+     * initializes the UI by creating border panes and setting up necessary components such as the
+     * command field
+     * 
+     * @param List<ObjectProperty> bindings
+     */
     private void initialize (List<ObjectProperty> bindings) {
         myBindings = bindings;
         myLanguage = myBindings.get(UIManager.LANGUAGE_INDEX);
         myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
-        
+
         myView = new BorderPane();
         myView = new BorderPane();
         myView.setPadding(new Insets(10, 10, 10, 10));
@@ -80,35 +92,50 @@ public class UI {
         myCenterView.setAlignment(myInput, Pos.CENTER);
     }
 
+    /**
+     * sets up the WorldController
+     */
     private void setUpController () {
         try {
-            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText, myBindings);
+            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText,
+                                               myBindings);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * sets up the command field which will be cleared the first time it is clicked and whenever it
+     * is played
+     * 
+     * binding between inputText and myInput allows the user to double click a saved or previous
+     * command and have it appear in the command box
+     */
     private void setUpCommandField () {
         myCommandField = new HBox(15);
         myInput = new TextArea(myLanguage.getValue().getString("InputText"));
-        
+
         inputText = new SimpleStringProperty();
         inputText = myInput.textProperty();
 
         firstClick = true;
         myInput.setMaxSize(INPUT_WIDTH, INPUT_HEIGHT);
         myInput.setOnMouseClicked(e -> {
-            if (firstClick){
+            if (firstClick) {
                 myInput.clear();
                 firstClick = false;
-            }   
+            }
         });
-        
+
         myCommandField.setAlignment(Pos.CENTER);
         myCommandField.getChildren().addAll(myInput, makeRunButton());
     }
 
+    /**
+     * creates run button
+     * @return Button play
+     */
     private Button makeRunButton () {
         Button play = new Button();
         Image playImage = new Image(PLAY_BUTTON);
@@ -118,6 +145,9 @@ public class UI {
         return play;
     }
 
+    /**
+     * sets up the canvas pane with the canvas and graphics context
+     */
     private void setUpPane () {
         canvasPane = new StackPane();
         canvasPane.setPadding(new Insets(10, 10, 10, 10));
@@ -126,7 +156,10 @@ public class UI {
         canvasPane.getChildren().add(myCanvas);
         canvasPane.styleProperty().bind(myCanvasColor);
     }
-
+    
+    /**
+     * called to run whatever command(s) are in the command field
+     */
     private void runCommand () {
         myController.update(inputText.getValue());
         myInput.clear();

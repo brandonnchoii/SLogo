@@ -1,7 +1,5 @@
 /**
- * 
  * @author Brandon Choi, James Mosca
- *
  */
 
 package worldController;

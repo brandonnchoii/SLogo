@@ -1,3 +1,7 @@
+/**
+ * @author Brandon Choi
+ */
+
 package userInterface;
 
 import java.io.File;
@@ -32,6 +36,11 @@ import javafx.stage.Stage;
 
 public class TopMenu {
 
+    /**
+     * TopMenu is the menu bar at the top of the UIManager. Holds options to change components of
+     * the view or to even create another tab of SLogo
+     */
+
     private static final String HEX_PREFIX = "x";
     private static final int COLOR_SUBSTRING_INDEX = 1;
     private static final String COLOR_PATH = "-fx-background-color: #";
@@ -60,10 +69,22 @@ public class TopMenu {
         initialize(tabHandler, bindings);
     }
 
+    /**
+     * used by UIManager to get the MenuBar
+     * 
+     * @return MenuBar myMenu
+     */
     public MenuBar getMenuBar () {
         return myMenu;
     }
 
+    /**
+     * Initializes the components of the TopMenu. Utilizes binding to ensure dynamic changes to the
+     * view aspects or language choice.
+     * 
+     * @param EventHandler<ActionEvent> tabHandler
+     * @param List<ObjectProperty> bindings
+     */
     private void initialize (EventHandler<ActionEvent> tabHandler, List<ObjectProperty> bindings) {
         createNewTab = tabHandler;
         canvasColor = bindings.get(UIManager.CANVAS_INDEX);
@@ -87,6 +108,10 @@ public class TopMenu {
     // return m;
     // }
 
+    /**
+     * creates File part of the MenuBar
+     * @return Menu File
+     */
     private Menu createFileMenu () {
         File = new Menu(language.getValue().getString("File"));
         MenuItem m1 = new MenuItem("New SLogo Tab");
@@ -97,6 +122,10 @@ public class TopMenu {
         return File;
     }
 
+    /**
+     * creates Edit part of the MenuBar
+     * @return Menu Edit
+     */
     private Menu createEditMenu () {
         Edit = new Menu("Edit");
         MenuItem m1 = new MenuItem("Add Turtle");
@@ -104,6 +133,10 @@ public class TopMenu {
         return Edit;
     }
 
+    /**
+     * creates View part of the MenuBar
+     * @return Menu View
+     */
     private Menu createViewMenu () {
         View = new Menu(language.getValue().getString("View"));
         MenuItem m1 = new MenuItem("Set Background Color");
@@ -117,6 +150,10 @@ public class TopMenu {
         return View;
     }
 
+    /**
+     * creates Help part of the MenuBar
+     * @return Menu Help
+     */
     private Menu createHelpMenu () {
         Help = new Menu(language.getValue().getString("Help"));
         MenuItem m1 = new MenuItem("What is SLogo?");
@@ -125,6 +162,10 @@ public class TopMenu {
         return Help;
     }
 
+    /**
+     * creates Preferences part of the MenuBar
+     * @return Menu Preferences
+     */
     private Menu createPreferencesMenu () {
         Preferences = new Menu(language.getValue().getString("Preferences"));
         MenuItem m1 = new MenuItem("Change Language");
@@ -157,6 +198,7 @@ public class TopMenu {
 
     /**
      * extract the hex values of the Color's string by substringing everything after the 0x;
+     * 
      * @param c
      * @return
      */

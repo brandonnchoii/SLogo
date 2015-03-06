@@ -1,3 +1,7 @@
+/**
+ * @author Brandon Choi
+ */
+
 package userInterface;
 
 import javafx.beans.property.StringProperty;
@@ -7,8 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
-
 public class RightPanel {
+
+    /**
+     * RightPanel is the right hand portion of the UI. It holds the results, previous commands, and
+     * saved commands. The previous and saved commands can be double clicked to run again if
+     * desired.
+     */
 
     private static final int DOUBLE_CLICK = 2;
     private static final String RESULTS_LABEL = "Results";
@@ -29,6 +38,11 @@ public class RightPanel {
     public RightPanel () {
     }
 
+    /**
+     * implements Singleton model
+     * 
+     * @return RightPanel instance
+     */
     public static synchronized RightPanel getInstance () {
         if (instance == null) {
             instance = new RightPanel();
@@ -38,10 +52,23 @@ public class RightPanel {
             return instance;
     }
 
+    /**
+     * for accessing the panel from the UI
+     * 
+     * @return VBox myRightPanel
+     */
     public VBox getPanel () {
         return myRightPanel;
     }
 
+    /**
+     * initializes the components and binds necessary objects together
+     * 
+     * @param ObservableList<String> r
+     * @param ObservableList<String> p
+     * @param ObservableList<String> s
+     * @param String Property t
+     */
     public void initialize (ObservableList<String> r,
                             ObservableList<String> p,
                             ObservableList<String> s,
@@ -72,6 +99,14 @@ public class RightPanel {
                                                        SAVED_COMMANDS_LABEL));
     }
 
+    /**
+     * general method used to create a ListView with any view, list, and name
+     * 
+     * @param ListView view
+     * @param ObservableList list
+     * @param String name
+     * @return
+     */
     private VBox makeListView (ListView view, ObservableList list, String name) {
         VBox listViewBox = new VBox();
         listViewBox.setAlignment(Pos.CENTER);
