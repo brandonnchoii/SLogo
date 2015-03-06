@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import command.Command;
-import factories.CommandFactory;
+import command.CommandFactory;
 
 public class Parser {
 	private CommandFactory myCommandFactory;
