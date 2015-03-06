@@ -1,6 +1,0 @@
-<map id="userInterface.UIManager.initialize" name="userInterface.UIManager.initialize">
-<area shape="rect" id="node2" href="$d6/dce/classuser_interface_1_1_u_i_manager.html#a60bda212a94f5f989e12a498da0409d1" title="userInterface.UIManager.addTab" alt="" coords="539,35,765,62"/>
-<area shape="rect" id="node4" href="$d3/db5/classuser_interface_1_1_top_menu.html#ac305da2ff432c584979bbe2495221b2e" title="userInterface.TopMenu.get\lMenuBar" alt="" coords="294,24,485,65"/>
-<area shape="rect" id="node5" href="$d6/dce/classuser_interface_1_1_u_i_manager.html#a1f1dccc66bb1147bfba04eedac265ce1" title="userInterface.UIManager.set\lUpEventHandlers" alt="" coords="288,89,491,130"/>
-<area shape="rect" id="node3" href="$d0/d7c/classuser_interface_1_1_u_i.html#af975e195f7702ad0e92116e61b5456f1" title="userInterface.UI.getUI" alt="" coords="814,35,975,62"/>
-</map>
