@@ -1,9 +1,0 @@
-<map id="worldController.WorldController.makeKeyFrame" name="worldController.WorldController.makeKeyFrame">
-<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#a7c0f37993844a70cdd57951ae4a916dd" title="turtle.Turtle.animatedMove" alt="" coords="310,56,503,83"/>
-<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#a49bc6263dff19b97b012d9c2052e701d" title="turtle.Turtle.findNextPoint" alt="" coords="553,5,735,32"/>
-<area shape="rect" id="node7" href="$df/dcb/classturtle_1_1_turtle.html#a6e41524d115c16610b5765720df6e658" title="turtle.Turtle.getCurrent" alt="" coords="323,107,490,133"/>
-<area shape="rect" id="node8" href="$df/dcb/classturtle_1_1_turtle.html#a568de9ba87ac973fb3987cb2782af97e" title="turtle.Turtle.getGoal" alt="" coords="333,157,481,184"/>
-<area shape="rect" id="node5" href="$df/dcb/classturtle_1_1_turtle.html#a42c672bc79ce607cef27b8f436cd938d" title="turtle.Turtle.moveMyself" alt="" coords="557,56,731,83"/>
-<area shape="rect" id="node6" href="$de/d57/classturtle_1_1_pen.html#a361f4e030646d953185a8afe94427ce2" title="turtle.Pen.penReady" alt="" coords="569,107,719,133"/>
-<area shape="rect" id="node4" href="$df/dcb/classturtle_1_1_turtle.html#a8f637f9dba952c65541c47ca5ef5748b" title="turtle.Turtle.atGoal" alt="" coords="785,5,925,32"/>
-</map>
