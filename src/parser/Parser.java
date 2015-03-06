@@ -44,22 +44,19 @@ public class Parser {
 	public Command parse(String valueFromPrevCommand) {
 		System.out.println("prevValue = " + valueFromPrevCommand);
 		Node current = null;
+		System.out.println("mytree = " +  myTree.getValue());
 		if (valueFromPrevCommand.equals("")) {
 			current = getNodeForCommand();
-		} else if (myTree.isLeaf()) {
+		} else if (valueFromPrevCommand.equals(LOOP)) {
+			myTree = makeTree(new Scanner(myInput));
 			myTree = myListTree;
-			// } else if (valueFromPrevCommand.equals(LOOP)) {
-			// //System.out.println("REGISTER LOOP");
-			// myTree = makeTree(new Scanner(myInput));
-			// myTree = myListTree;
-			// return parse("");
+			current = getNodeForCommand();
 		} else {
 			Node previous = getNodeBeforeToReplace();
 			previous.insertChild(new Node(valueFromPrevCommand, null, null),
 					myResources.getString("Command"));
 			current = getNodeForCommand();
 		}
-		System.out.println("current value: " + current.getValue());
 		List<String> commandInput = generateCommandInput(valueFromPrevCommand,
 				current);
 		return myCommandFactory.createCommand(commandInput);
@@ -159,6 +156,7 @@ public class Parser {
 			Scanner loopScanner = new Scanner(loopString);
 			if (loopScanner.next().matches(myResources.getString("Command"))) {
 				myListTree = makeTree(new Scanner(loopString));
+				numCommands -= 1;
 				return null;
 			} else {
 				return new Node(loopString, null, null);
