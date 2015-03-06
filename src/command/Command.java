@@ -74,11 +74,7 @@ public abstract class Command {
         commandValues.put("loopEnd", DEFAULT_END);
         commandValues.put("loopIncrement", DEFAULT_INCR);
         commandValues.put("loopVariable", DEFAULT_VAR);
-<<<<<<< HEAD
-        commandValues.put("ifStatement", "1");
-=======
         commandValues.put("ifStatement", DEFAULT_START);
->>>>>>> b5ff82023892fded24f0c35a8d48ee88f60a0db7
     }
 
     public abstract double run(Turtle t);

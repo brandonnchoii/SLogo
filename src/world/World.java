@@ -108,8 +108,8 @@ public abstract class World {
 						double loopIncrement = Double.parseDouble(commandValues
 								.get(LOOP_INCREMENT));
 						for (double j = loopStart; j < loopEnd; j += loopIncrement) {
-							myParser.updateVariable(
-									commandValues.get(LOOP_VARIABLE), j);
+//							myParser.updateVariable(
+//									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							System.out.println("loopEnd = " + loopEnd);
 							if (loopStart + loopIncrement == loopEnd) {

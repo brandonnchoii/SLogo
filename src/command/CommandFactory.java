@@ -101,8 +101,8 @@ public class CommandFactory {
         parts.add("2");
         
         Command c1 = cf.createCommand(parts);
-        Turtle t = new Turtle();
-        System.out.print(c1.run(t));
+        //Turtle t = new Turtle();
+        //System.out.print(c1.run(t));
     }
 
 }
