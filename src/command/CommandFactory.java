@@ -91,5 +91,13 @@ public class CommandFactory {
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
     }
+    
+    public Map<String, String> getFunctionMap(){
+        return functions;
+    }
+    
+    public Map<String, Double> getVariableMap(){
+        return variables;
+    }
 
 }
