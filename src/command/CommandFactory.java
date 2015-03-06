@@ -2,13 +2,10 @@ package command;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.scene.paint.Color;
-import turtle.Turtle;
 
 
 public class CommandFactory {
@@ -82,6 +79,9 @@ public class CommandFactory {
         setTranslationMap();
     }
 
+    public void updateVariable(String s, Double d){
+        variables.put(s,d);
+    }
 
 
     public void clearRepCount(){

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import turtle.Turtle;
 
-public class SumCommand extends Command{
+public class SumCommand extends ArithmeticCommand{
 
     public SumCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
         super(params, variableMap, func);
@@ -12,13 +12,11 @@ public class SumCommand extends Command{
 
     @Override
     public double run(Turtle t) {
+        return super.run();
+    }
 
-        if(parameters.size() < 2)
-            throw new IllegalArgumentException("Not enough parameters");
-
-        double ret = 0;
-        for(double d: parameters)
-            ret += d;
-        return ret;
+    @Override
+    protected double doMath (double a, double b) {
+        return a + b;
     }
 }

@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.Map;
 import turtle.Turtle;
 
-public class DifferenceCommand extends Command{
+public class DifferenceCommand extends ArithmeticCommand{
 
     public DifferenceCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
-        super(params, variableMap, func);    }
+        super(params, variableMap, func);    
+    }
+
 
     @Override
-    public double run(Turtle t) {
+    protected double doMath (double a, double b) {
+        return  a  - b;
+    }
 
-        if(parameters.size() < 2)
-            throw new IllegalArgumentException("Not enough parameters");
 
-        double ret = parameters.get(0);
-        for (int i = 1; i < parameters.size(); i++){
-            ret -= parameters.get(i);
-        }
-        return ret;
+    @Override
+    public double run (Turtle t) {
+        return super.run();
     }
 }
