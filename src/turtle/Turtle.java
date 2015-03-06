@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import command.Command;
-//Turtle extends IV but eventually, we want to not give WC or UI the entire Turtle
+
 public class Turtle extends ImageView {
 
 	private static final double DEFAULT_POS = 0;
@@ -32,7 +32,6 @@ public class Turtle extends ImageView {
 	private Point2D next;
 	private Point2D goal;
 
-
 	public Turtle(Paint color, int ID) {
 		myPen = new Pen(color);
 		initializeTurtleDefaults();
@@ -45,16 +44,25 @@ public class Turtle extends ImageView {
 
 	public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
 		myPen = new Pen(color);
-		setTranslateX(x);
-		setTranslateY(y);
-		direction = dir;
-		myPen.changePenState(DEFAULT_DRAW);
-		setVisible(DEFAULT_VISIBLE);
-		setImage(i);
+		initializeTurtleDefaults();
 		active = true;
 		id = ID;
 	}
 
+    public Turtle(Image i, Paint color, int ID){
+        myPen = new Pen(color);
+		initializeTurtleDefaults();
+        active = true;
+        id = ID;
+    }
+
+    public Turtle(int x, int y, Image i, Paint color, int ID){
+        myPen = new Pen(color);
+		initializeTurtleDefaults();
+        active = true;
+        id = ID;
+    }
+	
 	private void initializeTurtleDefaults() {
 		mySpeed = DEFAULT_SPEED;
 		current = new Point2D(DEFAULT_POS, DEFAULT_POS);
@@ -84,11 +92,6 @@ public class Turtle extends ImageView {
 	}
 
 	public void move (double pixels) {
-//		System.out.println(getTranslateX() + " " + getTranslateY());
-//		setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
-//		setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
-//		next = new Point2D(getTranslateX(), getTranslateY());
-//		System.out.println(getTranslateX() + " " + getTranslateY());
 		goal = new Point2D(getTranslateX() + pixels*Math.cos(radians()),
 				getTranslateY() + pixels*Math.sin(radians()));
 	}
@@ -109,7 +112,7 @@ public class Turtle extends ImageView {
 
 	public void setHeading (double degrees) {
 		direction = degrees % 360;
-		if(direction < 0)
+		if (direction < 0)
 			direction = 360 + direction;
 		setRotate(direction);
 	}
@@ -122,42 +125,21 @@ public class Turtle extends ImageView {
 		setTranslateX(x);
 		setTranslateY(y);
 		goal = new Point2D(x, y);
-//		while(current != goal) {
-//	    	animatedMove(myGC, shiftX, shiftY);
-//		}
-	}
-
-	public void previousDrawLine(GraphicsContext gc, double shiftX, double shiftY) {
-		double currX = current.getX();
-		double currY = current.getY();
-    	double nextX = getTranslateX();
-    	double nextY = getTranslateY();
-		setTranslateX(nextX);
-    	setTranslateY(nextY);
-		if (myPen.penReady()) {
-    		gc.strokeLine(currX + shiftX, currY + shiftY, 
-    				next.getX() + shiftX, next.getY() + shiftY);
-		}
-		current = new Point2D(nextX, nextY);
 	}
 	
-	public void animatedMove(GraphicsContext gc, double shiftX, double shiftY) {
+	public void animatedMove(GraphicsContext gc, Point2D shift) {
 		double currX = current.getX();
 		double currY = current.getY();
         if (current.distance(goal) < mySpeed) {
         	moveMyself(goal.getX(), goal.getY());
-        	gc.strokeLine(currX + shiftX, currY + shiftY, 
-    				goal.getX() + shiftX, goal.getY() + shiftY);
+        	myPen.drawLine(gc, goal, current, shift);
         	current = goal;
         	return;
         }
     	Point2D nextPoint = findNextPoint(currX, currY, 
         		goal.getX(), goal.getY());
     	moveMyself(nextPoint.getX(), nextPoint.getY());
-        if (myPen.penReady()) {
-    		gc.strokeLine(currX + shiftX, currY + shiftY, 
-    				nextPoint.getX() + shiftX, nextPoint.getY() + shiftY);
-		}
+    	myPen.drawLine(gc, nextPoint, current, shift);
 		current = nextPoint;
 	}
 	
@@ -166,7 +148,7 @@ public class Turtle extends ImageView {
 		setTranslateY(y);
 	}
 	
-	public Point2D findNextPoint(double x0, double y0, double x1, double y1) {
+	private Point2D findNextPoint(double x0, double y0, double x1, double y1) {
 		if (atGoal()) {
 			return goal;
 		}
@@ -178,16 +160,17 @@ public class Turtle extends ImageView {
 		return next;
 	}
 	
+	public Point2D nextFromCurrent() {
+		return findNextPoint(current.getX(), current.getY(),
+				goal.getX(), goal.getY());
+	}
+	
 	public void updatePenAttributes(GraphicsContext gc) {
 		gc.setStroke(myPen.getColor());
         gc.setLineWidth(myPen.getSize());
 	}
 	
-	public Pen getPen() {
-		return myPen;
-	}
-	
-	public boolean atGoal() {
+	private boolean atGoal() {
 		return current == goal;
 	}
 	
@@ -199,48 +182,18 @@ public class Turtle extends ImageView {
 		return id;
 	}
 	
-	public Point2D getCurrent() {
-		return current;
-	}
-	
-	public Point2D getGoal() {
-		return goal;
-	}
-	
-
-
-    public Turtle(Image i, Paint color, int ID){
-        myPen = new Pen(color);
-        setTranslateX(DEFAULT_POS);
-        setTranslateY(DEFAULT_POS);
-        direction = DEFAULT_POS;
-        myPen.changePenState(DEFAULT_DRAW);
-        setVisible(DEFAULT_VISIBLE);
-        setImage(i);
-        active = true;
-        id = ID;
-    }
-
-    public Turtle(int x, int y, Image i, Paint color, int ID){
-        myPen = new Pen(color);
-        setTranslateX(x);
-        setTranslateY(x);
-        direction = DEFAULT_POS;
-        myPen.changePenState(DEFAULT_DRAW);
-        setVisible(DEFAULT_VISIBLE);
-        setImage(i);
-        active = true;
-        id = ID;
-    }
-
-
     public String truncate (double d){
         NumberFormat nf = new DecimalFormat("#.##");
         return nf.format(d);
     }
-
-
-    public void drawLine(GraphicsContext gc, double shiftX, double shiftY) {
+    
+    public void setActive(boolean b) {
+        active = b;
+    }
+    
+    //old animation-less drawing (use if animation fails)
+    //call still exists in controller - just uncomment
+    public void previousDrawLine(GraphicsContext gc, double shiftX, double shiftY) {
         double currX = current.getX();
         double currY = current.getY();
         double nextX = getTranslateX();
@@ -254,11 +207,6 @@ public class Turtle extends ImageView {
                           next.getX() + shiftX, next.getY() + shiftY);
         }
         current = new Point2D(nextX, nextY);
-    }
-
-    public void setActive(boolean b) {
-        active = b;
-
     }
 
 }

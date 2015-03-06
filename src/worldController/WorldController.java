@@ -42,9 +42,7 @@ public class WorldController {
     private Turtle myTurtle;
     private Canvas myCanvas;
     private StackPane myPane;
-    private double shiftX;
-    private double shiftY;
-
+    private Point2D shift;
     
     public WorldController (UserInterface ui) throws IOException {
         myWorld = new BoundedWorld();
@@ -55,8 +53,7 @@ public class WorldController {
         myTurtle = myWorld.getTurtle();
         myCanvas.setWidth(myPane.getWidth());
         myCanvas.setHeight(myPane.getHeight());
-        shiftX = myPane.getWidth() / 2.0;
-        shiftY = myPane.getHeight() /2.0;
+        shift = new Point2D(myPane.getWidth() / 2.0, myPane.getHeight() / 2.0);
         myPane.getChildren().add(myTurtle);
         makeTimeline(PAUSE);
     }
@@ -88,29 +85,24 @@ public class WorldController {
 
      
      private KeyFrame makeKeyFrame(int framerate, double xTarget, double yTarget) {
-    	 Point2D current = myTurtle.getCurrent();
-    	 Point2D goal = myTurtle.getGoal();
     	 Duration t1 = new Duration(framerate);
     	 DoubleProperty xProp = new SimpleDoubleProperty(xTarget);
     	 DoubleProperty yProp = new SimpleDoubleProperty(yTarget);
-    	 KeyValue kv0 = new KeyValue(xProp, xTarget);
-         KeyValue kv1 = new KeyValue(yProp, yTarget);
+    	 KeyValue kvx = new KeyValue(xProp, xTarget);
+         KeyValue kvy = new KeyValue(yProp, yTarget);
          KeyFrame kf = new KeyFrame(t1,
           a -> {                          
-        	  myTurtle.animatedMove(myGC, shiftX, shiftY);
-              Point2D next = myTurtle.findNextPoint(current.getX(), current.getY()
-                   , goal.getX(), goal.getY());  
-        	  double nextXGoal = next.getX();
-              double nextYGoal = next.getY();
+        	  myTurtle.animatedMove(myGC, shift);
+              Point2D next = myTurtle.nextFromCurrent();
               myAnimation.stop();
               myAnimation.getKeyFrames().remove(0);
               myAnimation.getKeyFrames().add(makeKeyFrame(
-                   framerate, nextXGoal, nextYGoal));
+                   framerate, next.getX(), next.getY()));
               myAnimation.play();
           }, 
-          kv0, kv1);
-	return kf;
-  }
+          kvx, kvy);
+	      return kf;
+     }
      
     public void update(String command) {
     	myTurtle.updatePenAttributes(myGC);
@@ -119,19 +111,15 @@ public class WorldController {
     	UI.getSidebar().addResult(s);
     	//drawTurtle();
     }
+    
     //resort to this method if the animator isn't working well
     //just uncomment drawTurtle() in the update method
     private void drawTurtle() {
-        myTurtle.previousDrawLine(myGC, shiftX, shiftY);
+        myTurtle.previousDrawLine(myGC, shift.getX(), shift.getY());
     }    
     
 	public void clear () {
 
     }
-
-    public World getWorld () {
-        return myWorld;
-    }
-
 
 }
