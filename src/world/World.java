@@ -1,14 +1,18 @@
 package world;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import command.LoopCommand;
 import command.Command;
 import javafx.collections.ObservableMap;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
+import userInterface.UIManager;
 
 public abstract class World {
 
@@ -33,72 +37,47 @@ public abstract class World {
     private static final String LOOP_END = "loopEnd";
     private static final String LOOP_START = "loopStart";
     private static final String IF_STATEMENT = "ifStatement";
+    private  List<ObjectProperty> bindings;
 
-    public World(ObservableMap<String, Double> var, ObservableMap<String, String> fun) throws IOException {
+    public World(ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
         variables = var;
         functions = fun;
+        bindings = Bindings;
         height = DEFAULT_HEIGHT;
         width = DEFAULT_WIDTH;
         myTurtles = new HashMap<>();
-        myTurtles.put(0, (new Turtle(TURTLE_DEFAULT, 0)));
-        myParser = new Parser("English", variables, functions);
+        myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
+        myParser = new Parser("English", variables, functions, bindings);
         myTurtle = myTurtles.get(0);
     }
 
-    public World(int h, int w, ObservableMap<String, Double> var, ObservableMap<String, String> fun) throws IOException {
+    public World(int h, int w, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
         variables = var;
         functions = fun;
+        bindings = Bindings;
         height = h;
         width = w;
         myTurtles = new HashMap<>();
-        myTurtles.put(0, (new Turtle(TURTLE_DEFAULT, 0)));
-        myParser = new Parser("English", variables, functions);
+        myTurtles.put(0, (new Turtle(bindings,TURTLE_DEFAULT, 0)));
+        myParser = new Parser("English", variables, functions, bindings);
         myTurtle = myTurtles.get(0);
         
     }
 
-    public World(int h, int w, Turtle t, String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun) throws IOException {
+    public World(int h, int w, Turtle t, String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> Bindings) throws IOException {
         variables = var;
         functions = fun;
+        bindings = Bindings;
         height = h;
         width = w;
         myTurtles = new HashMap<>();
         myTurtles.put(t.getID(), t);
-        myParser = new Parser(language, variables, functions);
+        myParser = new Parser(language, variables, functions, Bindings);
         myTurtle = myTurtles.get(0);
 
     }
 
     public abstract void fixPosition();
-
-    //	public String oldListen(String input) {
-    //		String param = "";
-    //		for (String s : input.split("/n")) {
-    //			int numCmds = myParser.initializeCommands(s);
-    //			for (int i = 0; i < numCmds; i++) {
-    //				Command c = myParser.parse(param);
-    //				System.out.println("num " + i);
-    //				if (c.isLoop()) {
-    //					// param = "loop";
-    //					LoopCommand loopCommand = (LoopCommand) c;
-    //					loopCommand.readValues();
-    //					for (double j = loopCommand.getStart()
-    //							+ loopCommand.getIncr(); j < loopCommand.getEnd(); j += loopCommand
-    //							.getIncr()) {
-    //						param = "loop";
-    //						myParser.updateVariable(loopCommand.getVariable(), j);
-    //						myTurtle.act(myParser.parse(param));
-    //					}
-    //					myParser.resetRepcount();
-    //				} else {
-    //					param = myTurtle.act(c);
-    //					// param = myTurtle.act(myParser.parse(param));
-    //				}
-    //			}
-    //			param = "";
-    //		}
-    //		return param;
-    //	}
 
     public String listen(String input) {
         String param = "";
@@ -145,7 +124,7 @@ public abstract class World {
         try {
             param = myTurtles.get(turtleID).act(command);
         } catch (Exception e) {
-            myTurtles.put(turtleID, new Turtle(TURTLE_DEFAULT, turtleID));
+            myTurtles.put(turtleID, new Turtle(bindings, TURTLE_DEFAULT, turtleID));
             param = myTurtles.get(turtleID).act(command);
         }
         return param;
@@ -160,9 +139,5 @@ public abstract class World {
     }
 }
 
-// public static void main(String[] args) throws IOException {
-// BoundedWorld test = new BoundedWorld();
-// test.listen("fd 100 /n rt 90 /n fd 100");
-// }
-
+	
 

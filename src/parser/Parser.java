@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableMap;
 import command.Command;
 import command.CommandFactory;
@@ -27,11 +28,13 @@ public class Parser {
     private static final String LOOP = "loop";
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
+    private List<ObjectProperty> bindings;
 
-    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun) {
+    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind) {
         variables = var;
         functions = fun;
-        myCommandFactory = new CommandFactory(language, variables, functions);
+        bindings = bind;
+        myCommandFactory = new CommandFactory(language, variables, functions, bindings);
         myResources = ResourceBundle.getBundle("resources.languages/Syntax");
     }
 
