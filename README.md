@@ -4,7 +4,7 @@ A development environment that helps users write SLogo programs.
 Team 7: James Mosca, Brandon Choi, Thomas Bagley, Megan Gutter
 
 Date started: <br>
-Date finished: 3/7/15
+Date finished: 3/7/15 <br>
 Estimate # of hours: <br>
 Roles:
 
