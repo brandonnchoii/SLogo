@@ -38,6 +38,7 @@ public abstract class World {
 		myTurtles = new HashMap<>();
 		myTurtles.put(0, (new Turtle(TURTLE_DEFAULT, 0)));
 		myParser = new Parser("English");
+		myTurtle = myTurtles.get(0);
 	}
 
 	public World(int h, int w) throws IOException {
@@ -46,6 +47,7 @@ public abstract class World {
 		myTurtles = new HashMap<>();
 		myTurtles.put(0, (new Turtle(TURTLE_DEFAULT, 0)));
 		myParser = new Parser("English");
+		myTurtle = myTurtles.get(0);
 	}
 
 	public World(int h, int w, Turtle t, String language) throws IOException {
@@ -54,6 +56,7 @@ public abstract class World {
 		myTurtles = new HashMap<>();
 		myTurtles.put(t.getID(), t);
 		myParser = new Parser(language);
+		myTurtle = myTurtles.get(0);
 	}
 
 	public abstract void fixPosition();
@@ -91,9 +94,11 @@ public abstract class World {
 		String param = "";
 		for (String s : input.split("/n")) {
 			int numCommands = myParser.initializeCommands(s);
-			Command c = myParser.parse(param);
-			Map<String, String> commandValues = c.getCommandValues(myTurtles);
+			System.out.println("numCommands = " + numCommands);
 			for (int i = 0; i < numCommands; i++) {
+				Command c = myParser.parse(param);
+				Map<String, String> commandValues = c.getCommandValues(myTurtles);
+				System.out.println("param = " + param);
 				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
 					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
 						double loopStart = Double.parseDouble(commandValues
@@ -106,7 +111,9 @@ public abstract class World {
 							myParser.updateVariable(
 									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
+							System.out.println("loopEnd = " + loopEnd);
 							if (loopStart + loopIncrement == loopEnd) {
+								System.out.println("hi");
 								param = runCommand(c, turtleID);
 							} else {
 								param = runCommand(myParser.parse(param),
