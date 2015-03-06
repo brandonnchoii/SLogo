@@ -111,8 +111,7 @@ public class WorldController {
         myTurtle.updatePenAttributes(myGC);
         myAnimation.play();
         String s = myWorld.listen(command);
-        //UI.getSidebar().addResult(s);
-        //drawTurtle();
+        drawTurtle();
     }
     
     //resort to this method if the animator isn't working well

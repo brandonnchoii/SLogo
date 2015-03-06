@@ -17,7 +17,7 @@ import command.Command;
 //Turtle extends IV but eventually, we want to not give WC or UI the entire Turtle
 public class Turtle extends ImageView {
 
-    private static final int DEFAULT_SIZE = 30;
+    private static final int DEFAULT_SIZE = 25;
     private static final double DEFAULT_POS = 0;
     private static final double DEFAULT_SPEED = 10.0;
     private static final boolean DEFAULT_DRAW = true;
