@@ -82,7 +82,7 @@ public class CommandFactory {
         setTranslationMap();
     }
 
- 
+
 
     public void clearRepCount(){
         variables.remove(":repCount");
@@ -90,19 +90,6 @@ public class CommandFactory {
 
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
-    }
-    
-    public static void main(String[] args){
-        CommandFactory cf = new CommandFactory("English");
-        List<String> parts = new ArrayList<String>();
-        parts.add("sum");
-        parts.add("50");
-        parts.add("1");
-        parts.add("2");
-        
-        Command c1 = cf.createCommand(parts);
-        //Turtle t = new Turtle();
-        //System.out.print(c1.run(t));
     }
 
 }
