@@ -16,7 +16,7 @@ public class MakeVariableCommand extends LoopCommand {
         super(params, variableMap, func, bind, colors);
     }
 
-    public List<Double> createParameters(){
+    public List<Double> makeParameters(){
         List<Double> params = new ArrayList<Double>();
         params.add(addParam(strParameters.get(2)));
         return params;
@@ -27,7 +27,8 @@ public class MakeVariableCommand extends LoopCommand {
     }
 
     public void updateVariables(){
-        variables.put(strParameters.get(1), parameters.get(0));
+        //variables.put(strParameters.get(1), parameters.get(0));
+        variables.put(":x", 2.);
     }
 
 }
