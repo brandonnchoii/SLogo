@@ -1,0 +1,6 @@
+<map id="userInterface.UI.runCommand" name="userInterface.UI.runCommand">
+<area shape="rect" id="node2" href="$d0/d7c/classuser_interface_1_1_u_i.html#a02bd34909b5d6037ea8ebe812879b90a" title="userInterface.UI.makeRun\lButton" alt="" coords="269,5,456,46"/>
+<area shape="rect" id="node3" href="$d0/d7c/classuser_interface_1_1_u_i.html#a9f7eaa121e1405b45e262f03859f9ff0" title="userInterface.UI.setUpCommand\lField" alt="" coords="504,5,736,46"/>
+<area shape="rect" id="node4" href="$d0/d7c/classuser_interface_1_1_u_i.html#a3bbaba49b5a758cdab6fb4182e5dec4c" title="userInterface.UI.initialize" alt="" coords="784,12,963,39"/>
+<area shape="rect" id="node5" href="$d0/d7c/classuser_interface_1_1_u_i.html#aad82f35446d97cd94d5003a2b995e264" title="userInterface.UI.UI" alt="" coords="1011,12,1151,39"/>
+</map>

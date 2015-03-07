@@ -1,0 +1,5 @@
+<map id="command.HomeCommand.doCommand" name="command.HomeCommand.doCommand">
+<area shape="rect" id="node2" href="$d2/dda/classcommand_1_1_home_command.html#a0f4485e0766effe3ed62cc42a1ced43a" title="command.HomeCommand.distance" alt="" coords="339,5,594,32"/>
+<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#a5beb4f8b62b365363952d5ed4512435f" title="turtle.Turtle.moveTo" alt="" coords="393,56,540,83"/>
+<area shape="rect" id="node4" href="$df/dcb/classturtle_1_1_turtle.html#abfdf6ff527b415b5e0f813b7daee4216" title="turtle.Turtle.setHeading" alt="" coords="381,107,552,133"/>
+</map>
