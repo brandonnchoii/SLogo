@@ -106,8 +106,8 @@ public class CommandFactory {
     public static void main(String[] args){
         CommandFactory cf = new CommandFactory("English", null, null, null, null);
         List<String> a = new ArrayList<>();
-        a.add("fd");
-        a.add("50");
+        a.add("dotimes");
+        a.add(":x 10");
         Command c = cf.createCommand(a);
         System.out.print(c.getClass());
     }
