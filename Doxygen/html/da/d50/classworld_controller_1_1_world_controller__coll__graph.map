@@ -1,0 +1,11 @@
+<map id="worldController.WorldController" name="worldController.WorldController">
+<area shape="rect" id="node18" href="$d0/d7c/classuser_interface_1_1_u_i.html" title="userInterface.UI" alt="" coords="1829,1064,1952,1091"/>
+<area shape="rect" id="node14" href="$de/df4/classuser_interface_1_1_right_panel.html" title="userInterface.RightPanel" alt="" coords="1131,260,1307,287"/>
+<area shape="rect" id="node36" href="$d9/dd0/classworld_1_1_world.html" title="world.World" alt="" coords="1172,1051,1265,1077"/>
+<area shape="rect" id="node37" href="$d6/d95/classparser_1_1_parser.html" title="parser.Parser" alt="" coords="772,1101,879,1128"/>
+<area shape="rect" id="node38" href="$d9/d1b/classcommand_1_1_command_factory.html" title="command.CommandFactory" alt="" coords="329,1067,533,1093"/>
+<area shape="rect" id="node4" href="$dc/d1b/classuser_interface_1_1_left_panel.html" title="userInterface.LeftPanel" alt="" coords="1135,591,1303,617"/>
+<area shape="rect" id="node27" href="$df/dcb/classturtle_1_1_turtle.html" title="turtle.Turtle" alt="" coords="778,1549,873,1576"/>
+<area shape="rect" id="node30" href="$de/d57/classturtle_1_1_pen.html" title="turtle.Pen" alt="" coords="389,1651,473,1677"/>
+<area shape="rect" id="node40" href="$d3/dcc/classparser_1_1_node.html" title="parser.Node" alt="" coords="381,1171,481,1197"/>
+</map>

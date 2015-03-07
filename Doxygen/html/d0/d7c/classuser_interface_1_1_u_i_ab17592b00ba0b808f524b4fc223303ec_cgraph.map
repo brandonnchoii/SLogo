@@ -1,0 +1,31 @@
+<map id="userInterface.UI.runCommand" name="userInterface.UI.runCommand">
+<area shape="rect" id="node2" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="269,312,533,339"/>
+<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#a610aafaf658c4b351330b7c16c66881c" title="turtle.Turtle.updatePenAttributes" alt="" coords="582,212,813,239"/>
+<area shape="rect" id="node6" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="632,412,763,439"/>
+<area shape="rect" id="node4" href="$de/d57/classturtle_1_1_pen.html#ac9a08745a9f3615b9e47c1c8e5af8f1b" title="turtle.Pen.getColor" alt="" coords="915,161,1058,188"/>
+<area shape="rect" id="node5" href="$de/d57/classturtle_1_1_pen.html#a76c8dc4e66927e7d3774ea00b2266640" title="turtle.Pen.getSize" alt="" coords="919,212,1055,239"/>
+<area shape="rect" id="node7" href="$d6/d95/classparser_1_1_parser.html#a240c75608624a9c67402a296855c4d1d" title="parser.Parser.initialize\lCommands" alt="" coords="907,339,1067,381"/>
+<area shape="rect" id="node11" href="$d6/d95/classparser_1_1_parser.html#a4ecbffc246c3add017c4720eed4c6da9" title="parser.Parser.parse" alt="" coords="914,263,1059,289"/>
+<area shape="rect" id="node24" href="$d7/d35/classcommand_1_1_command.html#a957099a70dd30b5dc897e0caf07d2d99" title="command.Command.getCommand\lValues" alt="" coords="861,405,1112,446"/>
+<area shape="rect" id="node26" href="$d6/d95/classparser_1_1_parser.html#a8679d61f4ae6c55910ef113bcdda2c75" title="parser.Parser.updateVariable" alt="" coords="884,471,1089,497"/>
+<area shape="rect" id="node28" href="$d9/dd0/classworld_1_1_world.html#adcbcb8328c7e832fcb710a91457e6772" title="world.World.runCommand" alt="" coords="894,521,1079,548"/>
+<area shape="rect" id="node29" href="$d6/d95/classparser_1_1_parser.html#acebafe1593fc1f09ac31c7104438e4b1" title="parser.Parser.resetRepcount" alt="" coords="886,572,1087,599"/>
+<area shape="rect" id="node8" href="$d6/d95/classparser_1_1_parser.html#a4f582c65390bddc57219c0b5c31ef5e7" title="parser.Parser.makeTree" alt="" coords="1200,361,1371,388"/>
+<area shape="rect" id="node9" href="$d9/d1b/classcommand_1_1_command_factory.html#a87bf7e648425bb22124367cabedb3327" title="command.CommandFactory.get\lNumParameters" alt="" coords="1484,411,1711,453"/>
+<area shape="rect" id="node10" href="$d9/d1b/classcommand_1_1_command_factory.html#a947fdc151e857ea74564d0d1fe268246" title="command.CommandFactory.translate\lCommand" alt="" coords="1785,382,2047,423"/>
+<area shape="rect" id="node12" href="$d9/d1b/classcommand_1_1_command_factory.html#ab25bb047b051661d31adf73b2dae5649" title="command.CommandFactory.create\lCommand" alt="" coords="1162,295,1409,337"/>
+<area shape="rect" id="node14" href="$d6/d95/classparser_1_1_parser.html#aac1cff62f68138c7e977a67d39671701" title="parser.Parser.generateCommand\lInput" alt="" coords="1168,99,1403,141"/>
+<area shape="rect" id="node19" href="$d6/d95/classparser_1_1_parser.html#a3efcd1192e76101919526b4a5e0046f4" title="parser.Parser.getNodeBefore\lToReplace" alt="" coords="1182,165,1389,206"/>
+<area shape="rect" id="node22" href="$d6/d95/classparser_1_1_parser.html#a447c473b62ba23b7c144df9bb38a9a41" title="parser.Parser.getNodeFor\lCommand" alt="" coords="1193,230,1377,271"/>
+<area shape="rect" id="node23" href="$d3/dcc/classparser_1_1_node.html#a066da2b478008f39a02440d7afceb9ee" title="parser.Node.insertChild" alt="" coords="1200,48,1371,75"/>
+<area shape="rect" id="node13" href="$d9/d1b/classcommand_1_1_command_factory.html#abd97ea3e22afc09e07ed1d4fd039d11f" title="command.CommandFactory.reflectCMD" alt="" coords="1459,309,1735,336"/>
+<area shape="rect" id="node15" href="$d3/dcc/classparser_1_1_node.html#aa67bc0d39227232943abec9b95b23235" title="parser.Node.getChild1" alt="" coords="1515,157,1679,184"/>
+<area shape="rect" id="node16" href="$d3/dcc/classparser_1_1_node.html#a0f13775acc62af77cdde90dbeaf26bbc" title="parser.Node.getChild2" alt="" coords="1515,107,1679,133"/>
+<area shape="rect" id="node17" href="$d3/dcc/classparser_1_1_node.html#a9c12e8d4375a7517eae0a35724b253c4" title="parser.Node.getValue" alt="" coords="1517,56,1677,83"/>
+<area shape="rect" id="node18" href="$d3/dcc/classparser_1_1_node.html#a6bbc0c61aaa261077eb87cfc4e2b45dc" title="parser.Node.numChildren" alt="" coords="1505,5,1690,32"/>
+<area shape="rect" id="node20" href="$d3/dcc/classparser_1_1_node.html#ab14db24c0724dec4387e29d513008e2e" title="parser.Node.hasChildren" alt="" coords="1508,259,1687,285"/>
+<area shape="rect" id="node21" href="$d3/dcc/classparser_1_1_node.html#aa92667a825777b3d757bc3b1a247ac20" title="parser.Node.isLeaf" alt="" coords="1527,208,1668,235"/>
+<area shape="rect" id="node25" href="$d7/d35/classcommand_1_1_command.html#a7e1387db1d0d35d4dcd3a3ebe2ff902a" title="command.Command.makeString" alt="" coords="1167,412,1403,439"/>
+<area shape="rect" id="node27" href="$d9/d1b/classcommand_1_1_command_factory.html#a8347db76764ea8308d029789b49519dd" title="command.CommandFactory.update\lVariable" alt="" coords="1160,463,1411,505"/>
+<area shape="rect" id="node30" href="$d9/d1b/classcommand_1_1_command_factory.html#a0d59e4f0f925b5046957c0e054ce8bef" title="command.CommandFactory.reset\lRepcount" alt="" coords="1166,565,1405,606"/>
+</map>
