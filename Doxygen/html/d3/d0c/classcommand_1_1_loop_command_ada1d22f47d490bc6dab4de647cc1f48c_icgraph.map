@@ -1,0 +1,9 @@
+<map id="command.LoopCommand.readValues" name="command.LoopCommand.readValues">
+<area shape="rect" id="node2" href="$d9/dd0/classworld_1_1_world.html#ae370733f7784c42741a6ba66c7d2ecf5" title="world.World.listen" alt="" coords="277,45,408,72"/>
+<area shape="rect" id="node3" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="456,45,720,72"/>
+<area shape="rect" id="node4" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a95e324c85888faea808be269e44ed5b8" title="userInterface.UserInterface.run\lCommand" alt="" coords="768,38,989,79"/>
+<area shape="rect" id="node5" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a560c36977fddeee87002333870c54ed6" title="userInterface.UserInterface.set\lUpResponses" alt="" coords="1331,5,1551,46"/>
+<area shape="rect" id="node7" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a4316649a1f81fcc1dcaf93c812bf6f3a" title="userInterface.UserInterface.make\lRunButton" alt="" coords="1038,67,1274,109"/>
+<area shape="rect" id="node6" href="$dd/d8e/classuser_interface_1_1_user_interface.html#af296b064499e62c4fbfbf73da6456532" title="userInterface.UserInterface.\lUserInterface" alt="" coords="1608,38,1808,79"/>
+<area shape="rect" id="node8" href="$dd/d8e/classuser_interface_1_1_user_interface.html#a6d39ee7d7ae35fc0539bb714bce6221a" title="userInterface.UserInterface.make\lFunctionButtons" alt="" coords="1323,70,1559,111"/>
+</map>
