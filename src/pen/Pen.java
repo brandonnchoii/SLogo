@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
 //delete class or move it? lots of getters/setters, pointless?
 public class Pen {
-	private static final double DEFAULT_PEN_SIZE = 1;	
+	private static final double DEFAULT_PEN_SIZE = 3;	
 	
 	protected Paint myPenColor;
 	protected double mySize;

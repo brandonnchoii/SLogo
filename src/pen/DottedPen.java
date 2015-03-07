@@ -18,14 +18,22 @@ public class DottedPen extends Pen{
 	
 	@Override
 	public void drawLine(GraphicsContext gc, Point2D goal, Point2D current, Point2D shift) {
+        double currX = current.getX();
+        double currY = current.getY();
+        double xSlope = (goal.getX() - current.getX())/myInterval;
+        double ySlope = (goal.getY() - current.getY())/myInterval;
+        gc.setFill(myPenColor);
+        gc.setLineWidth(mySize);      	
         if (isDrawing) {
-        	double shiftX = shift.getX();
-        	double shiftY = shift.getY();
-        	gc.setFill(myPenColor);
-        	gc.setLineWidth(mySize);      	
-        	gc.strokeLine(current.getX() + shiftX, current.getY() + shiftY, 
-        			goal.getX() + shiftX, goal.getY() + shiftY);
-	
+        	for (int i = 0; i < myInterval; i++) {
+        		if (isDrawing) {
+        		gc.strokeLine(currX + shift.getX(), currY + shift.getY(), 
+        				currX + shift.getX(), currY + shift.getY());
+        		currX += xSlope;
+        		currY += ySlope;
+        		isDrawing = !isDrawing;     	
+        		}
+        	}
         }
 	}
 	

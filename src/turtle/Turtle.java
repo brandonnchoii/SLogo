@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import pen.DefaultPen;
+import pen.DottedPen;
 import pen.Pen;
 import worldController.WorldController;
 import userInterface.UIManager;
