@@ -14,7 +14,7 @@ public class ShowTurtleCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         t.setVisible(parameters.get(0) != 0);
         return parameters.get(0);
     }

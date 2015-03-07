@@ -17,7 +17,7 @@ public class RepeatCommand extends LoopCommand {
 
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return 0;
     }
 

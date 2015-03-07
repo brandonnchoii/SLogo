@@ -18,16 +18,16 @@ public class MakeUserInstructionCommand extends LoopCommand {
 
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(exists)
             return 0;
         return 1;
     }
 
-    public Map<String, String> updateFunctions(){
+    public void updateFunctions(){
         if(exists)
             functions.put(strParameters.get(1), strParameters.get(2));
-        return functions;
+
     }
 
 }

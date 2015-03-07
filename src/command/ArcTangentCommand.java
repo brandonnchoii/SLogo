@@ -16,7 +16,8 @@ public class ArcTangentCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
+        super.run(t);
         return Math.atan(Math.toDegrees(parameters.get(0)));
     }
 

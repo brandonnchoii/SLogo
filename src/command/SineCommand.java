@@ -15,7 +15,7 @@ public class SineCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return Math.sin(Math.toRadians(parameters.get(0)));
     }
 }

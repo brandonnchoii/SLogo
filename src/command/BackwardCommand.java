@@ -15,7 +15,7 @@ public class BackwardCommand extends Command {
     }
     
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         for (Double d: parameters)
             t.move(-1*d);
         return parameters.get(0);

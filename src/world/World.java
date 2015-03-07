@@ -153,6 +153,8 @@ public abstract class World {
 								.get(LOOP_INCREMENT));
 						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
 							System.out.println("loop# = " + j);
+							myParser.updateVariable(
+									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart == loopEnd) {
 								param = runCommand(c, turtleID);
@@ -160,8 +162,6 @@ public abstract class World {
 								param = runCommand(myParser.parse("loop"),
 										turtleID);
 							}
-							myParser.updateVariable(
-									commandValues.get(LOOP_VARIABLE), j);
 						}
 						myParser.resetRepcount();
 					} else {

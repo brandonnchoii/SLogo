@@ -15,7 +15,7 @@ public class ForwardCommand extends Command {
     }
     
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         for (Double d: parameters)
             t.move(d);
         return parameters.get(0);

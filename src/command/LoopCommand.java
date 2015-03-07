@@ -22,7 +22,7 @@ public abstract class LoopCommand extends Command {
         loop = true;
     }
   
-    protected List<Double> createParameters(){
+    protected List<Double> makeParameters(){
         return new ArrayList<Double>();
     }
     

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
+import turtle.Turtle;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -107,9 +107,9 @@ public class CommandFactory {
         CommandFactory cf = new CommandFactory("English", null, null, null, null);
         List<String> a = new ArrayList<>();
         a.add("dotimes");
-        a.add(":x 10");
+        a.add(":x 2");
         Command c = cf.createCommand(a);
-        System.out.print(c.getClass());
+        //System.out.print(c.run(new Turtle()));
     }
     
 
