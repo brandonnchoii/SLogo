@@ -1,0 +1,23 @@
+<map id="worldController.WorldController.WorldController" name="worldController.WorldController.WorldController">
+<area shape="rect" id="node2" href="$d0/d7c/classuser_interface_1_1_u_i.html#ab49b650fd622f1fd78ab068ea036cfaa" title="userInterface.UI.getCanvas" alt="" coords="303,5,497,32"/>
+<area shape="rect" id="node3" href="$d0/d7c/classuser_interface_1_1_u_i.html#ae4b4f47652558adc7f2a3b35cb03b0c5" title="userInterface.UI.getGraphics" alt="" coords="298,56,502,83"/>
+<area shape="rect" id="node4" href="$dc/d1b/classuser_interface_1_1_left_panel.html#a8b31bed29bdfa95820342c6d3facc020" title="userInterface.LeftPanel.get\lInstance" alt="" coords="303,107,497,149"/>
+<area shape="rect" id="node6" href="$de/df4/classuser_interface_1_1_right_panel.html#a458f970045d0dde26df4c9c4c1085fb7" title="userInterface.RightPanel.get\lInstance" alt="" coords="299,173,501,214"/>
+<area shape="rect" id="node8" href="$d0/d7c/classuser_interface_1_1_u_i.html#a27f69068b0d48aef3a5d91fa62b39059" title="userInterface.UI.getPane" alt="" coords="311,239,489,265"/>
+<area shape="rect" id="node9" href="$d9/dd0/classworld_1_1_world.html#a62bc519b46f0fd04af93a8a12d38f2f9" title="world.World.getTurtle" alt="" coords="324,289,476,316"/>
+<area shape="rect" id="node10" href="$dc/d1b/classuser_interface_1_1_left_panel.html#a06bc8c838ae46046bc0a78fceb224387" title="userInterface.LeftPanel.initialize" alt="" coords="289,340,511,367"/>
+<area shape="rect" id="node11" href="$de/df4/classuser_interface_1_1_right_panel.html#ab0a81e4ee0122226fc3181d25e9c19f8" title="userInterface.RightPanel.initialize" alt="" coords="285,391,515,417"/>
+<area shape="rect" id="node13" href="$d8/d08/classworld_controller_1_1_world_controller.html#a338b2d907598a400b7cbcfbb86550a71" title="worldController.WorldController.make\lTimeline" alt="" coords="273,442,527,483"/>
+<area shape="rect" id="node22" href="$d8/d08/classworld_controller_1_1_world_controller.html#a99332ba84b85c298014578f9ae762aa5" title="worldController.WorldController.set\lUpBindings" alt="" coords="281,507,519,549"/>
+<area shape="rect" id="node5" href="$dc/d1b/classuser_interface_1_1_left_panel.html#a0fcdcf8b427a868a7069ac627eea1b43" title="userInterface.LeftPanel.\lLeftPanel" alt="" coords="618,107,790,149"/>
+<area shape="rect" id="node7" href="$de/df4/classuser_interface_1_1_right_panel.html#a444679df7a56d1cfea2ed417f0ed4f7d" title="userInterface.RightPanel.\lRightPanel" alt="" coords="614,173,794,214"/>
+<area shape="rect" id="node12" href="$de/df4/classuser_interface_1_1_right_panel.html#a8b7803fd8d910ad0d0d9adc4735cac54" title="userInterface.RightPanel.make\lListView" alt="" coords="596,381,812,422"/>
+<area shape="rect" id="node14" href="$d8/d08/classworld_controller_1_1_world_controller.html#a6158b4b98f36224f3e871c8a164a0137" title="worldController.WorldController.make\lKeyFrame" alt="" coords="577,446,831,487"/>
+<area shape="rect" id="node15" href="$df/dcb/classturtle_1_1_turtle.html#a6e41524d115c16610b5765720df6e658" title="turtle.Turtle.getCurrent" alt="" coords="894,377,1061,404"/>
+<area shape="rect" id="node16" href="$df/dcb/classturtle_1_1_turtle.html#a568de9ba87ac973fb3987cb2782af97e" title="turtle.Turtle.getGoal" alt="" coords="903,428,1051,455"/>
+<area shape="rect" id="node17" href="$df/dcb/classturtle_1_1_turtle.html#a7c0f37993844a70cdd57951ae4a916dd" title="turtle.Turtle.animatedMove" alt="" coords="881,529,1074,556"/>
+<area shape="rect" id="node18" href="$df/dcb/classturtle_1_1_turtle.html#a49bc6263dff19b97b012d9c2052e701d" title="turtle.Turtle.findNextPoint" alt="" coords="1123,479,1306,505"/>
+<area shape="rect" id="node20" href="$df/dcb/classturtle_1_1_turtle.html#a42c672bc79ce607cef27b8f436cd938d" title="turtle.Turtle.moveMyself" alt="" coords="1127,529,1302,556"/>
+<area shape="rect" id="node21" href="$de/d57/classturtle_1_1_pen.html#a361f4e030646d953185a8afe94427ce2" title="turtle.Pen.penReady" alt="" coords="1139,580,1290,607"/>
+<area shape="rect" id="node19" href="$df/dcb/classturtle_1_1_turtle.html#a8f637f9dba952c65541c47ca5ef5748b" title="turtle.Turtle.atGoal" alt="" coords="1355,479,1495,505"/>
+</map>

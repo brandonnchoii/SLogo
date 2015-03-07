@@ -1,0 +1,8 @@
+<map id="userInterface.TopMenu.createViewMenu" name="userInterface.TopMenu.createViewMenu">
+<area shape="rect" id="node2" href="$d3/db5/classuser_interface_1_1_top_menu.html#a6910b4617ec06bd6ff657a326bc5414c" title="userInterface.TopMenu.display\lColorPicker" alt="" coords="265,95,479,137"/>
+<area shape="rect" id="node6" href="$d3/db5/classuser_interface_1_1_top_menu.html#a91967a0db57f7be18c876a79b405ad9f" title="userInterface.TopMenu.display\lImagePicker" alt="" coords="265,161,479,202"/>
+<area shape="rect" id="node7" href="$d3/db5/classuser_interface_1_1_top_menu.html#a49c0c214e19d20a7888e3760802aaf5e" title="userInterface.TopMenu.display\lPenEditor" alt="" coords="265,30,479,71"/>
+<area shape="rect" id="node3" href="$d3/db5/classuser_interface_1_1_top_menu.html#a5a5ca2d16b2af30c61db4744a593a709" title="userInterface.TopMenu.extract\lColor" alt="" coords="529,5,743,46"/>
+<area shape="rect" id="node4" href="$d3/db5/classuser_interface_1_1_top_menu.html#aaa39c0ed0953088b771fc02213fb0db0" title="userInterface.TopMenu.display" alt="" coords="529,71,743,97"/>
+<area shape="rect" id="node5" href="$d3/db5/classuser_interface_1_1_top_menu.html#a98951700279e23e40fadbb31a809a885" title="userInterface.TopMenu.create\lDisplayBox" alt="" coords="531,122,741,163"/>
+</map>
