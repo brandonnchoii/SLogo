@@ -1,4 +1,0 @@
-<map id="world.World" name="world.World">
-<area shape="rect" id="node2" href="$de/d1c/classworld_1_1_bounded_world.html" title="world.BoundedWorld" alt="" coords="5,80,155,107"/>
-<area shape="rect" id="node3" href="$db/d16/classworld_1_1_unbounded_world.html" title="world.UnboundedWorld" alt="" coords="179,80,345,107"/>
-</map>
