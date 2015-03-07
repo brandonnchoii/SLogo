@@ -2,6 +2,7 @@ package command;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class CommandFactory {
     private Command reflectCMD(String cmd, List<String> parts){
         try {
             Class<?> commandClass = Class.forName("command." + cmd + "Command");
-            Constructor<?> commandConstructor = commandClass.getConstructor(List.class, Map.class, Map.class, List.class, List.class);
+            Constructor<?> commandConstructor = commandClass.getConstructor(List.class, ObservableMap.class, ObservableMap.class, List.class, ObservableList.class);
             Command ret = (Command) commandConstructor.newInstance(parts, variables, functions, bindings, colors);
             return ret;
 
@@ -99,6 +100,15 @@ public class CommandFactory {
 
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
+    }
+    
+    public static void main(String[] args){
+        CommandFactory cf = new CommandFactory("English", null, null, null, null);
+        List<String> a = new ArrayList<>();
+        a.add("fd");
+        a.add("50");
+        Command c = cf.createCommand(a);
+        System.out.print(c.getClass());
     }
     
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
 
@@ -26,7 +27,7 @@ public abstract class Command {
     protected Map<String, String> commandValues; 
     protected ResourceBundle syntax;
 
-    public Command(List<String> params, Map<String, Double> variableMap, Map<String, String> func, List<ObjectProperty> bind, ObservableList<Color> color) {
+    public Command(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> color) {
         strParameters = params;
         loop = false;
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
