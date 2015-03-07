@@ -1,5 +1,0 @@
-<map id="command.Command.doCommand" name="command.Command.doCommand">
-<area shape="rect" id="node2" href="$d7/d35/classcommand_1_1_command.html#a66d04483ecf285dc068cdd6fa3dd0a39" title="command.Command.run" alt="" coords="299,31,482,57"/>
-<area shape="rect" id="node3" href="$d9/d1b/classcommand_1_1_command_factory.html#a29259fe3695c6c5ba28330705fe07a2f" title="command.CommandFactory.main" alt="" coords="531,5,770,32"/>
-<area shape="rect" id="node4" href="$df/dcb/classturtle_1_1_turtle.html#aa53d992fb81cd039a22a301af9b32aba" title="turtle.Turtle.act" alt="" coords="591,56,710,83"/>
-</map>
