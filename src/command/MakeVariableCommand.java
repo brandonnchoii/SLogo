@@ -27,8 +27,7 @@ public class MakeVariableCommand extends LoopCommand {
     }
 
     public void updateVariables(){
-        //variables.put(strParameters.get(1), parameters.get(0));
-        variables.put(":x", 2.);
+        variables.put(strParameters.get(1), parameters.get(0));
     }
 
 }
