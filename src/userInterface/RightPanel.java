@@ -6,6 +6,7 @@ package userInterface;
 
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,7 +30,7 @@ public class RightPanel {
     private VBox myRightPanel;
     private ObservableList<String> results;
     private ObservableList<String> previousCommands;
-    private ObservableList<String> savedCommands;
+    private ObservableMap<String, String> savedCommands;
     private ListView<String> resultsView;
     private ListView<String> previousCommandView;
     private ListView<String> savedCommandView;
@@ -71,11 +72,11 @@ public class RightPanel {
      */
     public void initialize (ObservableList<String> r,
                             ObservableList<String> p,
-                            ObservableList<String> s,
+                            ObservableMap<String, String> savedCommands2,
                             StringProperty t) {
         results = r;
         previousCommands = p;
-        savedCommands = s;
+        savedCommands = savedCommands2;
         inputText = t;
 
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
@@ -94,9 +95,9 @@ public class RightPanel {
 
         myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
                                           makeListView(previousCommandView, previousCommands,
-                                                       PREVIOUS_COMMANDS_LABEL),
-                                          makeListView(savedCommandView, savedCommands,
-                                                       SAVED_COMMANDS_LABEL));
+                                                       PREVIOUS_COMMANDS_LABEL));
+//                                          makeListView(savedCommandView, savedCommands,
+//                                                       SAVED_COMMANDS_LABEL));
     }
 
     /**

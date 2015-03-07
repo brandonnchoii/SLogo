@@ -98,37 +98,8 @@ public abstract class World {
 
 	public abstract void fixPosition();
 
-	// public String oldListen(String input) {
-	// String param = "";
-	// for (String s : input.split("/n")) {
-	// int numCmds = myParser.initializeCommands(s);
-	// for (int i = 0; i < numCmds; i++) {
-	// Command c = myParser.parse(param);
-	// System.out.println("num " + i);
-	// if (c.isLoop()) {
-	// // param = "loop";
-	// LoopCommand loopCommand = (LoopCommand) c;
-	// loopCommand.readValues();
-	// for (double j = loopCommand.getStart()
-	// + loopCommand.getIncr(); j < loopCommand.getEnd(); j += loopCommand
-	// .getIncr()) {
-	// param = "loop";
-	// myParser.updateVariable(loopCommand.getVariable(), j);
-	// myTurtle.act(myParser.parse(param));
-	// }
-	// myParser.resetRepcount();
-	// } else {
-	// param = myTurtle.act(c);
-	// // param = myTurtle.act(myParser.parse(param));
-	// }
-	// }
-	// param = "";
-	// }
-	// return param;
-	// }
-
 	/**
-	 * 
+	 * Logic to retrieve and perform all inputted commands
 	 * 
 	 * @param String input
 	 * @return String param
@@ -138,12 +109,12 @@ public abstract class World {
 		String param = "";
 		for (int s = 0; s < splitInput.length; s++) {
 			int numCommands = myParser.initializeCommands(splitInput[s]);
-			System.out.println("numCommands = " + numCommands);
+			//System.out.println("numCommands = " + numCommands);
 			for (int i = 0; i < numCommands; i++) {
 				Command c = myParser.parse(param);
 				Map<String, String> commandValues = c
 						.getCommandValues(myTurtles);
-				System.out.println("param = " + param);
+				//System.out.println("param = " + param);
 				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
 					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
 						System.out.println("if = " + commandValues.get(IF_STATEMENT));
@@ -154,12 +125,12 @@ public abstract class World {
 						double loopIncrement = Double.parseDouble(commandValues
 								.get(LOOP_INCREMENT));
 						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
-							System.out.println("loop# = " + j);
+							//System.out.println("loop# = " + j);
 							myParser.updateVariable(
 									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart == loopEnd) {
-								System.out.println("loopEnd" + loopEnd);
+								//System.out.println("loopEnd" + loopEnd);
 								param = runCommand(c, turtleID);
 							} else {
 								param = runCommand(myParser.parse("list"),

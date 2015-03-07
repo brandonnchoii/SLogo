@@ -67,7 +67,7 @@ public class WorldController {
         setUpBindings(s);
         myWorld = new BoundedWorld(variableMap, savedCommands, bindings, colors);
         myRightPanel = r.getInstance();
-        //myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
+        myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
         myLeftPanel = l.getInstance();
         myLeftPanel.initialize(turtleMap, variableMap);
         
