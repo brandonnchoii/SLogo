@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['backwardcommand',['BackwardCommand',['../d2/d63/classcommand_1_1_backward_command.html#a43d9252bfb83c7b7434e0ab9c8477a29',1,'command::BackwardCommand']]],
-  ['boundedworld',['BoundedWorld',['../de/d1c/classworld_1_1_bounded_world.html#abcd43245d195da8a2d500b32bb2d25dd',1,'world.BoundedWorld.BoundedWorld(ObservableMap&lt; String, Double &gt; variables, ObservableMap&lt; String, String &gt; functions, List&lt; ObjectProperty &gt; bindings, ObservableList&lt; Color &gt; colors)'],['../de/d1c/classworld_1_1_bounded_world.html#a7ce6e734f20e3b60ed86daf5dc4973fa',1,'world.BoundedWorld.BoundedWorld(ObservableMap&lt; String, Double &gt; variables, ObservableMap&lt; String, String &gt; functions, List&lt; ObjectProperty &gt; bindings, int h, int w, ObservableList&lt; Color &gt; colors)'],['../de/d1c/classworld_1_1_bounded_world.html#aa021e1a1b9a8ce9e1ba8aeeebf17f829',1,'world.BoundedWorld.BoundedWorld(int h, int w, Turtle t, String l, ObservableMap&lt; String, Double &gt; variables, ObservableMap&lt; String, String &gt; functions, List&lt; ObjectProperty &gt; bindings, ObservableList&lt; Color &gt; colors)']]],
-  ['buttonfactory',['ButtonFactory',['../dc/dad/classfactories_1_1_button_factory.html#a69631da24fc13df9f3facc7f86e73139',1,'factories::ButtonFactory']]]
-];

@@ -1,6 +1,0 @@
-<map id="command.CommandFactory.setTranslationMap" name="command.CommandFactory.setTranslationMap">
-<area shape="rect" id="node2" href="$d9/d1b/classcommand_1_1_command_factory.html#a11c96978d36a47061f3df041fc256cdf" title="command.CommandFactory.Command\lFactory" alt="" coords="281,5,554,46"/>
-<area shape="rect" id="node3" href="$d9/d1b/classcommand_1_1_command_factory.html#aefbf95ff32788eb3b04d84d0f3c1a09a" title="command.CommandFactory.set\lLanguage" alt="" coords="304,70,531,111"/>
-<area shape="rect" id="node4" href="$d6/d95/classparser_1_1_parser.html#a0fbf692895cf9375b199cd3ab16a85dc" title="parser.Parser.setLanguage" alt="" coords="603,77,795,104"/>
-<area shape="rect" id="node5" href="$d9/dd0/classworld_1_1_world.html#a3fce16a21fcf18b812d35b28349811d5" title="world.World.setLanguage" alt="" coords="843,77,1023,104"/>
-</map>
