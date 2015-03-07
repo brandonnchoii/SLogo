@@ -3,6 +3,9 @@ package command;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 
 public abstract class LoopCommand extends Command {
 
@@ -12,8 +15,8 @@ public abstract class LoopCommand extends Command {
     protected String variable;
     protected String[] loopInfo;
 
-    public LoopCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func){
-        super(params, variableMap, func);
+    public LoopCommand(List<String> params, Map<String, Double> variableMap, Map<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
         updateMap();
         loop = true;
     }
