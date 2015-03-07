@@ -1,6 +1,0 @@
-<map id="parser.Parser.getNodeForCommand" name="parser.Parser.getNodeForCommand">
-<area shape="rect" id="node2" href="$d3/dcc/classparser_1_1_node.html#aa67bc0d39227232943abec9b95b23235" title="parser.Node.getChild1" alt="" coords="245,5,409,32"/>
-<area shape="rect" id="node3" href="$d3/dcc/classparser_1_1_node.html#a0f13775acc62af77cdde90dbeaf26bbc" title="parser.Node.getChild2" alt="" coords="245,56,409,83"/>
-<area shape="rect" id="node4" href="$d3/dcc/classparser_1_1_node.html#ab14db24c0724dec4387e29d513008e2e" title="parser.Node.hasChildren" alt="" coords="237,107,416,133"/>
-<area shape="rect" id="node5" href="$d3/dcc/classparser_1_1_node.html#aa92667a825777b3d757bc3b1a247ac20" title="parser.Node.isLeaf" alt="" coords="256,157,397,184"/>
-</map>
