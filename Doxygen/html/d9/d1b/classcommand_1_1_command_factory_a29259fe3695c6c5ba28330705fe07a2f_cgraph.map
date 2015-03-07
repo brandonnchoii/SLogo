@@ -1,7 +1,0 @@
-<map id="command.CommandFactory.main" name="command.CommandFactory.main">
-<area shape="rect" id="node2" href="$d9/d1b/classcommand_1_1_command_factory.html#a30fe47e44d45830cf0aaed846059e71c" title="command.CommandFactory.Command\lFactory" alt="" coords="294,5,567,46"/>
-<area shape="rect" id="node4" href="$d9/d1b/classcommand_1_1_command_factory.html#ab25bb047b051661d31adf73b2dae5649" title="command.CommandFactory.create\lCommand" alt="" coords="307,70,554,111"/>
-<area shape="rect" id="node3" href="$d9/d1b/classcommand_1_1_command_factory.html#ae6b7cca664ad47f77ea7e8e8adae9830" title="command.CommandFactory.set\lTranslationMap" alt="" coords="641,5,868,46"/>
-<area shape="rect" id="node5" href="$d9/d1b/classcommand_1_1_command_factory.html#abd97ea3e22afc09e07ed1d4fd039d11f" title="command.CommandFactory.reflectCMD" alt="" coords="617,73,893,100"/>
-<area shape="rect" id="node6" href="$d9/d1b/classcommand_1_1_command_factory.html#a947fdc151e857ea74564d0d1fe268246" title="command.CommandFactory.translate\lCommand" alt="" coords="623,125,886,166"/>
-</map>
