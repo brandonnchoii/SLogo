@@ -134,9 +134,10 @@ public abstract class World {
 	 * @return String param
 	 */
 	public String listen(String input) {
+		String[] splitInput = input.split("\n");
 		String param = "";
-		for (String s : input.split("/n")) {
-			int numCommands = myParser.initializeCommands(s);
+		for (int s = 0; s < splitInput.length; s++) {
+			int numCommands = myParser.initializeCommands(splitInput[s]);
 			System.out.println("numCommands = " + numCommands);
 			for (int i = 0; i < numCommands; i++) {
 				Command c = myParser.parse(param);
@@ -169,6 +170,9 @@ public abstract class World {
 					} else {
 						// return commandValues.get("0");
 					}
+				}
+				if (s != splitInput.length - 1) {
+					param = "";
 				}
 			}
 		}
