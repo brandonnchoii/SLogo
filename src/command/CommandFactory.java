@@ -31,7 +31,6 @@ public class CommandFactory {
 
     public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> functions2, List<ObjectProperty> bind, ObservableList<Color> color)  {
         variables = var;
-        System.out.print("VARVARVAR " + variables.size());
         functions = functions2;
         bindings = bind;
         language = l;
