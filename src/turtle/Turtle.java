@@ -3,6 +3,8 @@ package turtle;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import pen.DefaultPen;
+import pen.Pen;
 import worldController.WorldController;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,7 +32,7 @@ public class Turtle extends ImageView {
 	private Point2D goal;
 
 	public Turtle(Paint color, int ID) {
-		myPen = new Pen(color);
+		myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
 		active = true;
 		id = ID;
@@ -38,21 +40,21 @@ public class Turtle extends ImageView {
 
 
 	public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
-		myPen = new Pen(color);
+		myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
 		active = true;
 		id = ID;
 	}
 
     public Turtle(Image i, Paint color, int ID){
-        myPen = new Pen(color);
+        myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
         active = true;
         id = ID;
     }
 
     public Turtle(int x, int y, Image i, Paint color, int ID){
-        myPen = new Pen(color);
+        myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
         active = true;
         id = ID;
@@ -88,8 +90,8 @@ public class Turtle extends ImageView {
 	}
 
 	public void move (double pixels) {
-		goal = new Point2D(getTranslateX() + pixels*Math.cos(radians()),
-				getTranslateY() + pixels*Math.sin(radians()));
+		goal = new Point2D(goal.getX() + pixels*Math.cos(radians()),
+				goal.getY() + pixels*Math.sin(radians()));
 	}
 
 	private double radians(){

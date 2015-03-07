@@ -1,15 +1,16 @@
-package turtle;
+package pen;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
 //delete class or move it? lots of getters/setters, pointless?
 public class Pen {
-	private static final double DEFAULT_PEN_SIZE = 2;	
+	private static final double DEFAULT_PEN_SIZE = 1;	
 	
-	private Paint myPenColor;
-	private double mySize;
-	private boolean isDrawing;
+	protected Paint myPenColor;
+	protected double mySize;
+	protected boolean isDrawing;
+	protected double myInterval;
 	
 	public Pen(Paint color) {
 		isDrawing = true;
@@ -17,6 +18,13 @@ public class Pen {
 		mySize = DEFAULT_PEN_SIZE;
 	}
 
+	public Pen(Paint color, double interval) {
+		isDrawing = true;
+		myPenColor = color;
+		mySize = DEFAULT_PEN_SIZE;
+		myInterval = interval;
+	}
+	
 	public void drawLine(GraphicsContext gc, Point2D goal, Point2D current, Point2D shift) {
         if (isDrawing) {
         	double shiftX = shift.getX();
