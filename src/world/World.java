@@ -59,7 +59,7 @@ public abstract class World {
 		width = DEFAULT_WIDTH;
 		myTurtles = new HashMap<>();
 		myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-		myParser = new Parser("English", variables, functions, bindings, colors);
+		myParser = new Parser("English", variables, savedCommands, bindings, colors);
 		myTurtle = myTurtles.get(0);
 	}
 
@@ -74,7 +74,7 @@ public abstract class World {
 		width = w;
 		myTurtles = new HashMap<>();
 		myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-		myParser = new Parser("English", variables, functions, bindings, colors);
+		myParser = new Parser("English", variables, fun, bindings, colors);
 		myTurtle = myTurtles.get(0);
 
 	}
@@ -91,7 +91,7 @@ public abstract class World {
 		width = w;
 		myTurtles = new HashMap<>();
 		myTurtles.put(t.getID(), t);
-		myParser = new Parser(language, variables, functions, bindings, colors);
+		myParser = new Parser(language, variables, fun, bindings, colors);
 		myTurtle = myTurtles.get(0);
 
 	}
@@ -145,6 +145,7 @@ public abstract class World {
 				System.out.println("param = " + param);
 				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
 					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
+						System.out.println("if = " + commandValues.get(IF_STATEMENT));
 						double loopStart = Double.parseDouble(commandValues
 								.get(LOOP_START));
 						double loopEnd = Double.parseDouble(commandValues
@@ -157,9 +158,10 @@ public abstract class World {
 									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart == loopEnd) {
+								System.out.println("loopEnd" + loopEnd);
 								param = runCommand(c, turtleID);
 							} else {
-								param = runCommand(myParser.parse("loop"),
+								param = runCommand(myParser.parse("list"),
 										turtleID);
 							}
 						}

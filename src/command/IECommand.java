@@ -24,12 +24,10 @@ public abstract class IECommand extends Command {
     protected void updateMap() {
         commandValues.put("LoopStart", IFLOOP);
         commandValues.put("LoopEnd", IFLOOP);
-       
         if(parameters.get(0) != 0.)
             commandValues.put("IfCommand", TRUE);
-        else{
+        else
             commandValues.put("IfCommand", FALSE);
-        }
     }
     
     @Override
