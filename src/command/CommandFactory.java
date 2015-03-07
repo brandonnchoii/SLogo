@@ -29,9 +29,9 @@ public class CommandFactory {
 
     private static final double DEFAULT_START = 1;
 
-    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color)  {
+    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> functions2, List<ObjectProperty> bind, ObservableList<Color> color)  {
         variables = var;
-        functions = fun;
+        functions = functions2;
         bindings = bind;
         language = l;
         colors = color;
@@ -109,7 +109,7 @@ public class CommandFactory {
         a.add("dotimes");
         a.add(":x 2");
         Command c = cf.createCommand(a);
-        System.out.print(c.run(new Turtle()));
+        //System.out.print(c.run(new Turtle()));
     }
     
 
