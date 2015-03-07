@@ -33,8 +33,8 @@ public abstract class LoopCommand extends Command {
     
     protected void addInfo(String s, int i){
         if(loopInfo[i].matches(syntax.getString("Variable")))
-            commandValues.put("loopEnd", readVariable(loopInfo[i]) + "");
+            commandValues.put(s, readVariable(loopInfo[i]) + "");
         else
-            commandValues.put("loopEnd", loopInfo[i]);
+            commandValues.put(s, loopInfo[i]);
     }
 }
