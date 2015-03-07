@@ -21,7 +21,7 @@ public abstract class IECommand extends Command {
     }
 
     protected void updateMap() {
-        if(parameters.get(1) != 0)
+        if(parameters.get(0) != 0)
             commandValues.put("IfCommand", TRUE);
         else
             commandValues.put("IfCommand", FALSE);
