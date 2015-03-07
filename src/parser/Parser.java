@@ -31,7 +31,7 @@ public class Parser {
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
     private List<ObjectProperty> bindings;
-    private ObservableList<Color> colors;
+    private static ObservableList<Color> colors;
 
     public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color) {
         variables = var;
@@ -201,7 +201,8 @@ public class Parser {
         ObservableMap<String, Double> variables = null;
         ObservableMap<String, String> functions = null;
         List<ObjectProperty> bindings = null;
-        Parser test = new Parser("English", variables, functions, bindings);
+        ObservableList<Color> colors = null;
+        Parser test = new Parser("English", variables, functions, bindings, colors);
         test.initializeCommands("repeat 2 [ sum 1 2 ]");
         test.parse("");
         test.parse("3");
