@@ -154,7 +154,7 @@ public abstract class World {
 						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
 							System.out.println("loop# = " + j);
 							int turtleID = Integer.parseInt(id);
-							if (loopStart + loopIncrement == loopEnd) {
+							if (loopStart == loopEnd) {
 								param = runCommand(c, turtleID);
 							} else {
 								param = runCommand(myParser.parse("loop"),

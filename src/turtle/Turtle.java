@@ -92,13 +92,16 @@ public class Turtle extends ImageView {
     }
 
     public void move (double pixels) {
+    	System.out.println("move " + pixels);
 //      System.out.println(getTranslateX() + " " + getTranslateY());
 //      setTranslateX(getTranslateX() + pixels*Math.cos(radians()));
 //      setTranslateY(getTranslateY() + pixels*Math.sin(radians()));
 //      next = new Point2D(getTranslateX(), getTranslateY());
 //      System.out.println(getTranslateX() + " " + getTranslateY());
-        goal = new Point2D(getTranslateX() + pixels*Math.cos(radians()),
-                getTranslateY() + pixels*Math.sin(radians()));
+//        goal = new Point2D(getTranslateX() + pixels*Math.cos(radians()),
+//                getTranslateY() + pixels*Math.sin(radians()));
+        goal = new Point2D(goal.getX() + pixels*Math.cos(radians()),
+                goal.getY() + pixels*Math.sin(radians()));
     }
 
     private double radians(){
