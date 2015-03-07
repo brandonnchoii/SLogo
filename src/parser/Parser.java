@@ -28,7 +28,7 @@ public class Parser {
     private Node myListTree;
     private String myInput;
     private int numCommands;
-    private static final String LOOP = "loop";
+    private static final String LIST = "list";
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
     private List<ObjectProperty> bindings;
@@ -75,7 +75,7 @@ public class Parser {
         System.out.println("mytree = " +  myTree.getValue());
         if (valueFromPrevCommand.equals("")) {
             current = getNodeForCommand();
-        } else if (valueFromPrevCommand.equals(LOOP)) {
+        } else if (valueFromPrevCommand.equals(LIST)) {
             myTree = makeTree(new Scanner(myInput));
             myTree = myListTree;
             current = getNodeForCommand();
