@@ -1,24 +1,26 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
-public class ProductCommand extends Command{
-	
-	public ProductCommand(List<Double> params){
-		super(params);
-	}
+public class ProductCommand extends ArithmeticCommand{
 
-	@Override
-	public double run(Turtle t) {
-		
-		if(parameters.size() < 2)
-			throw new IllegalArgumentException("Not enough parameters");
-		
-		double ret = 1;
-		for(int i = 0; i < parameters.size(); i ++)
-			ret *= parameters.get(i);
-		return ret;
-	}
+    public ProductCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
+
+    @Override
+    public double doCommand(Turtle t) {
+        return super.doCommand(t);
+    }
+
+    @Override
+    protected double doMath (double a, double b) {
+        return a * b;
+    }
 }

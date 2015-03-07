@@ -2,19 +2,24 @@ package command;
 
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public class ArcTangentCommand extends Command{
-	
-	public ArcTangentCommand(List<Double> params){
-		super(params);
-	}
 
-	@Override
-	public double run(Turtle t) {
-		return Math.atan(Math.toDegrees(parameters.get(0)));
-	}
-	
-	
+    public ArcTangentCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
+
+    @Override
+    public double doCommand(Turtle t) {
+        super.run(t);
+        return Math.atan(Math.toDegrees(parameters.get(0)));
+    }
+
+
 }

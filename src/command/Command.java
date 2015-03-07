@@ -4,35 +4,77 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public abstract class Command {
 
     private static final String DEFAULT_START = "1";
-    private static final String DEFAULT_END = "2";
+    private static final String DEFAULT_END = "1";
     private static final String DEFAULT_INCR = "1";
     private static final String DEFAULT_VAR = ":repcount";
+    protected List<String> strParameters;
     protected List<Double> parameters;
+    protected Map<String, Double> variables;
+    protected Map<String, String> functions;
+    protected List<ObjectProperty> bindings;
+    protected ObservableList<Color> colors;
     protected boolean loop;
-    protected Map<String, String> commandValues;
+    protected Map<String, String> commandValues; 
+    protected ResourceBundle syntax;
 
-
-    public Command(){
-        parameters = new ArrayList<Double>();
-        checkParams();
+    public Command(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> color) {
+        strParameters = params;
         loop = false;
+        syntax = ResourceBundle.getBundle("resources.languages/Syntax");
         createCommandValues();
+        variables = variableMap;
+        parameters = makeParameters();
+        functions = func;
+        bindings = bind;
+        colors = color;
     }
 
-    public Command(List<Double> params) {
-        parameters = params;
-        loop = false;
-        createCommandValues();
+    protected List<Double> makeParameters(){
+        List<Double> params = new ArrayList<Double>();
+        for (int i = 1; i < strParameters.size(); i ++){
+            params.add(addParam(strParameters.get(i)));
+        }
+        checkParams(params);
+        return params;
     }
 
-    public void addParam(double d){
-        parameters.add(d);
+    protected Double addParam(String s){
+        if(isVariable(s)){
+            return readVariable(s);
+        }
+        else
+            try{
+                return Double.parseDouble(s);
+            }
+        catch(NumberFormatException e){
+            return null;
+        }
+    }
+
+    private boolean isVariable(String s){ 
+        return s.matches(syntax.getString("Variable"));
+    }
+
+    protected double readVariable(String s){
+        Double d = variables.get(s);
+        if(d != null)
+            return variables.get(s);
+        else
+            throw new IllegalArgumentException("Illegal variable name");
+    }
+
+    public void updateVariable(String varName, double val){
+        variables.put(varName,val);
     }
 
     protected void createCommandValues(){
@@ -41,17 +83,24 @@ public abstract class Command {
         commandValues.put("loopEnd", DEFAULT_END);
         commandValues.put("loopIncrement", DEFAULT_INCR);
         commandValues.put("loopVariable", DEFAULT_VAR);
+        commandValues.put("ifStatement", DEFAULT_START);
     }
 
-    public abstract double run(Turtle t);
+    public double run(Turtle t){
+        update();
+        return doCommand(t);
+    }
+    
+    public abstract double doCommand(Turtle t);
 
     public boolean isLoop(){
         return loop;
     }
 
-    private void checkParams(){
-        if (parameters.contains(null)){
-            throw new IllegalArgumentException("The parameters are invalid"); 
+    private void checkParams(List<Double> params){
+     
+        if (params.contains(null)){
+            throw new IllegalArgumentException("Parameters are invalid"); 
         }
     }
 
@@ -67,5 +116,17 @@ public abstract class Command {
                 s += t.getID() + " ";
         return s.trim();
     }
+    
+    public void update(){
+        updateVariables();
+        updateFunctions();
+        updateColors();
+    }
+    
+    public void updateVariables(){}
 
-}
+    public void updateFunctions(){}
+    
+    public void updateColors(){}
+
+}       

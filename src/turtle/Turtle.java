@@ -96,7 +96,8 @@ public class Turtle extends ImageView {
     
     private void setUpBindings (List<ObjectProperty> bindings) {
         myImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
-        this.imageProperty().bind(myImage);        
+        this.imageProperty().bind(myImage);       
+        //add pen bindings depending on how you want to set up pen        
     }
     
     private void moveMyself(double x, double y) {

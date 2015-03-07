@@ -1,24 +1,26 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
-public class SumCommand extends Command{
-	
-	public SumCommand(List<Double> params){
-		super(params);
-	}
+public class SumCommand extends ArithmeticCommand{
 
-	@Override
-	public double run(Turtle t) {
+    public SumCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
 
-		if(parameters.size() < 2)
-			throw new IllegalArgumentException("Not enough parameters");
-		
-		double ret = 0;
-		for(double d: parameters)
-			ret += d;
-		return ret;
-	}
+    @Override
+    public double run(Turtle t) {
+        return super.run(t);
+    }
+
+    @Override
+    protected double doMath (double a, double b) {
+        return a + b;
+    }
 }

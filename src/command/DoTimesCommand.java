@@ -1,39 +1,31 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public class DoTimesCommand extends LoopCommand {
 
-	public DoTimesCommand(List<String> params) {
-		super(params);
+    public DoTimesCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
 
-	}
-
-	public DoTimesCommand(){
-		super();
-	}
-
-	public void readValues(){
-		try{
-			start = 1;
-			incr = 1;
-			String[] loopInfo = strParameters.get(1).split(" ");
-			variable = loopInfo[0];
-			end = Double.parseDouble(loopInfo[1]);
+    @Override
+    protected void updateMap(){
+        super.updateMap();
+        commandValues.put("loopVariable", loopInfo[0]);  
+        addInfo("loopEnd", 1);
+    }
 
 
-		}
-		catch(NumberFormatException e){
-			throw new IllegalArgumentException("Illegal Params");
-		}
-	}
-	@Override
-	public double run(Turtle t) {	
 
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public double doCommand(Turtle t) {	
+        return 0;
+    }
 
 }
