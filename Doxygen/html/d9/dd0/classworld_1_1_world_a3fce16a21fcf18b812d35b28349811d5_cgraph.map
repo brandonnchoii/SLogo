@@ -1,0 +1,5 @@
+<map id="world.World.setLanguage" name="world.World.setLanguage">
+<area shape="rect" id="node2" href="$d6/d95/classparser_1_1_parser.html#a0fbf692895cf9375b199cd3ab16a85dc" title="parser.Parser.setLanguage" alt="" coords="235,12,427,39"/>
+<area shape="rect" id="node3" href="$d9/d1b/classcommand_1_1_command_factory.html#aefbf95ff32788eb3b04d84d0f3c1a09a" title="command.CommandFactory.set\lLanguage" alt="" coords="475,5,701,46"/>
+<area shape="rect" id="node4" href="$d9/d1b/classcommand_1_1_command_factory.html#ae6b7cca664ad47f77ea7e8e8adae9830" title="command.CommandFactory.set\lTranslationMap" alt="" coords="749,5,976,46"/>
+</map>
