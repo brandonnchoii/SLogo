@@ -1,11 +1,18 @@
 package world;
 
+/**
+ * This class is responsible for passing the input to the parser, which
+ * generates a Command that the World gives to the turtle(s)
+ * 
+ * @author Megan, Thomas
+ *
+ */
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import command.LoopCommand;
+
 import command.Command;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -13,7 +20,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
-import userInterface.UIManager;
 
 public abstract class World {
 
@@ -42,10 +48,11 @@ public abstract class World {
 	private ObservableList<Color> colors;
 
 	public World(ObservableMap<String, Double> var,
-			ObservableMap<String, String> fun, List<ObjectProperty> Bindings,
-			ObservableList<Color> color) throws IOException {
+			ObservableMap<String, String> savedCommands,
+			List<ObjectProperty> Bindings, ObservableList<Color> color)
+			throws IOException {
 		variables = var;
-		functions = fun;
+		functions = savedCommands;
 		bindings = Bindings;
 		colors = color;
 		height = DEFAULT_HEIGHT;
@@ -73,9 +80,9 @@ public abstract class World {
 	}
 
 	public World(int h, int w, Turtle t, String language,
-			ObservableMap<String, Double> var,
-			ObservableMap<String, String> fun, List<ObjectProperty> Bindings,
-			ObservableList<Color> color) throws IOException {
+			ObservableMap<String, Double> var, ObservableMap<String, String> fun,
+			List<ObjectProperty> Bindings, ObservableList<Color> color)
+			throws IOException {
 		variables = var;
 		functions = fun;
 		bindings = Bindings;
@@ -120,6 +127,12 @@ public abstract class World {
 	// return param;
 	// }
 
+	/**
+	 * 
+	 * 
+	 * @param String input
+	 * @return String param
+	 */
 	public String listen(String input) {
 		String param = "";
 		for (String s : input.split("/n")) {
@@ -139,8 +152,6 @@ public abstract class World {
 						double loopIncrement = Double.parseDouble(commandValues
 								.get(LOOP_INCREMENT));
 						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
-							// myParser.updateVariable(
-							// commandValues.get(LOOP_VARIABLE), j);
 							System.out.println("loop# = " + j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart + loopIncrement == loopEnd) {
@@ -149,6 +160,8 @@ public abstract class World {
 								param = runCommand(myParser.parse("loop"),
 										turtleID);
 							}
+							myParser.updateVariable(
+									commandValues.get(LOOP_VARIABLE), j);
 						}
 						myParser.resetRepcount();
 					} else {
@@ -161,6 +174,14 @@ public abstract class World {
 
 	}
 
+	/**
+	 * Trys to run command on turtle if it exists, if not creates appropriate
+	 * turtle and runs command
+	 * 
+	 * @param Command command
+	 * @param int turtleID
+	 * @return String param
+	 */
 	private String runCommand(Command command, int turtleID) {
 		String param;
 		try {
@@ -173,10 +194,19 @@ public abstract class World {
 		return param;
 	}
 
+    /**
+     * Ability to change language of input
+     * @param language
+     */	
 	public void setLanguage(String language) {
 		myParser.setLanguage(language);
 	}
 
+	/**
+	 * Returns turtle
+	 * 
+	 * @return Turtle
+	 */
 	public Turtle getTurtle() {
 		return myTurtle;
 	}

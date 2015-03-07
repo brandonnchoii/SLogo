@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -27,9 +28,9 @@ public class CommandFactory {
 
     private static final double DEFAULT_START = 1;
 
-    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color)  {
+    public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> functions2, List<ObjectProperty> bind, ObservableList<Color> color)  {
         variables = var;
-        functions = fun;
+        functions = functions2;
         bindings = bind;
         language = l;
         colors = color;

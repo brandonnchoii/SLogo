@@ -27,6 +27,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import turtle.Pen;
 import turtle.Turtle;
@@ -56,17 +57,17 @@ public class WorldController {
     
     private ObservableList<String> results;
     private ObservableList<String> previousCommands;
-    private ObservableList<String> savedCommands;
+    private ObservableMap<String, String> savedCommands;
+    private ObservableList<Color> colors;
     private ObservableMap<String, String> turtleMap;
     private ObservableMap<String, Double> variableMap;
     private StringProperty inputText;
 
     public WorldController (UI ui, RightPanel r, LeftPanel l, StringProperty s, List<ObjectProperty> bindings) throws IOException {      
-        myWorld = new BoundedWorld(bindings);
-        
         setUpBindings(s);
+        myWorld = new BoundedWorld(variableMap, savedCommands, bindings, colors);
         myRightPanel = r.getInstance();
-        myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
+        //myRightPanel.initialize(results, previousCommands, savedCommands, inputText);
         myLeftPanel = l.getInstance();
         myLeftPanel.initialize(turtleMap, variableMap);
         
@@ -93,9 +94,9 @@ public class WorldController {
 
     public WorldController (UI ui, boolean bounded, List<ObjectProperty> bindings) throws IOException {
         if (bounded)
-            myWorld = new BoundedWorld(bindings);
+            myWorld = new BoundedWorld(variableMap, savedCommands, bindings, colors);
         else
-            myWorld = new UnboundedWorld(bindings);
+            myWorld = new UnboundedWorld(variableMap, savedCommands, bindings, colors);
         UI = ui;
         myGC = UI.getGraphics();
         myTurtle = myWorld.getTurtle();
@@ -104,7 +105,7 @@ public class WorldController {
     private void setUpBindings (StringProperty s) {
         results = FXCollections.observableArrayList();
         previousCommands = FXCollections.observableArrayList();
-        savedCommands = FXCollections.observableArrayList();
+        savedCommands = FXCollections.observableMap(new HashMap<String, String>());
         turtleMap = FXCollections.observableMap(new HashMap<String, String>());
         variableMap = FXCollections.observableMap(new HashMap<String, Double>());
         inputText = s;
