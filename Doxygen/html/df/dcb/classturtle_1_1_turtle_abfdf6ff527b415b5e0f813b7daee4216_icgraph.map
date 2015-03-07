@@ -1,5 +1,0 @@
-<map id="turtle.Turtle.setHeading" name="turtle.Turtle.setHeading">
-<area shape="rect" id="node2" href="$d2/dda/classcommand_1_1_home_command.html#a04664da488af2aed3cbdca58bf5b72fd" title="command.HomeCommand.doCommand" alt="" coords="225,5,509,32"/>
-<area shape="rect" id="node3" href="$d8/d00/classcommand_1_1_set_towards_command.html#a32809c89b1365d2b94d26f4504f8cf86" title="command.SetTowardsCommand.do\lCommand" alt="" coords="241,57,492,98"/>
-<area shape="rect" id="node4" href="$d9/d6c/classcommand_1_1_set_heading_command.html#a9830cde4555ad15771b1cafc30425613" title="command.SetHeadingCommand.do\lCommand" alt="" coords="240,122,493,163"/>
-</map>
