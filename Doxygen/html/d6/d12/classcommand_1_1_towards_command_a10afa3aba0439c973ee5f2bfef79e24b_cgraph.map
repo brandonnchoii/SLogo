@@ -1,0 +1,4 @@
+<map id="command.TowardsCommand.run" name="command.TowardsCommand.run">
+<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#aee0b52994c47376c03203bfdfc116c63" title="turtle.Turtle.getDirection" alt="" coords="288,5,464,32"/>
+<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#abfdf6ff527b415b5e0f813b7daee4216" title="turtle.Turtle.setHeading" alt="" coords="291,56,461,83"/>
+</map>

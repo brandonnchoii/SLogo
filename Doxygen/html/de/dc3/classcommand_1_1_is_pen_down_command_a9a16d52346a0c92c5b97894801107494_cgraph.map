@@ -1,0 +1,4 @@
+<map id="command.IsPenDownCommand.doCommand" name="command.IsPenDownCommand.doCommand">
+<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#a705ea4fb106755bef5f4af563515b537" title="turtle.Turtle.isDrawing" alt="" coords="302,12,461,39"/>
+<area shape="rect" id="node3" href="$de/d57/classturtle_1_1_pen.html#a361f4e030646d953185a8afe94427ce2" title="turtle.Pen.penReady" alt="" coords="510,12,661,39"/>
+</map>
