@@ -7,9 +7,11 @@ import java.util.Map;
 
 import command.LoopCommand;
 import command.Command;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import parser.Parser;
 import turtle.Turtle;
+import userInterface.UIManager;
 
 public abstract class World {
 
@@ -26,30 +28,30 @@ public abstract class World {
 	private static final int DEFAULT_WIDTH = 100;
 	private static final Color TURTLE_DEFAULT = Color.BLACK;
 
-	public World() throws IOException {
+	public World(List<ObjectProperty> bindings) throws IOException {
 		height = DEFAULT_HEIGHT;
 		width = DEFAULT_WIDTH;
 
+		myTurtle = new Turtle(bindings, TURTLE_DEFAULT, 0);
 		myTurtles = new ArrayList<>();
-		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
-		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
+		myTurtles.add(new Turtle(bindings, TURTLE_DEFAULT, 0));
 		myParser = new Parser("English");
 		//added for testing
 		myTurtle = myTurtles.get(0);
 	}
 
-	public World(int h, int w) throws IOException {
+	public World(List<ObjectProperty> bindings, int h, int w) throws IOException {
 		height = h;
 		width = w;
+		myTurtle = new Turtle(bindings, TURTLE_DEFAULT, 0);
 		myTurtles = new ArrayList<>();
-		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
-		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
+		myTurtles.add(new Turtle(bindings, TURTLE_DEFAULT, 0));
 		myParser = new Parser("English");
 		//added for testing
 		myTurtle = myTurtles.get(0);
 	}
 
-	public World(int h, int w, Turtle t, String language) throws IOException {
+	public World(List<ObjectProperty> bindings ,int h, int w, Turtle t, String language) throws IOException {
 		height = h;
 		width = w;
 		myTurtles = new ArrayList<>();
@@ -92,7 +94,6 @@ public abstract class World {
 					//param = myTurtle.act(myParser.parse(param));
 				}
 			}
-			param = "";
 		}
 		return param;		
 	}

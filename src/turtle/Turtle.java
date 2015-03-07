@@ -2,10 +2,13 @@ package turtle;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 
 import pen.DefaultPen;
 import pen.Pen;
 import worldController.WorldController;
+import userInterface.UIManager;
+import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -16,6 +19,7 @@ import command.Command;
 
 public class Turtle extends ImageView {
 
+    private static final int DEFAULT_SIZE = 25;
 	private static final double DEFAULT_POS = 0;
 	private static final double DEFAULT_SPEED = 10.0;
 	private static final boolean DEFAULT_DRAW = true;
@@ -30,16 +34,9 @@ public class Turtle extends ImageView {
 	private Point2D current;
 	private Point2D next;
 	private Point2D goal;
+    private ObjectProperty<Image> myImage;
 
 	public Turtle(Paint color, int ID) {
-		myPen = new DefaultPen(color);
-		initializeTurtleDefaults();
-		active = true;
-		id = ID;
-	}
-
-
-	public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
 		myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
 		active = true;
@@ -49,6 +46,12 @@ public class Turtle extends ImageView {
     public Turtle(Image i, Paint color, int ID){
         myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
+    }
+    
+    public Turtle(List<ObjectProperty> bindings, Paint color, int ID) {
+        myPen = new Pen(color);
+        initializeTurtleDefaults();
+        setUpBindings(bindings);
         active = true;
         id = ID;
     }
@@ -60,22 +63,49 @@ public class Turtle extends ImageView {
         id = ID;
         setImage(i);
     }
-	
-	private void initializeTurtleDefaults() {
-		mySpeed = DEFAULT_SPEED;
-		current = new Point2D(DEFAULT_POS, DEFAULT_POS);
-		next = new Point2D(DEFAULT_POS, DEFAULT_POS);
-		goal = new Point2D(DEFAULT_POS, DEFAULT_POS);
-		setTranslateX(DEFAULT_POS);
-		setTranslateY(DEFAULT_POS);
-		setFitWidth(70);
-		setFitHeight(70);
-		direction = DEFAULT_POS;
-		myPen.changePenState(DEFAULT_DRAW);
-		setVisible(DEFAULT_VISIBLE);
-		setImage(DEFAULT_IMAGE);
-	}
 
+    public Turtle(int x, int y, double dir, Image i, Paint color, int ID){
+        myPen = new Pen(color);
+        setTranslateX(x);
+        setTranslateY(y);
+        current = new Point2D(x, y);
+        direction = dir;
+		initializeTurtleDefaults();
+        myPen.changePenState(DEFAULT_DRAW);
+        setVisible(DEFAULT_VISIBLE);
+        setImage(i);
+        active = true;
+        id = ID;
+    }
+
+    private void initializeTurtleDefaults() {
+        mySpeed = DEFAULT_SPEED;
+        current = new Point2D(DEFAULT_POS, DEFAULT_POS);
+        next = new Point2D(DEFAULT_POS, DEFAULT_POS);
+        goal = new Point2D(DEFAULT_POS, DEFAULT_POS);
+        setTranslateX(DEFAULT_POS);
+        setTranslateY(DEFAULT_POS);
+        setFitWidth(DEFAULT_SIZE);
+        setFitHeight(DEFAULT_SIZE);
+        direction = DEFAULT_POS;
+        myPen.changePenState(DEFAULT_DRAW);
+        setVisible(DEFAULT_VISIBLE);
+        setImage(DEFAULT_IMAGE);
+    }
+    
+    private void setUpBindings (List<ObjectProperty> bindings) {
+        myImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
+        this.imageProperty().bind(myImage);        
+    }
+    
+    private void moveMyself(double x, double y) {
+        setTranslateX(x);
+        setTranslateY(y);
+    }
+    
+    public Pen getPen() {
+        return myPen;
+    }
 	
 	public boolean isDrawing() {
 		return myPen.penReady();
@@ -142,10 +172,6 @@ public class Turtle extends ImageView {
     	current = nextPoint;
 	}
 	
-	private void moveMyself(double x, double y) {
-		setTranslateX(x);
-		setTranslateY(y);
-	}
 	
 	private Point2D findNextPoint(double x0, double y0, double x1, double y1) {
 		if (atGoal()) {
@@ -180,7 +206,7 @@ public class Turtle extends ImageView {
 	public int getID(){
 		return id;
 	}
-	
+
     public String truncate (double d){
         NumberFormat nf = new DecimalFormat("#.##");
         return nf.format(d);
@@ -209,3 +235,6 @@ public class Turtle extends ImageView {
     }
 
 }
+    
+
+
