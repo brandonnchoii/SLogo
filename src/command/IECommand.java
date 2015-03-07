@@ -24,7 +24,7 @@ public abstract class IECommand extends Command {
     protected void updateMap() {
         commandValues.put("LoopStart", IFLOOP);
         commandValues.put("LoopEnd", IFLOOP);
-        if(parameters.get(0) != 0)
+        if(parameters.get(0) != 0.)
             commandValues.put("IfCommand", TRUE);
         else
             commandValues.put("IfCommand", FALSE);
@@ -32,7 +32,9 @@ public abstract class IECommand extends Command {
     
     @Override
     public double doCommand(Turtle t) {
-        if(parameters.get(0) != 0) 
+        System.out.println("LOOPEND: " + commandValues.get("LoopEnd"));
+        System.out.println("IF: " + commandValues.get("IfCommand"));
+        if(parameters.get(0) != 0.) 
             return 1;
         return 0;
     }

@@ -158,6 +158,7 @@ public abstract class World {
 									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart == loopEnd) {
+								System.out.println("loopEnd" + loopEnd);
 								param = runCommand(c, turtleID);
 							} else {
 								param = runCommand(myParser.parse("list"),
