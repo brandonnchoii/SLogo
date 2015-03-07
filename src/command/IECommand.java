@@ -28,7 +28,7 @@ public abstract class IECommand extends Command {
     }
     
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(parameters.get(0) != 0) 
             return 0;
         return 1;

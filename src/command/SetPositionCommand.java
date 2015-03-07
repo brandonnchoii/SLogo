@@ -14,7 +14,7 @@ public class SetPositionCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         double pastX = t.getTranslateX();
         double pastY = t.getTranslateY();
         t.moveTo(parameters.get(0), parameters.get(1));

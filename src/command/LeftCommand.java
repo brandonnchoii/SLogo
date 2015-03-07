@@ -14,7 +14,7 @@ public class LeftCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         t.rotate(-1*parameters.get(0));
         return parameters.get(0);
     }

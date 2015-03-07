@@ -16,7 +16,7 @@ public class TangentCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return Math.tan(Math.toDegrees(parameters.get(0)));
     }
 

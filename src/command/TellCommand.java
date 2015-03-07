@@ -15,7 +15,7 @@ public class TellCommand extends MultiTurtleCommand{
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(parameters.contains(t.getID()))
             t.setActive(true);
         else

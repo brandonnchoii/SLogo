@@ -15,7 +15,7 @@ public class NaturalLogCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(parameters.get(0) == 0)
             throw new IllegalArgumentException("Log zero");
         else

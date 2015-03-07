@@ -14,7 +14,7 @@ public class RemainderCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(parameters.get(1) == 0)
             throw new IllegalArgumentException("Divide by zero");
         else

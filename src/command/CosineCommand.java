@@ -15,7 +15,7 @@ public class CosineCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return Math.cos(Math.toRadians(parameters.get(0)));
     }
 }

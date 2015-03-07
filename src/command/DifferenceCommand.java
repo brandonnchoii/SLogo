@@ -22,7 +22,7 @@ public class DifferenceCommand extends ArithmeticCommand{
 
 
     @Override
-    public double run (Turtle t) {
-        return super.run();
+    public double doCommand (Turtle t) {
+        return super.doCommand(t);
     }
 }

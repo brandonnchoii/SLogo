@@ -16,7 +16,7 @@ public class SumCommand extends ArithmeticCommand{
 
     @Override
     public double run(Turtle t) {
-        return super.run();
+        return super.run(t);
     }
 
     @Override

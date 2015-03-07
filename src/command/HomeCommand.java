@@ -14,7 +14,7 @@ public class HomeCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         double pastX = t.getTranslateX();
         double pastY = t.getTranslateY();
         t.moveTo(0,0);
