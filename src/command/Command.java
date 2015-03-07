@@ -85,7 +85,12 @@ public abstract class Command {
         commandValues.put("ifStatement", DEFAULT_START);
     }
 
-    public abstract double run(Turtle t);
+    public double run(Turtle t){
+        update();
+        return doCommand(t);
+    }
+    
+    public abstract double doCommand(Turtle t);
 
     public boolean isLoop(){
         return loop;
@@ -110,13 +115,17 @@ public abstract class Command {
                 s += t.getID() + " ";
         return s.trim();
     }
-
-    public Map<String, Double> updateVariables(){
-        return variables;
+    
+    public void update(){
+        updateVariables();
+        updateFunctions();
+        updateColors();
     }
+    
+    public void updateVariables(){}
 
-    public Map<String, String> updateFunctions(){
-        return functions;
-    }
+    public void updateFunctions(){}
+    
+    public void updateColors(){}
 
 }       

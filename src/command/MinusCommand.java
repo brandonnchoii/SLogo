@@ -15,7 +15,7 @@ public class MinusCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return -1*parameters.get(0);
     }
 }

@@ -15,7 +15,7 @@ public class SetHeadingCommand extends Command {
     }
     
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         double pastDir = t.getDirection();
         t.setHeading(parameters.get(0));
         return Math.abs(parameters.get(0)-pastDir);

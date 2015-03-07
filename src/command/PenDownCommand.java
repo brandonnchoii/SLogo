@@ -14,7 +14,7 @@ public class PenDownCommand extends Command {
         super(params, variableMap, func, bind, colors);
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         t.setDrawing(true);
         return 1;
     }

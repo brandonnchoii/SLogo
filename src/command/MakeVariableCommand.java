@@ -22,13 +22,12 @@ public class MakeVariableCommand extends LoopCommand {
         return params;
     }
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return parameters.get(0);
     }
 
-    public Map<String, Double> updateVariables(){
+    public void updateVariables(){
         variables.put(strParameters.get(1), parameters.get(0));
-        return variables;
     }
 
 }

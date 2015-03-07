@@ -2,6 +2,7 @@ package command;
 
 import java.util.List;
 import java.util.Map;
+import turtle.Turtle;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -19,8 +20,7 @@ public abstract class ArithmeticCommand extends Command{
 
     }
 
-    protected double run(){
-
+    public double doCommand(Turtle t){
         double ret = parameters.get(0);
         for(int i = 1; i < parameters.size(); i ++)
             ret = doMath(ret, parameters.get(i));

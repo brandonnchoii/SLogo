@@ -16,7 +16,7 @@ public class LessThanCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(parameters.get(0) < parameters.get(1))
             return 1;
         return 0;

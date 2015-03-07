@@ -15,7 +15,7 @@ public class IsPenDownCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         if(t.isDrawing())
             return 1;
         return 0;

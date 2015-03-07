@@ -15,7 +15,7 @@ public class PowerCommand extends Command{
     }
 
     @Override
-    public double run(Turtle t) {
+    public double doCommand(Turtle t) {
         return Math.pow(parameters.get(0), parameters.get(1));
     }
 
