@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -31,16 +32,23 @@ public class Parser {
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
     private List<ObjectProperty> bindings;
-    private ObservableList<Color> colors;
+    private static ObservableList<Color> colors;
 
-    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> fun, List<ObjectProperty> bind, ObservableList<Color> color) {
+    public Parser(String language, ObservableMap<String, Double> var, ObservableMap<String, String> functions2, List<ObjectProperty> bind, ObservableList<Color> color) {
         variables = var;
-        functions = fun;
+        functions = functions2;
         bindings = bind;
         colors = color;
         myCommandFactory = new CommandFactory(language, variables, functions, bindings, colors);
         myResources = ResourceBundle.getBundle("resources.languages/Syntax");
     }
+    
+    /**
+     * Initializes the tree based on the user input
+     * 
+     * @param input
+     * @return int numCommands
+     */
 
     public int initializeCommands(String input) {
         numCommands = 0;
@@ -52,6 +60,14 @@ public class Parser {
         // }
         return numCommands;
     }
+    
+    /**
+     * Replaces value from the previously executed command in 
+     * the tree and retrieves the next command to be executed.
+     * 
+     * @param valueFromPrevCommand
+     * @return Command
+     */
 
     public Command parse(String valueFromPrevCommand) {
         System.out.println("prevValue = " + valueFromPrevCommand);
@@ -73,6 +89,16 @@ public class Parser {
                                                          current);
         return myCommandFactory.createCommand(commandInput);
     }
+    
+    /**
+     * Returns a list containing the elements (value of node of most nested 
+     * command and its children) needed to pass into myCommandFactory to 
+     * generate a command. 
+     * 
+     * @param  String valueFromPrevCommand
+     * @param  Node current
+     * @return List<String>
+     */
 
     private List<String> generateCommandInput(String valueFromPrevCommand,
                                               Node current) {
@@ -101,6 +127,12 @@ public class Parser {
         }
         return commandInput;
     }
+    
+    /**
+     * Traverses the tree and returns the deepest (most nested) command.
+     * 
+     * @return Node
+     */
 
     private Node getNodeForCommand() {
         Node current = myTree;
@@ -120,6 +152,14 @@ public class Parser {
         }
         return null;
     }
+    
+    /**
+     * Traverses the tree and retrieves the node that is the parent of
+     * the most nested command in order to replace that with the value
+     * of the most nested command executed.
+     * 
+     * @return Node
+     */
 
     private Node getNodeBeforeToReplace() {
         Node current = myTree;
@@ -155,6 +195,15 @@ public class Parser {
         }
         return null;
     }
+    
+    /**
+     * Creates tree out of Nodes using regex. Constants and
+     * variables are leaf children of commands. If a list is 
+     * detected, creates anothr tree for the contents of the list.
+     * 
+     * @param input
+     * @return Node
+     */
 
     private Node makeTree(Scanner input) {
         String current = input.next();
@@ -192,6 +241,11 @@ public class Parser {
         }
         return null;
     }
+    
+    /**
+     * Ability to change language of input
+     * @param language
+     */
 
     public void setLanguage(String language) {
         myCommandFactory.setLanguage(language);
@@ -201,7 +255,8 @@ public class Parser {
         ObservableMap<String, Double> variables = null;
         ObservableMap<String, String> functions = null;
         List<ObjectProperty> bindings = null;
-        Parser test = new Parser("English", variables, functions, bindings);
+        ObservableList<Color> colors = null;
+        Parser test = new Parser("English", variables, functions, bindings, colors);
         test.initializeCommands("repeat 2 [ sum 1 2 ]");
         test.parse("");
         test.parse("3");
@@ -214,9 +269,15 @@ public class Parser {
         // test.parse("21");
     }
 
-    //	public void updateVariable(String variable, double variableValue) {
-    //		myCommandFactory.updateVariable(variable, variableValue);
-    //	}
+    /**
+     * Calls method in myCommandFactory to update the variablecount in a loop.
+     * @param variable
+     * @param variableValue
+     */
+    
+	public void updateVariable(String variable, double variableValue) {
+		myCommandFactory.updateVariable(variable, variableValue);
+	}
 
     public void resetRepcount() {
         myCommandFactory.resetRepcount();

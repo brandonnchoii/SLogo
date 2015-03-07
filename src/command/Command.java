@@ -32,6 +32,7 @@ public abstract class Command {
         loop = false;
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
         createCommandValues();
+        variables = variableMap;
         parameters = makeParameters();
         functions = func;
         bindings = bind;
