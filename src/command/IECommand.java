@@ -22,7 +22,7 @@ public abstract class IECommand extends Command {
     }
 
     protected void updateMap() {
-        commandValues.put("loopStart", IFLOOP);
+    	commandValues.put("loopIncrement", IFLOOP);
         commandValues.put("loopEnd", IFLOOP);
         if(parameters.get(0) != 0.)
             commandValues.put("ifStatement", TRUE);
