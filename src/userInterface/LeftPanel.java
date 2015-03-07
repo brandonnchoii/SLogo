@@ -77,12 +77,12 @@ public class LeftPanel {
         turtleTable = new TableView();
         turtles = new TableColumn("Turtle:");
         turtleIDs = new TableColumn("ID:");
-        turtleTable.getColumns().addAll(turtles, turtleIDs);
+        turtleTable.getColumns().setAll(turtles, turtleIDs);
 
         variableTable = new TableView();
         variables = new TableColumn("Variable:");
         values = new TableColumn("Value:");
-        variableTable.getColumns().addAll(variables, values);
+        variableTable.getColumns().setAll(variables, values);
 
         myLeftPanel.getChildren().addAll(turtleTable, variableTable);
     }
