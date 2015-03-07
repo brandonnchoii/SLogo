@@ -3,6 +3,7 @@ package turtle;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Queue;
 
 import pen.DefaultPen;
 import pen.DottedPen;
@@ -36,7 +37,8 @@ public class Turtle extends ImageView {
 	private Point2D next;
 	private Point2D goal;
     private ObjectProperty<Image> myImage;
-
+    private PointQueue myGoalQ;
+    
 	public Turtle(Paint color, int ID) {
 		myPen = new DefaultPen(color);
 		initializeTurtleDefaults();
@@ -84,6 +86,7 @@ public class Turtle extends ImageView {
         current = new Point2D(DEFAULT_POS, DEFAULT_POS);
         next = new Point2D(DEFAULT_POS, DEFAULT_POS);
         goal = new Point2D(DEFAULT_POS, DEFAULT_POS);
+        myGoalQ = new PointQueue();
         setTranslateX(DEFAULT_POS);
         setTranslateY(DEFAULT_POS);
         setFitWidth(DEFAULT_SIZE);
@@ -98,6 +101,21 @@ public class Turtle extends ImageView {
         myImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
         this.imageProperty().bind(myImage);       
         //add pen bindings depending on how you want to set up pen        
+    }
+    
+    public Point2D checkQueue(PointQueue q) {
+    	if (q.size() == 0) {
+    		return current;
+    	}
+    	if (current != q.peak()) {
+    		System.out.println(q.peak());
+    		return q.peak();
+    	}
+    	if (current == q.peak()) {
+    		q.removeFirst();  
+    		checkQueue(q);
+    	}
+    	return new Point2D(0, 0);
     }
     
     private void moveMyself(double x, double y) {
@@ -121,9 +139,10 @@ public class Turtle extends ImageView {
 		return c.run(this) + "";
 	}
 
-	public void move (double pixels) {
-		goal = new Point2D(goal.getX() + pixels*Math.cos(radians()),
-				goal.getY() + pixels*Math.sin(radians()));
+	public void move(double pixels) {
+		Point2D next = new Point2D(checkQueue(myGoalQ).getX() + pixels*Math.cos(radians()),
+				checkQueue(myGoalQ).getY() + pixels*Math.sin(radians()));
+		myGoalQ.enqueue(next);
 	}
 
 	private double radians(){
@@ -160,14 +179,15 @@ public class Turtle extends ImageView {
 	public void animatedMove(GraphicsContext gc, Point2D shift) {
 		double currX = current.getX();
 		double currY = current.getY();
-		if (current.distance(goal) < mySpeed) {
-			moveMyself(goal.getX(), goal.getY());
-			myPen.drawLine(gc, goal, current, shift);	
-        	current = goal;
+		Point2D qItem = checkQueue(myGoalQ);
+		if (current.distance(qItem) < mySpeed) {
+			moveMyself(qItem.getX(), qItem.getY());
+			myPen.drawLine(gc, qItem, current, shift);	
+        	current = qItem;
         	return;
         }
 		Point2D nextPoint = findNextPoint(currX, currY, 
-        		goal.getX(), goal.getY());
+        		qItem.getX(), qItem.getY());
     	moveMyself(nextPoint.getX(), nextPoint.getY());
     	myPen.drawLine(gc, nextPoint, current, shift);
     	gc.strokeLine(currX, currY, nextPoint.getX(), nextPoint.getY());
