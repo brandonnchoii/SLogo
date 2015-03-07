@@ -1,8 +1,0 @@
-<map id="turtle.Pen.changePenState" name="turtle.Pen.changePenState">
-<area shape="rect" id="node2" href="$df/dcb/classturtle_1_1_turtle.html#ab08f17483dfe57acd1dd02c185f53d65" title="turtle.Turtle.initialize\lTurtleDefaults" alt="" coords="259,5,408,46"/>
-<area shape="rect" id="node4" href="$df/dcb/classturtle_1_1_turtle.html#ac6118ca3a77e112f4fd20431e1331f35" title="turtle.Turtle.setDrawing" alt="" coords="249,71,418,97"/>
-<area shape="rect" id="node7" href="$df/dcb/classturtle_1_1_turtle.html#ae1bc9beaba25c7eeea0c49386e050c2e" title="turtle.Turtle.Turtle" alt="" coords="267,121,399,148"/>
-<area shape="rect" id="node3" href="$df/dcb/classturtle_1_1_turtle.html#ad7775d2dd1b227899496c286c3ff1b47" title="turtle.Turtle.Turtle" alt="" coords="522,12,654,39"/>
-<area shape="rect" id="node5" href="$dd/d99/classcommand_1_1_pen_down_command.html#ac2f9113ba53ea8ed6fccc08ef7b18675" title="command.PenDownCommand.run" alt="" coords="467,67,709,93"/>
-<area shape="rect" id="node6" href="$d7/dfe/classcommand_1_1_pen_up_command.html#a3f92950a6a7702e9e09855d9aac69405" title="command.PenUpCommand.run" alt="" coords="475,117,701,144"/>
-</map>
