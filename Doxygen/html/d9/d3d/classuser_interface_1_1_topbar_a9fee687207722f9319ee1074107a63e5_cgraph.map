@@ -1,7 +1,0 @@
-<map id="userInterface.Topbar.Topbar" name="userInterface.Topbar.Topbar">
-<area shape="rect" id="node2" href="$d9/d3d/classuser_interface_1_1_topbar.html#adfe0dbb4c55d1051295c404c6341439b" title="userInterface.Topbar.initialize" alt="" coords="251,77,458,104"/>
-<area shape="rect" id="node3" href="$d9/d3d/classuser_interface_1_1_topbar.html#a1be294bda4285f829743c901cbb06b88" title="userInterface.Topbar.create\lHelpLink" alt="" coords="507,5,703,46"/>
-<area shape="rect" id="node5" href="$d9/d3d/classuser_interface_1_1_topbar.html#a6022a8893568f91dfc36b8223a257c8e" title="userInterface.Topbar.create\lColorChoices" alt="" coords="507,70,703,111"/>
-<area shape="rect" id="node6" href="$d9/d3d/classuser_interface_1_1_topbar.html#a8f3abe8a9910713096b4316e1a613fb2" title="userInterface.Topbar.create\lLanguageOptions" alt="" coords="507,135,703,177"/>
-<area shape="rect" id="node4" href="$d9/d3d/classuser_interface_1_1_topbar.html#aadc633ad6218538f0974b286a4b3b3be" title="userInterface.Topbar.display\lWebpage" alt="" coords="753,5,951,46"/>
-</map>
