@@ -1,8 +1,0 @@
-<map id="turtle.Turtle.act" name="turtle.Turtle.act">
-<area shape="rect" id="node2" href="$d7/d35/classcommand_1_1_command.html#a66d04483ecf285dc068cdd6fa3dd0a39" title="command.Command.run" alt="" coords="174,31,357,57"/>
-<area shape="rect" id="node3" href="$d7/d35/classcommand_1_1_command.html#ade84c695f2d6aa1e11511700aa6d89dd" title="command.Command.doCommand" alt="" coords="405,5,651,32"/>
-<area shape="rect" id="node4" href="$d7/d35/classcommand_1_1_command.html#ace2304395e13775995811b94446e8bbc" title="command.Command.update" alt="" coords="425,56,631,83"/>
-<area shape="rect" id="node5" href="$d7/d35/classcommand_1_1_command.html#ae8029b25ed3f430063671ae6584b1a0f" title="command.Command.updateColors" alt="" coords="709,5,955,32"/>
-<area shape="rect" id="node6" href="$d7/d35/classcommand_1_1_command.html#a92c3f31ef37574df9753a61e01c8daad" title="command.Command.updateFunctions" alt="" coords="699,56,965,83"/>
-<area shape="rect" id="node7" href="$d7/d35/classcommand_1_1_command.html#ab9f5701138ce884edf93cd748febbe0d" title="command.Command.updateVariables" alt="" coords="699,107,965,133"/>
-</map>

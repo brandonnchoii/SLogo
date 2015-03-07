@@ -1,8 +1,0 @@
-<map id="world.World.listen" name="world.World.listen">
-<area shape="rect" id="node2" href="$d8/d08/classworld_controller_1_1_world_controller.html#a178425d68e3e669c386706153ce44999" title="worldController.WorldController.update" alt="" coords="184,12,448,39"/>
-<area shape="rect" id="node3" href="$d0/d7c/classuser_interface_1_1_u_i.html#ab17592b00ba0b808f524b4fc223303ec" title="userInterface.UI.runCommand" alt="" coords="497,12,711,39"/>
-<area shape="rect" id="node4" href="$d0/d7c/classuser_interface_1_1_u_i.html#a02bd34909b5d6037ea8ebe812879b90a" title="userInterface.UI.makeRun\lButton" alt="" coords="760,5,947,46"/>
-<area shape="rect" id="node5" href="$d0/d7c/classuser_interface_1_1_u_i.html#a9f7eaa121e1405b45e262f03859f9ff0" title="userInterface.UI.setUpCommand\lField" alt="" coords="995,5,1227,46"/>
-<area shape="rect" id="node6" href="$d0/d7c/classuser_interface_1_1_u_i.html#a3bbaba49b5a758cdab6fb4182e5dec4c" title="userInterface.UI.initialize" alt="" coords="1275,12,1453,39"/>
-<area shape="rect" id="node7" href="$d0/d7c/classuser_interface_1_1_u_i.html#aad82f35446d97cd94d5003a2b995e264" title="userInterface.UI.UI" alt="" coords="1502,12,1642,39"/>
-</map>
