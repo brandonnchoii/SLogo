@@ -13,6 +13,7 @@ public abstract class IECommand extends Command {
 
     private final static String TRUE = "1";
     private final static String FALSE = "0";
+    private final static String IFLOOP = "2";
     
     public IECommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
         super(params, variableMap, func, bind, colors);
@@ -21,6 +22,8 @@ public abstract class IECommand extends Command {
     }
 
     protected void updateMap() {
+        commandValues.put("LoopStart", IFLOOP);
+        commandValues.put("LoopEnd", IFLOOP);
         if(parameters.get(0) != 0)
             commandValues.put("IfCommand", TRUE);
         else
@@ -30,8 +33,8 @@ public abstract class IECommand extends Command {
     @Override
     public double doCommand(Turtle t) {
         if(parameters.get(0) != 0) 
-            return 0;
-        return 1;
+            return 1;
+        return 0;
     }
 
 
