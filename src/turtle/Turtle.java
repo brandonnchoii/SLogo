@@ -1,13 +1,14 @@
 package turtle;
 
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import worldController.WorldController;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import command.Command;
 
@@ -55,6 +56,7 @@ public class Turtle extends ImageView {
 		initializeTurtleDefaults();
         active = true;
         id = ID;
+        setImage(i);
     }
 	
 	private void initializeTurtleDefaults() {
@@ -124,17 +126,18 @@ public class Turtle extends ImageView {
 	public void animatedMove(GraphicsContext gc, Point2D shift) {
 		double currX = current.getX();
 		double currY = current.getY();
-        if (current.distance(goal) < mySpeed) {
-        	moveMyself(goal.getX(), goal.getY());
-        	myPen.drawLine(gc, goal, current, shift);
+		if (current.distance(goal) < mySpeed) {
+			moveMyself(goal.getX(), goal.getY());
+			myPen.drawLine(gc, goal, current, shift);	
         	current = goal;
         	return;
         }
-    	Point2D nextPoint = findNextPoint(currX, currY, 
+		Point2D nextPoint = findNextPoint(currX, currY, 
         		goal.getX(), goal.getY());
     	moveMyself(nextPoint.getX(), nextPoint.getY());
     	myPen.drawLine(gc, nextPoint, current, shift);
-		current = nextPoint;
+    	gc.strokeLine(currX, currY, nextPoint.getX(), nextPoint.getY());
+    	current = nextPoint;
 	}
 	
 	private void moveMyself(double x, double y) {
@@ -204,4 +207,3 @@ public class Turtle extends ImageView {
     }
 
 }
-

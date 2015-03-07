@@ -9,7 +9,6 @@ package worldController;
 import java.io.IOException;
 
 import javafx.animation.Animation;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -18,39 +17,37 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
-import turtle.Pen;
 import turtle.Turtle;
-import userInterface.UserInterface;
 import world.BoundedWorld;
 import world.UnboundedWorld;
 import world.World;
 
 public class WorldController {
 
+    private static final int CANVAS_INSET = 20;
+
 	private static final int PAUSE = 10;
-	
-	World myWorld;
+    
+    World myWorld;
     private GraphicsContext myGC;
     private Timeline myAnimation;
     private Turtle myTurtle;
     private Canvas myCanvas;
     private StackPane myPane;
     private Point2D shift;
+    private boolean made = false;
     
     public WorldController (StackPane pane) throws IOException {
         myWorld = new BoundedWorld();
-        initializeWorld(pane);
+        initializeController(pane);
     }
 
     public WorldController (StackPane pane, World w) {
         myWorld = w;
-        initializeWorld(pane);
+        initializeController(pane);
     }
 
     public WorldController (StackPane pane, boolean bounded) throws IOException  {
@@ -58,17 +55,17 @@ public class WorldController {
             myWorld = new BoundedWorld();
         else 
             myWorld = new UnboundedWorld();
-        initializeWorld(pane);
+        initializeController(pane);
     }
-
-	private void initializeWorld(StackPane pane) {
+    
+	private void initializeController(StackPane pane) {
 		myPane = pane;
         myCanvas = (Canvas) pane.getChildren().get(0);
         myGC = myCanvas.getGraphicsContext2D();
         myTurtle = myWorld.getTurtle();
         myCanvas.setWidth(myPane.getWidth());
         myCanvas.setHeight(myPane.getHeight());
-        shift = new Point2D(myPane.getWidth() / 2.0, myPane.getHeight() / 2.0);
+        //shift = new Point2D(myPane.getWidth() / 2.0, myPane.getHeight() / 2.0);
         myPane.getChildren().add(myTurtle);
         makeTimeline(PAUSE);
 	}
@@ -83,10 +80,8 @@ public class WorldController {
      
      private KeyFrame makeKeyFrame(int framerate, double xTarget, double yTarget) {
     	 Duration t1 = new Duration(framerate);
-    	 DoubleProperty xProp = new SimpleDoubleProperty(xTarget);
-    	 DoubleProperty yProp = new SimpleDoubleProperty(yTarget);
-    	 KeyValue kvx = new KeyValue(xProp, xTarget);
-         KeyValue kvy = new KeyValue(yProp, yTarget);
+    	 KeyValue kvx = new KeyValue(new SimpleDoubleProperty(xTarget), xTarget);
+         KeyValue kvy = new KeyValue(new SimpleDoubleProperty(yTarget), yTarget);
          KeyFrame kf = new KeyFrame(t1,
           a -> {                          
         	  myTurtle.animatedMove(myGC, shift);
@@ -102,11 +97,18 @@ public class WorldController {
      }
      
     public void update(String command) {
+    	updateCanvasSize();
     	myTurtle.updatePenAttributes(myGC);
     	myAnimation.play();
         String s = myWorld.listen(command);
     	//UI.getSidebar().addResult(s);
     	//drawTurtle();
+    }
+    
+    private void updateCanvasSize() {
+    	myCanvas.setWidth(myPane.getWidth() - CANVAS_INSET);
+    	myCanvas.setHeight(myPane.getHeight() - CANVAS_INSET);
+        shift = new Point2D(myCanvas.getWidth() / 2.0, myCanvas.getHeight() / 2.0);
     }
     
     //resort to this method if the animator isn't working well

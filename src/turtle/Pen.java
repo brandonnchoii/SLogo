@@ -21,8 +21,8 @@ public class Pen {
         if (isDrawing) {
         	double shiftX = shift.getX();
         	double shiftY = shift.getY();
-        	gc.setStroke(myPenColor);
-        	gc.setLineWidth(mySize);
+        	gc.setFill(myPenColor);
+        	gc.setLineWidth(mySize);      	
         	gc.strokeLine(current.getX() + shiftX, current.getY() + shiftY, 
         			goal.getX() + shiftX, goal.getY() + shiftY);
 	

@@ -32,6 +32,7 @@ public abstract class World {
 
 		myTurtles = new ArrayList<>();
 		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
+		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
 		myParser = new Parser("English");
 		//added for testing
 		myTurtle = myTurtles.get(0);
@@ -42,6 +43,7 @@ public abstract class World {
 		width = w;
 		myTurtles = new ArrayList<>();
 		myTurtles.add(new Turtle(TURTLE_DEFAULT, 0));
+		myTurtle = new Turtle(TURTLE_DEFAULT, 0);
 		myParser = new Parser("English");
 		//added for testing
 		myTurtle = myTurtles.get(0);
