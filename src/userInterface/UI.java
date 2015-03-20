@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Brandon Choi
+
 /**
  * @author Brandon Choi, James Mosca
  */
@@ -36,6 +39,9 @@ public class UI {
     private static final String PLAY_BUTTON = "resources/images/PlayButton.jpg";
     private static final int INPUT_WIDTH = 450;
     private static final int INPUT_HEIGHT = 300;
+    private static final int HBOX_SPACING = 15;
+    private static final Insets CENTERVIEW_INSETS = new Insets(5, 5, 5, 5);
+    private static final Insets VIEW_INSETS = new Insets(10, 10, 10, 10);
 
     private WorldController myController;
     private BorderPane myView, myCenterView;
@@ -70,39 +76,26 @@ public class UI {
      * @param List<ObjectProperty> bindings
      */
     private void initialize (List<ObjectProperty> bindings) {
-        myBindings = bindings;
-        myLanguage = myBindings.get(UIManager.LANGUAGE_INDEX);
-        myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
-
-        myView = new BorderPane();
-        myView = new BorderPane();
-        myView.setPadding(new Insets(10, 10, 10, 10));
-        myCenterView = new BorderPane();
-        myCenterView.setPadding(new Insets(5, 5, 5, 5));
-
+        setUpBindings(bindings);
+        createViews();
         setUpCommandField();
         setUpPane();
         setUpController();
-
-        myView.setCenter(myCenterView);
-        myView.setRight(myRightPanel.getInstance().getPanel());
-        myView.setLeft(myLeftPanel.getInstance().getPanel());
-        myCenterView.setCenter(canvasPane);
-        myCenterView.setBottom(myCommandField);
-        myCenterView.setAlignment(myInput, Pos.CENTER);
+        setUpViews();
     }
 
-    /**
-     * sets up the WorldController
-     */
-    private void setUpController () {
-        try {
-            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText,
-                                               myBindings);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void setUpBindings (List<ObjectProperty> bindings) {
+        myBindings = bindings;
+        myLanguage = myBindings.get(UIManager.LANGUAGE_INDEX);
+        myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
+    }
+
+    private void createViews () {
+        myView = new BorderPane();
+        myView = new BorderPane();
+        myView.setPadding(VIEW_INSETS);
+        myCenterView = new BorderPane();
+        myCenterView.setPadding(CENTERVIEW_INSETS);
     }
 
     /**
@@ -113,7 +106,7 @@ public class UI {
      * command and have it appear in the command box
      */
     private void setUpCommandField () {
-        myCommandField = new HBox(15);
+        myCommandField = new HBox(HBOX_SPACING);
         myInput = new TextArea(myLanguage.getValue().getString("InputText"));
 
         inputText = new SimpleStringProperty();
@@ -133,30 +126,52 @@ public class UI {
     }
 
     /**
-     * creates run button
-     * @return Button play
-     */
-    private Button makeRunButton () {
-        Button play = new Button();
-        Image playImage = new Image(PLAY_BUTTON);
-        ImageView playView = new ImageView(playImage);
-        play.setGraphic(playView);
-        play.setOnAction(e -> runCommand());
-        return play;
-    }
-
-    /**
      * sets up the canvas pane with the canvas and graphics context
      */
     private void setUpPane () {
         canvasPane = new StackPane();
-        canvasPane.setPadding(new Insets(10, 10, 10, 10));
+        canvasPane.setPadding(VIEW_INSETS);
         myCanvas = new Canvas();
         myGC = myCanvas.getGraphicsContext2D();
         canvasPane.getChildren().add(myCanvas);
         canvasPane.styleProperty().bind(myCanvasColor);
     }
-    
+
+    /**
+     * sets up the WorldController
+     */
+    private void setUpController () {
+        try {
+            myController = new WorldController(this, myRightPanel, myLeftPanel, inputText,
+                                               myBindings);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setUpViews () {
+        myView.setCenter(myCenterView);
+        myView.setRight(myRightPanel.getInstance().getPanel());
+        myView.setLeft(myLeftPanel.getInstance().getPanel());
+        myCenterView.setCenter(canvasPane);
+        myCenterView.setBottom(myCommandField);
+        myCenterView.setAlignment(myInput, Pos.CENTER);
+    }
+
+    /**
+     * creates run button
+     * 
+     * @return Button play
+     */
+    private Button makeRunButton () {
+        Button play = new Button();
+        ImageView playView = new ImageView(new Image(PLAY_BUTTON));
+        play.setGraphic(playView);
+        play.setOnAction(e -> runCommand());
+        return play;
+    }
+
     /**
      * called to run whatever command(s) are in the command field
      */

@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Brandon Choi
+
 /**
  * @author Brandon Choi
  */
@@ -22,7 +25,7 @@ public class RightPanel {
 
     private static final int DOUBLE_CLICK = 2;
     private static final String RESULTS_LABEL = "Results";
-    private static final String SAVED_COMMANDS_LABEL = "Saved Commands";
+    // private static final String SAVED_COMMANDS_LABEL = "Saved Commands";
     private static final String PREVIOUS_COMMANDS_LABEL = "Previous Commands";
     private static final int RIGHT_PANEL_SPACING = 10;
 
@@ -30,7 +33,7 @@ public class RightPanel {
     private VBox myRightPanel;
     private ObservableList<String> results;
     private ObservableList<String> previousCommands;
-    private ObservableMap<String, String> savedCommands;
+    // private ObservableMap<String, String> savedCommands;
     private ListView<String> resultsView;
     private ListView<String> previousCommandView;
     private ListView<String> savedCommandView;
@@ -76,7 +79,7 @@ public class RightPanel {
                             StringProperty t) {
         results = r;
         previousCommands = p;
-        savedCommands = savedCommands2;
+        // savedCommands = savedCommands2;
         inputText = t;
 
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
@@ -96,8 +99,8 @@ public class RightPanel {
         myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
                                           makeListView(previousCommandView, previousCommands,
                                                        PREVIOUS_COMMANDS_LABEL));
-//                                          makeListView(savedCommandView, savedCommands,
-//                                                       SAVED_COMMANDS_LABEL));
+        // makeListView(savedCommandView, savedCommands,
+        // SAVED_COMMANDS_LABEL);
     }
 
     /**
@@ -106,7 +109,7 @@ public class RightPanel {
      * @param ListView view
      * @param ObservableList list
      * @param String name
-     * @return
+     * @return VBox
      */
     private VBox makeListView (ListView view, ObservableList list, String name) {
         VBox listViewBox = new VBox();

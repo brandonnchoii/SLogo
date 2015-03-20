@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Brandon Choi
+
 /**
  * @author Brandon Choi
  */
@@ -19,7 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class UIManager {
-
     /**
      * UIManager can hold multiple tabs of SLogo and holds the menu bar that controls features such
      * as the background color, turtle image, etc.
@@ -32,6 +34,7 @@ public class UIManager {
     public static final int PEN_SIZE_INDEX = 2;
     public static final int TURTLE_IMAGE_INDEX = 3;
     public static final int LANGUAGE_INDEX = 4;
+    private static final int SIZE_INCREMENT = 1;
 
     private static final String TAB_NAME = "SLogo #";
     private static final String DEFAULT_PACKAGE = "resources/languages/English";
@@ -71,7 +74,8 @@ public class UIManager {
     }
 
     /**
-     * sets up the binding properties for canvas color, pen color, pen size, turtle image, and language
+     * sets up the binding properties for canvas color, pen color, pen size, turtle image, and
+     * language
      */
     private void setUpBindings () {
         canvasColor = new SimpleObjectProperty<String>(DEFAULT_BACKGROUND_COLOR);
@@ -87,6 +91,7 @@ public class UIManager {
 
     /**
      * returns the scene to be viewed by main
+     * 
      * @return Scene myScene
      */
     public Scene getScene () {
@@ -105,7 +110,7 @@ public class UIManager {
      */
     private void addTab () {
         UI ui = new UI(myBindings);
-        Tab tab = new Tab(TAB_NAME + (myTabs.getTabs().size() + 1));
+        Tab tab = new Tab(TAB_NAME + (myTabs.getTabs().size() + SIZE_INCREMENT));
         tab.setContent(ui.getUI());
         myTabs.getTabs().add(tab);
     }
