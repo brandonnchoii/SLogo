@@ -32,7 +32,7 @@ public class CommandFactory {
     
 
     private static final String LANGUAGE_RESOURCE = "resources.language/";
-    private static final String PARAMETER_RESOURCE = "resources.parameters/";
+    private static final String PARAMETER_RESOURCE = "resources.parameters/numParameters";
     private static final String COMMAND_EXCEPTION = "Invalid Command";
     private static final String VARIABLE = "Variable";
     private static final String VARIABLE_EXCEPTION = "Illegal Variable Name";
@@ -54,7 +54,7 @@ public class CommandFactory {
         language = l;
         colors = color;
         setTranslationMap();
-        paramMap = ResourceBundle.getBundle(PARAMETER_RESOURCE + "numParameters");
+        paramMap = ResourceBundle.getBundle(PARAMETER_RESOURCE);
         syntax = ResourceBundle.getBundle(LANGUAGE_RESOURCE + "Syntax");
     }
 
