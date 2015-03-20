@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// JAMES MOSCA
+
 package turtle;
 
 import java.util.LinkedList;
@@ -31,12 +34,12 @@ public class PointQueue {
 		return list.get(0);
 	}
 	
+	public Point2D peakLast() {
+		return list.get(list.size() - 1);
+	}
+	
 	public void removeFirst() {
 		list.remove(0);
 	}
-//	public void addItems(PointQueue<? extends Point2D> q) {
-//		while (q.hasItems()) {
-//			list.addLast(q.dequeue());
-//	   }
-//	}
+
 }

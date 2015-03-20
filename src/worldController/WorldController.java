@@ -39,35 +39,6 @@ import world.World;
 
 public class WorldController {
     
-//    public WorldController (StackPane pane) throws IOException {
-//        myWorld = new BoundedWorld();
-//        initializeController(pane);
-//    }
-//
-//    public WorldController (StackPane pane, World w) {
-//        myWorld = w;
-//        initializeController(pane);
-//    }
-//
-//    public WorldController (StackPane pane, boolean bounded) throws IOException  {
-//        if (bounded)
-//            myWorld = new BoundedWorld();
-//        else 
-//            myWorld = new UnboundedWorld();
-//        initializeController(pane);
-//    }
-//    
-//	private void initializeController(StackPane pane) {
-//		myPane = pane;
-//        myCanvas = (Canvas) pane.getChildren().get(0);
-//        myGC = myCanvas.getGraphicsContext2D();
-//        myTurtle = myWorld.getTurtle();
-//        myCanvas.setWidth(myPane.getWidth());
-//        myCanvas.setHeight(myPane.getHeight());
-//        shift = new Point2D(myPane.getWidth() / 2.0, myPane.getHeight() / 2.0);
-//        myPane.getChildren().add(myTurtle);
-//        makeTimeline(PAUSE);
-//	}
 	
 	private static final int CANVAS_INSET = 20;
 	private static final int PAUSE = 10;
@@ -106,8 +77,6 @@ public class WorldController {
         myTurtle = myWorld.getTurtle();
         myCanvas.setWidth(myPane.getWidth());
         myCanvas.setHeight(myPane.getHeight());
-//        shiftX = myPane.getWidth() / 2.0;
-//        shiftY = myPane.getHeight() / 2.0;
         myPane.getChildren().add(myTurtle);
         makeTimeline(PAUSE);
     }
@@ -116,7 +85,6 @@ public class WorldController {
         myWorld = w;
         UI = ui;
         initializeController(pane);
-
     }
 
     public WorldController (UI ui, boolean bounded, List<ObjectProperty> bindings, StackPane pane) throws IOException {
@@ -176,7 +144,7 @@ public class WorldController {
      
     public void update(String command) {
     	updateCanvasSize();
-    	myTurtle.updatePenAttributes(myGC);
+    	myTurtle.updatePenAttributes(myGC); 
     	myAnimation.play();
         String s = myWorld.listen(command);
     	//UI.getSidebar().addResult(s);

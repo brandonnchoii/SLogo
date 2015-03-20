@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// JAMES MOSCA
+
 package turtle;
 
 import java.text.DecimalFormat;
@@ -38,6 +41,7 @@ public class Turtle extends ImageView {
 	private Point2D goal;
     private ObjectProperty<Image> myImage;
     private PointQueue myGoalQ;
+    private TurtleActionQueue myTAQ;
     
 	public Turtle(Paint color, int ID) {
 		myPen = new DefaultPen(color);
@@ -81,12 +85,16 @@ public class Turtle extends ImageView {
         id = ID;
     }
 
+    /**
+     * Sets up turtle default values to be used in constructors
+     */
     private void initializeTurtleDefaults() {
         mySpeed = DEFAULT_SPEED;
         current = new Point2D(DEFAULT_POS, DEFAULT_POS);
         next = new Point2D(DEFAULT_POS, DEFAULT_POS);
         goal = new Point2D(DEFAULT_POS, DEFAULT_POS);
         myGoalQ = new PointQueue();
+        myTAQ = new TurtleActionQueue();
         setTranslateX(DEFAULT_POS);
         setTranslateY(DEFAULT_POS);
         setFitWidth(DEFAULT_SIZE);
@@ -101,21 +109,6 @@ public class Turtle extends ImageView {
         myImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
         this.imageProperty().bind(myImage);       
         //add pen bindings depending on how you want to set up pen        
-    }
-    
-    public Point2D checkQueue(PointQueue q) {
-    	if (q.size() == 0) {
-    		return current;
-    	}
-    	if (current != q.peak()) {
-    		System.out.println(q.peak());
-    		return q.peak();
-    	}
-    	if (current == q.peak()) {
-    		q.removeFirst();  
-    		checkQueue(q);
-    	}
-    	return new Point2D(0, 0);
     }
     
     private void moveMyself(double x, double y) {
@@ -136,13 +129,20 @@ public class Turtle extends ImageView {
 	}
 
 	public String act(Command c) {
-		return c.run(this) + "";
+		return c.run(this) + ""; 
 	}
 
 	public void move(double pixels) {
-		Point2D next = new Point2D(checkQueue(myGoalQ).getX() + pixels*Math.cos(radians()),
-				checkQueue(myGoalQ).getY() + pixels*Math.sin(radians()));
-		myGoalQ.enqueue(next);
+		if (myGoalQ.size() != 0) {
+			Point2D next = new Point2D(myGoalQ.peakLast().getX() + pixels*Math.cos(radians()),
+					myGoalQ.peakLast().getY() + pixels*Math.sin(radians()));
+			myGoalQ.enqueue(next);
+		}
+		else {
+			Point2D next = new Point2D(current.getX() + pixels*Math.cos(radians()),
+				current.getY() + pixels*Math.sin(radians()));
+			myGoalQ.enqueue(next);
+		}
 	}
 
 	private double radians(){
@@ -176,25 +176,59 @@ public class Turtle extends ImageView {
 		goal = new Point2D(x, y);
 	}
 	
+    /**
+     * Checks values of a given queue by comparing them to the current
+     * position and goal of the turtle
+     * @param q
+     */
+    public void checkQueue(PointQueue q) {
+    	if (q.size() == 0) {
+    		goal = current;
+    		return;
+    	}
+    	if (current != q.peak()) {
+    		goal = q.peak();
+    		return;
+    	}
+    	if (current == q.peak()) {
+    		q.removeFirst();  
+    		checkQueue(q);
+    	}
+    }
+	
+	/**
+	 * Moves the turtle incrementally towards its goal
+	 * Draws a line to the turtle's current position
+	 * @param gc
+	 * @param shift
+	 */
 	public void animatedMove(GraphicsContext gc, Point2D shift) {
 		double currX = current.getX();
 		double currY = current.getY();
-		Point2D qItem = checkQueue(myGoalQ);
-		if (current.distance(qItem) < mySpeed) {
-			moveMyself(qItem.getX(), qItem.getY());
-			myPen.drawLine(gc, qItem, current, shift);	
-        	current = qItem;
+		checkQueue(myGoalQ);
+		if (current.distance(goal) < mySpeed) {
+			moveMyself(goal.getX(), goal.getY());
+			myPen.drawLine(gc, goal, current, shift);	
+        	current = goal;
         	return;
         }
 		Point2D nextPoint = findNextPoint(currX, currY, 
-        		qItem.getX(), qItem.getY());
+        		goal.getX(), goal.getY());
     	moveMyself(nextPoint.getX(), nextPoint.getY());
     	myPen.drawLine(gc, nextPoint, current, shift);
     	gc.strokeLine(currX, currY, nextPoint.getX(), nextPoint.getY());
     	current = nextPoint;
 	}
 	
-	
+	/**
+	 * Given a speed of the turtle, the turtle moves its speed towards 
+	 * the goal coordinate
+	 * @param x0
+	 * @param y0
+	 * @param x1
+	 * @param y1
+	 * @return
+	 */
 	private Point2D findNextPoint(double x0, double y0, double x1, double y1) {
 		if (atGoal()) {
 			return goal;
@@ -207,6 +241,11 @@ public class Turtle extends ImageView {
 		return next;
 	}
 	
+	/**
+	 * Finds the next point from standard values of the current 
+	 * turtle position, using its current goal
+	 * @return
+	 */
 	public Point2D nextFromCurrent() {
 		return findNextPoint(current.getX(), current.getY(),
 				goal.getX(), goal.getY());
@@ -238,8 +277,12 @@ public class Turtle extends ImageView {
         active = b;
     }
     
-    //old animation-less drawing (use if animation fails)
-    //call still exists in controller - just uncomment
+    /**
+     * Standard drawing function
+     * @param gc
+     * @param shiftX
+     * @param shiftY
+     */
     public void previousDrawLine(GraphicsContext gc, double shiftX, double shiftY) {
         double currX = current.getX();
         double currY = current.getY();
