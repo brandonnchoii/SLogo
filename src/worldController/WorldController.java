@@ -157,12 +157,6 @@ public class WorldController {
         shift = new Point2D(myCanvas.getWidth() / 2.0, myCanvas.getHeight() / 2.0);
     }
     
-    //resort to this method if the animator isn't working well
-    //just uncomment drawTurtle() in the update method
-    private void drawTurtle() {
-        myTurtle.previousDrawLine(myGC, shift.getX(), shift.getY());
-    }    
-    
 	public void clear () {
 	
 	}
