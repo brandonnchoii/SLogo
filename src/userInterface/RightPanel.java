@@ -85,16 +85,18 @@ public class RightPanel {
         myRightPanel = new VBox(RIGHT_PANEL_SPACING);
         myRightPanel.setPrefSize(UI.PANEL_WIDTH, UI.PANEL_HEIGHT);
         resultsView = new ListView<>();
+        
         previousCommandView = new ListView<>();
         previousCommandView.setOnMouseClicked(e -> {
             if (e.getClickCount() == DOUBLE_CLICK)
                 inputText.setValue(previousCommandView.getSelectionModel().getSelectedItem());
         });
-        savedCommandView = new ListView<>();
-        savedCommandView.setOnMouseClicked(e -> {
-            if (e.getClickCount() == DOUBLE_CLICK)
-                inputText.setValue(savedCommandView.getSelectionModel().getSelectedItem());
-        });
+        
+//        savedCommandView = new ListView<>();
+//        savedCommandView.setOnMouseClicked(e -> {
+//            if (e.getClickCount() == DOUBLE_CLICK)
+//                inputText.setValue(savedCommandView.getSelectionModel().getSelectedItem());
+//        });
 
         myRightPanel.getChildren().addAll(makeListView(resultsView, results, RESULTS_LABEL),
                                           makeListView(previousCommandView, previousCommands,

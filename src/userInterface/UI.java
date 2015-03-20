@@ -84,14 +84,20 @@ public class UI {
         setUpViews();
     }
 
+    /**
+     * sets up the bindings based on the List of ObjectPropertys given
+     * @param List<ObjectProperty> bindings
+     */
     private void setUpBindings (List<ObjectProperty> bindings) {
         myBindings = bindings;
         myLanguage = myBindings.get(UIManager.LANGUAGE_INDEX);
         myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
     }
 
+    /**
+     * initializes myView and myVenterView as BorderPanes
+     */
     private void createViews () {
-        myView = new BorderPane();
         myView = new BorderPane();
         myView.setPadding(VIEW_INSETS);
         myCenterView = new BorderPane();
@@ -150,6 +156,9 @@ public class UI {
         }
     }
 
+    /**
+     * assigns different components to various parts of the BorderPanes myView and myCenterView
+     */
     private void setUpViews () {
         myView.setCenter(myCenterView);
         myView.setRight(myRightPanel.getInstance().getPanel());
