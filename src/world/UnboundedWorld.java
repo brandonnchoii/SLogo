@@ -18,20 +18,20 @@ public class UnboundedWorld extends World {
 		super(variables, functions, bindings, colors);
 	}
 
-	public UnboundedWorld(ObservableMap<String, Double> variables,
-			ObservableMap<String, String> functions,
-			List<ObjectProperty> bindings, int h, int w,
-			ObservableList<Color> colors) throws IOException {
-		super(h, w, variables, functions, bindings, colors);
-	}
+//	public UnboundedWorld(ObservableMap<String, Double> variables,
+//			ObservableMap<String, String> functions,
+//			List<ObjectProperty> bindings, int h, int w,
+//			ObservableList<Color> colors) throws IOException {
+//		super(h, w, variables, functions, bindings, colors);
+//	}
 
-	public UnboundedWorld(int h, int w, Turtle t, String l,
-			ObservableMap<String, Double> variables,
-			ObservableMap<String, String> functions,
-			List<ObjectProperty> bindings, ObservableList<Color> colors)
-			throws IOException {
-		super(h, w, t, l, variables, functions, bindings, colors);
-	}
+//	public UnboundedWorld(int h, int w, Turtle t, String l,
+//			ObservableMap<String, Double> variables,
+//			ObservableMap<String, String> functions,
+//			List<ObjectProperty> bindings, ObservableList<Color> colors)
+//			throws IOException {
+//		super(h, w, t, l, variables, functions, bindings, colors);
+//	}
 
 	@Override
 	public void fixPosition() {

@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Megan Gutter
+
 package world;
 
 /**
@@ -63,39 +66,6 @@ public abstract class World {
 		myTurtle = myTurtles.get(0);
 	}
 
-	public World(int h, int w, ObservableMap<String, Double> var,
-			ObservableMap<String, String> fun, List<ObjectProperty> Bindings,
-			ObservableList<Color> color) throws IOException {
-		variables = var;
-		functions = fun;
-		bindings = Bindings;
-		colors = color;
-		height = h;
-		width = w;
-		myTurtles = new HashMap<>();
-		myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-		myParser = new Parser("English", variables, fun, bindings, colors);
-		myTurtle = myTurtles.get(0);
-
-	}
-
-	public World(int h, int w, Turtle t, String language,
-			ObservableMap<String, Double> var, ObservableMap<String, String> fun,
-			List<ObjectProperty> Bindings, ObservableList<Color> color)
-			throws IOException {
-		variables = var;
-		functions = fun;
-		bindings = Bindings;
-		colors = color;
-		height = h;
-		width = w;
-		myTurtles = new HashMap<>();
-		myTurtles.put(t.getID(), t);
-		myParser = new Parser(language, variables, fun, bindings, colors);
-		myTurtle = myTurtles.get(0);
-
-	}
-
 	public abstract void fixPosition();
 
 	/**
@@ -109,15 +79,12 @@ public abstract class World {
 		String param = "";
 		for (int s = 0; s < splitInput.length; s++) {
 			int numCommands = myParser.initializeCommands(splitInput[s]);
-			//System.out.println("numCommands = " + numCommands);
 			for (int i = 0; i < numCommands; i++) {
 				Command c = myParser.parse(param);
 				Map<String, String> commandValues = c
 						.getCommandValues(myTurtles);
-				//System.out.println("param = " + param);
 				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
 					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
-						System.out.println("if = " + commandValues.get(IF_STATEMENT));
 						double loopStart = Double.parseDouble(commandValues
 								.get(LOOP_START));
 						double loopEnd = Double.parseDouble(commandValues
@@ -125,12 +92,10 @@ public abstract class World {
 						double loopIncrement = Double.parseDouble(commandValues
 								.get(LOOP_INCREMENT));
 						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
-							//System.out.println("loop# = " + j);
 							myParser.updateVariable(
 									commandValues.get(LOOP_VARIABLE), j);
 							int turtleID = Integer.parseInt(id);
 							if (loopStart == loopEnd) {
-								//System.out.println("loopEnd" + loopEnd);
 								param = runCommand(c, turtleID);
 							} else {
 								param = runCommand(myParser.parse("list"),
@@ -139,7 +104,6 @@ public abstract class World {
 						}
 						myParser.resetRepcount();
 					} else {
-						// return commandValues.get("0");
 					}
 				}
 				if (s != splitInput.length - 1) {
@@ -187,10 +151,5 @@ public abstract class World {
 	public Turtle getTurtle() {
 		return myTurtle;
 	}
-
-	// public static void main(String[] args) throws IOException {
-	// BoundedWorld test = new BoundedWorld();
-	// test.listen("fd 100 /n rt 90 /n fd 100");
-	// }
 
 }
