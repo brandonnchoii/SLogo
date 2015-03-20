@@ -26,9 +26,10 @@ public class CommandFactory {
     private ResourceBundle translationMap;
     private ResourceBundle paramMap;
     protected ResourceBundle syntax;
-        
+
     private List<ObjectProperty> bindings;
     private ObservableList<Color> colors;
+    
 
     private static final String LANGUAGE_RESOURCE = "resources.language/";
     private static final String PARAMETER_RESOURCE = "resources.parameters/";
@@ -36,7 +37,8 @@ public class CommandFactory {
     private static final String VARIABLE = "Variable";
     private static final String VARIABLE_EXCEPTION = "Illegal Variable Name";
     private static final double DEFAULT_START = 1;
-    
+    private static final String[] splits = {",", "\\|"};
+
     /**
      * The constructor for Command Factory
      * @param l The language for commands
@@ -55,14 +57,14 @@ public class CommandFactory {
         paramMap = ResourceBundle.getBundle(PARAMETER_RESOURCE + "numParameters");
         syntax = ResourceBundle.getBundle(LANGUAGE_RESOURCE + "Syntax");
     }
-    
+
     /**
      * Called when the language is updated so that commands are recognized in the new language
      */
     private void setTranslationMap(){
         translationMap = ResourceBundle.getBundle(LANGUAGE_RESOURCE + language);
     }
-    
+
     /**
      * The core functionality of the program - takes a list of Strings and returns a Command
      * @param parts A list representing first the command and then its parameters
@@ -74,7 +76,7 @@ public class CommandFactory {
         Command ret = reflectCMD(cmd, parts);
         return ret;
     }
-    
+
     /**
      * Takes the English string representing the command and the parameters, and returns the appropriate command
      * @param cmd The command's English representation
@@ -105,15 +107,13 @@ public class CommandFactory {
     private String translateCommand(String s){
         for(String key: translationMap.keySet()){
             String val = translationMap.getString(key);
-            for (String sub: val.split(","))
-                if(sub.equals(s))
-                    return key;
-            for(String sub: val.split("\\|"))
-                if(sub.equals(s))
-                    return key;
+            for (String del: splits)
+                for (String sub: val.split(del))
+                    if(sub.equals(s))
+                        return key;
         }
 
-        throw new IllegalArgumentException("Illegal Command");
+        throw new IllegalArgumentException(COMMAND_EXCEPTION);
     }
 
     /**
@@ -133,7 +133,7 @@ public class CommandFactory {
         language = l;
         setTranslationMap();
     }
-    
+
     /**
      * Adds or updates a variable in the map
      * @param s The variable name (must start with ":")
@@ -144,7 +144,7 @@ public class CommandFactory {
             variables.put(s,d);
         else
             throw new IllegalArgumentException(VARIABLE_EXCEPTION);
-       
+
     }
 
     /**
@@ -153,5 +153,5 @@ public class CommandFactory {
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
     }
-    
+
 }
