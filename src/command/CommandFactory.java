@@ -100,7 +100,7 @@ public class CommandFactory {
     }
 
     /**
-     * Takes a string in any language and translates it to its English representation
+     * Takes a string in any language and translates it to its English representation. The resources file may be split by either commas or pipes. 
      * @param s The String representing the command
      * @return The String for the English representation
      */
