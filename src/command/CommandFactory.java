@@ -31,6 +31,7 @@ public class CommandFactory {
     private ObservableList<Color> colors;
 
     private static final String LANGUAGE_RESOURCE = "resources.language/";
+    private static final String PARAMETER_RESOURCE = "resources.parameters/";
     private static final String COMMAND_EXCEPTION = "Invalid Command";
     private static final String VARIABLE = "Variable";
     private static final String VARIABLE_EXCEPTION = "Illegal Variable Name";
@@ -51,8 +52,8 @@ public class CommandFactory {
         language = l;
         colors = color;
         setTranslationMap();
-        paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
-        syntax = ResourceBundle.getBundle("resources.languages/Syntax");
+        paramMap = ResourceBundle.getBundle(PARAMETER_RESOURCE + "numParameters");
+        syntax = ResourceBundle.getBundle(LANGUAGE_RESOURCE + "Syntax");
     }
     
     /**
@@ -153,6 +154,4 @@ public class CommandFactory {
         variables.put(":repcount", DEFAULT_START);
     }
     
-   
-
 }
