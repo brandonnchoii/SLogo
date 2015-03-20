@@ -112,7 +112,7 @@ public class CommandFactory {
                     if(sub.equals(s))
                         return key;
         }
-
+        
         throw new IllegalArgumentException(COMMAND_EXCEPTION);
     }
 
