@@ -1,34 +1,49 @@
+//This entire file is part of my masterpiece.
+//Thomas Bagley
+
 package command;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-import turtle.Turtle;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.paint.Color;
 
-
+/**
+ * CommandFactory.java
+ * @author Thomas Bagley
+ * Takes a List of Strings representing a command and its parameters and returns an executable command
+ */
 public class CommandFactory {
 
     private ObservableMap<String, Double> variables;
     private ObservableMap<String, String> functions;
-    private List<ObjectProperty> bindings;
-    private ObservableList<Color> colors;
     private String language;
 
     private ResourceBundle translationMap;
     private ResourceBundle paramMap;
     protected ResourceBundle syntax;
+        
+    private List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
 
-
+    private static final String LANGUAGE_RESOURCE = "resources.language/";
+    private static final String COMMAND_EXCEPTION = "Invalid Command";
+    private static final String VARIABLE = "Variable";
+    private static final String VARIABLE_EXCEPTION = "Illegal Variable Name";
     private static final double DEFAULT_START = 1;
-
+    
+    /**
+     * The constructor for Command Factory
+     * @param l The language for commands
+     * @param var An ObservableMap to store the variables currently recognized by the program
+     * @param functions2 An ObservableMap to store the user-defined functions currently recognized by the program
+     * @param bind A List of ObjectProperties for the User Interface (Never fully implemented)
+     * @param color A List of Colors for the User Interface (Never fully implemented)
+     */
     public CommandFactory(String l, ObservableMap<String, Double> var, ObservableMap<String, String> functions2, List<ObjectProperty> bind, ObservableList<Color> color)  {
         variables = var;
         functions = functions2;
@@ -39,18 +54,32 @@ public class CommandFactory {
         paramMap = ResourceBundle.getBundle("resources.parameters/numParameters");
         syntax = ResourceBundle.getBundle("resources.languages/Syntax");
     }
-
+    
+    /**
+     * Called when the language is updated so that commands are recognized in the new language
+     */
     private void setTranslationMap(){
-        translationMap = ResourceBundle.getBundle("resources.languages/" + language);
+        translationMap = ResourceBundle.getBundle(LANGUAGE_RESOURCE + language);
     }
-
+    
+    /**
+     * The core functionality of the program - takes a list of Strings and returns a Command
+     * @param parts A list representing first the command and then its parameters
+     * @return The executable command called by the user (or throws an exception)
+     */
     public Command createCommand(List<String> parts){
         String command = parts.get(0);
         String cmd = translateCommand(command.toLowerCase());
         Command ret = reflectCMD(cmd, parts);
         return ret;
     }
-
+    
+    /**
+     * Takes the English string representing the command and the parameters, and returns the appropriate command
+     * @param cmd The command's English representation
+     * @param parts The list of the command and its parameters, processed in command
+     * @return The appropriate command with correct parameters and properties (or throws an exception)
+     */
     private Command reflectCMD(String cmd, List<String> parts){
         try {
             Class<?> commandClass = Class.forName("command." + cmd + "Command");
@@ -61,12 +90,17 @@ public class CommandFactory {
         } 
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("Invalid Command");
+            throw new IllegalArgumentException(COMMAND_EXCEPTION);
         }
 
 
     }
 
+    /**
+     * Takes a string in any language and translates it to its English representation
+     * @param s The String representing the command
+     * @return The String for the English representation
+     */
     private String translateCommand(String s){
         for(String key: translationMap.keySet()){
             String val = translationMap.getString(key);
@@ -81,36 +115,44 @@ public class CommandFactory {
         throw new IllegalArgumentException("Illegal Command");
     }
 
+    /**
+     * Returns the number of parameters for a given command type
+     * @param s The English string representing the command
+     * @return The number of parameters for that command
+     */
     public int getNumParameters(String s){
         return Integer.parseInt(paramMap.getString(translateCommand(s)));
     }
 
+    /**
+     * Updates the language in which the CommandFactory reads commands
+     * @param l The new language
+     */
     public void setLanguage(String l) {
         language = l;
         setTranslationMap();
     }
-
+    
+    /**
+     * Adds or updates a variable in the map
+     * @param s The variable name (must start with ":")
+     * @param d
+     */
     public void updateVariable(String s, Double d){
-        variables.put(s,d);
+        if(s.matches(syntax.getString(VARIABLE)))
+            variables.put(s,d);
+        else
+            throw new IllegalArgumentException(VARIABLE_EXCEPTION);
+       
     }
 
-
-    public void clearRepCount(){
-        variables.remove(":repCount");
-    }
-
+    /**
+     * Resets the value of the variable repcount, used to track the number of runs for general commands and the repeat command.
+     */
     public void resetRepcount(){
         variables.put(":repcount", DEFAULT_START);
     }
     
-    public static void main(String[] args){
-        CommandFactory cf = new CommandFactory("English", null, null, null, null);
-        List<String> a = new ArrayList<>();
-        a.add("dotimes");
-        a.add(":x 2");
-        Command c = cf.createCommand(a);
-        //System.out.print(c.run(new Turtle()));
-    }
-    
+   
 
 }
