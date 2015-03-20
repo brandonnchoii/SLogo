@@ -31,7 +31,7 @@ public class CommandFactory {
     private ObservableList<Color> colors;
     
 
-    private static final String LANGUAGE_RESOURCE = "resources.language/";
+    private static final String LANGUAGE_RESOURCE = "resources.languages/";
     private static final String PARAMETER_RESOURCE = "resources.parameters/numParameters";
     private static final String COMMAND_EXCEPTION = "Invalid Command";
     private static final String VARIABLE = "Variable";
