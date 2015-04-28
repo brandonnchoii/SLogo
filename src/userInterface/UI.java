@@ -23,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 public class UI {
 
@@ -75,13 +76,12 @@ public class UI {
         myCanvasColor = myBindings.get(UIManager.CANVAS_INDEX);
 
         myView = new BorderPane();
-        myView = new BorderPane();
         myView.setPadding(new Insets(10, 10, 10, 10));
         myCenterView = new BorderPane();
         myCenterView.setPadding(new Insets(5, 5, 5, 5));
 
         setUpCommandField();
-        setUpPane();
+        setUpCanvas();
         setUpController();
 
         myView.setCenter(myCenterView);
@@ -98,13 +98,18 @@ public class UI {
     private void setUpController () {
         try {
             myController = new WorldController(this, myRightPanel, myLeftPanel, inputText,
-                                               myBindings);
+                                               myBindings, canvasPane);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+//    public void setUpController1() throws IOException {
+//    	myController = new WorldController(canvasPane);
+//    }
 
+    
     /**
      * sets up the command field which will be cleared the first time it is clicked and whenever it
      * is played
@@ -145,13 +150,15 @@ public class UI {
         return play;
     }
 
+
     /**
      * sets up the canvas pane with the canvas and graphics context
      */
-    private void setUpPane () {
+    private void setUpCanvas () {
         canvasPane = new StackPane();
         canvasPane.setPadding(new Insets(10, 10, 10, 10));
         myCanvas = new Canvas();
+        myCenterView.setCenter(canvasPane);
         myGC = myCanvas.getGraphicsContext2D();
         canvasPane.getChildren().add(myCanvas);
         canvasPane.styleProperty().bind(myCanvasColor);
@@ -165,15 +172,5 @@ public class UI {
         myInput.clear();
     }
 
-    public GraphicsContext getGraphics () {
-        return myGC;
-    }
 
-    public Canvas getCanvas () {
-        return myCanvas;
-    }
-
-    public StackPane getPane () {
-        return canvasPane;
-    }
 }

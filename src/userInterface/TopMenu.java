@@ -5,10 +5,12 @@
 package userInterface;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import turtle.Turtle;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -64,7 +66,10 @@ public class TopMenu {
     private ObjectProperty<Double> penSize;
     private ObjectProperty<Image> turtleImage;
     private ObjectProperty<ResourceBundle> language;
+    private ObjectProperty<ArrayList<Turtle>> turtles;
+    private ObjectProperty<ArrayList<Turtle>> actives;
 
+    
     public TopMenu (EventHandler<ActionEvent> tabHandler, List<ObjectProperty> bindings) {
         initialize(tabHandler, bindings);
     }
@@ -92,7 +97,9 @@ public class TopMenu {
         penSize = bindings.get(UIManager.PEN_SIZE_INDEX);
         turtleImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
         language = bindings.get(UIManager.LANGUAGE_INDEX);
-
+        turtles = bindings.get(UIManager.TURTLES_INDEX);
+        actives = bindings.get(UIManager.ACTIVES_INDEX);
+        
         myMenu = new MenuBar();
         myBackgroundColorChoices = new ColorPicker();
         myPenColorChoices = new ColorPicker();
