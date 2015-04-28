@@ -1,25 +1,28 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
-public class DifferenceCommand extends Command{
-	
-	public DifferenceCommand(List<Double> params){
-		super(params);
-	}
+public class DifferenceCommand extends ArithmeticCommand{
 
-	@Override
-	public double run(Turtle t) {
-		
-		if(parameters.size() < 2)
-			throw new IllegalArgumentException("Not enough parameters");
-		
-		double ret = parameters.get(0);
-		for (int i = 1; i < parameters.size(); i++){
-			ret -= parameters.get(i);
-		}
-		return ret;
-	}
+    public DifferenceCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);   
+    }
+
+
+    @Override
+    protected double doMath (double a, double b) {
+        return  a  - b;
+    }
+
+
+    @Override
+    public double doCommand (Turtle t) {
+        return super.doCommand(t);
+    }
 }

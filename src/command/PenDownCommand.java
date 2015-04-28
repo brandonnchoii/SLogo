@@ -1,18 +1,22 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public class PenDownCommand extends Command {
-	
-	public PenDownCommand(List<Double> params){
-		super(params);
-	}
-	@Override
-	public double run(Turtle t) {
-		t.setDrawing(parameters.get(0) != 0);
-		return parameters.get(0);
-	}
+
+    public PenDownCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
+    @Override
+    public double doCommand(Turtle t) {
+        t.setDrawing(true);
+        return 1;
+    }
 
 }

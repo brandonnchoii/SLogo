@@ -1,27 +1,26 @@
 package command;
 
 import java.util.List;
-
+import java.util.Map;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 import turtle.Turtle;
 
-public class QuotientCommand extends Command{
+public class QuotientCommand extends ArithmeticCommand{
 
-	public QuotientCommand(List<Double> params){
-		super(params);
-	}
+    public QuotientCommand(List<String> params, ObservableMap<String, Double> variableMap, ObservableMap<String, String> func, List<ObjectProperty> bind, ObservableList<Color> colors){
+        super(params, variableMap, func, bind, colors);
+    }
 
-	@Override
-	public double run(Turtle t) {
-		
-		if(parameters.size() < 2)
-			throw new IllegalArgumentException("Not enough parameters");
-		double ret = parameters.get(0);
-		for(int i = 1; i < parameters.size();i++){
-			if(parameters.get(i) == 0)
-				throw new IllegalArgumentException("Divide by zero");
-			ret /= parameters.get(i);
-		}
-		
-		return ret;
-	}
+    @Override
+    public double doCommand(Turtle t) {
+        return super.doCommand(t);
+    }
+
+    @Override
+    protected double doMath (double a, double b) {
+        return a / b;
+    }
 }
