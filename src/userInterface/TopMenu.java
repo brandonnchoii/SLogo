@@ -4,6 +4,9 @@
 
 package userInterface;
 
+import imagePicker.ImagePicker;
+import imagePicker.ImagePickerUnit;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +39,8 @@ import javafx.stage.Stage;
 
 public class TopMenu {
 
+    private static final String CHANGE_IMAGE_TEXT = "Change Turtle Image";
+    private static final String IMAGE_PICKER_TEXT = "Image Picker";
     /**
      * TopMenu is the menu bar at the top of the UIManager. Holds options to change components of
      * the view or to even create another tab of SLogo
@@ -55,7 +60,7 @@ public class TopMenu {
                                                "Russian", "Spanish" };
 
     private MenuBar myMenu;
-    private Menu File, Edit, View, Preferences, Help;
+    private Menu File, Edit, View, Preferences, Help, ImagePickerMenu;
     private ColorPicker myBackgroundColorChoices;
     private ColorPicker myPenColorChoices;
     private EventHandler<ActionEvent> createNewTab;
@@ -64,6 +69,7 @@ public class TopMenu {
     private ObjectProperty<Double> penSize;
     private ObjectProperty<Image> turtleImage;
     private ObjectProperty<ResourceBundle> language;
+    private ImagePicker imagePicker;
 
     public TopMenu (EventHandler<ActionEvent> tabHandler, List<ObjectProperty> bindings) {
         initialize(tabHandler, bindings);
@@ -92,24 +98,34 @@ public class TopMenu {
         penSize = bindings.get(UIManager.PEN_SIZE_INDEX);
         turtleImage = bindings.get(UIManager.TURTLE_IMAGE_INDEX);
         language = bindings.get(UIManager.LANGUAGE_INDEX);
+        imagePicker = new ImagePicker();
 
         myMenu = new MenuBar();
         myBackgroundColorChoices = new ColorPicker();
         myPenColorChoices = new ColorPicker();
         myStage = new Stage();
+        ImagePickerMenu = new Menu(IMAGE_PICKER_TEXT);
+        setUpImagePicker();
         myMenu.getMenus().addAll(createFileMenu(), createEditMenu(), createViewMenu(),
-                                 createPreferencesMenu(), createHelpMenu());
+                                 createPreferencesMenu(), createHelpMenu(), ImagePickerMenu);
     }
 
-    // use reflection to create all of them, save code
-    // private Menu createMenu (String s) {
-    // Menu m = new Menu();
-    // MenuItem m1, m2, m3;
-    // return m;
-    // }
+    /**
+     * Adds a menu item that when pressed, displays the ImagePicker class. From here, the user is
+     * able to change the turtle image via file chooser
+     */
+    private void setUpImagePicker () {
+        MenuItem picker = new MenuItem(CHANGE_IMAGE_TEXT);
+        ImagePickerMenu.getItems().add(picker);
+        imagePicker.addUnit(new ImagePickerUnit(turtleImage));
+        picker.setOnAction(e -> {
+            imagePicker.displayPicker();
+        });
+    }
 
     /**
      * creates File part of the MenuBar
+     * 
      * @return Menu File
      */
     private Menu createFileMenu () {
@@ -124,6 +140,7 @@ public class TopMenu {
 
     /**
      * creates Edit part of the MenuBar
+     * 
      * @return Menu Edit
      */
     private Menu createEditMenu () {
@@ -135,6 +152,7 @@ public class TopMenu {
 
     /**
      * creates View part of the MenuBar
+     * 
      * @return Menu View
      */
     private Menu createViewMenu () {
@@ -152,6 +170,7 @@ public class TopMenu {
 
     /**
      * creates Help part of the MenuBar
+     * 
      * @return Menu Help
      */
     private Menu createHelpMenu () {
@@ -164,6 +183,7 @@ public class TopMenu {
 
     /**
      * creates Preferences part of the MenuBar
+     * 
      * @return Menu Preferences
      */
     private Menu createPreferencesMenu () {
