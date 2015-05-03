@@ -31,6 +31,7 @@ public class Turtle extends ImageView {
     private Point2D next;
     private Point2D goal;
     private ObjectProperty<Image> myImage;
+    private int bound;
 
     public Turtle(List<ObjectProperty> bindings, Paint color, int ID) {
         myPen = new Pen(color);
@@ -38,6 +39,7 @@ public class Turtle extends ImageView {
         setUpBindings(bindings);
         active = true;
         id = ID;
+        bound = 2;
 //      xProp = new SimpleDoubleProperty(0);
 //      yProp = new SimpleDoubleProperty(0);
     }
@@ -269,6 +271,20 @@ public class Turtle extends ImageView {
     public void setActive(boolean b) {
         active = b;
 
+    }
+    
+    public void setBound(int newBound){
+        bound = newBound;
+    }
+    
+    public int getBound(){
+        return bound;
+    }
+
+
+    public void setGoal (double x, double y) {
+        goal = new Point2D(x,y);
+        
     }
 
 }

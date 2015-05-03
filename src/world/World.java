@@ -23,174 +23,197 @@ import turtle.Turtle;
 
 public abstract class World {
 
-	protected int height;
-	protected int width;
-	// Turtle extends IV but eventaully, we want to not give WC or UI the entire
-	// Turtle
-	protected Map<Integer, Turtle> myTurtles;
-	protected ObservableMap<String, Double> variables;
-	protected ObservableMap<String, String> functions;
-	protected Turtle activeTurtle;
-	private Parser myParser;
-	private Turtle myTurtle;
+    protected int height;
+    protected int width;
+    // Turtle extends IV but eventaully, we want to not give WC or UI the entire
+    // Turtle
+    protected Map<Integer, Turtle> myTurtles;
+    protected ObservableMap<String, Double> variables;
+    protected ObservableMap<String, String> functions;
+    protected Turtle activeTurtle;
+    private Parser myParser;
+    private Turtle myTurtle;
 
-	private static final int DEFAULT_HEIGHT = 100;
-	private static final int DEFAULT_WIDTH = 100;
-	private static final Color TURTLE_DEFAULT = Color.BLACK;
-	private static final String TRUE = "1";
-	private static final String TURTLES_TO_ACT = "turtlesToAct";
-	private static final String LOOP_VARIABLE = "loopVariable";
-	private static final String LOOP_INCREMENT = "loopIncrement";
-	private static final String LOOP_END = "loopEnd";
-	private static final String LOOP_START = "loopStart";
-	private static final String IF_STATEMENT = "ifStatement";
-	private List<ObjectProperty> bindings;
-	private ObservableList<Color> colors;
+    private static final int DEFAULT_HEIGHT = 400;
+    private static final int DEFAULT_WIDTH = 400;
+    private static final Color TURTLE_DEFAULT = Color.BLACK;
+    private static final String TRUE = "1";
+    private static final String TURTLES_TO_ACT = "turtlesToAct";
+    private static final String LOOP_VARIABLE = "loopVariable";
+    private static final String LOOP_INCREMENT = "loopIncrement";
+    private static final String LOOP_END = "loopEnd";
+    private static final String LOOP_START = "loopStart";
+    private static final String IF_STATEMENT = "ifStatement";
+    private List<ObjectProperty> bindings;
+    private ObservableList<Color> colors;
 
-	public World(ObservableMap<String, Double> var,
-			ObservableMap<String, String> savedCommands,
-			List<ObjectProperty> Bindings, ObservableList<Color> color)
-			throws IOException {
-		variables = var;
-		functions = savedCommands;
-		bindings = Bindings;
-		colors = color;
-		height = DEFAULT_HEIGHT;
-		width = DEFAULT_WIDTH;
-		myTurtles = new HashMap<>();
-		myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-		myParser = new Parser("English", variables, savedCommands, bindings, colors);
-		myTurtle = myTurtles.get(0);
-	}
+    public World(ObservableMap<String, Double> var,
+                 ObservableMap<String, String> savedCommands,
+                 List<ObjectProperty> Bindings, ObservableList<Color> color)
+                         throws IOException {
+        variables = var;
+        functions = savedCommands;
+        bindings = Bindings;
+        colors = color;
+        height = DEFAULT_HEIGHT;
+        width = DEFAULT_WIDTH;
+        myTurtles = new HashMap<>();
+        myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
+        myParser = new Parser("English", variables, savedCommands, bindings, colors);
+        myTurtle = myTurtles.get(0);
+    }
 
-	public World(int h, int w, ObservableMap<String, Double> var,
-			ObservableMap<String, String> fun, List<ObjectProperty> Bindings,
-			ObservableList<Color> color) throws IOException {
-		variables = var;
-		functions = fun;
-		bindings = Bindings;
-		colors = color;
-		height = h;
-		width = w;
-		myTurtles = new HashMap<>();
-		myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
-		myParser = new Parser("English", variables, fun, bindings, colors);
-		myTurtle = myTurtles.get(0);
+    public World(int h, int w, ObservableMap<String, Double> var,
+                 ObservableMap<String, String> fun, List<ObjectProperty> Bindings,
+                 ObservableList<Color> color) throws IOException {
+        variables = var;
+        functions = fun;
+        bindings = Bindings;
+        colors = color;
+        height = h;
+        width = w;
+        myTurtles = new HashMap<>();
+        myTurtles.put(0, (new Turtle(bindings, TURTLE_DEFAULT, 0)));
+        myParser = new Parser("English", variables, fun, bindings, colors);
+        myTurtle = myTurtles.get(0);
 
-	}
+    }
 
-	public World(int h, int w, Turtle t, String language,
-			ObservableMap<String, Double> var, ObservableMap<String, String> fun,
-			List<ObjectProperty> Bindings, ObservableList<Color> color)
-			throws IOException {
-		variables = var;
-		functions = fun;
-		bindings = Bindings;
-		colors = color;
-		height = h;
-		width = w;
-		myTurtles = new HashMap<>();
-		myTurtles.put(t.getID(), t);
-		myParser = new Parser(language, variables, fun, bindings, colors);
-		myTurtle = myTurtles.get(0);
+    public World(int h, int w, Turtle t, String language,
+                 ObservableMap<String, Double> var, ObservableMap<String, String> fun,
+                 List<ObjectProperty> Bindings, ObservableList<Color> color)
+                         throws IOException {
+        variables = var;
+        functions = fun;
+        bindings = Bindings;
+        colors = color;
+        height = h;
+        width = w;
+        myTurtles = new HashMap<>();
+        myTurtles.put(t.getID(), t);
+        myParser = new Parser(language, variables, fun, bindings, colors);
+        myTurtle = myTurtles.get(0);
 
-	}
+    }
 
-	public abstract void fixPosition();
+    public void fixPosition(Turtle t){
+        if(t.getBound() == 3){
+            t.setGoal(obX(t), obY(t));
+        }
+    }
 
-	/**
-	 * Logic to retrieve and perform all inputted commands
-	 * 
-	 * @param String input
-	 * @return String param
-	 */
-	public String listen(String input) {
-		String[] splitInput = input.split("\n");
-		String param = "";
-		for (int s = 0; s < splitInput.length; s++) {
-			int numCommands = myParser.initializeCommands(splitInput[s]);
-			//System.out.println("numCommands = " + numCommands);
-			for (int i = 0; i < numCommands; i++) {
-				Command c = myParser.parse(param);
-				Map<String, String> commandValues = c
-						.getCommandValues(myTurtles);
-				//System.out.println("param = " + param);
-				for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
-					if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
-						System.out.println("if = " + commandValues.get(IF_STATEMENT));
-						double loopStart = Double.parseDouble(commandValues
-								.get(LOOP_START));
-						double loopEnd = Double.parseDouble(commandValues
-								.get(LOOP_END));
-						double loopIncrement = Double.parseDouble(commandValues
-								.get(LOOP_INCREMENT));
-						for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
-							//System.out.println("loop# = " + j);
-							myParser.updateVariable(
-									commandValues.get(LOOP_VARIABLE), j);
-							int turtleID = Integer.parseInt(id);
-							if (loopStart == loopEnd) {
-								//System.out.println("loopEnd" + loopEnd);
-								param = runCommand(c, turtleID);
-							} else {
-								param = runCommand(myParser.parse("list"),
-										turtleID);
-							}
-						}
-						myParser.resetRepcount();
-					} else {
-						// return commandValues.get("0");
-					}
-				}
-				if (s != splitInput.length - 1) {
-					param = "";
-				}
-			}
-		}
-		return param;
+    private double obY (Turtle t) {
+        if(t.getGoal().getY() >= height /2)
+            return height/2;
+        else if(Math.abs(t.getGoal().getY()) >= height/2)
+            return -height/2;
+        return t.getGoal().getY();
 
-	}
+    }
 
-	/**
-	 * Trys to run command on turtle if it exists, if not creates appropriate
-	 * turtle and runs command
-	 * 
-	 * @param Command command
-	 * @param int turtleID
-	 * @return String param
-	 */
-	private String runCommand(Command command, int turtleID) {
-		String param;
-		try {
-			param = myTurtles.get(turtleID).act(command);
-		} catch (Exception e) {
-			myTurtles.put(turtleID, new Turtle(bindings, TURTLE_DEFAULT,
-					turtleID));
-			param = myTurtles.get(turtleID).act(command);
-		}
-		return param;
-	}
+    private double obX (Turtle t) {
+        if(t.getGoal().getX() >= width /2)
+            return width/2;
+        else if(Math.abs(t.getGoal().getX()) >= width/2)
+            return -width/2;
+        return t.getGoal().getX();
+
+    }
+
+    /**
+     * Logic to retrieve and perform all inputted commands
+     * 
+     * @param String input
+     * @return String param
+     */
+    public String listen(String input) {
+        String[] splitInput = input.split("\n");
+        String param = "";
+        for (int s = 0; s < splitInput.length; s++) {
+            int numCommands = myParser.initializeCommands(splitInput[s]);
+            //System.out.println("numCommands = " + numCommands);
+            for (int i = 0; i < numCommands; i++) {
+                Command c = myParser.parse(param);
+                Map<String, String> commandValues = c
+                        .getCommandValues(myTurtles);
+                //System.out.println("param = " + param);
+                for (String id : commandValues.get(TURTLES_TO_ACT).split("/n")) {
+                    if (commandValues.get(IF_STATEMENT).equals(TRUE)) {
+                        System.out.println("if = " + commandValues.get(IF_STATEMENT));
+                        double loopStart = Double.parseDouble(commandValues
+                                                              .get(LOOP_START));
+                        double loopEnd = Double.parseDouble(commandValues
+                                                            .get(LOOP_END));
+                        double loopIncrement = Double.parseDouble(commandValues
+                                                                  .get(LOOP_INCREMENT));
+                        for (double j = loopStart; j <= loopEnd; j += loopIncrement) {
+                            //System.out.println("loop# = " + j);
+                            myParser.updateVariable(
+                                                    commandValues.get(LOOP_VARIABLE), j);
+                            int turtleID = Integer.parseInt(id);
+                            if (loopStart == loopEnd) {
+                                //System.out.println("loopEnd" + loopEnd);
+                                param = runCommand(c, turtleID);
+                            } else {
+                                param = runCommand(myParser.parse("list"),
+                                                   turtleID);
+                            }
+                        }
+                        myParser.resetRepcount();
+                    } else {
+                        // return commandValues.get("0");
+                    }
+                }
+                if (s != splitInput.length - 1) {
+                    param = "";
+                }
+            }
+        }
+        return param;
+
+    }
+
+    /**
+     * Trys to run command on turtle if it exists, if not creates appropriate
+     * turtle and runs command
+     * 
+     * @param Command command
+     * @param int turtleID
+     * @return String param
+     */
+    private String runCommand(Command command, int turtleID) {
+        String param;
+        try {
+            param = myTurtles.get(turtleID).act(command);
+            fixPosition(myTurtles.get(turtleID));
+        } catch (Exception e) {
+            myTurtles.put(turtleID, new Turtle(bindings, TURTLE_DEFAULT,
+                                               turtleID));
+            param = myTurtles.get(turtleID).act(command);
+        }
+        return param;
+    }
 
     /**
      * Ability to change language of input
      * @param language
      */	
-	public void setLanguage(String language) {
-		myParser.setLanguage(language);
-	}
+    public void setLanguage(String language) {
+        myParser.setLanguage(language);
+    }
 
-	/**
-	 * Returns turtle
-	 * 
-	 * @return Turtle
-	 */
-	public Turtle getTurtle() {
-		return myTurtle;
-	}
+    /**
+     * Returns turtle
+     * 
+     * @return Turtle
+     */
+    public Turtle getTurtle() {
+        return myTurtle;
+    }
 
-	// public static void main(String[] args) throws IOException {
-	// BoundedWorld test = new BoundedWorld();
-	// test.listen("fd 100 /n rt 90 /n fd 100");
-	// }
+    // public static void main(String[] args) throws IOException {
+    // BoundedWorld test = new BoundedWorld();
+    // test.listen("fd 100 /n rt 90 /n fd 100");
+    // }
 
 }

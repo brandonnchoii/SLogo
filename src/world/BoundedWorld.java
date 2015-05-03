@@ -33,9 +33,5 @@ public class BoundedWorld extends World {
 		super(h, w, t, l, variables, functions, bindings, colors);
 	}
 
-	@Override
-	public void fixPosition() {
-
-	}
 
 }
