@@ -26,8 +26,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
@@ -50,8 +52,8 @@ public class TopMenu {
     private static final String RESOURCE_PATH = "resources/languages/";
     private static final String HTML_HELP_PAGE = "/html/helpPage.html";
     private static final int PANE_SPACING = 5;
-    private static final int POPUP_WIDTH = 250;
-    private static final int POPUP_HEIGHT = 150;
+    private static final int POPUP_WIDTH = 500;
+    private static final int POPUP_HEIGHT = 500;
     private static final String[] LANGUAGES = { "Chinese", "English", "French", "German",
                                                "Italian", "Japanese", "Korean", "Portuguese",
                                                "Russian", "Spanish" };
@@ -150,14 +152,39 @@ public class TopMenu {
         m1.setOnAction(e -> displayColorPicker());
         MenuItem m2 = new MenuItem("Set Pen Settings");
         m2.setOnAction(e -> displayPenEditor());
+        //Brandon's SLogoextension
         MenuItem m3 = new MenuItem("Set Current Turtle's Image");
         m3.setOnAction(e -> displayImagePicker());
-
-        View.getItems().addAll(m1, m2, m3);
+        MenuItem m4 = new MenuItem("Change Turtle Image");
+        //James' Slogo extension
+        m4.setOnAction(e -> checkTurtles());
+        MenuItem m5 = new MenuItem("Display Possible Images");
+        m5.setOnAction(e -> showImages());
+        View.getItems().addAll(m1, m2, m3, m4, m5);
         return View;
     }
 
-    /**
+    private void showImages() {
+    	Stage stage = new Stage();
+    	StackPane pane = new StackPane();
+    	VBox vbox = new VBox();
+    	vbox.getChildren().add(new ImageView(turtleImage.getValue()));
+		pane.getChildren().add(vbox);
+    	Scene scene = new Scene(pane, POPUP_WIDTH, POPUP_HEIGHT);
+		stage.setScene(scene);
+		stage.show();
+    }
+
+	private void checkTurtles() {
+    	FileChooser chooser = new FileChooser();
+        chooser.setTitle("Change Turtle Image");
+        chooser.getExtensionFilters().addAll(new ExtensionFilter("*.jpg", "*.png",
+                                                                 ".gif"));
+        File selectedFile = chooser.showOpenDialog(myStage);
+        turtleImage.setValue(new Image(IMAGE_PATH + selectedFile.getName()));
+	}
+
+	/**
      * creates Help part of the MenuBar
      * @return Menu Help
      */
