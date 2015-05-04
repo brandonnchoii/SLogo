@@ -31,6 +31,7 @@ public class Turtle extends ImageView {
     private Point2D next;
     private Point2D goal;
     private ObjectProperty<Image> myImage;
+    private int myBoundaryType;
 
     public Turtle(List<ObjectProperty> bindings, Paint color, int ID) {
         myPen = new Pen(color);
@@ -38,6 +39,7 @@ public class Turtle extends ImageView {
         setUpBindings(bindings);
         active = true;
         id = ID;
+        myBoundaryType = 2;
 //      xProp = new SimpleDoubleProperty(0);
 //      yProp = new SimpleDoubleProperty(0);
     }
@@ -100,8 +102,10 @@ public class Turtle extends ImageView {
 //      System.out.println(getTranslateX() + " " + getTranslateY());
 //        goal = new Point2D(getTranslateX() + pixels*Math.cos(radians()),
 //                getTranslateY() + pixels*Math.sin(radians()));
+    	
         goal = new Point2D(goal.getX() + pixels*Math.cos(radians()),
                 goal.getY() + pixels*Math.sin(radians()));
+  
     }
 
     private double radians(){
@@ -270,5 +274,15 @@ public class Turtle extends ImageView {
         active = b;
 
     }
-
+    public void makeBoundary(int boundaryType) {
+        myBoundaryType = boundaryType;
+    }
+    
+    public int getBoundaryType() {
+        return myBoundaryType;
+    }
+    
+    public void setGoal(Point2D newGoal) {
+        goal = newGoal;
+    }
 }

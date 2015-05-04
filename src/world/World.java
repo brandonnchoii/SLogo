@@ -32,11 +32,11 @@ public abstract class World {
 	protected ObservableMap<String, String> functions;
 	protected Turtle activeTurtle;
 	private Parser myParser;
-	private Turtle myTurtle;
+	protected Turtle myTurtle;
 
 	private static final int DEFAULT_HEIGHT = 100;
 	private static final int DEFAULT_WIDTH = 100;
-	private static final Color TURTLE_DEFAULT = Color.BLACK;
+	protected static final Color TURTLE_DEFAULT = Color.BLACK;
 	private static final String TRUE = "1";
 	private static final String TURTLES_TO_ACT = "turtlesToAct";
 	private static final String LOOP_VARIABLE = "loopVariable";
@@ -44,7 +44,7 @@ public abstract class World {
 	private static final String LOOP_END = "loopEnd";
 	private static final String LOOP_START = "loopStart";
 	private static final String IF_STATEMENT = "ifStatement";
-	private List<ObjectProperty> bindings;
+	protected List<ObjectProperty> bindings;
 	private ObservableList<Color> colors;
 
 	public World(ObservableMap<String, Double> var,
@@ -96,7 +96,7 @@ public abstract class World {
 
 	}
 
-	public abstract void fixPosition();
+	public abstract void fixPosition(int turtleID);
 
 	/**
 	 * Logic to retrieve and perform all inputted commands
@@ -159,7 +159,7 @@ public abstract class World {
 	 * @param int turtleID
 	 * @return String param
 	 */
-	private String runCommand(Command command, int turtleID) {
+	protected String runCommand(Command command, int turtleID) {
 		String param;
 		try {
 			param = myTurtles.get(turtleID).act(command);
