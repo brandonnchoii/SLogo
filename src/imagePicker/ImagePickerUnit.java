@@ -1,8 +1,16 @@
+// This entire file is part of my masterpiece.
+// Brandon Choi
+
 package imagePicker;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,11 +19,22 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * ImagePickerUnit represents one image node in the ImagePicker. Upon double click, a file chooser
+ * pops up and allows the user to change the image of the turtle selected. The image properties on
+ * the ImagePickerUnit and the Turtle are binded together so that changing one changes the other as
+ * well. This was part of my extension for VOOGASalad.
+ * 
+ * @author Brandon Choi
+ *
+ */
+
 public class ImagePickerUnit {
 
     private static final String IMAGE_PATH = "resources/images/";
     private static final int GRAPHIC_SIZE = 50;
     private static final String FILE_CHOOSER_PROMPT_TEXT = "Pick a new Turtle image!";
+
     private HBox container;
     private ImageView graphic;
     private ObjectProperty<Image> myProperty;
@@ -31,8 +50,8 @@ public class ImagePickerUnit {
         container.setAlignment(Pos.CENTER);
         setUpClick();
     }
-    
-    public ImageView getImageView() {
+
+    public ImageView getImageView () {
         return graphic;
     }
 
@@ -58,7 +77,14 @@ public class ImagePickerUnit {
         fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg",
                                                             "*.gif"));
         File chosen = fc.showOpenDialog(s);
-        Image i = new Image(IMAGE_PATH + chosen.getName());
+        BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(chosen);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image i = SwingFXUtils.toFXImage(bi, null);
         myProperty.setValue(i);
     }
 }
